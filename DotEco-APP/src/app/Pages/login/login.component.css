@@ -9,7 +9,7 @@
 .card{
     background: #FFFFFF;
     box-shadow: 5px 4px 10px rgba(0, 0, 0, 0.25);
-    border-radius: 16px;
+    border-radius: 1.5rem;
 }
 
 .card-body{
@@ -48,8 +48,8 @@
     height: 48px;
     margin-top: 2.5rem;
     box-shadow: 0 0 1px #ccc;
-    -webkit-transition-duration: 0.7s;
-    -webkit-transition-timing-function: linear;
+    transition-duration: 0.7s;
+    transition-timing-function: linear;
     box-shadow:0px 0 0 #FFFFFF  inset;
 
     /* Text */
@@ -61,7 +61,7 @@
     text-align: center;
     color: #FFFFFF;
 }.btnLogin:hover{
-    -webkit-box-shadow: -150px 0 0 #FFFFFF inset;
+    box-shadow: -150px 0 0 #FFFFFF inset;
     color: #4EEEA1;
 }
 
@@ -92,7 +92,7 @@ label{
 
 .painelLogin{
     background: #4EEEA1;
-    border-radius: 0px 8px 8px 0px;
+    border-radius: 0rem 1.5rem 1.5rem 0rem;
 }
 
 .btnCadaster{
@@ -110,12 +110,12 @@ label{
     text-align: center;
     color: #4EEEA1;
     box-shadow: 0 0 1px #ccc;
-    -webkit-transition-duration: 0.7s;
-    -webkit-transition-timing-function: linear;
+    transition-duration: 0.7s;
+    transition-timing-function: linear;
     box-shadow:0px 0 0 #FFFFFF  inset;
 }
 .btnCadaster:hover{
-    -webkit-box-shadow: -150px 0 0 #4EEEA1 inset;
+    box-shadow: -150px 0 0 #4EEEA1 inset;
     color: #FFFFFF;
 }
 
