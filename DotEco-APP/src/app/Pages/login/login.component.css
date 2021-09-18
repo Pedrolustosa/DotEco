@@ -1,0 +1,53 @@
+/* Acesse sua conta agora mesmo. */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap');
+.title {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 27px;
+    /* identical to box height */
+    text-align: center;
+    color: #4EEEA1;
+}
+
+.subtitle {
+    /* Preencha seus dados */
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 21px;
+    /* identical to box height */
+    text-align: center;
+    color: #A4A4A4;
+}
+
+.btnlogin {
+    /* Rectangle 3 */
+    background: #4EEEA1;
+    border: 3px solid #4EEEA1;
+    border-radius: 30px;
+    width: 176px;
+    height: 48px;
+    /* ENTRAR */
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 27px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.form-control{
+    /* Rectangle 5 */
+
+width: 398px;
+height: 60px;
+margin: 0;
+background: #E6E6E6;
+
+}
+
