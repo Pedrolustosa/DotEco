@@ -1,37 +1,58 @@
-/* Acesse sua conta agora mesmo. */
-
+/* CSS Login */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap');
-.title {
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.card{
+    background: #FFFFFF;
+    box-shadow: 5px 4px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 1.5rem;
+}
+
+.card-body{
+    height: 42rem;
+}
+
+.Title {
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 900;
     font-size: 18px;
     line-height: 27px;
-    /* identical to box height */
     text-align: center;
+    margin-bottom: 2rem;
     color: #4EEEA1;
 }
 
-.subtitle {
-    /* Preencha seus dados */
+.subTitle {
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 900;
     font-size: 14px;
     line-height: 21px;
-    /* identical to box height */
     text-align: center;
+    margin-bottom: 1.5rem;
     color: #A4A4A4;
 }
 
-.btnlogin {
-    /* Rectangle 3 */
+.btnLogin {
+
+    /* Button */
     background: #4EEEA1;
     border: 3px solid #4EEEA1;
     border-radius: 30px;
     width: 176px;
     height: 48px;
-    /* ENTRAR */
+    margin-top: 2.5rem;
+    box-shadow: 0 0 1px #ccc;
+    transition-duration: 0.7s;
+    transition-timing-function: linear;
+    box-shadow:0px 0 0 #FFFFFF  inset;
+
+    /* Text */
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 800;
@@ -39,15 +60,63 @@
     line-height: 27px;
     text-align: center;
     color: #FFFFFF;
+}.btnLogin:hover{
+    box-shadow: -150px 0 0 #FFFFFF inset;
+    color: #4EEEA1;
 }
 
 .form-control{
-    /* Rectangle 5 */
-
-width: 398px;
-height: 60px;
-margin: 0;
-background: #E6E6E6;
-
+    height: 4.5rem;
+    background: #E6E6E6;
 }
+
+input{
+    max-width: 35rem;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 2rem;
+    line-height: 3rem;
+    border-radius: 7rem;
+}
+
+label{
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 1.1rem;
+    line-height: 2rem;
+    color: darkgrey;
+    transition: .7s;
+}
+
+.painelLogin{
+    background: #4EEEA1;
+    border-radius: 0rem 1.5rem 1.5rem 0rem;
+}
+
+.btnCadaster{
+    background: #FFFFFF;
+    border: 3px solid #FFFFFF;
+    border-radius: 30px;
+    width: 176px;
+    height: 48px;
+
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 27px;
+    text-align: center;
+    color: #4EEEA1;
+    box-shadow: 0 0 1px #ccc;
+    transition-duration: 0.7s;
+    transition-timing-function: linear;
+    box-shadow:0px 0 0 #FFFFFF  inset;
+}
+.btnCadaster:hover{
+    box-shadow: -150px 0 0 #4EEEA1 inset;
+    color: #FFFFFF;
+}
+
 
