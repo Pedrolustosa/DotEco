@@ -1,12 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap');
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #dfe6e9;
+}
 
 /*Custom Scroolbar*/
 body::-webkit-scrollbar {
     width: 7px;
 }
 body::-webkit-scrollbar-thumb {
-    background-image: linear-gradient(#FFFFFF, #4EEEA1);
-    border-radius: .9rem;
+    background-image: linear-gradient(#4EEEA1, #FFFFFF, #4EEEA1);
+    border-radius: .7rem;
 }
 /*Custom Scroolbar*/
