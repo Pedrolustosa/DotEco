@@ -28,6 +28,7 @@ namespace DotEco_API
         {
 
             services.AddControllers();
+            services.AddCors();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DotEco_API", Version = "v1" });
@@ -49,6 +50,10 @@ namespace DotEco_API
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(cors => cors.AllowAnyHeader()
+                                    .AllowAnyMethod()
+                                    .AllowAnyOrigin());
 
             app.UseEndpoints(endpoints =>
             {
