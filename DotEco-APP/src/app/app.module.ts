@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Pages/login/login.component';
 import { NavComponent } from './Shared/nav/nav.component';
+import { TitleComponent } from './shared/title/title.component';
 
 
 
@@ -12,7 +13,8 @@ import { NavComponent } from './Shared/nav/nav.component';
   declarations: [
     AppComponent,
     LoginComponent,
-    NavComponent
+    NavComponent,
+    TitleComponent
 
   ],
   imports: [
