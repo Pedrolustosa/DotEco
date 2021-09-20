@@ -12,7 +12,7 @@
     justify-content: center;
 }
 
-.Title {
+.Title1 {
     text-align: center;
     margin-bottom: 3rem;
     color: #4EEEA1;
@@ -42,7 +42,6 @@ label {
     transition-timing-function: linear;
     box-shadow: 0px 0 0 #FFFFFF inset;
     /* Text */
-    font-style: normal;
     font-weight: 800;
     font-size: 18px;
     line-height: 27px;
@@ -55,12 +54,14 @@ label {
     color: #4EEEA1;
 }
 
-.painelCadastro {
-    border-radius: 0rem 1rem 1rem 0rem;
+.panelCadaster {
+    color: #FFFFFF;
     background: #4EEEA1;
+    border-radius: 0rem 1.5rem 1.5rem 0rem;
 }
 
 .doteco p {
+    color: #FFFFFF;
     margin-top: 9rem;
-    font-family: 'Courier New', Courier, monospace
+    font-family: Arial, Helvetica, sans-serif;
 }
