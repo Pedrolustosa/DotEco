@@ -13,6 +13,7 @@
 }
 
 .Title1 {
+    margin-top: .6rem;
     font-weight: 900;
     font-size: 18px;
     line-height: 27px;
@@ -30,7 +31,7 @@
     color: #A4A4A4;
 }
 
-.btnLogin {
+.btnRegister {
     /* Button */
     background: #4EEEA1;
     border: 3px solid #4EEEA1;
@@ -38,6 +39,7 @@
     width: 176px;
     height: 48px;
     margin-top: 2.5rem;
+    margin-bottom: 1.1rem;
     box-shadow: 0 0 1px #ccc;
     transition-duration: 0.7s;
     transition-timing-function: linear;
@@ -50,7 +52,28 @@
     color: #FFFFFF;
 }
 
-.btnLogin:hover {
+.btnRegister:hover {
+    box-shadow: -150px 0 0 #FFFFFF inset;
+    color: #4EEEA1;
+}
+
+.btnReturn {
+    background: #4EEEA1;
+    border: 3px solid #FFFFFF;
+    border-radius: 30px;
+    width: 176px;
+    height: 48px;
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 27px;
+    text-align: center;
+    color: #FFFFFF;
+    transition-duration: 0.7s;
+    transition-timing-function: linear;
+    box-shadow: 0px 0 0 #4EEEA1 inset;
+}
+
+.btnReturn:hover {
     box-shadow: -150px 0 0 #FFFFFF inset;
     color: #4EEEA1;
 }
@@ -80,7 +103,7 @@ label {
     transition: .7s;
 }
 
-.panelLogin {
+.panelRegister {
     color: #FFFFFF;
     background: #4EEEA1;
     padding-top: .9rem;
@@ -95,51 +118,6 @@ label {
 .nav-link:hover{
     color: #4EEEA1;
     text-decoration: none;
-}
-
-.btnCadaster {
-    background: #4EEEA1;
-    border: 3px solid #FFFFFF;
-    border-radius: 30px;
-    width: 176px;
-    height: 48px;
-    font-weight: 800;
-    font-size: 18px;
-    line-height: 27px;
-    text-align: center;
-    color: #FFFFFF;
-    transition-duration: 0.7s;
-    transition-timing-function: linear;
-    box-shadow: 0px 0 0 #4EEEA1 inset;
-}
-
-.btnCadaster:hover {
-    box-shadow: -150px 0 0 #FFFFFF inset;
-    color: #4EEEA1;
-}
-
-.btnCadasterText{
-    cursor: pointer;
-    font-size: .7rem;
-    text-align: center;
-}
-
-.dropdown-toggle:hover{
-    color: #4EEEA1;
-}
-    
-
-a.linkRecovery {
-    /* Esqueci minha senha. */
-    width: 224px;
-    height: 18px;
-    font-weight: 900;
-    font-size: 12px;
-    line-height: 18px;
-    /* identical to box height */
-    text-align: center;
-    color: #FFFFFF;
-    cursor: pointer;
 }
 
 div.Title2 {
