@@ -1,0 +1,66 @@
+.card {
+    background: #FFFFFF;
+    box-shadow: 5px 4px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 1.5rem;
+}
+
+.card-body {
+    height: 42rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Title {
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #4EEEA1;
+    font-size: 16pt;
+}
+
+input {
+    width: 500px;
+    border-radius: 1rem;
+    color: #A4A4A4;
+}
+
+label {
+    color: #A4A4A4;
+}
+
+.btnCadaster {
+    /* Button */
+    background: #4EEEA1;
+    border: 3px solid #4EEEA1;
+    border-radius: 30px;
+    width: 176px;
+    height: 48px;
+    margin-top: 2.5rem;
+    box-shadow: 0 0 1px #ccc;
+    transition-duration: 0.7s;
+    transition-timing-function: linear;
+    box-shadow: 0px 0 0 #FFFFFF inset;
+    /* Text */
+    font-style: normal;
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 27px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.btnCadaster:hover {
+    box-shadow: -150px 0 0 #FFFFFF inset;
+    color: #4EEEA1;
+}
+
+.painelCadastro {
+    border-radius: 0rem 1rem 1rem 0rem;
+    background: #4EEEA1;
+}
+
+.doteco p {
+    margin-top: 9rem;
+    font-family: 'Courier New', Courier, monospace
+}

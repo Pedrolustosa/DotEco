@@ -5,8 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Pages/login/login.component';
 import { NavComponent } from './Shared/nav/nav.component';
-import { TitleComponent } from './shared/title/title.component';
-
+import { RegisterComponent } from './Pages/register/register.component';
+import { TitleComponent } from './Shared/title/title.component';
 
 
 @NgModule({
@@ -14,13 +14,12 @@ import { TitleComponent } from './shared/title/title.component';
     AppComponent,
     LoginComponent,
     NavComponent,
-    TitleComponent
-
+    TitleComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    
   ],
   providers: [],
   bootstrap: [AppComponent]
