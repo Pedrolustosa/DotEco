@@ -8,7 +8,7 @@
                             <div class="card-body p-4 p-lg-6 gap-3">
 
                                 <div class="m-5">
-                                    <p class="Title">Acesse sua conta agora mesmo.</p>
+                                    <p class="Title1">Acesse sua conta agora mesmo.</p>
                                     <p class="subTitle">Preencha seus dados</p>
                                 </div>
 
@@ -35,8 +35,8 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="col-md-4 painelLogin">
-                            <div class="bloco titulo text-white ">
+                        <div class="col-md-4 panelLogin">
+                            <div class="block Title2">
 
                                 <div class="doteco fs-1">
                                     <p>DOT<b>ECO</b></p>
@@ -48,13 +48,27 @@
                                 <div class="mt-5 fs-4 fw-normal">
                                     <div>Criar sua conta</div>
                                 </div>
-                                
-                                <!-- modificar button para dropdown -->   
-                                <div class="btnBlocoLogo mt-5">
-                                    <button class="btnCadaster" type="button">
-                                        <div class="textCadaster">Cadastrar</div>
-                                    </button>
-                                </div>
+
+                                <!-- modificar button para dropdown -->
+                                <ul class="navbar-nav btnBlocoLogo mt-5">
+                                    <li class="nav-item btnCadaster dropdown" dropdown>
+                                        <a dropdownToggle class="nav-link dropdown-toggle" style="cursor: pointer;"
+                                            id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            Cadastrar
+                                        </a>
+                                        <div *dropdownMenu class="dropdown-menu btnCadasterText"
+                                            aria-labelledby="navbarDropdownMenuLink">
+                                            <a class="dropdown-item">
+                                                Cliente
+                                            </a>
+                                            <div role="separator" class="divider"></div>
+                                            <a class="dropdown-item">
+                                                Empresa/Associação
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
                                 <div class="mt-4">
                                     <a class="linkRecovery"> Esqueci minha Senha</a>
                                 </div>
