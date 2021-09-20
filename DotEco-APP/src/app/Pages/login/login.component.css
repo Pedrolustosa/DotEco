@@ -5,7 +5,7 @@
 }
 
 .card-body {
-    height: 42rem;
+    height: 40rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -83,7 +83,18 @@ label {
 .panelLogin {
     color: #FFFFFF;
     background: #4EEEA1;
+    padding-top: .9rem;
+    padding-bottom: .9rem;
     border-radius: 0rem 1.5rem 1.5rem 0rem;
+}
+
+.nav-link{
+    color: #FFFFFF;
+    text-decoration: none;
+}
+.nav-link:hover{
+    color: #4EEEA1;
+    text-decoration: none;
 }
 
 .btnCadaster {
@@ -106,6 +117,17 @@ label {
     box-shadow: -150px 0 0 #FFFFFF inset;
     color: #4EEEA1;
 }
+
+.btnCadasterText{
+    cursor: pointer;
+    font-size: .7rem;
+    text-align: center;
+}
+
+.dropdown-toggle:hover{
+    color: #4EEEA1;
+}
+    
 
 a.linkRecovery {
     /* Esqueci minha senha. */

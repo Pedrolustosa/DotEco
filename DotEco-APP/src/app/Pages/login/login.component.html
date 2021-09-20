@@ -50,11 +50,25 @@
                                 </div>
 
                                 <!-- modificar button para dropdown -->
-                                <div class="btnBlocoLogo mt-5">
-                                    <button class="btnCadaster" type="button">
-                                        <div class="textCadaster">Cadastrar</div>
-                                    </button>
-                                </div>
+                                <ul class="navbar-nav btnBlocoLogo mt-5">
+                                    <li class="nav-item btnCadaster dropdown" dropdown>
+                                        <a dropdownToggle class="nav-link dropdown-toggle" style="cursor: pointer;"
+                                            id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            Cadastrar
+                                        </a>
+                                        <div *dropdownMenu class="dropdown-menu btnCadasterText"
+                                            aria-labelledby="navbarDropdownMenuLink">
+                                            <a class="dropdown-item">
+                                                Cliente
+                                            </a>
+                                            <div role="separator" class="divider"></div>
+                                            <a class="dropdown-item">
+                                                Empresa/Associação
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
                                 <div class="mt-4">
                                     <a class="linkRecovery"> Esqueci minha Senha</a>
                                 </div>

@@ -5,7 +5,7 @@
 }
 
 .card-body {
-    height: 42rem;
+    height: 40rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,23 +13,25 @@
 }
 
 .Title1 {
+    margin-top: .6rem;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 27px;
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     color: #4EEEA1;
-    font-size: 16pt;
 }
 
-input {
-    width: 500px;
-    border-radius: 1rem;
+.subTitle {
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 21px;
+    text-align: center;
+    margin-bottom: 1.5rem;
     color: #A4A4A4;
 }
 
-label {
-    color: #A4A4A4;
-}
-
-.btnCadaster {
+.btnRegister {
     /* Button */
     background: #4EEEA1;
     border: 3px solid #4EEEA1;
@@ -49,19 +51,68 @@ label {
     color: #FFFFFF;
 }
 
-.btnCadaster:hover {
+.btnRegister:hover {
     box-shadow: -150px 0 0 #FFFFFF inset;
     color: #4EEEA1;
 }
 
-.panelCadaster {
+.btnBlocoLogo p {
+    color: #FFFFFF;
+}
+
+.form-control {
+    height: 4.5rem;
+    background: #E6E6E6;
+}
+
+input {
+    max-width: 35rem;
+    font-weight: 900;
+    font-size: 2rem;
+    line-height: 3rem;
+    border-radius: 1rem;
+}
+
+label {
+    font-weight: 900;
+    font-size: 1.1rem;
+    line-height: 2rem;
+    color: darkgrey;
+    transition: .7s;
+}
+
+.panelRegister {
     color: #FFFFFF;
     background: #4EEEA1;
+    padding-top: .9rem;
+    padding-bottom: .9rem;
     border-radius: 0rem 1.5rem 1.5rem 0rem;
 }
 
-.doteco p {
+.nav-link{
     color: #FFFFFF;
-    margin-top: 9rem;
+    text-decoration: none;
+}
+.nav-link:hover{
+    color: #4EEEA1;
+    text-decoration: none;
+}
+
+div.Title2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.block {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.doteco p{
+    margin-bottom: 3rem;
     font-family: Arial, Helvetica, sans-serif;
 }
