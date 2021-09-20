@@ -4,12 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Pages/login/login.component';
-import { NavComponent } from './Shared/nav/nav.component';
 import { RegisterComponent } from './Pages/register/register.component';
+import { NavComponent } from './Shared/nav/nav.component';
 import { TitleComponent } from './Shared/title/title.component';
+
+import { CollapseModule } from 'ngx-bootstrap/collapse
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 
 @NgModule({
   declarations: [
@@ -22,8 +23,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BsDropdownModule.forRoot(),
+    CollapseModule.forRoot(),
     BrowserAnimationsModule,
+    BsDropdownModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
