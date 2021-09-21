@@ -1,4 +1,4 @@
-.navbar{
+.navbar {
     background-color: #4EEEA1;
     border-radius: 0rem 0rem .5rem .5rem;
     font-size: 1rem;
@@ -9,7 +9,14 @@
     color: #FFFFFF;
 }
 
-.doteco p{
-    margin-bottom: 3rem;
+.doteco p {
+    margin-bottom: auto;
     font-family: Arial, Helvetica, sans-serif;
+}
+
+ul {
+    padding: 0rem 7rem 0rem 7rem;
+}
+li{
+    padding: 0rem 2rem 0rem 2rem;
 }
