@@ -38,7 +38,6 @@
     border-radius: 30px;
     width: 176px;
     height: 48px;
-    margin-top: 2.5rem;
     margin-bottom: 1.1rem;
     box-shadow: 0 0 1px #ccc;
     transition-duration: 0.7s;
@@ -91,14 +90,14 @@ input {
     max-width: 35rem;
     font-weight: 900;
     font-size: 2rem;
-    line-height: 3rem;
+    line-height: 1rem;
     border-radius: 1rem;
 }
 
 label {
-    font-weight: 900;
+    font-weight: 250;
     font-size: 1.1rem;
-    line-height: 2rem;
+    line-height: 3rem;
     color: darkgrey;
     transition: .7s;
 }
@@ -111,11 +110,12 @@ label {
     border-radius: 0rem 1.5rem 1.5rem 0rem;
 }
 
-.nav-link{
+.nav-link {
     color: #FFFFFF;
     text-decoration: none;
 }
-.nav-link:hover{
+
+.nav-link:hover {
     color: #4EEEA1;
     text-decoration: none;
 }
@@ -134,7 +134,10 @@ div.Title2 {
     align-items: flex-end;
 }
 
-.doteco p{
-    margin-bottom: 3rem;
+.doteco p {
     font-family: Arial, Helvetica, sans-serif;
+}
+
+.btnRadio {
+    margin-inline-start: 3rem;
 }
