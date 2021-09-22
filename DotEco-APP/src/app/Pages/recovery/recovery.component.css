@@ -1,0 +1,37 @@
+.card {
+    background-color: #FFFFFF;
+    border-radius: 1rem;
+}
+
+.card-body {
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+input {
+    margin-bottom: 1.5rem;
+    width: 25rem;
+}
+
+.painelRecovery{
+    color:#FFFFFF;
+    background: #4EEEA1;
+    padding-top: .9rem;
+    padding-bottom: .9rem;
+    border-radius: 0rem 1.5rem 1.5rem 0rem;
+}
+
+.block {
+    display: flex;
+    height: 100%; 
+    flex-direction: column;
+    align-items:flex-end;
+}
+
+.doteco p{
+    margin-top: 3rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
