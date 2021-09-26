@@ -12,6 +12,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RecoveryComponent } from './Pages/recovery/recovery.component';
+import { ProfileComponent } from './Pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { RecoveryComponent } from './Pages/recovery/recovery.component';
     TitleComponent,
     RegisterComponent,
     RecoveryComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

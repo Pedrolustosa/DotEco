@@ -1,0 +1,34 @@
+.card {
+    background: #FFFFFF;
+    box-shadow: 5px 4px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 1.5rem;
+}
+
+.card-body {
+    width: 90rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn{
+    /* Button */
+    background: #4EEEA1;
+    border: 3px solid #4EEEA1;
+    border-radius: 5px;
+    width: 200px;
+    height: 48px;
+    margin-top: 2.5rem;
+    box-shadow: 0 0 1px #ccc;
+    transition-duration: 0.7s;
+    transition-timing-function: linear;
+    box-shadow: 0px 0 0 #FFFFFF inset;
+    /* Text */
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 27px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
