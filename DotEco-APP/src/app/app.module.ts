@@ -12,6 +12,8 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RequestRecycleComponent } from './Pages/request-recycle/request-recycle.component';
+import { RecoveryComponent } from './Pages/recovery/recovery.component';
+import { ProfileComponent } from './Pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { RequestRecycleComponent } from './Pages/request-recycle/request-recycle
     TitleComponent,
     RegisterComponent,
     RequestRecycleComponent,
+    RecoveryComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
