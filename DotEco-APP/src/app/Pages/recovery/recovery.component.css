@@ -56,6 +56,11 @@ label {
     color: #FFFFFF;
 }
 
+.btnConfirm:hover {
+    box-shadow: -150px 0 0 #FFFFFF inset;
+    color: #4EEEA1;
+}
+
 .painelRecovery {
     color: #FFFFFF;
     background: #4EEEA1;
