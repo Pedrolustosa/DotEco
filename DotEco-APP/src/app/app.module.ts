@@ -14,7 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RequestRecycleComponent } from './Pages/request-recycle/request-recycle.component';
 import { RecoveryComponent } from './Pages/recovery/recovery.component';
 import { ProfileComponent } from './Pages/profile/profile.component';
-import { HomeUserComponent } from './Pages/home-user/home-user.component';
+import { DashboardComponent } from './Pages/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,7 @@ import { HomeUserComponent } from './Pages/home-user/home-user.component';
     RequestRecycleComponent,
     RecoveryComponent,
     ProfileComponent,
-    HomeUserComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
