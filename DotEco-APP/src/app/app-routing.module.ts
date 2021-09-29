@@ -6,6 +6,7 @@ import { RecoveryComponent } from './Pages/recovery/recovery.component';
 import { ProfileComponent } from './Pages/profile/profile.component';
 import { RegisterComponent } from './Pages/register/register.component';
 import { RequestRecycleComponent } from './Pages/request-recycle/request-recycle.component';
+import { HomeUserComponent } from './Pages/home-user/home-user.component';
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: "login/recovery", component: RecoveryComponent },
   { path: "profile", component: ProfileComponent },
   { path: "requestrecycle", component: RequestRecycleComponent}
+  { path: "home-user", component: HomeUserComponent }
 ];
 
 @NgModule({
