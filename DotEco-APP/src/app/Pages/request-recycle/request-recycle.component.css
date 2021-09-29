@@ -1,4 +1,3 @@
-
 .card {
     background: #FFFFFF;
     box-shadow: 5px 4px 10px rgba(0, 0, 0, 0.25);
@@ -6,26 +5,67 @@
 }
 
 .card-body {
-    height: 40rem;
+    height: 50rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-.Title{
+
+.Title {
+    margin-top: .5rem;
     font-weight: 900;
     font-size: 18px;
     line-height: 27px;
     text-align: center;
     margin-bottom: 2rem;
     color: #4EEEA1;
+}
 
+.btnBlocoLogo p {
+    color: #FFFFFF;
 }
+
+.form-control {
+    height: 4.5rem;
+    background: #E6E6E6;
+}
+
+.btn{
+   /* Button */
+   background: #4EEEA1;
+   border: 3px solid #4EEEA1;
+   border-radius: 30px;
+   width: 176px;
+   height: 48px;
+   margin-top: 2.5rem;
+   margin-bottom: 1.1rem;
+   box-shadow: 0 0 1px #ccc;
+   transition-duration: 0.7s;
+   transition-timing-function: linear;
+   box-shadow: 0px 0 0 #FFFFFF inset;
+   /* Text */
+   font-weight: 800;
+   font-size: 18px;
+   line-height: 27px;
+   text-align: center;
+   color: #FFFFFF;
+}
+
+.btn:hover {
+    box-shadow: -150px 0 0 #FFFFFF inset;
+    color: #4EEEA1;
+}
+
 input {
-    width: 35rem;
-    padding: 1rem;
+    max-width: 35rem;
+    font-weight: 900;
+    font-size: 2rem;
+    line-height: 3rem;
+    border-radius: 1rem;
 }
-label{
+
+label {
     font-weight: 900;
     font-size: 1.1rem;
     line-height: 2rem;
@@ -33,50 +73,19 @@ label{
     transition: .7s;
 }
 
-.btnCancelar {
-    /* Button */
-    background: #4EEEA1;
-    border: 3px solid #4EEEA1;
-    border-radius: 30px;
-    width: 176px;
-    height: 48px;
-    box-shadow: 0 0 1px #ccc;
-    transition-duration: 0.7s;
-    transition-timing-function: linear;
-    box-shadow: 0px 0 0 #FFFFFF inset;
-    /* Text */
-    font-weight: 800;
-    font-size: 18px;
-    line-height: 27px;
-    text-align: center;
+.panelRegister {
     color: #FFFFFF;
-}
-
-.btnCancelar:hover {
-    box-shadow: -150px 0 0 #FFFFFF inset;
-    color: #4EEEA1;
-}
-
-.btnFinalizar {
-    /* Button */
     background: #4EEEA1;
-    border: 3px solid #4EEEA1;
-    border-radius: 30px;
-    width: 176px;
-    height: 48px;
-    box-shadow: 0 0 1px #ccc;
-    transition-duration: 0.7s;
-    transition-timing-function: linear;
-    box-shadow: 0px 0 0 #FFFFFF inset;
-    /* Text */
-    font-weight: 800;
-    font-size: 18px;
-    line-height: 27px;
-    text-align: center;
-    color: #FFFFFF;
+    padding-top: .9rem;
+    padding-bottom: .9rem;
+    border-radius: 0rem 1.5rem 1.5rem 0rem;
 }
 
-.btnFinalizar:hover {
-    box-shadow: -150px 0 0 #FFFFFF inset;
+.nav-link{
+    color: #FFFFFF;
+    text-decoration: none;
+}
+.nav-link:hover{
     color: #4EEEA1;
+    text-decoration: none;
 }
