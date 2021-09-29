@@ -5,20 +5,34 @@
 }
 
 .card-body {
-    width: 90rem;
+    height: 45rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.btn{
+.avatar {
+    width: 9rem;
+    border-color: #4EEEA1;
+}
+
+.Title {
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 27px;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #4EEEA1;
+}
+
+.btn {
     /* Button */
     background: #4EEEA1;
     border: 3px solid #4EEEA1;
     border-radius: 5px;
-    width: 200px;
-    height: 48px;
+    width: 15rem;
+    height: 5rem;
     margin-top: 2.5rem;
     box-shadow: 0 0 1px #ccc;
     transition-duration: 0.7s;
@@ -30,5 +44,13 @@
     line-height: 27px;
     text-align: center;
     color: #FFFFFF;
+    box-shadow: 5px 4px 10px rgba(0, 0, 0, 0.25);
 }
 
+.Lefth {
+    margin-inline-end: 10rem;
+}
+
+.Rigth {
+    margin-inline-start: 10rem;
+}
