@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotEco.Application", "DotEc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotEco.Domain", "DotEco.Domain\DotEco.Domain.csproj", "{7FDC93A1-100C-4A1D-B77E-7D762336F57E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotEco-API", "DotEco-API\DotEco-API.csproj", "{8D5945BC-F0E4-461F-8916-3D494CE97DF2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotEco.API", "DotEco.API\DotEco.API.csproj", "{8D5945BC-F0E4-461F-8916-3D494CE97DF2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotEco.Persistence", "DotEco.Persistence\DotEco.Persistence.csproj", "{B8E85C90-FEFE-46F0-9FA0-0DB5F4C586C9}"
 EndProject

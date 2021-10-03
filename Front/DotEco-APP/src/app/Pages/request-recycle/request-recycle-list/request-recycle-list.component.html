@@ -1,0 +1,8 @@
+<div class="container pt-3 mt-5">
+    <button class="btn" routerLink="requestrecycle">Cadastrar</button>
+    <div *ngFor="let requestRecycle of requestRecycles">
+        <p><b>NameUser:</b> {{requestRecycle.nameUser}}</p>
+        <p><b>RecycleType:</b> {{requestRecycle.recycleType}}</p>
+        <p><b>CollectionDate:</b> {{requestRecycle.collectionDate}}</p>
+    </div>
+</div>
