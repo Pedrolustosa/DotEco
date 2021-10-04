@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,8 @@ import { RequestRecycleComponent } from './Pages/request-recycle/request-recycle
 import { RecoveryComponent } from './Pages/recovery/recovery.component';
 import { ProfileComponent } from './Pages/profile/profile.component';
 import { DashboardComponent } from './Pages/dashboard/dashboard.component';
+import { RequestRecycleListComponent } from './Pages/request-recycle/request-recycle-list/request-recycle-list.component';
+import { RequestRecycleDetailComponent } from './Pages/request-recycle/request-recycle-detail/request-recycle-detail.component';
 
 @NgModule({
   declarations: [
@@ -27,11 +30,14 @@ import { DashboardComponent } from './Pages/dashboard/dashboard.component';
     RecoveryComponent,
     ProfileComponent,
     DashboardComponent,
+    RequestRecycleListComponent,
+    RequestRecycleDetailComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot(),
   ],
