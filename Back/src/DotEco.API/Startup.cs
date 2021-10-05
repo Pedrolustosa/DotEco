@@ -1,5 +1,7 @@
 using System;
 using System.Text;
+using AutoMapper;
+using DotEco.Application.Dtos;
 using DotEco.Domain.Identity;
 using DotEco.Persistence.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -31,7 +33,16 @@ namespace DotEco.API
             services.AddDbContext<DotEcoContext>(
                 context => context.UseSqlite(Configuration.GetConnectionString("Default"))
             );
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            #region AutoMapper
+            var autoMapperConfig = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<User, UserDto>().ReverseMap();
+                cfg.CreateMap<User, UserLoginDto>().ReverseMap();
+            });
+
+            services.AddSingleton(autoMapperConfig.CreateMapper());
+            #endregion
 
             services.AddControllers()
                     .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling =
