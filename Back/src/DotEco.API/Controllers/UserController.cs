@@ -38,7 +38,6 @@ namespace DotEco.API.Controllers
         }
 
         [HttpGet("GetUser")]
-        [AllowAnonymous]
         public async Task<IActionResult> GetUser()
         {
             return Ok(new UserDto());
@@ -118,7 +117,8 @@ namespace DotEco.API.Controllers
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
 
-            var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration.GetSection("AppSetings:Token").Value));
+            var key = new SymmetricSecurityKey(Encoding.ASCII
+                                .GetBytes(_configuration.GetSection("AppSettings:Token").Value));
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
