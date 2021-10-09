@@ -1,0 +1,153 @@
+<section>
+    <div class="container-fluid py-5">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-md-9">
+                <div class="card mt-2 mb-4 m-3">
+                    <div class="row g-0">
+                        <div class="col-md-8 d-flex align-items-center">
+                            <div class="card-body p-4 p-lg-6 gap-3">
+
+                                <div class="mt-4">
+                                    <p class="Title1 m-2">Preencha os campos abaixo.</p>
+                                </div>
+
+                                <form class="form-group" [formGroup]="registerForm">
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="userName" name="userName"
+                                                formControlName="userName" [ngClass]="{'is-invalid': registerForm.get('userName').errors 
+                                                && registerForm.get('userName').touched}"
+                                                placeholder="Insira o nome de Usuário" />
+                                            <label for="userName">Nome Usuário</label>
+                                            <div *ngIf="registerForm.get('userName').hasError('required') 
+                                                && registerForm.get('userName').touched" class="invalid-feedback">
+                                                Usuário é obrigatório.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="floatingNome"
+                                                formControlName="fullName" [ngClass]="{'is-invalid': registerForm.get('fullName').errors 
+                                                && registerForm.get('fullName').touched }"
+                                                placeholder="Insira o Nome Completo" />
+                                            <label for="floatingNome">Nome</label>
+                                            <div *ngIf="registerForm.get('fullName').hasError('required') 
+                                                && registerForm.get('fullName').touched" class="invalid-feedback">
+                                                Nome Completo é obrigatório.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="d-flex justify-content-center align-items-center">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="cpf" formControlName="cpf"
+                                                name="cpf" [ngClass]="{ 'is-invalid': registerForm.get('cpf').errors 
+                                                && registerForm.get('cpf').touched}"
+                                                placeholder="Insira o Nome Completo">
+                                            <label for="cpf">CPF</label>
+                                            <div *ngIf="registerForm.get('cpf').hasError('required') 
+                                                    && registerForm.get('cpf').touched" class="invalid-feedback">
+                                                CPF é obrigatório.
+                                            </div>
+                                        </div>
+                                    </div> -->
+
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <div class="form-floating mb-3">
+                                            <input type="email" class="form-control" id="email" formControlName="email"
+                                                [ngClass]="{ 'is-invalid': registerForm.get('email').errors 
+                                                    && registerForm.get('email').touched}"
+                                                placeholder="Insira o Nome Completo" />
+                                            <div *ngIf="registerForm.get('email').hasError('required') 
+                                                    && registerForm.get('email').touched" class="invalid-feedback">
+                                                email é obrigatório.
+                                            </div>
+                                            <div *ngIf="registerForm.get('email').hasError('email')
+                                                    && registerForm.get('email').touched" class="invalid-feedback">
+                                                Deve ser um e-mail válido.
+                                            </div>
+                                            <label for="email">Email address</label>
+                                        </div>
+                                    </div>
+
+                                    <div formGroupName="passwords">
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <div class="form-floating mb-3">
+                                                <input id="password" class="form-control" type="password"
+                                                    formControlName="password" [ngClass]="{ 'is-invalid': registerForm.get('passwords.password').errors 
+                                                    && registerForm.get('passwords.password').touched}"
+                                                    placeholder="Digite uma Senha" />
+                                                <div *ngIf="registerForm.get('passwords.password').hasError('minlength') 
+                                                    && registerForm.get('passwords.password').touched"
+                                                    class="invalid-feedback">
+                                                    Deve conter no mínimo 4 caracters
+                                                </div>
+                                                <div *ngIf="registerForm.get('passwords.password').hasError('required') 
+                                                    && registerForm.get('passwords.password').touched"
+                                                    class="invalid-feedback">
+                                                    Senha é obrigatório.
+                                                </div>
+                                                <label for="password">Password</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <div class="form-floating">
+                                                <input id="confirmPassword" class="form-control" type="password"
+                                                    formControlName="confirmPassword" [ngClass]="{ 'is-invalid': registerForm.get('passwords.confirmPassword').errors 
+                                                    && registerForm.get('passwords.confirmPassword').touched 
+                                                    ||registerForm.get('passwords.confirmPassword').hasError('mismatch') 
+                                                    && registerForm.get('passwords.confirmPassword').touched }"
+                                                    placeholder="Confirme a Senha" />
+                                                <label for="confirmPassword">Password</label>
+                                                <div *ngIf="registerForm.get('passwords.confirmPassword').hasError('required') 
+                                                    && registerForm.get('passwords.confirmPassword').touched"
+                                                    class="invalid-feedback">
+                                                    Confirme a Senha
+                                                </div>
+                                                <div *ngIf="registerForm.get('passwords.confirmPassword').hasError('mismatch') 
+                                                    && registerForm.get('passwords.confirmPassword').touched"
+                                                    class="invalid-feedback">
+                                                    Confirmação não confere
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-center mb-5 pb-2">
+                                        <button type="button" class="btnRegister" [disabled]="!registerForm.valid"
+                                            (click)="registerUser()">
+                                            Cadastrar
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-md-4 panelRegister">
+                            <div class="block Title2">
+
+                                <div class="doteco fs-1">
+                                    <div class="text-center">
+                                        <p>DOT<b>ECO</b></p>
+                                    </div>
+                                </div>
+                                <div class="d-block justify-content-center text-center fs-6 text-uppercase">
+                                    <div class="text-white text-center align-items-center m-5">
+                                        <p>Ao se cadastrar você estará confirmando que as informações inseridas, são
+                                            verídicas.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button class="btnReturn" type="button" routerLink="login">Voltar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
