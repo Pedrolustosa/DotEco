@@ -18,6 +18,8 @@ import { ProfileComponent } from './Pages/profile/profile.component';
 import { DashboardComponent } from './Pages/dashboard/dashboard.component';
 import { RequestRecycleListComponent } from './Pages/request-recycle/request-recycle-list/request-recycle-list.component';
 import { RequestRecycleDetailComponent } from './Pages/request-recycle/request-recycle-detail/request-recycle-detail.component';
+import { HomeComponent } from './Pages/home/home.component';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { RequestRecycleDetailComponent } from './Pages/request-recycle/request-r
     DashboardComponent,
     RequestRecycleListComponent,
     RequestRecycleDetailComponent,
+    HomeComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -40,6 +44,7 @@ import { RequestRecycleDetailComponent } from './Pages/request-recycle/request-r
     HttpClientModule,
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot(),
+    CarouselModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -9,6 +9,7 @@ import { DashboardComponent } from './Pages/dashboard/dashboard.component';
 import { RequestRecycleComponent } from './Pages/request-recycle/request-recycle.component';
 import { RequestRecycleListComponent } from './Pages/request-recycle/request-recycle-list/request-recycle-list.component';
 import { RequestRecycleDetailComponent } from './Pages/request-recycle/request-recycle-detail/request-recycle-detail.component';
+import { HomeComponent } from './Pages/home/home.component';
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
@@ -24,7 +25,7 @@ const routes: Routes = [
       { path: 'detail', component: RequestRecycleDetailComponent },
       { path: 'list', component: RequestRecycleListComponent },
     ],
-  },
+  },{path:"home",component: HomeComponent}
 ];
 
 @NgModule({

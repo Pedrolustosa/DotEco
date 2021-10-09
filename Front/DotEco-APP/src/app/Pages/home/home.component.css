@@ -1,0 +1,9 @@
+.carousel{
+    justify-content: center;
+}
+.carousel-item{
+    height: 32rem;
+    background: #777777;
+    color:#FFFFFF;
+    
+}
