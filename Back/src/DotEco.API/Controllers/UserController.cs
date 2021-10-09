@@ -74,14 +74,14 @@ namespace DotEco.API.Controllers
         {
             try
             {
-                var user = await _userManager.FindByNameAsync(userLogin.UserName);
+                var user = await _userManager.FindByEmailAsync(userLogin.Email);
 
                 var result = await _signInManager.CheckPasswordSignInAsync(user, userLogin.Password, false);
 
                 if (result.Succeeded)
                 {
                     var appUser = await _userManager.Users
-                    .FirstOrDefaultAsync(u => u.NormalizedUserName == userLogin.UserName.ToUpper());
+                    .FirstOrDefaultAsync(u => u.NormalizedEmail == userLogin.Email.ToUpper());
 
                     var userToReturn = _mapper.Map<UserLoginDto>(appUser);
 

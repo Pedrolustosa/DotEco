@@ -12,25 +12,26 @@
                                     <p class="subTitle">Preencha seus dados</p>
                                 </div>
 
-                                <form class="form-group">
+                                <form class="form-group" #loginForm="ngForm" (ngSubmit)="login()">
                                     <div class="d-flex justify-content-center align-items-center">
                                         <div class="form-floating mb-3">
-                                            <input type="email" class="form-control" id="floatingInput"
-                                                placeholder="name@example.com">
-                                            <label for="floatingInput">Email address</label>
+                                            <input type="email" id="email" class="form-control" placeholder="Email"
+                                                name="email" required [(ngModel)]="model.email">
+                                            <label for="email">Email</label>
                                         </div>
                                     </div>
 
                                     <div class="d-flex justify-content-center align-items-center">
                                         <div class="form-floating">
-                                            <input type="password" class="form-control" id="floatingPassword"
-                                                placeholder="Password">
-                                            <label for="floatingPassword">Password</label>
+                                            <input type="password" class="form-control" name="password"
+                                                [(ngModel)]="model.password" id="password" placeholder="Password">
+                                            <label for="password">Password</label>
                                         </div>
                                     </div>
 
                                     <div class="text-center">
-                                        <button class="btnLogin" type="button">Entrar</button>
+                                        <button [disabled]="!loginForm.valid" class="btnLogin"
+                                            type="submit">Entrar</button>
                                     </div>
                                 </form>
                             </div>
@@ -49,29 +50,20 @@
                                     <div>Criar sua conta</div>
                                 </div>
 
-                                <!-- modificar button para dropdown -->
                                 <ul class="navbar-nav btnBlocoLogo mt-5">
                                     <li class="nav-item btnCadaster dropdown" dropdown>
-                                        <a dropdownToggle class="nav-link dropdown-toggle" style="cursor: pointer;"
-                                            id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
+                                        <a dropdownToggle class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Cadastrar
                                         </a>
                                         <div *dropdownMenu class="dropdown-menu btnCadasterText"
                                             aria-labelledby="navbarDropdownMenuLink">
-                                            <a class="dropdown-item" routerLink="register">
+                                            <a class="dropdown-item" (click)="router.navigate(['/user/registration'])">
                                                 Cliente
-                                            </a>
-                                            <div role="separator" class="divider"></div>
-                                            <a class="dropdown-item" routerLink="register">
-                                                Empresa/Associação
                                             </a>
                                         </div>
                                     </li>
                                 </ul>
-                                <div class="mt-4">
-                                    <a class="linkRecovery" routerLink="recovery"> Esqueci minha Senha</a>
-                                </div>
                             </div>
                         </div>
                     </div>
