@@ -7,8 +7,8 @@
                         <div class="col-md-8 d-flex align-items-center">
                             <div class="card-body p-4 p-lg-6 gap-3">
 
-                                <div class="mt-4">
-                                    <p class="Title1 m-2">Preencha os campos abaixo.</p>
+                                <div class="mt-5">
+                                    <p class="Title1">Preencha os campos abaixo.</p>
                                 </div>
 
                                 <form class="form-group" [formGroup]="registerForm">
@@ -40,7 +40,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- <div class="d-flex justify-content-center align-items-center">
+                                    <div class="d-flex justify-content-center align-items-center">
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control" id="cpf" formControlName="cpf"
                                                 name="cpf" [ngClass]="{ 'is-invalid': registerForm.get('cpf').errors 
@@ -52,7 +52,7 @@
                                                 CPF é obrigatório.
                                             </div>
                                         </div>
-                                    </div> -->
+                                    </div>
 
                                     <div class="d-flex justify-content-center align-items-center">
                                         <div class="form-floating mb-3">
@@ -70,6 +70,15 @@
                                             </div>
                                             <label for="email">Email address</label>
                                         </div>
+                                    </div>
+
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <select class="form-select mb-3">
+                                            <option value="" selected disabled hidden>Selecione uma Opção</option>
+                                            <option value="Client">Cliente</option>
+                                            <option value="Company">Empresa</option>
+                                            <option value="Association">Associação</option>
+                                        </select>
                                     </div>
 
                                     <div formGroupName="passwords">
@@ -94,7 +103,7 @@
                                         </div>
 
                                         <div class="d-flex justify-content-center align-items-center">
-                                            <div class="form-floating">
+                                            <div class="form-floating mb-3">
                                                 <input id="confirmPassword" class="form-control" type="password"
                                                     formControlName="confirmPassword" [ngClass]="{ 'is-invalid': registerForm.get('passwords.confirmPassword').errors 
                                                     && registerForm.get('passwords.confirmPassword').touched 

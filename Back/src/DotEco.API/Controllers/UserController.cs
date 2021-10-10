@@ -38,6 +38,7 @@ namespace DotEco.API.Controllers
         }
 
         [HttpGet("GetUser")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetUser()
         {
             return Ok(new UserDto());
