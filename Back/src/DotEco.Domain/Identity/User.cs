@@ -8,6 +8,8 @@ namespace DotEco.Domain.Identity
     {
         [Column(TypeName = "nvarchar(150)")]
         public string FullName { get; set; }
+        public string CPF { get; set; }
+        public string Type { get; set; }
         public List<UserRole> UserRoles { get; set; }
     }
 }
