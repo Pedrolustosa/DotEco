@@ -2,7 +2,9 @@ using System;
 using System.Text;
 using AutoMapper;
 using DotEco.Application.Dtos;
+using DotEco.Domain;
 using DotEco.Domain.Identity;
+using DotEco.Persistence;
 using DotEco.Persistence.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -39,6 +41,9 @@ namespace DotEco.API
             {
                 cfg.CreateMap<User, UserDto>().ReverseMap();
                 cfg.CreateMap<User, UserLoginDto>().ReverseMap();
+                cfg.CreateMap<Coupons, CouponsDto>().ReverseMap();
+                cfg.CreateMap<Association, AssociationDto>().ReverseMap();
+                cfg.CreateMap<CollectionData, CollectionDataDto>().ReverseMap();
             });
 
             services.AddSingleton(autoMapperConfig.CreateMapper());
@@ -48,6 +53,8 @@ namespace DotEco.API
                     .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling =
                         Newtonsoft.Json.ReferenceLoopHandling.Ignore
                     );
+
+            services.AddScoped<IDotEcoRepository, DotEcoRepository>();
 
             IdentityBuilder builder = services.AddIdentityCore<User>(options =>
             {
