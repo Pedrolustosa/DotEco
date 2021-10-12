@@ -88,9 +88,10 @@
   border-radius: .5rem;
 }
 
-/*   footer links e copyrigth  */
-
-.Copyright {
+footer{
+ background-color: #42a877;
+}
+.copyright {
   font-family: Arial, Helvetica, sans-serif;
   font-size: small;
   
