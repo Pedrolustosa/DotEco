@@ -1,3 +1,4 @@
+using DotEco.Domain;
 using DotEco.Domain.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -12,6 +13,9 @@ namespace DotEco.Persistence.Context
                                                   IdentityUserToken<int>>
     {
         public DotEcoContext(DbContextOptions<DotEcoContext> options) : base(options) { }
+        public DbSet<Association> Associations { get; set; }
+        public DbSet<CollectionData> CollectionDatas { get; set; }
+        public DbSet<Coupons> Coupons { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
