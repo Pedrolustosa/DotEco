@@ -113,14 +113,14 @@ namespace DotEco.API.Controllers
         {
             try
             {
-                var coupons = await _repo.GetAssociationAsyncById(CouponsId);
+                var coupons = await _repo.GetCouponsAsyncById(CouponsId);
                 if (coupons == null) return NotFound();
 
                 _repo.Delete(coupons);
 
                 if (await _repo.SaveChangesAsync())
                 {
-                    return Ok();
+                    return Ok("Cupom Excluido!");
                 }
             }
             catch (System.Exception)
