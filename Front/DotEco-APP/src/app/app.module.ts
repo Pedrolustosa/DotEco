@@ -16,6 +16,8 @@ import { ProfileComponent } from './Pages/profile/profile.component';
 import { DashboardComponent } from './Pages/dashboard/dashboard.component';
 import { RequestRecycleListComponent } from './Pages/request-recycle/request-recycle-list/request-recycle-list.component';
 import { RequestRecycleDetailComponent } from './Pages/request-recycle/request-recycle-detail/request-recycle-detail.component';
+import { HomeComponent } from './Pages/home/home.component';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { UserComponent } from './Pages/user/user.component';
 import { LoginComponent } from './Pages/user/login/login.component';
 import { RegistrationComponent } from './pages/user/registration/registration.component';
@@ -35,6 +37,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     DashboardComponent,
     RequestRecycleListComponent,
     RequestRecycleDetailComponent,
+    HomeComponent,
     UserComponent,
     LoginComponent,
     RegistrationComponent,
@@ -48,6 +51,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     BrowserAnimationsModule,
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot(),
+    CarouselModule.forRoot(),
     BsDatepickerModule.forRoot(),
     ModalModule.forRoot(),
     ToastrModule.forRoot({
