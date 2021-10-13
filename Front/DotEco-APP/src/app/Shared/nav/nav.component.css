@@ -17,3 +17,24 @@
 li{
     padding: 0rem 2rem 0rem 2rem;
 }
+
+.btnDotEco {
+    background: #4EEEA1;
+    border: 3px solid #FFFFFF;
+    border-radius: 30px;
+    width: 6.2rem;
+    height: 2.8rem;
+    font-weight: 800;
+    font-size: 1.1rem;
+    line-height: 27px;
+    text-align: center;
+    color: #FFFFFF;
+    transition-duration: 0.7s;
+    transition-timing-function: linear;
+    box-shadow: 0px 0 0 #4EEEA1 inset;
+}
+
+.btnDotEco:hover {
+    box-shadow: -150px 0 0 #FFFFFF inset;
+    color: #4EEEA1;
+}

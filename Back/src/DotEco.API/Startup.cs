@@ -2,7 +2,9 @@ using System;
 using System.Text;
 using AutoMapper;
 using DotEco.Application.Dtos;
+using DotEco.Domain;
 using DotEco.Domain.Identity;
+using DotEco.Persistence;
 using DotEco.Persistence.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -39,6 +41,9 @@ namespace DotEco.API
             {
                 cfg.CreateMap<User, UserDto>().ReverseMap();
                 cfg.CreateMap<User, UserLoginDto>().ReverseMap();
+                cfg.CreateMap<Coupons, CouponsDto>().ReverseMap();
+                cfg.CreateMap<Association, AssociationDto>().ReverseMap();
+                cfg.CreateMap<CollectionData, CollectionDataDto>().ReverseMap();
             });
 
             services.AddSingleton(autoMapperConfig.CreateMapper());
@@ -48,6 +53,8 @@ namespace DotEco.API
                     .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling =
                         Newtonsoft.Json.ReferenceLoopHandling.Ignore
                     );
+
+            services.AddScoped<IDotEcoRepository, DotEcoRepository>();
 
             IdentityBuilder builder = services.AddIdentityCore<User>(options =>
             {
@@ -67,14 +74,17 @@ namespace DotEco.API
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
+
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("AppSetings:Token").Value)),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
+                                .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
                     ValidateIssuer = false,
                     ValidateAudience = false,
                 };
             });
+
 
             services.AddMvc(options =>
             {
@@ -103,15 +113,14 @@ namespace DotEco.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "DotEco.API v1"));
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseRouting();
 
             app.UseAuthorization();
 
-            app.UseCors(cors => cors.AllowAnyHeader()
-                                    .AllowAnyMethod()
-                                    .AllowAnyOrigin());
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
