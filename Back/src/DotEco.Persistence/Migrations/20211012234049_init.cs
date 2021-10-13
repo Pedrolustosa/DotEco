@@ -80,7 +80,7 @@ namespace DotEco.Persistence.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     FullName = table.Column<string>(type: "nvarchar(150)", nullable: true),
                     CPF = table.Column<string>(type: "TEXT", nullable: true),
-                    Type = table.Column<string>(type: "TEXT", nullable: true),
+                    TypeUser = table.Column<int>(type: "INTEGER", nullable: false),
                     CollectionDataId = table.Column<int>(type: "INTEGER", nullable: true),
                     UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),

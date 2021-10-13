@@ -1,3 +1,5 @@
+using DotEco.Domain.Identity;
+
 namespace DotEco.Application.Dtos
 {
     public class UserDto
@@ -7,6 +9,6 @@ namespace DotEco.Application.Dtos
         public string Email { get; set; }
         public string CPF { get; set; }
         public string Password { get; set; }
-        public string Type { get; set; }
+        public TypeUser TypeUser { get; set; }
     }
 }
