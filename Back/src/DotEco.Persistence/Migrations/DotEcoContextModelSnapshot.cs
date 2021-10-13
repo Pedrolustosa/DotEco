@@ -169,8 +169,8 @@ namespace DotEco.Persistence.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Type")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("TypeUser")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
