@@ -9,22 +9,21 @@
             data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div *ngIf="loggedIn()" class="collapse navbar-collapse " [collapse]="isCollapsed" [isAnimated]="true"
-            id="navbarNav">
+        <div class="collapse navbar-collapse " [collapse]="isCollapsed" [isAnimated]="true" id="navbarNav">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" aria-current="page" routerLink="">Home</a>
+                <li *ngIf="!loggedIn()" class="nav-item" routerLinkActive="active">
+                    <a class="nav-link" aria-current="page" routerLink="home">Home</a>
                 </li>
-                <li class="nav-item" routerLinkActive="active">
+                <li *ngIf="loggedIn()" class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="">Associações</a>
                 </li>
-                <li class="nav-item" routerLinkActive="active">
+                <li *ngIf="loggedIn()" class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="">Cupons</a>
                 </li>
-                <li class="nav-item" routerLinkActive="active">
+                <li *ngIf="loggedIn()" class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="">Solicitações</a>
                 </li>
-                <li class="nav-item" routerLinkActive="active">
+                <li *ngIf="!loggedIn()" class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="">Ajuda</a>
                 </li>
             </ul>

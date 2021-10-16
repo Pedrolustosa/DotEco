@@ -31,6 +31,7 @@ export class RegistrationComponent implements OnInit {
       userName: ['', Validators.required],
       fullName: ['', Validators.required],
       cpf: ['', Validators.required],
+      typeUser: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       passwords: this.fb.group({
         password: ['', [Validators.required, Validators.minLength(4)]],
@@ -40,12 +41,12 @@ export class RegistrationComponent implements OnInit {
   }
 
   comparePassword(fb: FormGroup) {
-    const confirmSenhaCtrl = fb.get('confirmPassword');
-    if (confirmSenhaCtrl.errors == null || 'mismatch' in confirmSenhaCtrl.errors) {
-      if (fb.get('password').value !== confirmSenhaCtrl.value) {
-        confirmSenhaCtrl.setErrors({ mismatch: true });
+    const confirmPasswordCtrl = fb.get('confirmPassword');
+    if (confirmPasswordCtrl.errors == null || 'mismatch' in confirmPasswordCtrl.errors) {
+      if (fb.get('password').value !== confirmPasswordCtrl.value) {
+        confirmPasswordCtrl.setErrors({ mismatch: true });
       } else {
-        confirmSenhaCtrl.setErrors(null);
+        confirmPasswordCtrl.setErrors(null);
       }
     }
   }

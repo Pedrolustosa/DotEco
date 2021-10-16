@@ -14,7 +14,7 @@
 
 .avatar {
     width: 9rem;
-    border-color: #4EEEA1;
+    border-color: #42a877;
 }
 
 .Title {
@@ -23,13 +23,13 @@
     line-height: 27px;
     text-align: center;
     margin-bottom: 2rem;
-    color: #4EEEA1;
+    color: #42a877;
 }
 
 .btn {
     /* Button */
-    background: #4EEEA1;
-    border: 3px solid #4EEEA1;
+    background: #42a877;
+    border: 3px solid #42a877;
     border-radius: 5px;
     width: 15rem;
     height: 5rem;

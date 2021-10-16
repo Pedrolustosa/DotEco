@@ -18,7 +18,7 @@
     line-height: 27px;
     text-align: center;
     margin-bottom: 2rem;
-    color: #4EEEA1;
+    color: #42a877;
 }
 
 .subTitle {
@@ -32,8 +32,8 @@
 
 .btnLogin {
     /* Button */
-    background: #4EEEA1;
-    border: 3px solid #4EEEA1;
+    background: #42a877;
+    border: 3px solid #42a877;
     border-radius: 30px;
     width: 176px;
     height: 48px;
@@ -52,7 +52,7 @@
 
 .btnLogin:hover {
     box-shadow: -150px 0 0 #FFFFFF inset;
-    color: #4EEEA1;
+    color: #42a877;
 }
 
 .btnBlocoLogo p {
@@ -82,7 +82,7 @@ label {
 
 .panelLogin {
     color: #FFFFFF;
-    background: #4EEEA1;
+    background: #42a877;
     padding-top: .9rem;
     padding-bottom: .9rem;
     border-radius: 0rem 1.5rem 1.5rem 0rem;
@@ -93,12 +93,12 @@ label {
     text-decoration: none;
 }
 .nav-link:hover{
-    color: #4EEEA1;
+    color: #42a877;
     text-decoration: none;
 }
 
 .btnCadaster {
-    background: #4EEEA1;
+    background: #42a877;
     border: 3px solid #FFFFFF;
     border-radius: 30px;
     width: 176px;
@@ -110,12 +110,12 @@ label {
     color: #FFFFFF;
     transition-duration: 0.7s;
     transition-timing-function: linear;
-    box-shadow: 0px 0 0 #4EEEA1 inset;
+    box-shadow: 0px 0 0 #42a877 inset;
 }
 
 .btnCadaster:hover {
     box-shadow: -150px 0 0 #FFFFFF inset;
-    color: #4EEEA1;
+    color: #42a877;
 }
 
 .btnCadasterText{
@@ -125,7 +125,7 @@ label {
 }
 
 .dropdown-toggle:hover{
-    color: #4EEEA1;
+    color: #42a877;
 }
     
 

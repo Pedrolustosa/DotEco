@@ -72,14 +72,22 @@
                                         </div>
                                     </div>
 
-                                    <div class="d-flex justify-content-center align-items-center">
-                                        <select class="form-select mb-3">
+                                    <div class="d-flex justify-content-center align-items-center mb-3">
+                                        <select class="form-select" type="text" class="form-control" id="typeUser"
+                                            formControlName="typeUser" [ngClass]="{ 'is-invalid': registerForm.get('typeUser').errors 
+                                            && registerForm.get('typeUser').touched}">
                                             <option value="" selected disabled hidden>Selecione uma Opção</option>
-                                            <option value="Client">Cliente</option>
-                                            <option value="Company">Empresa</option>
-                                            <option value="Association">Associação</option>
+                                            <option value="0">Cliente</option>
+                                            <option value="1">Empresa</option>
+                                            <option value="2">Associação</option>
                                         </select>
+                                        <div *ngIf="registerForm.get('typeUser').hasError('required') 
+                                                    && registerForm.get('typeUser').touched" class="invalid-feedback">
+                                            Escolha o Tipo de Usuário.
+                                        </div>
                                     </div>
+
+
 
                                     <div formGroupName="passwords">
                                         <div class="d-flex justify-content-center align-items-center">

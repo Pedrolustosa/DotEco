@@ -15,8 +15,8 @@ namespace DotEco.Domain.Identity
 
     public enum TypeUser
     {
-        Client = 1,
-        Company = 2,
-        Association = 3,
+        Client = 0,
+        Company = 1,
+        Association = 2,
     }
 }
