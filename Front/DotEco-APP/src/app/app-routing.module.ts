@@ -4,8 +4,8 @@ import { HomeComponent } from './Pages/home/home.component';
 import { DashboardComponent } from './Pages/dashboard/dashboard.component';
 import { UserComponent } from './Pages/user/user.component';
 import { LoginComponent } from './Pages/user/login/login.component';
-import { RegistrationComponent } from './pages/user/registration/registration.component';
 import { AuthGuard } from './auth/auth.guard';
+import { RegistrationComponent } from './Pages/user/registration/registration.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -14,7 +14,7 @@ const routes: Routes = [
     path: 'user', component: UserComponent,
     children: [
       { path: 'login', component: LoginComponent },
-      { path: 'registration', component: RegistrationComponent }
+      { path: 'registration', component: RegistrationComponent}
     ]
   }
 ];

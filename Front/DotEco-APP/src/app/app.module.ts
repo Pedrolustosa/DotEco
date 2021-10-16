@@ -16,10 +16,9 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './Pages/home/home.component';
 import { UserComponent } from './Pages/user/user.component';
 import { LoginComponent } from './Pages/user/login/login.component';
-import { RegistrationComponent } from './pages/user/registration/registration.component';
-
 import { NavComponent } from './Shared/nav/nav.component';
 import { TitleComponent } from './Shared/title/title.component';
+import { RegistrationComponent } from './Pages/user/registration/registration.component';
 
 
 @NgModule({
