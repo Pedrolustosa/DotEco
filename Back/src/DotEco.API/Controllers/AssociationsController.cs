@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using DotEco.Application.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Authorization;
 
 namespace DotEco.API.Controllers
 {
