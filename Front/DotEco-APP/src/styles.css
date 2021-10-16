@@ -18,10 +18,9 @@ body {
 
 /*Custom Scroolbar*/
 body::-webkit-scrollbar {
-    width: 7px;
+    width: 8px;
 }
 body::-webkit-scrollbar-thumb {
-    background-image: linear-gradient(#4EEEA1, #FFFFFF, #4EEEA1);
-    border-radius: .7rem;
+    background-image: linear-gradient(#42a877, #FFFFFF, #42a877);
 }
 /*Custom Scroolbar*/

@@ -38,12 +38,12 @@ namespace DotEco.API.Controllers
         }
 
         //Método criado para testar Autorização
-        // [HttpGet("GetUser")]
-        // [AllowAnonymous]
-        // public async Task<IActionResult> GetUser()
-        // {
-        //     return Ok(new UserDto());
-        // }
+        [HttpGet("GetUser")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetUser()
+        {
+            return Ok(new UserDto());
+        }
 
         [HttpPost("Register")]
         [AllowAnonymous]

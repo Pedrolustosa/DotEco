@@ -1,7 +1,7 @@
 .btn{
     /* Button */
-    background: #4EEEA1;
-    border: 3px solid #4EEEA1;
+    background: #42a877;
+    border: 3px solid #42a877;
     border-radius: 30px;
     width: 176px;
     height: 48px;
@@ -21,5 +21,5 @@
  
  .btn:hover {
      box-shadow: -150px 0 0 #FFFFFF inset;
-     color: #4EEEA1;
+     color: #42a877;
  }

@@ -1,5 +1,5 @@
 .navbar {
-    background-color: #4EEEA1;
+    background-color: #42a877;
     border-radius: 0rem 0rem .5rem .5rem;
     font-size: 1rem;
     line-height: 1.1rem;
@@ -19,7 +19,7 @@ li{
 }
 
 .btnDotEco {
-    background: #4EEEA1;
+    background: #42a877;
     border: 3px solid #FFFFFF;
     border-radius: 30px;
     width: 6.2rem;
@@ -31,10 +31,10 @@ li{
     color: #FFFFFF;
     transition-duration: 0.7s;
     transition-timing-function: linear;
-    box-shadow: 0px 0 0 #4EEEA1 inset;
+    box-shadow: 0px 0 0 #42a877 inset;
 }
 
 .btnDotEco:hover {
     box-shadow: -150px 0 0 #FFFFFF inset;
-    color: #4EEEA1;
+    color: #42a877;
 }
