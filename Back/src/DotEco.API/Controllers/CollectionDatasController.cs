@@ -23,7 +23,6 @@ namespace DotEco.API.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> Get()
         {
             try
@@ -41,7 +40,6 @@ namespace DotEco.API.Controllers
         }
 
         [HttpGet("{CollectionDataId}")]
-        [AllowAnonymous]
         public async Task<IActionResult> Get(int CollectionDataId)
         {
             try
@@ -59,7 +57,6 @@ namespace DotEco.API.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
         public async Task<IActionResult> Post(CollectionDataDto model)
         {
             try
@@ -83,7 +80,6 @@ namespace DotEco.API.Controllers
         }
 
         [HttpPut("{CollectionDataId}")]
-        [AllowAnonymous]
         public async Task<IActionResult> Put(int CollectionDataId, CollectionDataDto model)
         {
             try
@@ -110,7 +106,6 @@ namespace DotEco.API.Controllers
         }
 
         [HttpDelete("{CollectionDataId}")]
-        [AllowAnonymous]
         public async Task<IActionResult> Delete(int CollectionDataId)
         {
             try

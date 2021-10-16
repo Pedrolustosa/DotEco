@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using DotEco.Application.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Authorization;
 
 namespace DotEco.API.Controllers
 {
@@ -23,7 +22,6 @@ namespace DotEco.API.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> Get()
         {
             try
@@ -41,7 +39,6 @@ namespace DotEco.API.Controllers
         }
 
         [HttpGet("{AssociationId}")]
-        [AllowAnonymous]
         public async Task<IActionResult> Get(int AssociationId)
         {
             try
@@ -59,7 +56,6 @@ namespace DotEco.API.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
         public async Task<IActionResult> Post(AssociationDto model)
         {
             try
@@ -83,7 +79,6 @@ namespace DotEco.API.Controllers
         }
 
         [HttpPut("{AssociationId}")]
-        [AllowAnonymous]
         public async Task<IActionResult> Put(int AssociationId, AssociationDto model)
         {
             try
@@ -110,7 +105,6 @@ namespace DotEco.API.Controllers
         }
 
         [HttpDelete("{AssociationId}")]
-        [AllowAnonymous]
         public async Task<IActionResult> Delete(int AssociationId)
         {
             try

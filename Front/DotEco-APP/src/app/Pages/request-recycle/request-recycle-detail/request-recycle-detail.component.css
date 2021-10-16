@@ -19,7 +19,7 @@
     line-height: 27px;
     text-align: center;
     margin-bottom: 2rem;
-    color: #4EEEA1;
+    color: #42a877;
 }
 
 .btnBlocoLogo p {
@@ -33,8 +33,8 @@
 
 .btn{
    /* Button */
-   background: #4EEEA1;
-   border: 3px solid #4EEEA1;
+   background: #42a877;
+   border: 3px solid #42a877;
    border-radius: 30px;
    width: 176px;
    height: 48px;
@@ -54,7 +54,7 @@
 
 .btn:hover {
     box-shadow: -150px 0 0 #FFFFFF inset;
-    color: #4EEEA1;
+    color: #42a877;
 }
 
 input {
@@ -75,7 +75,7 @@ label {
 
 .panelRegister {
     color: #FFFFFF;
-    background: #4EEEA1;
+    background: #42a877;
     padding-top: .9rem;
     padding-bottom: .9rem;
     border-radius: 0rem 1.5rem 1.5rem 0rem;
@@ -86,6 +86,6 @@ label {
     text-decoration: none;
 }
 .nav-link:hover{
-    color: #4EEEA1;
+    color: #42a877;
     text-decoration: none;
 }
