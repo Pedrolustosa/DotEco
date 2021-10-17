@@ -1,13 +1,10 @@
 p {
-    font-family: 'Courier New', Courier, monospace;
     background: #FFFFFF;
-    padding-left: 6rem;
-}
-
-.card {
-    background: #FFFFFF;
-    box-shadow: 5px 4px 10px rgba(0, 0, 0, 0.25);
-    border-radius: 1.5rem;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 27px;
+    margin-bottom: 2rem;
+    color: #A4A4A4;
 }
 
 .card-body {
@@ -24,8 +21,8 @@ button {
     background: #42a877;
     border: 3px solid #42a877;
     border-radius: 1rem;
-    width: 7rem;
-    height: 7rem;
+    width: 200px;
+    height: 180px;
     margin-top: 2.5rem;
     box-shadow: 0 0 1px #ccc;
     transition-duration: 0.7s;
@@ -33,9 +30,13 @@ button {
     box-shadow: 0px 0 0 #FFFFFF inset;
     /* Text */
     font-weight: 800;
-    font-size: 18px;
+    font-size: 15px;
     line-height: 27px;
     color: #FFFFFF;
+}
+
+img {
+    width: 140px;
 }
 
 .painelBtn {
@@ -43,22 +44,22 @@ button {
     padding-top: 1rem;
 }
 
-.top{
+.top {
     padding: auto;
 }
 
-.topRigth{
-    margin-left: 7rem;
+.topRigth {
+    margin-left: rem;
 }
 
-.topLeft{
-    margin-right: 7rem;
+.topLeft {
+    margin-right: 8rem;
 }
 
-.bottonRigth{
-    margin-left: 7rem;
+.bottonRigth {
+    margin-left: rem;
 }
 
-.bottonLeft{
-    margin-right: 7rem;
+.bottonLeft {
+    margin-right: 8rem;
 }
