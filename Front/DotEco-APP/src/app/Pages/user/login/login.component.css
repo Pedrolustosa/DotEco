@@ -53,6 +53,7 @@
 .btnLogin:hover {
     box-shadow: -150px 0 0 #FFFFFF inset;
     color: #42a877;
+    cursor: pointer;
 }
 
 .btnBlocoLogo p {
@@ -116,6 +117,7 @@ label {
 .btnCadaster:hover {
     box-shadow: -150px 0 0 #FFFFFF inset;
     color: #42a877;
+    cursor: pointer;
 }
 
 .btnCadasterText{
