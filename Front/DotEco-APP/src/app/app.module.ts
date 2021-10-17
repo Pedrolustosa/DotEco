@@ -6,7 +6,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -20,6 +20,9 @@ import { RegistrationComponent } from './pages/user/registration/registration.co
 
 import { NavComponent } from './Shared/nav/nav.component';
 import { TitleComponent } from './Shared/title/title.component';
+import { AssociationComponent } from './Pages/association/association.component';
+import { AssociationService } from './_services/association.service';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
 
 @NgModule({
@@ -31,6 +34,7 @@ import { TitleComponent } from './Shared/title/title.component';
     UserComponent,
     LoginComponent,
     RegistrationComponent,
+    AssociationComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,7 +54,14 @@ import { TitleComponent } from './Shared/title/title.component';
       progressBar: true
     }),
   ],
-  providers: [],
+  providers: [
+    AssociationService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

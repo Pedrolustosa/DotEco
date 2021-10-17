@@ -1,15 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
+import { AuthGuard } from './auth/auth.guard';
+
 import { HomeComponent } from './Pages/home/home.component';
-import { DashboardComponent } from './Pages/dashboard/dashboard.component';
 import { UserComponent } from './Pages/user/user.component';
 import { LoginComponent } from './Pages/user/login/login.component';
+import { DashboardComponent } from './Pages/dashboard/dashboard.component';
+import { AssociationComponent } from './Pages/association/association.component';
 import { RegistrationComponent } from './pages/user/registration/registration.component';
-import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'association', component: AssociationComponent, canActivate: [AuthGuard] },
   {
     path: 'user', component: UserComponent,
     children: [

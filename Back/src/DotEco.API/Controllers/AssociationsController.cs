@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DotEco.Application.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DotEco.API.Controllers
 {
@@ -66,7 +67,7 @@ namespace DotEco.API.Controllers
 
                 if (await _repo.SaveChangesAsync())
                 {
-                    return Created($"/api/association/{model.Id}", _mapper.Map<AssociationDto>(association));
+                    return Created($"/api/associations/{model.Id}", _mapper.Map<AssociationDto>(association));
                 }
             }
             catch (System.Exception ex)
@@ -93,7 +94,7 @@ namespace DotEco.API.Controllers
 
                 if (await _repo.SaveChangesAsync())
                 {
-                    return Created($"/api/association/{model.Id}", _mapper.Map<AssociationDto>(association));
+                    return Created($"/api/associations/{model.Id}", _mapper.Map<AssociationDto>(association));
                 }
             }
             catch (System.Exception ex)

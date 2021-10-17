@@ -11,6 +11,7 @@ export class AuthService {
     baseURL = 'http://localhost:5000/api/user/';
     jwtHelper = new JwtHelperService();
     decodedToken: any;
+    tokenOk: boolean;
 
     constructor(private http: HttpClient) { }
 
@@ -34,7 +35,12 @@ export class AuthService {
 
     loggedIn() {
         const token = localStorage.getItem('token');
-        return !this.jwtHelper.isTokenExpired(token);
+        this.tokenOk = this.jwtHelper.isTokenExpired(token);
+
+        if (this.tokenOk) {
+            window.localStorage.removeItem('token');
+        }
+        return !this.tokenOk;
     }
 
 }
