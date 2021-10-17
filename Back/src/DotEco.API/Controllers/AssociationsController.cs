@@ -117,7 +117,7 @@ namespace DotEco.API.Controllers
 
                 if (await _repo.SaveChangesAsync())
                 {
-                    return Ok("Associação desvinculada");
+                    return Ok(new { message = "Associação desvinculada" });
                 }
             }
             catch (System.Exception)
