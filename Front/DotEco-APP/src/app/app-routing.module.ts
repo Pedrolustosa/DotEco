@@ -9,11 +9,13 @@ import { LoginComponent } from './Pages/user/login/login.component';
 import { DashboardComponent } from './Pages/dashboard/dashboard.component';
 import { AssociationComponent } from './Pages/association/association.component';
 import { RegistrationComponent } from './pages/user/registration/registration.component';
+import { ProfileComponent } from './Pages/profile/profile.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'association', component: AssociationComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent},
   {
     path: 'user', component: UserComponent,
     children: [
