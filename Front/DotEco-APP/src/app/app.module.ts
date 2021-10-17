@@ -23,6 +23,7 @@ import { TitleComponent } from './Shared/title/title.component';
 import { AssociationComponent } from './Pages/association/association.component';
 import { AssociationService } from './_services/association.service';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { CouponsComponent } from './Pages/coupons/coupons.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     LoginComponent,
     RegistrationComponent,
     AssociationComponent,
+    CouponsComponent,
   ],
   imports: [
     BrowserModule,

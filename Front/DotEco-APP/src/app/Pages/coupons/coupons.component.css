@@ -1,0 +1,55 @@
+.coupons-header{
+    margin-top: 4rem;
+    color: #42a877;
+}
+
+.coupons-header div{
+    margin-top: 2rem;
+}
+
+.card {
+    background: #FFFFFF;
+    box-shadow: 5px 4px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 1.5rem;
+}
+
+.card-body {
+    height: 40.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    color: #42a877;
+    margin-bottom: 3rem;
+    margin-top: -3rem;
+}
+
+.form-group .title {
+    justify-content: center;
+}
+
+.form-group {
+    color: #42a877;
+}
+
+.btn {
+    background: #4EEEA1;
+    border: 3px solid #4EEEA1;
+    height: 2rem;
+    border-radius: 1rem;
+    text-align: center;
+    color: #FFFFFF;
+    margin-top: 2rem;
+    box-shadow: 0 0 1px #ccc;
+    transition-duration: 0.7s;
+    transition-timing-function: linear;
+    box-shadow: 0px 0 0 #FFFFFF inset;
+    font-weight: 8rem;
+    font-size: 14pt;
+    line-height: 10px;
+    text-align: center;
+    color: #FFFFFF;
+}
