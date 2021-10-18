@@ -8,11 +8,6 @@ import { Association } from '../_models/Association';
 })
 export class AssociationService {
     baseURL = 'http://localhost:5000/api/associations';
-    header = {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Access-Control-Allow-Headers': 'Content-Type',
-    }
 
     constructor(private http: HttpClient) { }
 

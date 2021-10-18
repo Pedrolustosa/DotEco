@@ -3,7 +3,7 @@
         <h1> Cupons </h1>
     </div>
     <div class="d-flex justify-content-around">
-        <button type="button" class="btn">Gerar</button>
+        <button type="button" class="btn" (click)="newCoupons(template)">Gerar</button>
         <button type="button" class="btn">Ativos</button>
         <button type="button" class="btn">Utilizados</button>
     </div>
@@ -44,6 +44,67 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div bsModal #template="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+        aria-labelledby="dialog-sizes-name1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        Atualziando Dados
+                    </h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="template.hide()"
+                        aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="form-group" [formGroup]="couponsForm">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="name" name="name" formControlName="name"
+                                [ngClass]="{'is-invalid': couponsForm.get('name').errors 
+                                    && couponsForm.get('name').touched}" />
+                            <label for="name">Nome</label>
+                            <div *ngIf="couponsForm.get('name').hasError('required') 
+                                    && couponsForm.get('name').touched" class="invalid-feedback">
+                                Nome é obrigatório.
+                            </div>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="quantity" formControlName="quantity" [ngClass]="{'is-invalid': couponsForm.get('quantity').errors 
+                                    && couponsForm.get('quantity').touched }" />
+                            <label for="quantity">Quantidade</label>
+                            <div *ngIf="couponsForm.get('quantity').hasError('required') 
+                                    && couponsForm.get('quantity').touched" class="invalid-feedback">
+                                Quantidade é obrigatório.
+                            </div>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="percent" formControlName="percent"
+                                name="percent" [ngClass]="{ 'is-invalid': couponsForm.get('percent').errors 
+                                    && couponsForm.get('percent').touched}">
+                            <label for="percent">Desconto %</label>
+                            <div *ngIf="couponsForm.get('percent').hasError('required') 
+                                        && couponsForm.get('percent').touched" class="invalid-feedback">
+                                Desconto % é obrigatório.
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer d-flex">
+                    <button class="btn btn-secondary" (click)="template.hide()">
+                        Fechar
+                    </button>
+                    <button class="btn btn-primary ml-auto" [disabled]="!couponsForm.valid"
+                        (click)="saveAlteration(template)">
+                        Salvar Alterações
+                    </button>
                 </div>
             </div>
         </div>

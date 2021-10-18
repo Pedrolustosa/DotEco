@@ -24,8 +24,6 @@ export class AssociationComponent implements OnInit {
   _filterList = '';
   bodyDeleteAssociation = '';
 
-  
-
   constructor(
     private fb: FormBuilder,
     private toastr: ToastrService,

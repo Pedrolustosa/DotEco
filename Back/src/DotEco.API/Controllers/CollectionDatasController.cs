@@ -117,7 +117,7 @@ namespace DotEco.API.Controllers
 
                 if (await _repo.SaveChangesAsync())
                 {
-                    return Ok();
+                    return Ok(new { message = "Coleta cancelada" });
                 }
             }
             catch (System.Exception)
