@@ -3,9 +3,9 @@
         <h1> Cupons </h1>
     </div>
     <div class="d-flex justify-content-around">
-        <button type="button" class="btn" (click)="newCoupons(template)">Gerar</button>
-        <button type="button" class="btn">Ativos</button>
-        <button type="button" class="btn">Utilizados</button>
+        <button type="button" class="btnCoupons" (click)="newCoupons(template)">Gerar</button>
+        <button type="button" class="btnCoupons">Ativos</button>
+        <button type="button" class="btnCoupons">Utilizados</button>
     </div>
 </section>
 
@@ -40,7 +40,7 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center">
-                                <button type="button" class="btn">Finalizar</button>
+                                <button type="button" class="btnCoupons">Finalizar</button>
                             </div>
                         </div>
                     </div>
@@ -98,10 +98,10 @@
                     </form>
                 </div>
                 <div class="modal-footer d-flex">
-                    <button class="btn btn-secondary" (click)="template.hide()">
+                    <button class="btn btn-outline-secondary" (click)="template.hide()">
                         Fechar
                     </button>
-                    <button class="btn btn-primary ml-auto" [disabled]="!couponsForm.valid"
+                    <button class="btn btn-outline-primary ml-auto" [disabled]="!couponsForm.valid"
                         (click)="saveAlteration(template)">
                         Salvar Alterações
                     </button>
