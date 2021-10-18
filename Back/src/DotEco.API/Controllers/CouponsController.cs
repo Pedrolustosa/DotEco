@@ -115,7 +115,7 @@ namespace DotEco.API.Controllers
 
                 if (await _repo.SaveChangesAsync())
                 {
-                    return Ok("Cupom Excluido!");
+                    return Ok(new { message = "Cupom cancelado" });
                 }
             }
             catch (System.Exception)
