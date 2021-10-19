@@ -12,8 +12,8 @@
     margin-bottom: 5rem;
 }
 
-.between-about, h3{
-    padding-top: 1.5rem;
+.between-about, h3 {
+    padding-top: 3rem;
     color: #42a877;
 }
 
@@ -21,7 +21,6 @@
     padding-top: 3rem;
     padding-bottom: 4rem;
     color: #42a877;
-
 }
 
 #about {
