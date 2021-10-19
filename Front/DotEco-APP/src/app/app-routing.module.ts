@@ -8,9 +8,9 @@ import { UserComponent } from './Pages/user/user.component';
 import { LoginComponent } from './Pages/user/login/login.component';
 import { DashboardComponent } from './Pages/dashboard/dashboard.component';
 import { AssociationComponent } from './Pages/association/association.component';
-import { RegistrationComponent } from './pages/user/registration/registration.component';
 import { ProfileComponent } from './Pages/profile/profile.component';
 import { CouponsComponent } from './Pages/coupons/coupons.component';
+import { RegistrationComponent } from './Pages/user/registration/registration.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
