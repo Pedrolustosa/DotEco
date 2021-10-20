@@ -23,6 +23,7 @@ import { AssociationService } from './_services/association.service';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { CouponsComponent } from './Pages/coupons/coupons.component';
 import { RegistrationComponent } from './Pages/user/registration/registration.component';
+import { CollectionDataComponent } from './Pages/collectiondata/collectiondata.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { RegistrationComponent } from './Pages/user/registration/registration.co
     RegistrationComponent,
     AssociationComponent,
     CouponsComponent,
+    CollectionDataComponent
   ],
   imports: [
     BrowserModule,
@@ -63,6 +65,6 @@ import { RegistrationComponent } from './Pages/user/registration/registration.co
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

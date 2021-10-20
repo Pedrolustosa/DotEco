@@ -1,20 +1,19 @@
+
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using DotEco.Domain;
 
 namespace DotEco.Application.Dtos
 {
     public class CollectionDataDto
     {
+        [Key]
         public int Id { get; set; }
-        public string Type { get; set; }
-        public UserDto Users { get; set; }
-        public List<AssociationDto> Associations { get; set; }
-        public Status Status { get; set; }
-    }
-
-    public enum Status
-    {
-        Confirmed = 0,
-        Rescheduled = 1,
-        Refused = 2
+        public string Address { get; set; }
+        public string CEP { get; set; }
+        public string Reference { get; set; }
+        public string Email { get; set; }
+        public string Telephone { get; set; }
+        public List<AssociationDto> AssociationDto { get; set; }
     }
 }

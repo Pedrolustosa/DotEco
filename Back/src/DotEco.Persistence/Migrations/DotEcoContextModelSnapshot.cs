@@ -31,6 +31,12 @@ namespace DotEco.Persistence.Migrations
                     b.Property<string>("CNPJ")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("CollectionDataId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("CollectionDataId1")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
@@ -38,6 +44,8 @@ namespace DotEco.Persistence.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CollectionDataId1");
 
                     b.ToTable("Associations");
                 });
@@ -48,10 +56,19 @@ namespace DotEco.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Status")
+                    b.Property<string>("Address")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Type")
+                    b.Property<string>("CEP")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Reference")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Telephone")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -282,6 +299,15 @@ namespace DotEco.Persistence.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("DotEco.Domain.Association", b =>
+                {
+                    b.HasOne("DotEco.Domain.CollectionData", "CollectionData")
+                        .WithMany("Association")
+                        .HasForeignKey("CollectionDataId1");
+
+                    b.Navigation("CollectionData");
+                });
+
             modelBuilder.Entity("DotEco.Domain.Identity.UserRole", b =>
                 {
                     b.HasOne("DotEco.Domain.Identity.Role", "Role")
@@ -339,6 +365,11 @@ namespace DotEco.Persistence.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("DotEco.Domain.CollectionData", b =>
+                {
+                    b.Navigation("Association");
                 });
 
             modelBuilder.Entity("DotEco.Domain.Identity.Role", b =>
