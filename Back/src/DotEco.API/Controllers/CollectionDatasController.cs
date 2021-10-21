@@ -60,17 +60,17 @@ namespace DotEco.API.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Post(CollectionDataDto model)
+        public async Task<IActionResult> Post(CollectionDataPostDto model)
         {
             try
             {
-                var collectionData = _mapper.Map<CollectionDataDto>(model);
+                var collectionData = _mapper.Map<CollectionDataPostDto>(model);
 
                 _repo.Add(collectionData);
 
                 if (await _repo.SaveChangesAsync())
                 {
-                    return Created($"/api/collectiondata/{model.Id}", _mapper.Map<CollectionDataDto>(collectionData));
+                    return Created($"/api/collectiondata/{model.Id}", _mapper.Map<CollectionDataPostDto>(collectionData));
                 }
             }
             catch (System.Exception ex)
@@ -84,7 +84,7 @@ namespace DotEco.API.Controllers
 
         [HttpPut("{CollectionDataId}")]
         [AllowAnonymous]
-        public async Task<IActionResult> Put(int CollectionDataId, CollectionDataDto model)
+        public async Task<IActionResult> Put(int CollectionDataId, CollectionDataPostDto model)
         {
             try
             {
@@ -98,7 +98,7 @@ namespace DotEco.API.Controllers
 
                 if (await _repo.SaveChangesAsync())
                 {
-                    return Created($"/api/collectiondata/{model.Id}", _mapper.Map<CollectionDataDto>(collectionData));
+                    return Created($"/api/collectiondata/{model.Id}", _mapper.Map<CollectionDataPostDto>(collectionData));
                 }
             }
             catch (System.Exception ex)

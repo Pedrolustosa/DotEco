@@ -24,6 +24,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { CouponsComponent } from './Pages/coupons/coupons.component';
 import { RegistrationComponent } from './Pages/user/registration/registration.component';
 import { CollectionDataComponent } from './Pages/collectiondata/collectiondata.component';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { CollectionDataComponent } from './Pages/collectiondata/collectiondata.c
     CarouselModule.forRoot(),
     BsDatepickerModule.forRoot(),
     ModalModule.forRoot(),
+    TabsModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 3000,
       preventDuplicates: true,

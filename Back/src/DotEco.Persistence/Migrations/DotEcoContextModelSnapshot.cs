@@ -31,10 +31,7 @@ namespace DotEco.Persistence.Migrations
                     b.Property<string>("CNPJ")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("CollectionDataId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("CollectionDataId1")
+                    b.Property<int?>("CollectionDataId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
@@ -45,7 +42,7 @@ namespace DotEco.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CollectionDataId1");
+                    b.HasIndex("CollectionDataId");
 
                     b.ToTable("Associations");
                 });
@@ -58,6 +55,9 @@ namespace DotEco.Persistence.Migrations
 
                     b.Property<string>("Address")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("AssociationId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("CEP")
                         .HasColumnType("TEXT");
@@ -303,7 +303,7 @@ namespace DotEco.Persistence.Migrations
                 {
                     b.HasOne("DotEco.Domain.CollectionData", "CollectionData")
                         .WithMany("Association")
-                        .HasForeignKey("CollectionDataId1");
+                        .HasForeignKey("CollectionDataId");
 
                     b.Navigation("CollectionData");
                 });

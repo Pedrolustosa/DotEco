@@ -61,7 +61,8 @@ namespace DotEco.Persistence.Migrations
                     CEP = table.Column<string>(type: "TEXT", nullable: true),
                     Reference = table.Column<string>(type: "TEXT", nullable: true),
                     Email = table.Column<string>(type: "TEXT", nullable: true),
-                    Telephone = table.Column<string>(type: "TEXT", nullable: true)
+                    Telephone = table.Column<string>(type: "TEXT", nullable: true),
+                    AssociationId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -207,15 +208,14 @@ namespace DotEco.Persistence.Migrations
                     CNPJ = table.Column<string>(type: "TEXT", nullable: true),
                     State = table.Column<string>(type: "TEXT", nullable: true),
                     Address = table.Column<string>(type: "TEXT", nullable: true),
-                    CollectionDataId = table.Column<string>(type: "TEXT", nullable: true),
-                    CollectionDataId1 = table.Column<int>(type: "INTEGER", nullable: true)
+                    CollectionDataId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Associations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Associations_CollectionDatas_CollectionDataId1",
-                        column: x => x.CollectionDataId1,
+                        name: "FK_Associations_CollectionDatas_CollectionDataId",
+                        column: x => x.CollectionDataId,
                         principalTable: "CollectionDatas",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -259,9 +259,9 @@ namespace DotEco.Persistence.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Associations_CollectionDataId1",
+                name: "IX_Associations_CollectionDataId",
                 table: "Associations",
-                column: "CollectionDataId1");
+                column: "CollectionDataId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

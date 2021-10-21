@@ -3,7 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
+import { filter } from 'rxjs/operators';
+import { Association } from 'src/app/_models/Association';
 import { CollectionData } from 'src/app/_models/CollectionData';
+import { AssociationService } from 'src/app/_services/association.service';
 import { CollectionDataService } from 'src/app/_services/collectiondata.service';
 
 @Component({
@@ -17,9 +20,11 @@ export class CollectionDataComponent implements OnInit {
   collectiondatas: CollectionData[];
   collectiondata: CollectionData;
   collectiondataForm: FormGroup;
+  associations: Association[];
   mode = 'post';
   _filterList = '';
   bodyDeleteCollectionData = '';
+  collectiondataAssociation: any;
 
   constructor(
     private fb: FormBuilder,
@@ -27,6 +32,7 @@ export class CollectionDataComponent implements OnInit {
     private modalService: BsModalService,
     private localeService: BsLocaleService,
     private collectiondataService: CollectionDataService,
+    private serviceAssociation: AssociationService,
   ) {
     this.localeService.use('pt-br');
   }
@@ -34,6 +40,7 @@ export class CollectionDataComponent implements OnInit {
   ngOnInit(): void {
     this.validation();
     this.getCollectionData();
+    this.getAllAssociation();
   }
 
   get filterList(): string {
@@ -49,9 +56,6 @@ export class CollectionDataComponent implements OnInit {
     template.show();
   }
 
-  getAssociation(){
-    
-  }
 
   validation() {
     this.collectiondataForm = this.fb.group({
@@ -102,8 +106,18 @@ export class CollectionDataComponent implements OnInit {
     );
   }
 
+  getAllAssociation() {
+    this.serviceAssociation.getAllAssociation().subscribe(
+      (_associations: Association[]) => {
+        this.associations = _associations;
+        console.log(this.associations);
+      }, error => {
+        this.toastr.error(`Erro ao tentar Carregar eventos: ${error}`);
+      });
+  }
+
   getCollectionData() {
-    this.collectiondataService.getAllCollectionData().subscribe(
+    this.collectiondataService.getAllCollectionData().pipe(filter(data => !data)).subscribe(
       (_collectiondata: CollectionData[]) => {
         this.collectiondatas = _collectiondata;
         this.collectiondatasFilters = this.collectiondatas;

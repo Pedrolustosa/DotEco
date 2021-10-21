@@ -44,7 +44,9 @@ namespace DotEco.API
                 cfg.CreateMap<Coupons, CouponsDto>().ReverseMap();
                 cfg.CreateMap<Association, AssociationDto>().ReverseMap();
                 cfg.CreateMap<CollectionData, CollectionDataDto>().ReverseMap();
+                cfg.CreateMap<CollectionData, CollectionDataPostDto>().ReverseMap();
             });
+
 
             services.AddSingleton(autoMapperConfig.CreateMapper());
             #endregion

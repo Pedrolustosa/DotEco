@@ -1,112 +1,118 @@
-<section class="coupons-header">
-    <div class="text-center">
-        <h1> Cupons </h1>
+<section class="container">
+    <div class="d-flex justify-content-center">
+        <button title="Criar" class="btnCoupons text-center mt- mb-2" (click)="newCoupons(template)">
+            <i class="fa fa-plus-circle"></i>&nbsp;
+            Gerar Cupom
+        </button>
     </div>
-    <div class="d-flex justify-content-around">
-        <button type="button" class="btnCoupons" (click)="newCoupons(template)">Gerar</button>
-        <button type="button" class="btnCoupons">Ativos</button>
-        <button type="button" class="btnCoupons">Utilizados</button>
+    <div class="card mt-5">
+        <div class="card-body">
+            <tabset class="m-2">
+                <tab heading="Ativos" id="tab1">
+                    <table
+                        class="table table-sm text-center table-bordered border-success table-striped table-hover mt-2 m-1">
+                        <thead class="table-success">
+                            <tr>
+                                <th>#</th>
+                                <th>Nome</th>
+                                <th>Quantidade</th>
+                                <th>%</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="coupons && coupons">
+                            <tr *ngFor="let coupons of couponsFilters">
+                                <td>{{coupons.id}}</td>
+                                <td>{{coupons.name}}</td>
+                                <td>{{coupons.quantity}}</td>
+                                <td>{{coupons.percent}}</td>
+                                <td>
+                                    <div>
+                                        <button type="button" title="Excluir" class="btn btn-outline-danger me-2"
+                                            (click)="deleteCoupons(coupons, confirm)"><i
+                                                class="fa fa-eraser"></i></button>
+                                        <button type="button" title="Editar" class="btn btn-outline-warning me-2"
+                                            (click)="editCoupons(coupons, template)"><i class="fa fa-edit"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot *ngIf="!coupons">
+                            <tr>
+                                <td colspan="7" class="text-center">
+                                    <h4>
+                                        Nenhuma Associação encontrada!
+                                    </h4>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </tab>
+                <tab heading="Utilizados">
+                    <div class="mt-2 m-1">
+                        Utilizados
+                    </div>
+                </tab>
+            </tabset>
+        </div>
     </div>
 </section>
 
-<section>
-    <div class="container-fluid py-5">
-        <div class="row d-flex justify-content-center align-items-center">
-            <div class="col-md-9">
-                <div class="card mt-2 mt-4 m-5">
-                    <div class="card-body justify-content-center">
-                        <div class="title text-center">
-                            <p> Preencha os campos abaixo.</p>
-                        </div>
-                        <div class="form-group">
-                            <div class="row m-4">
-                                <label for="inputQtd" class="col-sm-6">Quantidade de
-                                    cupons</label>
-                                <div class="col-sm-5">
-                                    <input type="number" class="form-control" id="input">
-                                </div>
-                            </div>
-                            <div class="row m-4">
-                                <label for="inputName" class="col-sm-6 col-form-label">Nome do cupom</label>
-                                <div class="col-sm-5">
-                                    <input type="text" class="form-control" id="input">
-                                </div>
-                            </div>
-                            <div class="row m-4">
-                                <label for="inputSelect" class="col-sm-6 col-form-label">Selecione o
-                                    Desconto</label>
-                                <div class="col-sm-5">
-                                    <input type="number" class="form-control" id="input">
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-center">
-                                <button type="button" class="btnCoupons">Finalizar</button>
-                            </div>
+
+<div bsModal #template="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    Atualziando Dados
+                </h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="template.hide()"
+                    aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="form-group" [formGroup]="couponsForm">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="name" name="name" formControlName="name" [ngClass]="{'is-invalid': couponsForm.get('name').errors 
+                                    && couponsForm.get('name').touched}" />
+                        <label for="name">Nome</label>
+                        <div *ngIf="couponsForm.get('name').hasError('required') 
+                                    && couponsForm.get('name').touched" class="invalid-feedback">
+                            Nome é obrigatório.
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-
-    <div bsModal #template="bs-modal" class="modal fade" tabindex="-1" role="dialog"
-        aria-labelledby="dialog-sizes-name1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">
-                        Atualziando Dados
-                    </h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="template.hide()"
-                        aria-label="Close">
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form class="form-group" [formGroup]="couponsForm">
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="name" name="name" formControlName="name"
-                                [ngClass]="{'is-invalid': couponsForm.get('name').errors 
-                                    && couponsForm.get('name').touched}" />
-                            <label for="name">Nome</label>
-                            <div *ngIf="couponsForm.get('name').hasError('required') 
-                                    && couponsForm.get('name').touched" class="invalid-feedback">
-                                Nome é obrigatório.
-                            </div>
-                        </div>
-
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="quantity" formControlName="quantity" [ngClass]="{'is-invalid': couponsForm.get('quantity').errors 
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="quantity" formControlName="quantity" [ngClass]="{'is-invalid': couponsForm.get('quantity').errors 
                                     && couponsForm.get('quantity').touched }" />
-                            <label for="quantity">Quantidade</label>
-                            <div *ngIf="couponsForm.get('quantity').hasError('required') 
+                        <label for="quantity">Quantidade</label>
+                        <div *ngIf="couponsForm.get('quantity').hasError('required') 
                                     && couponsForm.get('quantity').touched" class="invalid-feedback">
-                                Quantidade é obrigatório.
-                            </div>
+                            Quantidade é obrigatório.
                         </div>
+                    </div>
 
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="percent" formControlName="percent"
-                                name="percent" [ngClass]="{ 'is-invalid': couponsForm.get('percent').errors 
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="percent" formControlName="percent" name="percent"
+                            [ngClass]="{ 'is-invalid': couponsForm.get('percent').errors 
                                     && couponsForm.get('percent').touched}">
-                            <label for="percent">Desconto %</label>
-                            <div *ngIf="couponsForm.get('percent').hasError('required') 
+                        <label for="percent">Desconto %</label>
+                        <div *ngIf="couponsForm.get('percent').hasError('required') 
                                         && couponsForm.get('percent').touched" class="invalid-feedback">
-                                Desconto % é obrigatório.
-                            </div>
+                            Desconto % é obrigatório.
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer d-flex">
-                    <button class="btn btn-outline-secondary" (click)="template.hide()">
-                        Fechar
-                    </button>
-                    <button class="btn btn-outline-primary ml-auto" [disabled]="!couponsForm.valid"
-                        (click)="saveAlteration(template)">
-                        Salvar Alterações
-                    </button>
-                </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer d-flex">
+                <button class="btn btn-outline-secondary" (click)="template.hide()">
+                    Fechar
+                </button>
+                <button class="btn btn-outline-primary ml-auto" [disabled]="!couponsForm.valid"
+                    (click)="saveAlteration(template)">
+                    Salvar Alterações
+                </button>
             </div>
         </div>
     </div>
-</section>
+</div>

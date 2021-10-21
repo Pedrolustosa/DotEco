@@ -40,7 +40,7 @@ namespace DotEco.Persistence
         //ASSOCIATIONS
         public async Task<Association[]> GetAllAssociationAsync()
         {
-            IQueryable<Association> query = _context.Associations;
+            IQueryable<Association> query = _context.Associations.Include(x => x.CollectionData);
 
             query = query.AsNoTracking()
                         .OrderBy(c => c.Id);
@@ -62,7 +62,7 @@ namespace DotEco.Persistence
         //COLLECTION DATA
         public async Task<CollectionData[]> GetAllCollectionDataAsync()
         {
-            IQueryable<CollectionData> query = _context.CollectionDatas;
+            IQueryable<CollectionData> query = _context.CollectionDatas.Include(cd => cd.Association);
 
             query = query.AsNoTracking()
                         .OrderBy(c => c.Id);
@@ -71,7 +71,7 @@ namespace DotEco.Persistence
         }
         public async Task<CollectionData> GetCollectionDataAsyncById(int CollectionDataId)
         {
-            IQueryable<CollectionData> query = _context.CollectionDatas;
+            IQueryable<CollectionData> query = _context.CollectionDatas.Include(cd => cd.Association);
 
             query = query
                         .AsNoTracking()
