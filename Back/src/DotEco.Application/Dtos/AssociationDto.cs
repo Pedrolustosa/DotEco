@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+
 namespace DotEco.Application.Dtos
 {
     public class AssociationDto

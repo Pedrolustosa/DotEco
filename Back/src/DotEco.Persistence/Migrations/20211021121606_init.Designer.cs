@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotEco.Persistence.Migrations
 {
     [DbContext(typeof(DotEcoContext))]
-    [Migration("20211020235330_init")]
+    [Migration("20211021121606_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

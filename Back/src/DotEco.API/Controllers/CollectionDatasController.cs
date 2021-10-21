@@ -60,17 +60,17 @@ namespace DotEco.API.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Post(CollectionDataPostDto model)
+        public async Task<IActionResult> Post(CollectionDataDto model)
         {
             try
             {
-                var collectionData = _mapper.Map<CollectionDataPostDto>(model);
+                var collectionData = _mapper.Map<CollectionDataDto>(model);
 
                 _repo.Add(collectionData);
 
                 if (await _repo.SaveChangesAsync())
                 {
-                    return Created($"/api/collectiondata/{model.Id}", _mapper.Map<CollectionDataPostDto>(collectionData));
+                    return Created($"/api/collectiondata/{model.Id}", _mapper.Map<CollectionDataDto>(collectionData));
                 }
             }
             catch (System.Exception ex)
