@@ -16,14 +16,15 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './Pages/home/home.component';
 import { UserComponent } from './Pages/user/user.component';
 import { LoginComponent } from './Pages/user/login/login.component';
-import { RegistrationComponent } from './pages/user/registration/registration.component';
-
 import { NavComponent } from './Shared/nav/nav.component';
 import { TitleComponent } from './Shared/title/title.component';
 import { AssociationComponent } from './Pages/association/association.component';
 import { AssociationService } from './_services/association.service';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { CouponsComponent } from './Pages/coupons/coupons.component';
+import { RegistrationComponent } from './Pages/user/registration/registration.component';
+import { CollectionDataComponent } from './Pages/collectiondata/collectiondata.component';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { CouponsComponent } from './Pages/coupons/coupons.component';
     RegistrationComponent,
     AssociationComponent,
     CouponsComponent,
+    CollectionDataComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +52,7 @@ import { CouponsComponent } from './Pages/coupons/coupons.component';
     CarouselModule.forRoot(),
     BsDatepickerModule.forRoot(),
     ModalModule.forRoot(),
+    TabsModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 3000,
       preventDuplicates: true,
@@ -64,6 +67,6 @@ import { CouponsComponent } from './Pages/coupons/coupons.component';
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

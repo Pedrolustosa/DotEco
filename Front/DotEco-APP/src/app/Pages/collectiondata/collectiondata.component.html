@@ -1,0 +1,187 @@
+<div class="container mt-5">
+    <div class="table-responsive-md">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-sm-4 mb-2">
+                        <div class="form-inline">
+                            <div class="form-floating mb-3">
+                                <input id="search" type="text" class="form-control mr-2" [(ngModel)]="filterList" />
+                                <label for="search">Pesquisar</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <button title="Criar" class="btn btn-outline-success" (click)="newCollectionData(template)">
+                            <i class="fa fa-plus-circle"></i>&nbsp;
+                            Nova Coleta
+                        </button>
+                    </div>
+                </div>
+                <h3 class="card-header text-center">Coletas Agendadas</h3>
+                <table class="table table-sm text-center table-bordered border-success table-striped table-hover">
+                    <thead class="table-success">
+                        <tr>
+                            <th>#</th>
+                            <th>address</th>
+                            <th>CEP</th>
+                            <th>reference</th>
+                            <th>email</th>
+                            <th>telephone</th>
+                            <th>association</th>
+                            <th>opções</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="collectiondatas && collectiondatas">
+                        <tr *ngFor="let collectiondatas of collectiondatasFilters">
+                            <td>{{collectiondatas.id}}</td>
+                            <td>{{collectiondatas.address}}</td>
+                            <td>
+                                <div>
+                                    <button type="button" title="Excluir" class="btn btn-outline-danger me-2"
+                                        (click)="deleteCollectionData(collectiondatas, confirm)"><i
+                                            class="fa fa-eraser"></i></button>
+                                    <button type="button" title="Editar" class="btn btn-outline-warning me-2"
+                                        (click)="editCollectionData(collectiondatas, template)"><i
+                                            class="fa fa-edit"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot *ngIf="!collectiondata">
+                        <tr>
+                            <td colspan="7" class="text-center">
+                                <h4>
+                                    Nenhuma Coleta encontrada!
+                                </h4>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div bsModal #template="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    Atualziando Dados
+                </h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="template.hide()"
+                    aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="form-group" [formGroup]="collectiondataForm">
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="address" name="address" formControlName="address"
+                            [ngClass]="{'is-invalid': collectiondataForm.get('name')?.errors 
+                                && collectiondataForm.get('address')?.touched}" />
+                        <label for="address">Endereço</label>
+                        <div *ngIf="collectiondataForm.get('address')?.hasError('required') 
+                                && collectiondataForm.get('address')?.touched" class="invalid-feedback">
+                            Endereço é obrigatório.
+                        </div>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="cep" formControlName="cep" [ngClass]="{'is-invalid': collectiondataForm.get('cep')?.errors 
+                                && collectiondataForm.get('cep')?.touched }" />
+                        <label for="cep">CEP</label>
+                        <div *ngIf="collectiondataForm.get('cep')?.hasError('required') 
+                                && collectiondataForm.get('cep')?.touched" class="invalid-feedback">
+                            CEP é obrigatório.
+                        </div>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="reference" formControlName="reference"
+                            name="reference" [ngClass]="{ 'is-invalid': collectiondataForm.get('reference')?.errors 
+                                && collectiondataForm.get('reference')?.touched}">
+                        <label for="reference">Referência</label>
+                        <div *ngIf="collectiondataForm.get('reference')?.hasError('required') 
+                                    && collectiondataForm.get('reference')?.touched" class="invalid-feedback">
+                            Referência é obrigatório.
+                        </div>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="email" formControlName="email" [ngClass]="{ 'is-invalid': collectiondataForm.get('email')?.errors 
+                                    && collectiondataForm.get('email')?.touched}" />
+                        <label for="email">Email</label>
+                        <div *ngIf="collectiondataForm.get('email')?.hasError('required') 
+                                    && collectiondataForm.get('email')?.touched" class="invalid-feedback">
+                            Email é obrigatório.
+                        </div>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="telephone" formControlName="telephone" [ngClass]="{ 'is-invalid': collectiondataForm.get('telephone')?.errors 
+                                    && collectiondataForm.get('telephone')?.touched}" />
+                        <label for="telephone">Telefone</label>
+                        <div *ngIf="collectiondataForm.get('telephone')?.hasError('required') 
+                                    && collectiondataForm.get('telephone')?.touched" class="invalid-feedback">
+                            telephone é obrigatório.
+                        </div>
+                    </div>
+
+                    <div class="form-floating">
+                        <select class="form-select" type="text" id="association" formControlName="association"
+                            aria-label="Floating label select example" [ngClass]="{ 'is-invalid': collectiondataForm.get('association')?.errors 
+                            && collectiondataForm.get('association')?.touched}">
+                            <option *ngFor="let association of associations" value={{association.id}}>
+                                {{association.name}}
+                            </option>
+                        </select>
+                        <label for="association">Associações</label>
+                        <div *ngIf=" collectiondataForm.get('association')?.hasError('required') &&
+                                collectiondataForm.get('association')?.touched" class="invalid-feedback">
+                            Escolha a associação para coleta.
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer d-flex">
+                <button class="btn btn-secondary" (click)="template.hide()">
+                    Fechar
+                </button>
+                <button class="btn btn-primary ml-auto" [disabled]="!collectiondataForm.valid"
+                    (click)="saveAlteration(template)">
+                    Salvar Alterações
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div bsModal #confirm="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    Deletando Coleta
+                </h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="confirm.hide()"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>{{bodyDeleteCollectionData}}</p>
+            </div>
+            <div class="modal-footer btn-group d-flex">
+                <button type="button" class="btn btn-outline-primary" (click)="confirm.hide()">
+                    CENCELAR
+                </button>
+                <button type="button" class="btn btn-outline-danger" (click)="confirmDelete(confirm)">
+                    DELETAR
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -21,6 +21,7 @@ namespace DotEco.API.Controllers
             _repo = repo;
         }
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Get()
         {
             try
@@ -38,6 +39,7 @@ namespace DotEco.API.Controllers
         }
 
         [HttpGet("{CouponsId}")]
+        [AllowAnonymous]
         public async Task<IActionResult> Get(int CouponsId)
         {
             try
@@ -55,6 +57,7 @@ namespace DotEco.API.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Post(CouponsDto model)
         {
             try
@@ -78,6 +81,7 @@ namespace DotEco.API.Controllers
         }
 
         [HttpPut("{CouponsId}")]
+        [AllowAnonymous]
         public async Task<IActionResult> Put(int CouponsId, CouponsDto model)
         {
             try
@@ -104,6 +108,7 @@ namespace DotEco.API.Controllers
         }
 
         [HttpDelete("{CouponsId}")]
+        [AllowAnonymous]
         public async Task<IActionResult> Delete(int CouponsId)
         {
             try

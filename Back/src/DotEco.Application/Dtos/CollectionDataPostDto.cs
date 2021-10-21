@@ -1,9 +1,9 @@
-using System.Collections.Generic;
+
 using System.ComponentModel.DataAnnotations;
 
-namespace DotEco.Domain
+namespace DotEco.Application.Dtos
 {
-    public class CollectionData
+    public class CollectionDataPostDto
     {
         [Key]
         public int Id { get; set; }
@@ -12,7 +12,6 @@ namespace DotEco.Domain
         public string Reference { get; set; }
         public string Email { get; set; }
         public string Telephone { get; set; }
-        public virtual List<Association> Association { get; set; }
         public virtual int AssociationId { get; set; }
     }
 }

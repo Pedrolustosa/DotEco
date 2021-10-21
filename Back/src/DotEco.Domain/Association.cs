@@ -1,3 +1,4 @@
+
 namespace DotEco.Domain
 {
     public class Association
@@ -8,5 +9,6 @@ namespace DotEco.Domain
         public string CNPJ { get; set; }
         public string State { get; set; }
         public string Address { get; set; }
+        public virtual CollectionData CollectionData { get; set; }
     }
 }

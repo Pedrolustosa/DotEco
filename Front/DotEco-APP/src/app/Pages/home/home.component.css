@@ -9,22 +9,18 @@
 }
 
 .carousel-caption {
-    margin-bottom: 8rem;
+    margin-bottom: 5rem;
 }
 
-.carousel-caption h1, p {
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-/* between*/
-
-.between-about {
-    padding-top: 5rem;
+.between-about, h3 {
+    padding-top: 3rem;
+    color: #42a877;
 }
 
 .between-partner {
-    padding-top: 5rem;
+    padding-top: 3rem;
     padding-bottom: 4rem;
+    color: #42a877;
 }
 
 #about {
@@ -34,7 +30,7 @@
 }
 
 #about .card {
-    margin: 5px;
+    margin: .5rem;
     border: none;
     box-shadow: .2rem .5rem .7rem rgb(0, 0, 0, .25);
 }
@@ -42,7 +38,6 @@
 #about .card .principal {
     border: none;
     text-align: justify;
-    font-weight: 600;
     box-shadow: .2rem .5rem .7rem rgb(0, 0, 0, .35);
 }
 
@@ -62,7 +57,7 @@
     transform: translateY(-2%);
 }
 
-#about .card-body i {
+#about .card-body {
     color: #42a877;
 }
 
@@ -74,10 +69,15 @@
     padding-bottom: 2rem;
 }
 
+#partner .card-text {
+    padding-top: .9rem;
+    color: #42a877;
+}
+
 #partner .card-title {
-    font-size: x-large;
-    font-family: Arial, Helvetica, sans-serif;
-    padding-bottom: 2.5rem;
+    font-size: large;
+    padding-bottom: 3.5rem;
+    color: #42a877;
 }
 
 #partner img {
@@ -89,6 +89,5 @@ footer {
 }
 
 .copyright {
-    font-family: Arial, Helvetica, sans-serif;
     font-size: small;
 }
