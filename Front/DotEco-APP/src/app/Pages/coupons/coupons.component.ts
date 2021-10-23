@@ -80,7 +80,7 @@ export class CouponsComponent implements OnInit {
   deleteCoupons(coupon: Coupons, template: any) {
     this.openModal(template);
     this.coupon = coupon;
-    this.bodyDeleteCoupons = `Tem certeza que deseja excluir o Evento: ${this.coupon.name}, Código: ${this.coupon.id}`;
+    this.bodyDeleteCoupons = `Tem certeza que deseja excluir o Cupom: ${this.coupon.name}, Código: ${this.coupon.id}`;
   }
 
   confirmDelete(template: any) {
@@ -103,7 +103,7 @@ export class CouponsComponent implements OnInit {
         this.couponsFilters = this.coupons;
         console.log(this.coupons);
       }, error => {
-        this.toastr.error(`Erro ao tentar Carregar eventos: ${error}`);
+        this.toastr.error(`Erro ao tentar Carregar Cupons: ${error}`);
       });
   }
 

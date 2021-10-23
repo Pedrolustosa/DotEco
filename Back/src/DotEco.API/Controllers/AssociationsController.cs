@@ -12,7 +12,7 @@ namespace DotEco.API.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Associacao")]
+    [Authorize(Roles = "Associacao, Administrador")]
     public class AssociationsController : ControllerBase
     {
         private readonly IMapper _mapper;

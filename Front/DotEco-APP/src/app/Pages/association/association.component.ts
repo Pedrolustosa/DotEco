@@ -105,9 +105,8 @@ export class AssociationComponent implements OnInit {
       (_associations: Association[]) => {
         this.associations = _associations;
         this.associationsFilters = this.associations;
-        console.log(this.associations);
       }, error => {
-        this.toastr.error(`Erro ao tentar Carregar eventos: ${error}`);
+        this.toastr.error(`Erro ao tentar Carregar Associações: ${error}`);
       });
   }
 

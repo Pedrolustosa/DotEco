@@ -11,7 +11,7 @@ namespace DotEco.API.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Empresa")]
+    [Authorize(Roles = "Empresa, Administrador")]
     public class CouponsController : ControllerBase
     {
         private readonly IMapper _mapper;
