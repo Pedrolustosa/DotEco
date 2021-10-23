@@ -9,45 +9,36 @@
         <div class="card-body">
             <tabset class="m-2">
                 <tab heading="Ativos" id="tab1">
-                    <table
-                        class="table table-sm text-center table-bordered border-success table-striped table-hover mt-2 m-1">
-                        <thead class="table-success">
-                            <tr>
-                                <th>#</th>
-                                <th>Nome</th>
-                                <th>Quantidade</th>
-                                <th>%</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody *ngIf="coupons && coupons">
-                            <tr *ngFor="let coupons of couponsFilters">
-                                <td>{{coupons.id}}</td>
-                                <td>{{coupons.name}}</td>
-                                <td>{{coupons.quantity}}</td>
-                                <td>{{coupons.percent}}</td>
-                                <td>
-                                    <div>
-                                        <button type="button" title="Excluir" class="btn btn-outline-danger me-2"
-                                            (click)="deleteCoupons(coupons, confirm)"><i
-                                                class="fa fa-eraser"></i></button>
-                                        <button type="button" title="Editar" class="btn btn-outline-warning me-2"
-                                            (click)="editCoupons(coupons, template)"><i class="fa fa-edit"></i></button>
+
+                    <div *ngIf="coupons && coupons">
+                        <div *ngFor="let coupons of couponsFilters">
+                            <div class="col-md-4">
+                                <div class="card m-1">
+                                    <div class="card-body">
+                                        <div class="border">
+                                            <div class="m-1">{{coupons.id}}</div>
+                                            <div class="m-1">{{coupons.name}}</div>
+                                            <div class="m-1">{{coupons.quantity}}</div>
+                                            <div class="m-1">{{coupons.percent}}</div>
+                                        </div>
                                     </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tfoot *ngIf="!coupons">
-                            <tr>
-                                <td colspan="7" class="text-center">
-                                    <h4>
-                                        Nenhuma Associação encontrada!
-                                    </h4>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="!coupons">
+                        <tr>
+                            <td colspan="7" class="text-center">
+                                <h4>
+                                    Nenhum Cupom Disnponível!
+                                </h4>
+                            </td>
+                        </tr>
+                    </div>
+
                 </tab>
+
                 <tab heading="Utilizados">
                     <div class="mt-2 m-1">
                         Utilizados

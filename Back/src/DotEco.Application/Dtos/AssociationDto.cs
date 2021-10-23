@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using DotEco.Domain;
-
 namespace DotEco.Application.Dtos
 {
     public class AssociationDto
