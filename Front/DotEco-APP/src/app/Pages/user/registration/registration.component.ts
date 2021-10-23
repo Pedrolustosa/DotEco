@@ -18,7 +18,9 @@ export class RegistrationComponent implements OnInit {
 
   userTypes = [
     { id: 1, name: "Cliente" },
-    { id: 2, name: "Associação" }
+    { id: 2, name: "Associação" },
+    { id: 3, name: "Empresa" },
+    { id: 4, name: "Administrador" }
   ];
 
   constructor(

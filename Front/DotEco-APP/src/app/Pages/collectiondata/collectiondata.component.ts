@@ -112,7 +112,7 @@ export class CollectionDataComponent implements OnInit {
         this.associations = _associations;
         console.log(this.associations);
       }, error => {
-        this.toastr.error(`Erro ao tentar Carregar eventos: ${error}`);
+        this.toastr.error(`Erro ao tentar Carregar Associações: ${error}`);
       });
   }
 
@@ -123,7 +123,7 @@ export class CollectionDataComponent implements OnInit {
         this.collectiondatasFilters = this.collectiondatas;
         console.log(this.collectiondatas);
       }, error => {
-        this.toastr.error(`Erro ao tentar Carregar eventos: ${error}`);
+        this.toastr.error(`Erro ao tentar Carregar Coletas: ${error}`);
       });
   }
 

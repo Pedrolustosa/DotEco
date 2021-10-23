@@ -1,12 +1,10 @@
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 
 namespace DotEco.Domain.Identity
 {
     public class User : IdentityUser<int>
     {
-        [Column(TypeName = "nvarchar(150)")]
         public string FullName { get; set; }
         public string CPF { get; set; }
         public int Type { get; set; }

@@ -50,14 +50,6 @@ namespace DotEco.API
             services.AddSingleton(autoMapperConfig.CreateMapper());
             #endregion
 
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("admin", policy => policy.RequireClaim("Store", "admin"));
-                options.AddPolicy("user", policy => policy.RequireClaim("Store", "user"));
-                options.AddPolicy("client", policy => policy.RequireClaim("Store", "client"));
-                options.AddPolicy("association", policy => policy.RequireClaim("Store", "association"));
-            });
-
             services.AddControllers()
                     .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling =
                         Newtonsoft.Json.ReferenceLoopHandling.Ignore
@@ -83,7 +75,6 @@ namespace DotEco.API
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
-
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
@@ -92,6 +83,8 @@ namespace DotEco.API
                     ValidateIssuer = false,
                     ValidateAudience = false,
                 };
+                options.SaveToken = true;
+                options.RequireHttpsMetadata = false;
             });
 
 
@@ -127,9 +120,8 @@ namespace DotEco.API
 
             app.UseRouting();
 
-            app.UseAuthorization();
-
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
