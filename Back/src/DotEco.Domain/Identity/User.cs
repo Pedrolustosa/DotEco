@@ -9,14 +9,7 @@ namespace DotEco.Domain.Identity
         [Column(TypeName = "nvarchar(150)")]
         public string FullName { get; set; }
         public string CPF { get; set; }
-        public TypeUser TypeUser { get; set; }
+        public int Type { get; set; }
         public List<UserRole> UserRoles { get; set; }
-    }
-
-    public enum TypeUser
-    {
-        Client = 0,
-        Company = 1,
-        Association = 2,
     }
 }

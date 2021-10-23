@@ -1,11 +1,11 @@
-using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
+using DotEco.Domain;
 
 namespace DotEco.Application.Dtos
 {
     public class AssociationDto
     {
-        [Key]
-        public int Id { get; set; }
+        public int AssociationId { get; set; }
         public string Name { get; set; }
         public string CEP { get; set; }
         public string CNPJ { get; set; }

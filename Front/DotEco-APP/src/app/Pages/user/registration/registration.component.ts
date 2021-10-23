@@ -1,3 +1,4 @@
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -15,6 +16,11 @@ export class RegistrationComponent implements OnInit {
   registerForm: FormGroup;
   user: User;
 
+  userTypes = [
+    { id: 1, name: "Cliente" },
+    { id: 2, name: "Associação" }
+  ];
+
   constructor(
     private authService: AuthService,
     public router: Router,
@@ -31,7 +37,7 @@ export class RegistrationComponent implements OnInit {
       userName: ['', Validators.required],
       fullName: ['', Validators.required],
       cpf: ['', Validators.required],
-      typeUser: ['', Validators.required],
+      type: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       passwords: this.fb.group({
         password: ['', [Validators.required, Validators.minLength(4)]],
@@ -73,7 +79,6 @@ export class RegistrationComponent implements OnInit {
             }
           });
         }
-
       );
     }
   }

@@ -18,7 +18,7 @@ namespace DotEco.Persistence.Migrations
 
             modelBuilder.Entity("DotEco.Domain.Association", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("AssociationId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -40,7 +40,7 @@ namespace DotEco.Persistence.Migrations
                     b.Property<string>("State")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("AssociationId");
 
                     b.HasIndex("CollectionDataId");
 
@@ -49,7 +49,7 @@ namespace DotEco.Persistence.Migrations
 
             modelBuilder.Entity("DotEco.Domain.CollectionData", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CollectionDataId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -71,7 +71,7 @@ namespace DotEco.Persistence.Migrations
                     b.Property<string>("Telephone")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("CollectionDataId");
 
                     b.ToTable("CollectionDatas");
                 });
@@ -178,7 +178,7 @@ namespace DotEco.Persistence.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("TypeUser")
+                    b.Property<int>("Type")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("UserName")

@@ -40,21 +40,21 @@ namespace DotEco.Persistence
         //ASSOCIATIONS
         public async Task<Association[]> GetAllAssociationAsync()
         {
-            IQueryable<Association> query = _context.Associations.Include(x => x.CollectionData);
+            IQueryable<Association> query = _context.Associations;
 
             query = query.AsNoTracking()
-                        .OrderBy(c => c.Id);
+                        .OrderBy(c => c.AssociationId);
 
             return await query.ToArrayAsync();
         }
-        public async Task<Association> GetAssociationAsyncById(int AssociationId)
+        public async Task<Association> GetAssociationAsyncById(int associationId)
         {
             IQueryable<Association> query = _context.Associations;
 
             query = query
                         .AsNoTracking()
-                        .OrderBy(c => c.Id)
-                        .Where(c => c.Id == AssociationId);
+                        .OrderBy(c => c.AssociationId)
+                        .Where(c => c.AssociationId == associationId);
 
             return await query.FirstOrDefaultAsync();
         }
@@ -62,21 +62,21 @@ namespace DotEco.Persistence
         //COLLECTION DATA
         public async Task<CollectionData[]> GetAllCollectionDataAsync()
         {
-            IQueryable<CollectionData> query = _context.CollectionDatas.Include(cd => cd.Association);
+            IQueryable<CollectionData> query = _context.CollectionDatas;
 
             query = query.AsNoTracking()
-                        .OrderBy(c => c.Id);
+                        .OrderBy(c => c.CollectionDataId);
 
             return await query.ToArrayAsync();
         }
-        public async Task<CollectionData> GetCollectionDataAsyncById(int CollectionDataId)
+        public async Task<CollectionData> GetCollectionDataAsyncById(int collectionDataId)
         {
-            IQueryable<CollectionData> query = _context.CollectionDatas.Include(cd => cd.Association);
+            IQueryable<CollectionData> query = _context.CollectionDatas;
 
             query = query
                         .AsNoTracking()
-                        .OrderBy(c => c.Id)
-                        .Where(c => c.Id == CollectionDataId);
+                        .OrderBy(c => c.CollectionDataId)
+                        .Where(c => c.CollectionDataId == collectionDataId);
 
             return await query.FirstOrDefaultAsync();
         }

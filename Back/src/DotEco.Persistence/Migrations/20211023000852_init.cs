@@ -30,7 +30,7 @@ namespace DotEco.Persistence.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     FullName = table.Column<string>(type: "nvarchar(150)", nullable: true),
                     CPF = table.Column<string>(type: "TEXT", nullable: true),
-                    TypeUser = table.Column<int>(type: "INTEGER", nullable: false),
+                    Type = table.Column<int>(type: "INTEGER", nullable: false),
                     UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
@@ -55,7 +55,7 @@ namespace DotEco.Persistence.Migrations
                 name: "CollectionDatas",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    CollectionDataId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Address = table.Column<string>(type: "TEXT", nullable: true),
                     CEP = table.Column<string>(type: "TEXT", nullable: true),
@@ -66,7 +66,7 @@ namespace DotEco.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CollectionDatas", x => x.Id);
+                    table.PrimaryKey("PK_CollectionDatas", x => x.CollectionDataId);
                 });
 
             migrationBuilder.CreateTable(
@@ -201,7 +201,7 @@ namespace DotEco.Persistence.Migrations
                 name: "Associations",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    AssociationId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: true),
                     CEP = table.Column<string>(type: "TEXT", nullable: true),
@@ -212,12 +212,12 @@ namespace DotEco.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Associations", x => x.Id);
+                    table.PrimaryKey("PK_Associations", x => x.AssociationId);
                     table.ForeignKey(
                         name: "FK_Associations_CollectionDatas_CollectionDataId",
                         column: x => x.CollectionDataId,
                         principalTable: "CollectionDatas",
-                        principalColumn: "Id",
+                        principalColumn: "CollectionDataId",
                         onDelete: ReferentialAction.Restrict);
                 });
 

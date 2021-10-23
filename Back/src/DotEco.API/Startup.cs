@@ -44,12 +44,19 @@ namespace DotEco.API
                 cfg.CreateMap<Coupons, CouponsDto>().ReverseMap();
                 cfg.CreateMap<Association, AssociationDto>().ReverseMap();
                 cfg.CreateMap<CollectionData, CollectionDataDto>().ReverseMap();
-                cfg.CreateMap<CollectionData, CollectionDataPostDto>().ReverseMap();
             });
 
 
             services.AddSingleton(autoMapperConfig.CreateMapper());
             #endregion
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("admin", policy => policy.RequireClaim("Store", "admin"));
+                options.AddPolicy("user", policy => policy.RequireClaim("Store", "user"));
+                options.AddPolicy("client", policy => policy.RequireClaim("Store", "client"));
+                options.AddPolicy("association", policy => policy.RequireClaim("Store", "association"));
+            });
 
             services.AddControllers()
                     .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling =

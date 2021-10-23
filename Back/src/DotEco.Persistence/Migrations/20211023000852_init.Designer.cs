@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotEco.Persistence.Migrations
 {
     [DbContext(typeof(DotEcoContext))]
-    [Migration("20211021121606_init")]
+    [Migration("20211023000852_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,7 +20,7 @@ namespace DotEco.Persistence.Migrations
 
             modelBuilder.Entity("DotEco.Domain.Association", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("AssociationId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -42,7 +42,7 @@ namespace DotEco.Persistence.Migrations
                     b.Property<string>("State")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("AssociationId");
 
                     b.HasIndex("CollectionDataId");
 
@@ -51,7 +51,7 @@ namespace DotEco.Persistence.Migrations
 
             modelBuilder.Entity("DotEco.Domain.CollectionData", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CollectionDataId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -73,7 +73,7 @@ namespace DotEco.Persistence.Migrations
                     b.Property<string>("Telephone")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("CollectionDataId");
 
                     b.ToTable("CollectionDatas");
                 });
@@ -180,7 +180,7 @@ namespace DotEco.Persistence.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("TypeUser")
+                    b.Property<int>("Type")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("UserName")
