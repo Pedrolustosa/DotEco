@@ -9,9 +9,10 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace DotEco.API.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Association")]
+    [Authorize(Roles = "Associacao")]
     public class AssociationsController : ControllerBase
     {
         private readonly IMapper _mapper;
@@ -41,6 +42,7 @@ namespace DotEco.API.Controllers
         }
 
         [HttpGet("{AssociationId}")]
+
         public async Task<IActionResult> Get(int AssociationId)
         {
             try
@@ -58,6 +60,7 @@ namespace DotEco.API.Controllers
         }
 
         [HttpPost]
+
         public async Task<IActionResult> Post(AssociationDto model)
         {
             try
@@ -81,6 +84,7 @@ namespace DotEco.API.Controllers
         }
 
         [HttpPut("{AssociationId}")]
+
         public async Task<IActionResult> Put(int AssociationId, AssociationDto model)
         {
             try

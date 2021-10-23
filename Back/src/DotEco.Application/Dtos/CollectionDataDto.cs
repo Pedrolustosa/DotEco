@@ -11,8 +11,6 @@ namespace DotEco.Application.Dtos
         public string Reference { get; set; }
         public string Email { get; set; }
         public string Telephone { get; set; }
-        public virtual List<AssociationDto> Association { get; set; }
-        public virtual int AssociationId { get; set; }
 
     }
 }

@@ -11,6 +11,5 @@ namespace DotEco.Application.Dtos
         public string CNPJ { get; set; }
         public string State { get; set; }
         public string Address { get; set; }
-        public virtual CollectionDataDto CollectionData { get; set; }
     }
 }

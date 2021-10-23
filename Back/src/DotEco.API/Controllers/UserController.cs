@@ -14,6 +14,7 @@ using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using AutoMapper;
 using DotEco.Application.Dtos;
+using System.Linq;
 
 namespace DotEco.API.Controllers
 {
@@ -35,6 +36,23 @@ namespace DotEco.API.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
+        }
+
+        [Authorize]
+        [HttpGet("test")]
+        public IActionResult GetClaims()
+        {
+            var identity = User.Identity as ClaimsIdentity;
+
+            var claims = from c in identity.Claims
+                         select new
+                         {
+                             subject = c.Subject.Name,
+                             type = c.Type,
+                             value = c.Value
+                         };
+
+            return Ok(claims);
         }
 
         [HttpPost("Register")]
@@ -100,7 +118,7 @@ namespace DotEco.API.Controllers
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.FullName.ToString()),
                 new Claim(ClaimTypes.Role, RoleFactory(user.Type))
             };
 
@@ -135,24 +153,13 @@ namespace DotEco.API.Controllers
             switch (roleNumber)
             {
                 case 1:
-                    return "Client";
+                    return "Cliente";
                 case 2:
-                    return "Association";
+                    return "Associacao";
                 case 3:
-                    return "Company";
-                default:
-                    throw new Exception("Você não tem permissão para acessar essa página");
-            }
-        }
-
-        private static string RoleAdm(int roleAdm)
-        {
-            switch (roleAdm)
-            {
-                case 1:
-                    return "Administrator";
-
-
+                    return "Empresa";
+                case 4:
+                    return "Administrador";
                 default:
                     throw new Exception();
             }
