@@ -4,6 +4,7 @@
             <div class="col-md-9">
                 <div class="card mt-2 mb-4 m-3">
                     <div class="row g-0">
+
                         <div class="col-md-8 d-flex align-items-center">
                             <div class="card-body p-4 p-lg-6 gap-3">
 
@@ -36,6 +37,7 @@
                                 </form>
                             </div>
                         </div>
+
                         <div class="col-md-4 panelLogin">
                             <div class="block Title2">
 
@@ -50,20 +52,11 @@
                                     <div>Criar sua conta</div>
                                 </div>
 
-                                <ul class="navbar-nav btnBlocoLogo mt-5">
-                                    <li class="nav-item btnCadaster dropdown" dropdown>
-                                        <a dropdownToggle class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Cadastrar
-                                        </a>
-                                        <div *dropdownMenu class="dropdown-menu btnCadasterText"
-                                            aria-labelledby="navbarDropdownMenuLink">
-                                            <a class="dropdown-item" (click)="router.navigate(['/user/registration'])">
-                                                Cliente
-                                            </a>
-                                        </div>
-                                    </li>
-                                </ul>
+                                <div class="text-center">
+                                    <button class="btnCadaster" (click)="router.navigate(['/user/registration'])">
+                                        Registrar-se
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
