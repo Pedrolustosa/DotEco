@@ -11,6 +11,7 @@ namespace DotEco.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Association")]
     public class AssociationsController : ControllerBase
     {
         private readonly IMapper _mapper;
@@ -23,7 +24,6 @@ namespace DotEco.API.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> Get()
         {
             try
@@ -41,7 +41,6 @@ namespace DotEco.API.Controllers
         }
 
         [HttpGet("{AssociationId}")]
-        [AllowAnonymous]
         public async Task<IActionResult> Get(int AssociationId)
         {
             try
@@ -59,7 +58,6 @@ namespace DotEco.API.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
         public async Task<IActionResult> Post(AssociationDto model)
         {
             try
@@ -70,7 +68,7 @@ namespace DotEco.API.Controllers
 
                 if (await _repo.SaveChangesAsync())
                 {
-                    return Created($"/api/associations/{model.Id}", _mapper.Map<AssociationDto>(association));
+                    return Created($"/api/associations/{model.AssociationId}", _mapper.Map<AssociationDto>(association));
                 }
             }
             catch (System.Exception ex)
@@ -83,7 +81,6 @@ namespace DotEco.API.Controllers
         }
 
         [HttpPut("{AssociationId}")]
-        [AllowAnonymous]
         public async Task<IActionResult> Put(int AssociationId, AssociationDto model)
         {
             try
@@ -98,7 +95,7 @@ namespace DotEco.API.Controllers
 
                 if (await _repo.SaveChangesAsync())
                 {
-                    return Created($"/api/associations/{model.Id}", _mapper.Map<AssociationDto>(association));
+                    return Created($"/api/associations/{model.AssociationId}", _mapper.Map<AssociationDto>(association));
                 }
             }
             catch (System.Exception ex)
@@ -110,7 +107,6 @@ namespace DotEco.API.Controllers
         }
 
         [HttpDelete("{AssociationId}")]
-        [AllowAnonymous]
         public async Task<IActionResult> Delete(int AssociationId)
         {
             try

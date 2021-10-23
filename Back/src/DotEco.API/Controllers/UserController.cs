@@ -101,7 +101,7 @@ namespace DotEco.API.Controllers
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.UserName)
+                new Claim(ClaimTypes.Role, RoleFactory(user.Type))
             };
 
             var roles = await _userManager.GetRolesAsync(user);
@@ -119,7 +119,7 @@ namespace DotEco.API.Controllers
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(1),
+                Expires = DateTime.UtcNow.AddMinutes(45),
                 SigningCredentials = creds
             };
 
@@ -128,6 +128,34 @@ namespace DotEco.API.Controllers
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
             return tokenHandler.WriteToken(token);
+        }
+
+        private static string RoleFactory(int roleNumber)
+        {
+            switch (roleNumber)
+            {
+                case 1:
+                    return "Client";
+                case 2:
+                    return "Association";
+                case 3:
+                    return "Company";
+                default:
+                    throw new Exception("Você não tem permissão para acessar essa página");
+            }
+        }
+
+        private static string RoleAdm(int roleAdm)
+        {
+            switch (roleAdm)
+            {
+                case 1:
+                    return "Administrator";
+
+
+                default:
+                    throw new Exception();
+            }
         }
     }
 }

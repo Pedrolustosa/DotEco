@@ -6,11 +6,13 @@ using DotEco.Application.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
+using DotEco.Domain;
 
 namespace DotEco.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Client")]
     public class CollectionDatasController : ControllerBase
     {
         private readonly IMapper _mapper;
@@ -64,13 +66,13 @@ namespace DotEco.API.Controllers
         {
             try
             {
-                var collectionData = _mapper.Map<CollectionDataDto>(model);
+                var collectionData = _mapper.Map<CollectionData>(model);
 
                 _repo.Add(collectionData);
 
                 if (await _repo.SaveChangesAsync())
                 {
-                    return Created($"/api/collectiondata/{model.Id}", _mapper.Map<CollectionDataDto>(collectionData));
+                    return Created($"/api/collectiondata/{model.CollectionDataId}", _mapper.Map<CollectionDataDto>(collectionData));
                 }
             }
             catch (System.Exception ex)
@@ -84,7 +86,7 @@ namespace DotEco.API.Controllers
 
         [HttpPut("{CollectionDataId}")]
         [AllowAnonymous]
-        public async Task<IActionResult> Put(int CollectionDataId, CollectionDataPostDto model)
+        public async Task<IActionResult> Put(int CollectionDataId, CollectionDataDto model)
         {
             try
             {
@@ -98,7 +100,7 @@ namespace DotEco.API.Controllers
 
                 if (await _repo.SaveChangesAsync())
                 {
-                    return Created($"/api/collectiondata/{model.Id}", _mapper.Map<CollectionDataPostDto>(collectionData));
+                    return Created($"/api/collectiondata/{model.CollectionDataId}", _mapper.Map<CollectionDataDto>(collectionData));
                 }
             }
             catch (System.Exception ex)

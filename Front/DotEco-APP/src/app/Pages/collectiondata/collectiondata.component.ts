@@ -135,8 +135,10 @@ export class CollectionDataComponent implements OnInit {
           (newCollectionData: CollectionData) => {
             template.hide();
             this.getCollectionData();
+            console.log("collectiondataConfirm: ", this.collectiondata);
             this.toastr.success('Inserido com Sucesso!');
           }, error => {
+            console.log("collectiondataError: ", this.collectiondata);
             this.toastr.error(`Erro ao Inserir: ${error}`);
           }
         );

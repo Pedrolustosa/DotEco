@@ -15,12 +15,12 @@
                                     <div class="d-flex justify-content-center align-items-center">
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control" id="userName" name="userName"
-                                                formControlName="userName" [ngClass]="{'is-invalid': registerForm.get('userName').errors 
-                                                && registerForm.get('userName').touched}"
+                                                formControlName="userName" [ngClass]="{'is-invalid': registerForm.get('userName')?.errors 
+                                                && registerForm.get('userName')?.touched}"
                                                 placeholder="Insira o nome de Usuário" />
                                             <label for="userName">Nome Usuário</label>
-                                            <div *ngIf="registerForm.get('userName').hasError('required') 
-                                                && registerForm.get('userName').touched" class="invalid-feedback">
+                                            <div *ngIf="registerForm.get('userName')?.hasError('required') 
+                                                && registerForm.get('userName')?.touched" class="invalid-feedback">
                                                 Usuário é obrigatório.
                                             </div>
                                         </div>
@@ -29,12 +29,12 @@
                                     <div class="d-flex justify-content-center align-items-center">
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control" id="floatingNome"
-                                                formControlName="fullName" [ngClass]="{'is-invalid': registerForm.get('fullName').errors 
-                                                && registerForm.get('fullName').touched }"
+                                                formControlName="fullName" [ngClass]="{'is-invalid': registerForm.get('fullName')?.errors 
+                                                && registerForm.get('fullName')?.touched }"
                                                 placeholder="Insira o Nome Completo" />
                                             <label for="floatingNome">Nome</label>
-                                            <div *ngIf="registerForm.get('fullName').hasError('required') 
-                                                && registerForm.get('fullName').touched" class="invalid-feedback">
+                                            <div *ngIf="registerForm.get('fullName')?.hasError('required') 
+                                                && registerForm.get('fullName')?.touched" class="invalid-feedback">
                                                 Nome Completo é obrigatório.
                                             </div>
                                         </div>
@@ -43,12 +43,12 @@
                                     <div class="d-flex justify-content-center align-items-center">
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control" id="cpf" formControlName="cpf"
-                                                name="cpf" [ngClass]="{ 'is-invalid': registerForm.get('cpf').errors 
-                                                && registerForm.get('cpf').touched}"
+                                                name="cpf" [ngClass]="{ 'is-invalid': registerForm.get('cpf')?.errors 
+                                                && registerForm.get('cpf')?.touched}"
                                                 placeholder="Insira o Nome Completo">
                                             <label for="cpf">CPF</label>
-                                            <div *ngIf="registerForm.get('cpf').hasError('required') 
-                                                    && registerForm.get('cpf').touched" class="invalid-feedback">
+                                            <div *ngIf="registerForm.get('cpf')?.hasError('required') 
+                                                    && registerForm.get('cpf')?.touched" class="invalid-feedback">
                                                 CPF é obrigatório.
                                             </div>
                                         </div>
@@ -57,15 +57,15 @@
                                     <div class="d-flex justify-content-center align-items-center">
                                         <div class="form-floating mb-3">
                                             <input type="email" class="form-control" id="email" formControlName="email"
-                                                [ngClass]="{ 'is-invalid': registerForm.get('email').errors 
-                                                    && registerForm.get('email').touched}"
+                                                [ngClass]="{ 'is-invalid': registerForm.get('email')?.errors 
+                                                    && registerForm.get('email')?.touched}"
                                                 placeholder="Insira o Nome Completo" />
-                                            <div *ngIf="registerForm.get('email').hasError('required') 
-                                                    && registerForm.get('email').touched" class="invalid-feedback">
+                                            <div *ngIf="registerForm.get('email')?.hasError('required') 
+                                                    && registerForm.get('email')?.touched" class="invalid-feedback">
                                                 email é obrigatório.
                                             </div>
-                                            <div *ngIf="registerForm.get('email').hasError('email')
-                                                    && registerForm.get('email').touched" class="invalid-feedback">
+                                            <div *ngIf="registerForm.get('email')?.hasError('email')
+                                                    && registerForm.get('email')?.touched" class="invalid-feedback">
                                                 Deve ser um e-mail válido.
                                             </div>
                                             <label for="email">Email address</label>
@@ -73,16 +73,14 @@
                                     </div>
 
                                     <div class="d-flex justify-content-center align-items-center mb-3">
-                                        <select class="form-select" type="text" class="form-control" id="typeUser"
-                                            formControlName="typeUser" [ngClass]="{ 'is-invalid': registerForm.get('typeUser').errors 
-                                            && registerForm.get('typeUser').touched}">
+                                        <select class="form-control" id="type" formControlName="type" [ngClass]="{ 'is-invalid': registerForm.get('type')?.errors 
+                                            && registerForm.get('type')?.touched}">
                                             <option value="" selected disabled hidden>Selecione uma Opção</option>
-                                            <option value="0">Cliente</option>
-                                            <option value="1">Empresa</option>
-                                            <option value="2">Associação</option>
+                                            <option *ngFor="let type of userTypes" [ngValue]="type.id">
+                                                {{type.name}}</option>
                                         </select>
-                                        <div *ngIf="registerForm.get('typeUser').hasError('required') 
-                                                    && registerForm.get('typeUser').touched" class="invalid-feedback">
+                                        <div *ngIf="registerForm.get('type')?.hasError('required') 
+                                                    && registerForm.get('type')?.touched" class="invalid-feedback">
                                             Escolha o Tipo de Usuário.
                                         </div>
                                     </div>
@@ -93,16 +91,16 @@
                                         <div class="d-flex justify-content-center align-items-center">
                                             <div class="form-floating mb-3">
                                                 <input id="password" class="form-control" type="password"
-                                                    formControlName="password" [ngClass]="{ 'is-invalid': registerForm.get('passwords.password').errors 
-                                                    && registerForm.get('passwords.password').touched}"
+                                                    formControlName="password" [ngClass]="{ 'is-invalid': registerForm.get('passwords.password')?.errors 
+                                                    && registerForm.get('passwords.password')?.touched}"
                                                     placeholder="Digite uma Senha" />
-                                                <div *ngIf="registerForm.get('passwords.password').hasError('minlength') 
-                                                    && registerForm.get('passwords.password').touched"
+                                                <div *ngIf="registerForm.get('passwords.password')?.hasError('minlength') 
+                                                    && registerForm.get('passwords.password')?.touched"
                                                     class="invalid-feedback">
                                                     Deve conter no mínimo 4 caracters
                                                 </div>
-                                                <div *ngIf="registerForm.get('passwords.password').hasError('required') 
-                                                    && registerForm.get('passwords.password').touched"
+                                                <div *ngIf="registerForm.get('passwords.password')?.hasError('required') 
+                                                    && registerForm.get('passwords.password')?.touched"
                                                     class="invalid-feedback">
                                                     Senha é obrigatório.
                                                 </div>
@@ -113,19 +111,19 @@
                                         <div class="d-flex justify-content-center align-items-center">
                                             <div class="form-floating mb-3">
                                                 <input id="confirmPassword" class="form-control" type="password"
-                                                    formControlName="confirmPassword" [ngClass]="{ 'is-invalid': registerForm.get('passwords.confirmPassword').errors 
-                                                    && registerForm.get('passwords.confirmPassword').touched 
-                                                    ||registerForm.get('passwords.confirmPassword').hasError('mismatch') 
-                                                    && registerForm.get('passwords.confirmPassword').touched }"
+                                                    formControlName="confirmPassword" [ngClass]="{ 'is-invalid': registerForm.get('passwords.confirmPassword')?.errors 
+                                                    && registerForm.get('passwords.confirmPassword')?.touched 
+                                                    ||registerForm.get('passwords.confirmPassword')?.hasError('mismatch') 
+                                                    && registerForm.get('passwords.confirmPassword')?.touched }"
                                                     placeholder="Confirme a Senha" />
                                                 <label for="confirmPassword">Password</label>
-                                                <div *ngIf="registerForm.get('passwords.confirmPassword').hasError('required') 
-                                                    && registerForm.get('passwords.confirmPassword').touched"
+                                                <div *ngIf="registerForm.get('passwords.confirmPassword')?.hasError('required') 
+                                                    && registerForm.get('passwords.confirmPassword')?.touched"
                                                     class="invalid-feedback">
                                                     Confirme a Senha
                                                 </div>
-                                                <div *ngIf="registerForm.get('passwords.confirmPassword').hasError('mismatch') 
-                                                    && registerForm.get('passwords.confirmPassword').touched"
+                                                <div *ngIf="registerForm.get('passwords.confirmPassword')?.hasError('mismatch') 
+                                                    && registerForm.get('passwords.confirmPassword')?.touched"
                                                     class="invalid-feedback">
                                                     Confirmação não confere
                                                 </div>
