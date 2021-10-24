@@ -16,11 +16,13 @@ import { CollectionDataService } from 'src/app/_services/collectiondata.service'
 })
 export class CollectionDataComponent implements OnInit {
   titulo = 'Requisições';
+
+  collectiondataForm: FormGroup;
   collectiondatasFilters: CollectionData[];
   collectiondatas: CollectionData[];
   collectiondata: CollectionData;
-  collectiondataForm: FormGroup;
   associations: Association[];
+
   mode = 'post';
   _filterList = '';
   bodyDeleteCollectionData = '';
@@ -55,7 +57,6 @@ export class CollectionDataComponent implements OnInit {
     this.collectiondataForm.reset();
     template.show();
   }
-
 
   validation() {
     this.collectiondataForm = this.fb.group({
