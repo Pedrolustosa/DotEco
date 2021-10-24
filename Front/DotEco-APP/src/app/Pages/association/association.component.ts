@@ -7,6 +7,7 @@ import { Association } from 'src/app/_models/Association';
 import { AssociationService } from 'src/app/_services/association.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 
 @Component({
   selector: 'app-association',
@@ -16,10 +17,13 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 
 export class AssociationComponent implements OnInit {
   titulo = 'Associações';
+
+  associationForm: FormGroup;
   associationsFilters: Association[];
+  _association: Association[] = [];
   associations: Association[];
   association: Association;
-  associationForm: FormGroup;
+
   mode = 'post';
   _filterList = '';
   bodyDeleteAssociation = '';
@@ -34,17 +38,17 @@ export class AssociationComponent implements OnInit {
     this.localeService.use('pt-br');
   }
 
-  ngOnInit(): void {
-    this.validation();
-    this.getAssociation();
-  }
-
   get filterList(): string {
     return this._filterList;
   }
   set filterList(value: string) {
     this._filterList = value;
     this.associationsFilters = this.filterList ? this.filterAssociations(this.filterList) : this.associations;
+  }
+
+  ngOnInit(): void {
+    this.validation();
+    this.getAssociation();
   }
 
   openModal(template: any) {

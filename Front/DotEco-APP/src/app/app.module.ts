@@ -25,6 +25,7 @@ import { CouponsComponent } from './Pages/coupons/coupons.component';
 import { RegistrationComponent } from './Pages/user/registration/registration.component';
 import { CollectionDataComponent } from './Pages/collectiondata/collectiondata.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     CarouselModule.forRoot(),
     BsDatepickerModule.forRoot(),
     ModalModule.forRoot(),
+    PaginationModule.forRoot(),
     TabsModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 3000,

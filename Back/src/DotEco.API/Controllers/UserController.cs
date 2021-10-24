@@ -137,7 +137,7 @@ namespace DotEco.API.Controllers
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddMinutes(45),
+                Expires = DateTime.UtcNow.AddMinutes(15),
                 SigningCredentials = creds
             };
 

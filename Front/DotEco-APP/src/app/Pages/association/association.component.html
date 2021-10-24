@@ -22,7 +22,6 @@
                 <table class="table table-sm text-center table-bordered border-success table-striped table-hover">
                     <thead class="table-success">
                         <tr>
-                            <th>#</th>
                             <th>Nome</th>
                             <th>CEP</th>
                             <th>CNPJ</th>
@@ -33,7 +32,6 @@
                     </thead>
                     <tbody *ngIf="associations && associations">
                         <tr *ngFor="let associations of associationsFilters">
-                            <td>{{associations.id}}</td>
                             <td>{{associations.name}}</td>
                             <td>{{associations.cep}}</td>
                             <td>{{associations.cnpj}}</td>
