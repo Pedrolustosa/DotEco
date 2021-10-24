@@ -1,5 +1,3 @@
-using DotEco.Domain.Identity;
-
 namespace DotEco.Application.Dtos
 {
     public class UserDto

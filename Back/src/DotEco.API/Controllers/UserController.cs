@@ -39,7 +39,7 @@ namespace DotEco.API.Controllers
         }
 
         [Authorize]
-        [HttpGet("test")]
+        [HttpGet("TestClaim")]
         public IActionResult GetClaims()
         {
             var identity = User.Identity as ClaimsIdentity;

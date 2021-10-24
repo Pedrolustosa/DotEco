@@ -26,7 +26,6 @@ namespace DotEco.API.Controllers
         }
 
         [HttpGet]
-
         public async Task<IActionResult> Get()
         {
             try
@@ -61,7 +60,6 @@ namespace DotEco.API.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Associação")]
         public async Task<IActionResult> Post(CollectionDataDto model)
         {
             try
