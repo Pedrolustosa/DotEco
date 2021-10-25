@@ -52,21 +52,38 @@ namespace DotEco.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Associations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    CEP = table.Column<string>(type: "TEXT", nullable: true),
+                    CNPJ = table.Column<string>(type: "TEXT", nullable: true),
+                    State = table.Column<string>(type: "TEXT", nullable: true),
+                    Address = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Associations", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CollectionDatas",
                 columns: table => new
                 {
-                    CollectionDataId = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Address = table.Column<string>(type: "TEXT", nullable: true),
                     CEP = table.Column<string>(type: "TEXT", nullable: true),
                     Reference = table.Column<string>(type: "TEXT", nullable: true),
                     Email = table.Column<string>(type: "TEXT", nullable: true),
                     Telephone = table.Column<string>(type: "TEXT", nullable: true),
-                    AssociationId = table.Column<int>(type: "INTEGER", nullable: false)
+                    Date = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CollectionDatas", x => x.CollectionDataId);
+                    table.PrimaryKey("PK_CollectionDatas", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -197,30 +214,6 @@ namespace DotEco.Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Associations",
-                columns: table => new
-                {
-                    AssociationId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: true),
-                    CEP = table.Column<string>(type: "TEXT", nullable: true),
-                    CNPJ = table.Column<string>(type: "TEXT", nullable: true),
-                    State = table.Column<string>(type: "TEXT", nullable: true),
-                    Address = table.Column<string>(type: "TEXT", nullable: true),
-                    CollectionDataId = table.Column<int>(type: "INTEGER", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Associations", x => x.AssociationId);
-                    table.ForeignKey(
-                        name: "FK_Associations_CollectionDatas_CollectionDataId",
-                        column: x => x.CollectionDataId,
-                        principalTable: "CollectionDatas",
-                        principalColumn: "CollectionDataId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -257,11 +250,6 @@ namespace DotEco.Persistence.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Associations_CollectionDataId",
-                table: "Associations",
-                column: "CollectionDataId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -285,6 +273,9 @@ namespace DotEco.Persistence.Migrations
                 name: "Associations");
 
             migrationBuilder.DropTable(
+                name: "CollectionDatas");
+
+            migrationBuilder.DropTable(
                 name: "Coupons");
 
             migrationBuilder.DropTable(
@@ -292,9 +283,6 @@ namespace DotEco.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "CollectionDatas");
         }
     }
 }

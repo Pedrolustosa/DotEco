@@ -83,7 +83,6 @@ namespace DotEco.API
                     ValidateIssuer = false,
                     ValidateAudience = false,
                 };
-                options.SaveToken = true;
                 options.RequireHttpsMetadata = false;
             });
 

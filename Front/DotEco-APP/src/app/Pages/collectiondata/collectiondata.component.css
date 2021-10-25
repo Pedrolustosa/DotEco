@@ -1,0 +1,25 @@
+
+.btnCollectionData {
+    /* Button */
+    background: #42a877;
+    border: .3rem solid #42a877;
+    border-radius: 2.3rem;
+    width: 12rem;
+    height: 3rem;
+    margin-top: 2.8rem;
+    box-shadow: 0 0 1px #ccc;
+    transition-duration: 0.7s;
+    transition-timing-function: linear;
+    box-shadow: 0px 0 0 #FFFFFF inset;
+    /* Text */
+    font-size: 1.2rem;
+    line-height: 2rem;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.btnCollectionData:hover {
+    box-shadow: -150px 0 0 #FFFFFF inset;
+    color: #42a877;
+    cursor: pointer;
+}

@@ -45,8 +45,9 @@
                                             <input type="text" class="form-control" id="cpf" formControlName="cpf"
                                                 name="cpf" [ngClass]="{ 'is-invalid': registerForm.get('cpf')?.errors 
                                                 && registerForm.get('cpf')?.touched}"
+                                                mask="000.000.000-00||00.000.000/0000-00"
                                                 placeholder="Insira o Nome Completo">
-                                            <label for="cpf">CPF</label>
+                                            <label for="cpf">CPF ou CNPJ</label>
                                             <div *ngIf="registerForm.get('cpf')?.hasError('required') 
                                                     && registerForm.get('cpf')?.touched" class="invalid-feedback">
                                                 CPF é obrigatório.

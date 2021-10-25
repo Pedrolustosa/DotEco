@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
-import { filter } from 'rxjs/operators';
 import { Association } from 'src/app/_models/Association';
 import { CollectionData } from 'src/app/_models/CollectionData';
 import { AssociationService } from 'src/app/_services/association.service';
@@ -65,7 +64,7 @@ export class CollectionDataComponent implements OnInit {
       reference: ['', Validators.required],
       email: ['', Validators.required],
       telephone: ['', Validators.required],
-      association: ['', Validators.required],
+      date: [''],
     });
   }
 
@@ -118,7 +117,7 @@ export class CollectionDataComponent implements OnInit {
   }
 
   getCollectionData() {
-    this.collectiondataService.getAllCollectionData().pipe(filter(data => !data)).subscribe(
+    this.collectiondataService.getAllCollectionData().subscribe(
       (_collectiondata: CollectionData[]) => {
         this.collectiondatas = _collectiondata;
         this.collectiondatasFilters = this.collectiondatas;

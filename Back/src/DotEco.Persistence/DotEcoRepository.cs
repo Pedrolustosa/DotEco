@@ -43,18 +43,18 @@ namespace DotEco.Persistence
             IQueryable<Association> query = _context.Associations;
 
             query = query.AsNoTracking()
-                        .OrderBy(c => c.AssociationId);
+                        .OrderBy(c => c.Id);
 
             return await query.ToArrayAsync();
         }
-        public async Task<Association> GetAssociationAsyncById(int associationId)
+        public async Task<Association> GetAssociationAsyncById(int AssociationId)
         {
             IQueryable<Association> query = _context.Associations;
 
             query = query
                         .AsNoTracking()
-                        .OrderBy(c => c.AssociationId)
-                        .Where(c => c.AssociationId == associationId);
+                        .OrderBy(c => c.Id)
+                        .Where(c => c.Id == AssociationId);
 
             return await query.FirstOrDefaultAsync();
         }
@@ -65,18 +65,18 @@ namespace DotEco.Persistence
             IQueryable<CollectionData> query = _context.CollectionDatas;
 
             query = query.AsNoTracking()
-                        .OrderBy(c => c.CollectionDataId);
+                        .OrderBy(c => c.Id);
 
             return await query.ToArrayAsync();
         }
-        public async Task<CollectionData> GetCollectionDataAsyncById(int collectionDataId)
+        public async Task<CollectionData> GetCollectionDataAsyncById(int CollectionDataId)
         {
             IQueryable<CollectionData> query = _context.CollectionDatas;
 
             query = query
                         .AsNoTracking()
-                        .OrderBy(c => c.CollectionDataId)
-                        .Where(c => c.CollectionDataId == collectionDataId);
+                        .OrderBy(c => c.Id)
+                        .Where(c => c.Id == CollectionDataId);
 
             return await query.FirstOrDefaultAsync();
         }
