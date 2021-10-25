@@ -13,7 +13,6 @@ namespace DotEco.API.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Cliente, Administrador")]
     public class CollectionDatasController : ControllerBase
     {
         private readonly IMapper _mapper;
@@ -26,6 +25,7 @@ namespace DotEco.API.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Cliente2, Administrador")]
         public async Task<IActionResult> Get()
         {
             try
@@ -43,6 +43,7 @@ namespace DotEco.API.Controllers
         }
 
         [HttpGet("{CollectionDataId}")]
+        [Authorize(Roles = "Cliente2, Administrador")]
         public async Task<IActionResult> Get(int CollectionDataId)
         {
             try
@@ -60,6 +61,7 @@ namespace DotEco.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Cliente2, Administrador")]
         public async Task<IActionResult> Post(CollectionDataDto model)
         {
             try
@@ -70,7 +72,7 @@ namespace DotEco.API.Controllers
 
                 if (await _repo.SaveChangesAsync())
                 {
-                    return Created($"/api/collectiondata/{model.CollectionDataId}", _mapper.Map<CollectionDataDto>(collectionData));
+                    return Created($"/api/collectiondata/{model.Id}", _mapper.Map<CollectionDataDto>(collectionData));
                 }
             }
             catch (System.Exception ex)
@@ -83,6 +85,7 @@ namespace DotEco.API.Controllers
         }
 
         [HttpPut("{CollectionDataId}")]
+        [Authorize(Roles = "Associacao, Administrador")]
         public async Task<IActionResult> Put(int CollectionDataId, CollectionDataDto model)
         {
             try
@@ -97,7 +100,7 @@ namespace DotEco.API.Controllers
 
                 if (await _repo.SaveChangesAsync())
                 {
-                    return Created($"/api/collectiondata/{model.CollectionDataId}", _mapper.Map<CollectionDataDto>(collectionData));
+                    return Created($"/api/collectiondata/{model.Id}", _mapper.Map<CollectionDataDto>(collectionData));
                 }
             }
             catch (System.Exception ex)
@@ -109,6 +112,7 @@ namespace DotEco.API.Controllers
         }
 
         [HttpDelete("{CollectionDataId}")]
+        [Authorize(Roles = "Associacao, Administrador")]
         public async Task<IActionResult> Delete(int CollectionDataId)
         {
             try

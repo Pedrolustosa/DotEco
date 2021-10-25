@@ -1,62 +1,67 @@
-<div class="container mt-5">
-    <div class="table-responsive-md">
-        <div class="card">
-            <div class="card-body">
-                <div class="row mb-4">
-                    <div class="col-sm-4 mb-2">
-                        <div class="form-inline">
-                            <div class="form-floating mb-3">
-                                <input id="search" type="text" class="form-control mr-2" [(ngModel)]="filterList" />
-                                <label for="search">Pesquisar</label>
-                            </div>
+<div class="container">
+    <div class="d-flex justify-content-center">
+        <button title="Criar" class="btnCollectionData text-center mb-2" (click)="newCollectionData(template)">
+            <i class="fa fa-plus-circle"></i>&nbsp;
+            Nova Coleta
+        </button>
+    </div>
+
+    <div class="card mt-5">
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-sm-4 mb-2">
+                    <div class="form-inline">
+                        <div class="form-floating mb-3">
+                            <input id="search" type="text" class="form-control mr-2" [(ngModel)]="filterList" />
+                            <label for="search">Pesquisar</label>
                         </div>
                     </div>
-                    <div class="col-md-4 mb-2">
-                        <button title="Criar" class="btn btn-outline-success" (click)="newCollectionData(template)">
-                            <i class="fa fa-plus-circle"></i>&nbsp;
-                            Nova Coleta
-                        </button>
-                    </div>
                 </div>
-                <h3 class="card-header text-center">Coletas Agendadas</h3>
-                <table class="table table-sm text-center table-bordered border-success table-striped table-hover">
-                    <thead class="table-success">
-                        <tr>
-                            <th>address</th>
-                            <th>CEP</th>
-                            <th>reference</th>
-                            <th>email</th>
-                            <th>telephone</th>
-                            <th>association</th>
-                            <th>opções</th>
-                        </tr>
-                    </thead>
-                    <tbody *ngIf="collectiondatas && collectiondatas">
-                        <tr *ngFor="let collectiondatas of collectiondatasFilters">
-                            <td>{{collectiondatas.cep}}</td>
-                            <td>
-                                <div>
-                                    <button type="button" title="Excluir" class="btn btn-outline-danger me-2"
-                                        (click)="deleteCollectionData(collectiondatas, confirm)"><i
-                                            class="fa fa-eraser"></i></button>
-                                    <button type="button" title="Editar" class="btn btn-outline-warning me-2"
-                                        (click)="editCollectionData(collectiondatas, template)"><i
-                                            class="fa fa-edit"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tfoot *ngIf="!collectiondata">
-                        <tr>
-                            <td colspan="7" class="text-center">
-                                <h4>
-                                    Nenhuma Coleta encontrada!
-                                </h4>
-                            </td>
-                        </tr>
-                    </tfoot>
-                </table>
             </div>
+            <h3 class="card-header text-center">Coletas Agendadas</h3>
+            <div class="table-responsive-md"></div>
+            <table class="table table-sm text-center table-bordered border-success table-striped table-hover">
+                <thead class="table-success">
+                    <tr>
+                        <th>cep</th>
+                        <th>address</th>
+                        <th>reference</th>
+                        <th>email</th>
+                        <th>telephone</th>
+                        <th>date</th>
+                        <th>opções</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="collectiondatas && collectiondatas">
+                    <tr *ngFor="let collectiondatas of collectiondatasFilters">
+                        <td>{{collectiondatas.cep}}</td>
+                        <td>{{collectiondatas.address}}</td>
+                        <td>{{collectiondatas.reference}}
+                        <td>{{collectiondatas.email}}</td>
+                        <td>{{collectiondatas.telephone}}</td>
+                        <td>{{collectiondatas.date}}</td>
+                        <td>
+                            <div>
+                                <button type="button" title="Excluir" class="btn btn-outline-danger me-2"
+                                    (click)="deleteCollectionData(collectiondatas, confirm)"><i
+                                        class="fa fa-eraser"></i></button>
+                                <button type="button" title="Editar" class="btn btn-outline-warning me-2"
+                                    (click)="editCollectionData(collectiondatas, template)"><i
+                                        class="fa fa-edit"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot *ngIf="!collectiondatas">
+                    <tr>
+                        <td colspan="7" class="text-center">
+                            <h4>
+                                Nenhuma Coleta encontrada!
+                            </h4>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
     </div>
 </div>
@@ -76,6 +81,17 @@
                 <form class="form-group" [formGroup]="collectiondataForm">
 
                     <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="date" name="date" bsDatepicker
+                            [bsConfig]="{ dateInputFormat : 'DD/MM/YYYY hh:mm' }" [ngClass]="{'is-invalid': collectiondataForm.get('date')?.errors 
+                                && collectiondataForm.get('date').touched}" formControlName="date">
+                        <label for="address">Data de Coleta</label>
+                        <div *ngIf="collectiondataForm.get('date')?.hasError('required') 
+                                && collectiondataForm.get('date')?.touched" class="invalid-feedback">
+                            Data de Coleta é obrigatório.
+                        </div>
+                    </div>
+
+                    <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="address" name="address" formControlName="address"
                             [ngClass]="{'is-invalid': collectiondataForm.get('name')?.errors 
                                 && collectiondataForm.get('address')?.touched}" />
@@ -88,7 +104,7 @@
 
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="cep" formControlName="cep" [ngClass]="{'is-invalid': collectiondataForm.get('cep')?.errors 
-                                && collectiondataForm.get('cep')?.touched }" />
+                                && collectiondataForm.get('cep')?.touched }" mask="00000-000" />
                         <label for="cep">CEP</label>
                         <div *ngIf="collectiondataForm.get('cep')?.hasError('required') 
                                 && collectiondataForm.get('cep')?.touched" class="invalid-feedback">
@@ -127,21 +143,6 @@
                         </div>
                     </div>
 
-                    <div class="form-floating">
-                        <select class="form-select" type="text" id="association" formControlName="association"
-                            aria-label="Floating label select example" [ngClass]="{ 'is-invalid': collectiondataForm.get('association')?.errors 
-                            && collectiondataForm.get('association')?.touched}">
-                            <option *ngFor="let association of associations" value={{association.id}}>
-                                {{association.name}}
-                            </option>
-                        </select>
-                        <label for="association">Associações</label>
-                        <div *ngIf=" collectiondataForm.get('association')?.hasError('required') &&
-                                collectiondataForm.get('association')?.touched" class="invalid-feedback">
-                            Escolha a associação para coleta.
-                        </div>
-                    </div>
-
                 </form>
             </div>
             <div class="modal-footer d-flex">
@@ -156,7 +157,6 @@
         </div>
     </div>
 </div>
-
 
 <!-- Modal -->
 <div bsModal #confirm="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">

@@ -2,7 +2,7 @@ namespace DotEco.Application.Dtos
 {
     public class AssociationDto
     {
-        public int AssociationId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string CEP { get; set; }
         public string CNPJ { get; set; }

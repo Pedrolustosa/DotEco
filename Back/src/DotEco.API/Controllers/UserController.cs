@@ -153,7 +153,7 @@ namespace DotEco.API.Controllers
             switch (roleNumber)
             {
                 case 1:
-                    return "Cliente";
+                    return "Cliente2";
                 case 2:
                     return "Associacao";
                 case 3:

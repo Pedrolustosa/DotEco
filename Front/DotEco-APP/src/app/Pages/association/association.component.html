@@ -1,65 +1,65 @@
-<div class="container mt-5">
-    <div class="table-responsive-md">
-        <div class="card">
-            <div class="card-body">
-                <div class="row mb-4">
-                    <div class="col-sm-4 mb-2">
-                        <div class="form-inline">
-                            <div class="form-floating mb-3">
-                                <input id="search" type="text" class="form-control mr-2" [(ngModel)]="filterList" />
-                                <label for="search">Pesquisar</label>
-                            </div>
+<div class="container">
+    <div class="d-flex justify-content-center">
+        <button title="Criar" class="btnAssociation text-center mb-2" (click)="newAssociation(template)">
+            <i class="fa fa-plus-circle"></i>&nbsp;
+            Nova Associação
+        </button>
+    </div>
+
+    <div class="card mt-5">
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-sm-4 mb-2">
+                    <div class="form-inline">
+                        <div class="form-floating mb-3">
+                            <input id="search" type="text" class="form-control mr-2" [(ngModel)]="filterList" />
+                            <label for="search">Pesquisar</label>
                         </div>
                     </div>
-                    <div class="col-md-4 mb-2">
-                        <button title="Criar" class="btn btn-outline-success" (click)="newAssociation(template)">
-                            <i class="fa fa-plus-circle"></i>&nbsp;
-                            Nova Associação
-                        </button>
-                    </div>
                 </div>
-                <h3 class="card-header text-center">Associaçoes</h3>
-                <table class="table table-sm text-center table-bordered border-success table-striped table-hover">
-                    <thead class="table-success">
-                        <tr>
-                            <th>Nome</th>
-                            <th>CEP</th>
-                            <th>CNPJ</th>
-                            <th>Estado</th>
-                            <th>Endereço</th>
-                            <th>Opções</th>
-                        </tr>
-                    </thead>
-                    <tbody *ngIf="associations && associations">
-                        <tr *ngFor="let associations of associationsFilters">
-                            <td>{{associations.name}}</td>
-                            <td>{{associations.cep}}</td>
-                            <td>{{associations.cnpj}}</td>
-                            <td>{{associations.state}}</td>
-                            <td>{{associations.address}}</td>
-                            <td>
-                                <div>
-                                    <button type="button" title="Excluir" class="btn btn-outline-danger me-2"
-                                        (click)="deleteAssociation(associations, confirm)"><i
-                                            class="fa fa-eraser"></i></button>
-                                    <button type="button" title="Editar" class="btn btn-outline-warning me-2"
-                                        (click)="editAssociation(associations, template)"><i
-                                            class="fa fa-edit"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tfoot *ngIf="!associations">
-                        <tr>
-                            <td colspan="7" class="text-center">
-                                <h4>
-                                    Nenhuma Associação encontrada!
-                                </h4>
-                            </td>
-                        </tr>
-                    </tfoot>
-                </table>
             </div>
+            <h3 class="card-header text-center">Associaçoes</h3>
+            <div class="table-responsive-md"></div>
+            <table class="table table-sm text-center table-bordered border-success table-striped table-hover">
+                <thead class="table-success">
+                    <tr>
+                        <th>Nome</th>
+                        <th>CEP</th>
+                        <th>CNPJ</th>
+                        <th>Estado</th>
+                        <th>Endereço</th>
+                        <th>Opções</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="associations && associations">
+                    <tr *ngFor="let associations of associationsFilters">
+                        <td>{{associations.name}}</td>
+                        <td>{{associations.cep}}</td>
+                        <td>{{associations.cnpj}}</td>
+                        <td>{{associations.state}}</td>
+                        <td>{{associations.address}}</td>
+                        <td>
+                            <div>
+                                <button type="button" title="Excluir" class="btn btn-outline-danger me-2"
+                                    (click)="deleteAssociation(associations, confirm)"><i
+                                        class="fa fa-eraser"></i></button>
+                                <button type="button" title="Editar" class="btn btn-outline-warning me-2"
+                                    (click)="editAssociation(associations, template)"><i
+                                        class="fa fa-edit"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot *ngIf="!associations">
+                    <tr>
+                        <td colspan="7" class="text-center">
+                            <h4>
+                                Nenhuma Associação encontrada!
+                            </h4>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
     </div>
 </div>

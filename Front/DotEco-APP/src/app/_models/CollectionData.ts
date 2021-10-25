@@ -1,5 +1,3 @@
-import { Association } from "./Association";
-
 export interface CollectionData {
     id: number;
     address: string;
@@ -7,5 +5,4 @@ export interface CollectionData {
     reference: string;
     email: string;
     telephone: string;
-    association: Association[];
 }
