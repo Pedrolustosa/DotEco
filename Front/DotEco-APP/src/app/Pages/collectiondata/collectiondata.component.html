@@ -29,6 +29,7 @@
                         <th>email</th>
                         <th>telephone</th>
                         <th>date</th>
+                        <th>associação</th>
                         <th>opções</th>
                     </tr>
                 </thead>
@@ -40,6 +41,7 @@
                         <td>{{collectiondatas.email}}</td>
                         <td>{{collectiondatas.telephone}}</td>
                         <td>{{collectiondatas.date}}</td>
+                        <td>{{collectiondatas.associations}}</td>
                         <td>
                             <div>
                                 <button type="button" title="Excluir" class="btn btn-outline-danger me-2"
@@ -140,6 +142,19 @@
                         <div *ngIf="collectiondataForm.get('telephone')?.hasError('required') 
                                     && collectiondataForm.get('telephone')?.touched" class="invalid-feedback">
                             telephone é obrigatório.
+                        </div>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <select class="form-control" id="associations" formControlName="associations" [ngClass]="{ 'is-invalid': collectiondataForm.get('associations')?.errors 
+                            && collectiondataForm.get('associations')?.touched}">
+                            <option value="" selected disabled hidden>Selecione uma Opção</option>
+                            <option *ngFor="let association of associations" [ngValue]="association.name">
+                                {{association.name}}</option>
+                        </select>
+                        <div *ngIf="collectiondataForm.get('associations')?.hasError('required') 
+                                    && collectiondataForm.get('associations')?.touched" class="invalid-feedback">
+                            Escolha o Tipo de Usuário.
                         </div>
                     </div>
 

@@ -65,6 +65,7 @@ export class CollectionDataComponent implements OnInit {
       email: ['', Validators.required],
       telephone: ['', Validators.required],
       date: [''],
+      associations: ['', Validators.required],
     });
   }
 
