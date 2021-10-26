@@ -35,6 +35,11 @@ namespace DotEco.Persistence.Context
                         .HasForeignKey(ur => ur.UserId)
                         .IsRequired();
             });
+
+            modelBuilder.Entity<CollectionData>()
+            .HasOne(e => e.Association)
+            .WithMany(b => b.CollectionDatas);
+
         }
     }
 }

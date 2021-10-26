@@ -11,5 +11,6 @@ namespace DotEco.Application.Dtos
         public string Email { get; set; }
         public string Telephone { get; set; }
         public string Date { get; set; }
+        public int AssociationId { get; set; }
     }
 }
