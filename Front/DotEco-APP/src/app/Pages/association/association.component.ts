@@ -7,7 +7,6 @@ import { Association } from 'src/app/_models/Association';
 import { AssociationService } from 'src/app/_services/association.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 
 @Component({
   selector: 'app-association',

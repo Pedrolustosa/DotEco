@@ -3,10 +3,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
-import { Association } from 'src/app/_models/Association';
+import { Observable } from 'rxjs';
 import { CollectionData } from 'src/app/_models/CollectionData';
-import { AssociationService } from 'src/app/_services/association.service';
 import { CollectionDataService } from 'src/app/_services/collectiondata.service';
+import { Association } from 'src/app/_models/Association';
+import { AssociationService } from 'src/app/_services/association.service';
 
 @Component({
   selector: 'app-collectiondata',
@@ -20,7 +21,7 @@ export class CollectionDataComponent implements OnInit {
   collectiondatasFilters: CollectionData[];
   collectiondatas: CollectionData[];
   collectiondata: CollectionData;
-  associations: Association[];
+  associationId: Observable<Association[]>;
 
   mode = 'post';
   _filterList = '';
@@ -33,7 +34,7 @@ export class CollectionDataComponent implements OnInit {
     private modalService: BsModalService,
     private localeService: BsLocaleService,
     private collectiondataService: CollectionDataService,
-    private serviceAssociation: AssociationService,
+    private associationService: AssociationService,
   ) {
     this.localeService.use('pt-br');
   }
@@ -41,7 +42,7 @@ export class CollectionDataComponent implements OnInit {
   ngOnInit(): void {
     this.validation();
     this.getCollectionData();
-    this.getAllAssociation();
+    this.associationId = this.associationService.getAllAssociation();
   }
 
   get filterList(): string {
@@ -65,7 +66,7 @@ export class CollectionDataComponent implements OnInit {
       email: ['', Validators.required],
       telephone: ['', Validators.required],
       date: [''],
-      associations: ['', Validators.required],
+      associationId: ['', Validators.required],
     });
   }
 
@@ -107,16 +108,6 @@ export class CollectionDataComponent implements OnInit {
     );
   }
 
-  getAllAssociation() {
-    this.serviceAssociation.getAllAssociation().subscribe(
-      (_associations: Association[]) => {
-        this.associations = _associations;
-        console.log(this.associations);
-      }, error => {
-        this.toastr.error(`Erro ao tentar Carregar Associações: ${error}`);
-      });
-  }
-
   getCollectionData() {
     this.collectiondataService.getAllCollectionData().subscribe(
       (_collectiondata: CollectionData[]) => {
@@ -131,7 +122,7 @@ export class CollectionDataComponent implements OnInit {
   saveAlteration(template: any) {
     if (this.collectiondataForm.valid) {
       if (this.mode === 'post') {
-        this.collectiondata = Object.assign({}, this.collectiondataForm.value);
+        this.collectiondata = this.collectiondataForm.value;
         this.collectiondataService.postCollectionData(this.collectiondata).subscribe(
           (newCollectionData: CollectionData) => {
             template.hide();
