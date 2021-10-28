@@ -33,7 +33,7 @@ namespace DotEco.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DotEcoContext>(
-                context => context.UseSqlite(Configuration.GetConnectionString("Default"))
+                context => context.UseSqlite(Configuration.GetConnectionString("Sqlite"))
             );
 
             #region AutoMapper

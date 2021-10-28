@@ -75,7 +75,6 @@ namespace DotEco.Persistence.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: true),
-                    Quantity = table.Column<int>(type: "INTEGER", nullable: false),
                     Percent = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>

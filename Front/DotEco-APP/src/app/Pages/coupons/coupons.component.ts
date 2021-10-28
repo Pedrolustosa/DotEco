@@ -53,7 +53,6 @@ export class CouponsComponent implements OnInit {
   validation() {
     this.couponsForm = this.fb.group({
       name: ['', Validators.required],
-      quantity: ['', Validators.required],
       percent: ['', Validators.required],
     });
   }

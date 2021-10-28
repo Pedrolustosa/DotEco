@@ -90,9 +90,6 @@ namespace DotEco.Persistence.Migrations
                     b.Property<string>("Percent")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
 
                     b.ToTable("Coupons");
