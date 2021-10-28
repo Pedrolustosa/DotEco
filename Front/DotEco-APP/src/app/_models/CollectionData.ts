@@ -5,5 +5,5 @@ export interface CollectionData {
     reference: string;
     email: string;
     telephone: string;
-    associations: [{}];
+    associationId: number;
 }
