@@ -15,6 +15,7 @@ using System.IdentityModel.Tokens.Jwt;
 using AutoMapper;
 using DotEco.Application.Dtos;
 using System.Linq;
+using DotEco.Persistence;
 
 namespace DotEco.API.Controllers
 {
@@ -25,13 +26,16 @@ namespace DotEco.API.Controllers
         private readonly IConfiguration _configuration;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IDotEcoRepository _repo;
         private readonly IMapper _mapper;
 
         public UserController(IConfiguration configuration,
+                              IDotEcoRepository repo,
                               UserManager<User> userManager,
                               SignInManager<User> signInManager,
                               IMapper mapper)
         {
+            _repo = repo;
             _mapper = mapper;
             _userManager = userManager;
             _signInManager = signInManager;
@@ -53,6 +57,24 @@ namespace DotEco.API.Controllers
                          };
 
             return Ok(claims);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Get()
+        {
+            try
+            {
+                var users = await _repo.GetAllUserAsync();
+
+                var results = _mapper.Map<User[]>(users);
+
+                return Ok(results);
+            }
+            catch (System.Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Banco Dados Falhou {ex.Message}");
+            }
         }
 
         [HttpPost("Register")]
@@ -111,6 +133,33 @@ namespace DotEco.API.Controllers
 
                 throw;
             }
+        }
+
+        [HttpPut("{UserId}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Put(int UserId, UserDto model)
+        {
+            try
+            {
+                var users = await _repo.GetUsersAsyncById(UserId);
+                if (users == null) return NotFound();
+
+
+                _mapper.Map(model, users);
+
+                _repo.Update(users);
+
+                if (await _repo.SaveChangesAsync())
+                {
+                    return Created($"/api/user/{model.Id}", _mapper.Map<UserDto>(users));
+                }
+            }
+            catch (System.Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, "Banco Dados Falhou " + ex.Message);
+            }
+
+            return BadRequest();
         }
 
         private async Task<string> GenerateJwToken(User user)

@@ -1,4 +1,5 @@
 using DotEco.Domain;
+using DotEco.Domain.Identity;
 using System.Threading.Tasks;
 
 namespace DotEco.Persistence
@@ -12,11 +13,15 @@ namespace DotEco.Persistence
         void DeleteRange<T>(T[] entity) where T : class;
         Task<bool> SaveChangesAsync();
 
-        //ASSOCIATION
+        //USERS
+        Task<User[]> GetAllUserAsync();
+        Task<User> GetUsersAsyncById(int UserId);
+
+        //ASSOCIATIONS
         Task<Association[]> GetAllAssociationAsync();
         Task<Association> GetAssociationAsyncById(int AssociationId);
 
-        //COLLECTION DATA
+        //COLLECTION DATAS
         Task<CollectionData[]> GetAllCollectionDataAsync();
         Task<CollectionData> GetCollectionDataAsyncById(int CollectionDataId);
 
