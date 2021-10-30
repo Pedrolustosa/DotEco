@@ -3,6 +3,7 @@ using DotEco.Domain;
 using System.Threading.Tasks;
 using DotEco.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
+using DotEco.Domain.Identity;
 
 namespace DotEco.Persistence
 {
@@ -35,6 +36,28 @@ namespace DotEco.Persistence
         public async Task<bool> SaveChangesAsync()
         {
             return (await _context.SaveChangesAsync()) > 0;
+        }
+
+        //USERS
+        public async Task<User[]> GetAllUserAsync()
+        {
+            IQueryable<User> query = _context.Users;
+
+            query = query.AsNoTracking()
+                        .OrderBy(c => c.Id);
+
+            return await query.ToArrayAsync();
+        }
+
+        public async Task<User> GetUsersAsyncById(int UserId)
+        {
+            IQueryable<User> query = _context.Users;
+            query = query
+                        .AsNoTracking()
+                        .OrderBy(c => c.Id)
+                        .Where(c => c.Id == UserId);
+
+            return await query.FirstOrDefaultAsync();
         }
 
         //ASSOCIATIONS

@@ -73,7 +73,10 @@ export class RegistrationComponent implements OnInit {
           erro.forEach(element => {
             switch (element.code) {
               case 'DuplicateUserName':
-                this.toastr.error('Cadastro Duplicado!');
+                this.toastr.error('Usuário Duplicado!');
+                break;
+              case 'DuplicateEmail':
+                this.toastr.error('Email Duplicado!');
                 break;
               default:
                 this.toastr.error(`Erro no Cadatro! CODE: ${element.code}`);
