@@ -71,6 +71,9 @@ namespace DotEco.Persistence.Migrations
                     b.Property<string>("Telephone")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("TypeCollection")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AssociationId");

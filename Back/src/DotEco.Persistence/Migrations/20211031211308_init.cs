@@ -206,6 +206,7 @@ namespace DotEco.Persistence.Migrations
                     Reference = table.Column<string>(type: "TEXT", nullable: true),
                     Email = table.Column<string>(type: "TEXT", nullable: true),
                     Telephone = table.Column<string>(type: "TEXT", nullable: true),
+                    TypeCollection = table.Column<string>(type: "TEXT", nullable: true),
                     Date = table.Column<DateTime>(type: "TEXT", nullable: false),
                     AssociationId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
