@@ -31,6 +31,7 @@
                         <th>tipo de Coleta</th>
                         <th>date</th>
                         <th>associação</th>
+                        <th>status</th>
                         <th>opções</th>
                     </tr>
                 </thead>
@@ -44,6 +45,7 @@
                         <td>{{collectiondatas.typeCollection}}</td>
                         <td>{{collectiondatas.date}}</td>
                         <td>{{collectiondatas.associationId}}</td>
+                        <td>{{collectiondatas.status}}</td>
                         <td>
                             <div>
                                 <button type="button" title="Excluir" class="btn btn-outline-danger me-2"
@@ -160,12 +162,28 @@
                     </div>
 
                     <div class="form-floating mb-3">
-                        <select class="form-control" id="associationId" formControlName="associationId" [ngClass]="{ 'is-invalid': collectiondataForm.get('associationId')?.errors 
+                        <select class="form-select" id="status" formControlName="status" [ngClass]="{ 'is-invalid': collectiondataForm.get('status')?.errors 
+                        && collectiondataForm.get('status')?.touched}">
+                            <option value="" selected disabled hidden>Selecione uma Opção</option>
+                            <option value="0">Agendado</option>
+                            <option value="1">Comfirmado</option>
+                            <option value="2">Recusado</option>
+                        </select>
+                        <label for="status">Status</label>
+                        <div *ngIf="collectiondataForm.get('status')?.hasError('required') 
+                                    && collectiondataForm.get('status')?.touched" class="invalid-feedback">
+                            Coloque o status comforme a situação da Coleta.
+                        </div>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <select class="form-select" id="associationId" formControlName="associationId" [ngClass]="{ 'is-invalid': collectiondataForm.get('associationId')?.errors 
                             && collectiondataForm.get('associationId')?.touched}">
                             <option value="" selected disabled hidden>Selecione uma Opção</option>
                             <option *ngFor="let association of associationId | async as list" [value]="association.id">
                                 {{association.name}}</option>
                         </select>
+                        <label for="associationId">Associação</label>
                         <div *ngIf="collectiondataForm.get('associationId')?.hasError('required') 
                                     && collectiondataForm.get('associationId')?.touched" class="invalid-feedback">
                             Escolha o Tipo de Usuário.

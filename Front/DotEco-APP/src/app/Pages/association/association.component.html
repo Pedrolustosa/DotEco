@@ -89,7 +89,7 @@
 
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="cep" formControlName="cep" [ngClass]="{'is-invalid': associationForm.get('cep').errors 
-                                && associationForm.get('cep').touched }" />
+                                && associationForm.get('cep').touched }" mask="00000-000" />
                         <label for="cep">CEP</label>
                         <div *ngIf="associationForm.get('cep').hasError('required') 
                                 && associationForm.get('cep').touched" class="invalid-feedback">
@@ -99,7 +99,7 @@
 
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="cnpj" formControlName="cnpj" name="cnpj" [ngClass]="{ 'is-invalid': associationForm.get('cnpj').errors 
-                                && associationForm.get('cnpj').touched}">
+                                && associationForm.get('cnpj').touched}" mask="00.000.000/0000-00">
                         <label for="cnpj">CNPJ</label>
                         <div *ngIf="associationForm.get('cnpj').hasError('required') 
                                     && associationForm.get('cnpj').touched" class="invalid-feedback">

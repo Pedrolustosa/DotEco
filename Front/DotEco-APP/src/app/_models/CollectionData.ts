@@ -6,4 +6,11 @@ export interface CollectionData {
     email: string;
     telephone: string;
     associationId: number;
+    status: Status;
+}
+
+export enum Status {
+    Agendado = 0,
+    Confirmado = 1,
+    Recusado = 2,
 }

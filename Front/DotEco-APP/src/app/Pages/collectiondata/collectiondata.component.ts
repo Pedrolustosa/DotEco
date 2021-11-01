@@ -68,6 +68,7 @@ export class CollectionDataComponent implements OnInit {
       typeCollection: ['', Validators.required],
       date: [''],
       associationId: ['', Validators.required],
+      status: ['', Validators.required],
     });
   }
 
