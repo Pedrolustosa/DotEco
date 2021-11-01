@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace DotEco.Application.Dtos
 {
     public class CollectionDataDto
@@ -10,8 +8,9 @@ namespace DotEco.Application.Dtos
         public string Reference { get; set; }
         public string Email { get; set; }
         public string Telephone { get; set; }
+        public string TypeCollection { get; set; }
         public string Date { get; set; }
         public int AssociationId { get; set; }
-        public AssociationDto Association {get; set;}
+        public AssociationDto Association { get; set; }
     }
 }

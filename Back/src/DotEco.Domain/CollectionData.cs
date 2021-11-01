@@ -14,6 +14,7 @@ namespace DotEco.Domain
         public string Reference { get; set; }
         public string Email { get; set; }
         public string Telephone { get; set; }
+        public string TypeCollection { get; set; }
         public DateTime Date { get; set; }
         public int AssociationId { get; set; }
         public Association Association {get; set;}

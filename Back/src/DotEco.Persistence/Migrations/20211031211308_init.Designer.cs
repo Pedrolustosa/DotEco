@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotEco.Persistence.Migrations
 {
     [DbContext(typeof(DotEcoContext))]
-    [Migration("20211028231803_init")]
+    [Migration("20211031211308_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,6 +71,9 @@ namespace DotEco.Persistence.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Telephone")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TypeCollection")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

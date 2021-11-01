@@ -28,6 +28,7 @@
                         <th>reference</th>
                         <th>email</th>
                         <th>telephone</th>
+                        <th>tipo de Coleta</th>
                         <th>date</th>
                         <th>associação</th>
                         <th>opções</th>
@@ -40,6 +41,7 @@
                         <td>{{collectiondatas.reference}}
                         <td>{{collectiondatas.email}}</td>
                         <td>{{collectiondatas.telephone}}</td>
+                        <td>{{collectiondatas.typeCollection}}</td>
                         <td>{{collectiondatas.date}}</td>
                         <td>{{collectiondatas.associationId}}</td>
                         <td>
@@ -136,9 +138,20 @@
                     </div>
 
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="telephone" formControlName="telephone" [ngClass]="{ 'is-invalid': collectiondataForm.get('telephone')?.errors 
-                                    && collectiondataForm.get('telephone')?.touched}"
+                        <input type="text" class="form-control" id="typeCollection" formControlName="typeCollection"
+                            [ngClass]="{ 'is-invalid': collectiondataForm.get('typeCollection')?.errors 
+                                    && collectiondataForm.get('typeCollection')?.touched}"
                             mask="(00) 0000-0000 || (00) 00000-0000" />
+                        <label for="typeCollection">Telefone</label>
+                        <div *ngIf="collectiondataForm.get('typeCollection')?.hasError('required') 
+                                    && collectiondataForm.get('typeCollection')?.touched" class="invalid-feedback">
+                            Tipo de Coleta é obrigatório.
+                        </div>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="telephone" formControlName="telephone" [ngClass]="{ 'is-invalid': collectiondataForm.get('telephone')?.errors 
+                                    && collectiondataForm.get('telephone')?.touched}" />
                         <label for="telephone">Telefone</label>
                         <div *ngIf="collectiondataForm.get('telephone')?.hasError('required') 
                                     && collectiondataForm.get('telephone')?.touched" class="invalid-feedback">
