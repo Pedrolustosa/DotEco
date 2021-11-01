@@ -10,6 +10,7 @@ namespace DotEco.Application.Dtos
         public string Telephone { get; set; }
         public string TypeCollection { get; set; }
         public string Date { get; set; }
+        public string Status { get; set; }
         public int AssociationId { get; set; }
         public AssociationDto Association { get; set; }
     }
