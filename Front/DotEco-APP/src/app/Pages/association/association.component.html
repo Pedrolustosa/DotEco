@@ -34,8 +34,8 @@
                     <tbody *ngIf="associations && associations">
                         <tr *ngFor="let associations of associationsFilters">
                             <td>{{associations.name}}</td>
-                            <td>{{associations.cep}}</td>
-                            <td>{{associations.cnpj}}</td>
+                            <td>{{associations.cep | mask: '00000-000'}}</td>
+                            <td>{{associations.cnpj | mask: '00.000.000/0000-00'}}</td>
                             <td>{{associations.state}}</td>
                             <td>{{associations.address}}</td>
                             <td>
