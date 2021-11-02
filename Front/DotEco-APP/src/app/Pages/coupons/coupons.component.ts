@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Coupons } from 'src/app/_models/Coupons';
 import { CouponsService } from 'src/app/_services/coupons.service';
@@ -28,11 +29,13 @@ export class CouponsComponent implements OnInit {
     private modalService: BsModalService,
     private localeService: BsLocaleService,
     private couponService: CouponsService,
+    private spinner: NgxSpinnerService,
   ) {
     this.localeService.use('pt-br');
   }
 
   ngOnInit(): void {
+    this.spinner.show();
     this.validation();
     this.getCoupon();
   }
@@ -95,15 +98,18 @@ export class CouponsComponent implements OnInit {
     );
   }
 
-  getCoupon() {
-    this.couponService.getAllCoupons().subscribe(
-      (_coupons: Coupons[]) => {
-        this.coupons = _coupons;
+  public getCoupon(): void {
+    this.couponService.getAllCoupons().subscribe({
+      next: (coupons: Coupons[]) => {
+        this.coupons = coupons;
         this.couponsFilters = this.coupons;
-        console.log(this.coupons);
-      }, error => {
-        this.toastr.error(`Erro ao tentar Carregar Cupons: ${error}`);
-      });
+      },
+      error: (error: any) => {
+        this.spinner.hide();
+        this.toastr.error('Erro ao Carregar os Cupons', 'Erro!');
+      },
+      complete: () => this.spinner.hide()
+    });
   }
 
   saveAlteration(template: any) {

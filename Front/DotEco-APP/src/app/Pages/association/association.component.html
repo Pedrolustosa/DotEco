@@ -19,151 +19,155 @@
                 </div>
             </div>
             <h3 class="card-header text-center">Associaçoes</h3>
-            <div class="table-responsive-md"></div>
-            <table class="table table-sm text-center table-bordered border-success table-striped table-hover">
-                <thead class="table-success">
-                    <tr>
-                        <th>Nome</th>
-                        <th>CEP</th>
-                        <th>CNPJ</th>
-                        <th>Estado</th>
-                        <th>Endereço</th>
-                        <th>Opções</th>
-                    </tr>
-                </thead>
-                <tbody *ngIf="associations && associations">
-                    <tr *ngFor="let associations of associationsFilters">
-                        <td>{{associations.name}}</td>
-                        <td>{{associations.cep}}</td>
-                        <td>{{associations.cnpj}}</td>
-                        <td>{{associations.state}}</td>
-                        <td>{{associations.address}}</td>
-                        <td>
-                            <div>
-                                <button type="button" title="Excluir" class="btn btn-outline-danger me-2"
-                                    (click)="deleteAssociation(associations, confirm)"><i
-                                        class="fa fa-eraser"></i></button>
-                                <button type="button" title="Editar" class="btn btn-outline-warning me-2"
-                                    (click)="editAssociation(associations, template)"><i
-                                        class="fa fa-edit"></i></button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-                <tfoot *ngIf="!associations">
-                    <tr>
-                        <td colspan="7" class="text-center">
-                            <h4>
-                                Nenhuma Associação encontrada!
-                            </h4>
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
+            <div class="table-responsive-md">
+                <table class="table table-sm text-center table-bordered border-success table-striped table-hover">
+                    <thead class="table-success">
+                        <tr>
+                            <th>Nome</th>
+                            <th>CEP</th>
+                            <th>CNPJ</th>
+                            <th>Estado</th>
+                            <th>Endereço</th>
+                            <th>Opções</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="associations && associations">
+                        <tr *ngFor="let associations of associationsFilters">
+                            <td>{{associations.name}}</td>
+                            <td>{{associations.cep}}</td>
+                            <td>{{associations.cnpj}}</td>
+                            <td>{{associations.state}}</td>
+                            <td>{{associations.address}}</td>
+                            <td>
+                                <div>
+                                    <button type="button" title="Excluir" class="btn btn-outline-danger me-2"
+                                        (click)="deleteAssociation(associations, confirm)"><i
+                                            class="fa fa-eraser"></i></button>
+                                    <button type="button" title="Editar" class="btn btn-outline-warning me-2"
+                                        (click)="editAssociation(associations, template)"><i
+                                            class="fa fa-edit"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot *ngIf="!associations">
+                        <tr>
+                            <td colspan="7" class="text-center">
+                                <h4>
+                                    Nenhuma Associação encontrada!
+                                </h4>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 
-<div bsModal #template="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">
-                    Atualziando Dados
-                </h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="template.hide()"
-                    aria-label="Close">
-                </button>
-            </div>
-            <div class="modal-body">
-                <form class="form-group" [formGroup]="associationForm">
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="name" name="name" formControlName="name" [ngClass]="{'is-invalid': associationForm.get('name').errors 
+    <div bsModal #template="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+        aria-labelledby="dialog-sizes-name1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        Atualziando Dados
+                    </h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="template.hide()"
+                        aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="form-group" [formGroup]="associationForm">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="name" name="name" formControlName="name"
+                                [ngClass]="{'is-invalid': associationForm.get('name').errors 
                                 && associationForm.get('name').touched}" />
-                        <label for="name">Nome</label>
-                        <div *ngIf="associationForm.get('name').hasError('required') 
+                            <label for="name">Nome</label>
+                            <div *ngIf="associationForm.get('name').hasError('required') 
                                 && associationForm.get('name').touched" class="invalid-feedback">
-                            Nome é obrigatório.
+                                Nome é obrigatório.
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="cep" formControlName="cep" [ngClass]="{'is-invalid': associationForm.get('cep').errors 
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="cep" formControlName="cep" [ngClass]="{'is-invalid': associationForm.get('cep').errors 
                                 && associationForm.get('cep').touched }" mask="00000-000" />
-                        <label for="cep">CEP</label>
-                        <div *ngIf="associationForm.get('cep').hasError('required') 
+                            <label for="cep">CEP</label>
+                            <div *ngIf="associationForm.get('cep').hasError('required') 
                                 && associationForm.get('cep').touched" class="invalid-feedback">
-                            CEP é obrigatório.
+                                CEP é obrigatório.
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="cnpj" formControlName="cnpj" name="cnpj" [ngClass]="{ 'is-invalid': associationForm.get('cnpj').errors 
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="cnpj" formControlName="cnpj" name="cnpj"
+                                [ngClass]="{ 'is-invalid': associationForm.get('cnpj').errors 
                                 && associationForm.get('cnpj').touched}" mask="00.000.000/0000-00">
-                        <label for="cnpj">CNPJ</label>
-                        <div *ngIf="associationForm.get('cnpj').hasError('required') 
+                            <label for="cnpj">CNPJ</label>
+                            <div *ngIf="associationForm.get('cnpj').hasError('required') 
                                     && associationForm.get('cnpj').touched" class="invalid-feedback">
-                            CNPJ é obrigatório.
+                                CNPJ é obrigatório.
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="state" formControlName="state" [ngClass]="{ 'is-invalid': associationForm.get('state').errors 
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="state" formControlName="state" [ngClass]="{ 'is-invalid': associationForm.get('state').errors 
                                     && associationForm.get('state').touched}" />
-                        <div *ngIf="associationForm.get('state').hasError('required') 
+                            <div *ngIf="associationForm.get('state').hasError('required') 
                                     && associationForm.get('state').touched" class="invalid-feedback">
-                            Estado é obrigatório.
+                                Estado é obrigatório.
+                            </div>
+                            <label for="state">Estado</label>
                         </div>
-                        <label for="state">Estado</label>
-                    </div>
 
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="address" formControlName="address" [ngClass]="{ 'is-invalid': associationForm.get('address').errors 
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="address" formControlName="address" [ngClass]="{ 'is-invalid': associationForm.get('address').errors 
                                     && associationForm.get('address').touched}" />
-                        <div *ngIf="associationForm.get('address').hasError('required') 
+                            <div *ngIf="associationForm.get('address').hasError('required') 
                                     && associationForm.get('address').touched" class="invalid-feedback">
-                            Endereço é obrigatório.
+                                Endereço é obrigatório.
+                            </div>
+                            <label for="address">Endereço</label>
                         </div>
-                        <label for="address">Endereço</label>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer d-flex">
-                <button class="btn btn-secondary" (click)="template.hide()">
-                    Fechar
-                </button>
-                <button class="btn btn-primary ml-auto" [disabled]="!associationForm.valid"
-                    (click)="saveAlteration(template)">
-                    Salvar Alterações
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- Modal -->
-<div bsModal #confirm="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">
-                    Deletando Associação
-                </h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="confirm.hide()"
-                    aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>{{bodyDeleteAssociation}}</p>
-            </div>
-            <div class="modal-footer btn-group d-flex">
-                <button type="button" class="btn btn-outline-primary" (click)="confirm.hide()">
-                    CENCELAR
-                </button>
-                <button type="button" class="btn btn-outline-danger" (click)="confirmDelete(confirm)">
-                    DELETAR
-                </button>
+                    </form>
+                </div>
+                <div class="modal-footer d-flex">
+                    <button class="btn btn-secondary" (click)="template.hide()">
+                        Fechar
+                    </button>
+                    <button class="btn btn-primary ml-auto" [disabled]="!associationForm.valid"
+                        (click)="saveAlteration(template)">
+                        Salvar Alterações
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
+
+    <!-- Modal -->
+    <div bsModal #confirm="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+        aria-labelledby="dialog-sizes-name1">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        Deletando Associação
+                    </h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="confirm.hide()"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>{{bodyDeleteAssociation}}</p>
+                </div>
+                <div class="modal-footer btn-group d-flex">
+                    <button type="button" class="btn btn-outline-primary" (click)="confirm.hide()">
+                        CENCELAR
+                    </button>
+                    <button type="button" class="btn btn-outline-danger" (click)="confirmDelete(confirm)">
+                        DELETAR
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -144,7 +144,6 @@ namespace DotEco.API.Controllers
                 var users = await _repo.GetUsersAsyncById(UserId);
                 if (users == null) return NotFound();
 
-
                 _mapper.Map(model, users);
 
                 _repo.Update(users);
