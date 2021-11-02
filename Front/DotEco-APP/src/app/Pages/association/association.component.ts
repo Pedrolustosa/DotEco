@@ -7,6 +7,7 @@ import { Association } from 'src/app/_models/Association';
 import { AssociationService } from 'src/app/_services/association.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-association',
@@ -33,6 +34,7 @@ export class AssociationComponent implements OnInit {
     private modalService: BsModalService,
     private localeService: BsLocaleService,
     private associationService: AssociationService,
+    private spinner: NgxSpinnerService,
   ) {
     this.localeService.use('pt-br');
   }
@@ -46,6 +48,7 @@ export class AssociationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.spinner.show();
     this.validation();
     this.getAssociation();
   }
@@ -103,14 +106,18 @@ export class AssociationComponent implements OnInit {
     );
   }
 
-  getAssociation() {
-    this.associationService.getAllAssociation().subscribe(
-      (_associations: Association[]) => {
-        this.associations = _associations;
+  public getAssociation(): void {
+    this.associationService.getAllAssociation().subscribe({
+      next: (associations: Association[]) => {
+        this.associations = associations;
         this.associationsFilters = this.associations;
-      }, error => {
-        this.toastr.error(`Erro ao tentar Carregar Associações: ${error}`);
-      });
+      },
+      error: (error: any) => {
+        this.spinner.hide();
+        this.toastr.error('Erro ao Carregar as Associações', 'Erro!');
+      },
+      complete: () => this.spinner.hide()
+    });
   }
 
   saveAlteration(template: any) {

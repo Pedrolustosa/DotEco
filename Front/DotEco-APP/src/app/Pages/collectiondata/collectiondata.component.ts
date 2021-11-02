@@ -8,6 +8,7 @@ import { CollectionData } from 'src/app/_models/CollectionData';
 import { CollectionDataService } from 'src/app/_services/collectiondata.service';
 import { Association } from 'src/app/_models/Association';
 import { AssociationService } from 'src/app/_services/association.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-collectiondata',
@@ -35,11 +36,13 @@ export class CollectionDataComponent implements OnInit {
     private localeService: BsLocaleService,
     private collectiondataService: CollectionDataService,
     private associationService: AssociationService,
+    private spinner: NgxSpinnerService,
   ) {
     this.localeService.use('pt-br');
   }
 
   ngOnInit(): void {
+    this.spinner.show();
     this.validation();
     this.getCollectionData();
     this.associationId = this.associationService.getAllAssociation();
@@ -110,15 +113,18 @@ export class CollectionDataComponent implements OnInit {
     );
   }
 
-  getCollectionData() {
-    this.collectiondataService.getAllCollectionData().subscribe(
-      (_collectiondata: CollectionData[]) => {
-        this.collectiondatas = _collectiondata;
+  public getCollectionData(): void {
+    this.collectiondataService.getAllCollectionData().subscribe({
+      next: (collectiondata: CollectionData[]) => {
+        this.collectiondatas = collectiondata;
         this.collectiondatasFilters = this.collectiondatas;
-        console.log(this.collectiondatas);
-      }, error => {
-        this.toastr.error(`Erro ao tentar Carregar Coletas: ${error}`);
-      });
+      },
+      error: (error: any) => {
+        this.spinner.hide();
+        this.toastr.error('Erro ao Carregar as Coletas', 'Erro!');
+      },
+      complete: () => this.spinner.hide()
+    });
   }
 
   saveAlteration(template: any) {

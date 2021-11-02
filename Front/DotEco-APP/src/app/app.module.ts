@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -27,6 +27,7 @@ import { CouponsComponent } from './Pages/coupons/coupons.component';
 import { AssociationComponent } from './Pages/association/association.component';
 import { RegistrationComponent } from './Pages/user/registration/registration.component';
 import { CollectionDataComponent } from './Pages/collectiondata/collectiondata.component';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 defineLocale('pt-br', ptBrLocale);
 
@@ -60,10 +61,12 @@ defineLocale('pt-br', ptBrLocale);
     TabsModule.forRoot(),
     NgxMaskModule.forRoot(),
     ToastrModule.forRoot({
-      timeOut: 3000,
+      timeOut: 4000,
+      positionClass: 'toast-bottom-right',
       preventDuplicates: true,
       progressBar: true
     }),
+    NgxSpinnerModule,
   ],
   providers: [
     AssociationService,
@@ -74,5 +77,6 @@ defineLocale('pt-br', ptBrLocale);
     }
   ],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }
