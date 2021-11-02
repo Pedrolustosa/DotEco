@@ -1,6 +1,7 @@
+
 .carousel-item .active img {
-    width: 100vw;
-    height: 51vh;
+    width: 105vw;
+    height: 85vh;
 }
 
 .carousel-inner img {
@@ -8,81 +9,74 @@
     filter: brightness(75%);
 }
 
-.carousel-caption {
-    margin-bottom: 5rem;
+.carousel-caption h1 {
+    font-size: 3.5rem;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+
+.carousel-caption p {
+    margin-bottom: 16.5%;
+    font-size: x-large;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+/* entre carruosel e about */
 
 .between-about, h3 {
     padding-top: 3rem;
     color: #42a877;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+/* about vertical */
+
+#conteiner .card-text {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#conteiner .card {
+    text-align: center;
+    margin: 1.5rem;
+}
+
+#conteiner .card-text {
+    font-size: x-large;
+}
+
+/* entre partner e about */
+
 .between-partner {
-    padding-top: 3rem;
     padding-bottom: 4rem;
     color: #42a877;
 }
 
-#about {
-    margin-top: 4rem;
-    box-sizing: border-box;
-    background-image: #f5f5f5;
-}
+/* Partner parceiros site*/
 
-#about .card {
-    margin: .5rem;
-    border: none;
-    box-shadow: .2rem .5rem .7rem rgb(0, 0, 0, .25);
-}
-
-#about .card .principal {
-    border: none;
-    text-align: justify;
-    box-shadow: .2rem .5rem .7rem rgb(0, 0, 0, .35);
-}
-
-#about .sub {
-    transition: 2s;
-}
-
-#about .sub:hover {
-    cursor: pointer;
-    transition: 1s;
-    transform: translateY(-2%);
-}
-
-#about .principal:hover {
-    cursor: pointer;
-    transition: 1s;
-    transform: translateY(-2%);
-}
-
-#about .card-body {
-    color: #42a877;
-}
-
-#about .card-body li {
-    list-style: none;
-}
-
-#about img {
-    padding-bottom: 2rem;
+#partner .card {
+    border-radius: 1.2rem;
+    width: 26.5rem;
+    height: 35rem;
 }
 
 #partner .card-text {
-    padding-top: .9rem;
-    color: #42a877;
+    font-size: large;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 #partner .card-title {
-    font-size: large;
-    padding-bottom: 3.5rem;
-    color: #42a877;
+    font-size: x-large;
+    padding: 2.5rem;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 #partner img {
-    border-radius: .5rem;
+    border-top-left-radius: 1.2rem;
+    border-top-right-radius: 1.2rem;
+    width: 26.4rem;
+    height: 18rem;
 }
+
+/* roda pé footer */
 
 footer {
     background-color: #42a877;
