@@ -6,6 +6,10 @@ using DotEco.Application.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
+using DotEco.Persistence.Contracts;
+using DotEco.Application.Contracts;
+using Microsoft.AspNetCore.Hosting;
+using System;
 
 namespace DotEco.API.Controllers
 {
@@ -14,13 +18,17 @@ namespace DotEco.API.Controllers
     [ApiController]
     public class AssociationsController : ControllerBase
     {
-        private readonly IMapper _mapper;
-        private readonly IDotEcoRepository _repo;
+        private readonly IAssociationService _associationService;
+        private readonly IWebHostEnvironment _hostEnvironment;
+        private readonly IAccountService _accountService;
 
-        public AssociationsController(IDotEcoRepository repo, IMapper mapper)
+        public AssociationsController(IAssociationService associationService,
+                                 IWebHostEnvironment hostEnvironment,
+                                 IAccountService accountService)
         {
-            _mapper = mapper;
-            _repo = repo;
+            _hostEnvironment = hostEnvironment;
+            _accountService = accountService;
+            _associationService = associationService;
         }
 
         [HttpGet]
@@ -29,15 +37,15 @@ namespace DotEco.API.Controllers
         {
             try
             {
-                var associations = await _repo.GetAllAssociationAsync();
+                var associations = await _associationService.GetAllAssociationAsync();
+                if (associations == null) return NoContent();
 
-                var results = _mapper.Map<AssociationDto[]>(associations);
-
-                return Ok(results);
+                return Ok(associations);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Banco Dados Falhou {ex.Message}");
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar recuperar eventos. Erro: {ex.Message}");
             }
         }
 
@@ -47,15 +55,15 @@ namespace DotEco.API.Controllers
         {
             try
             {
-                var association = await _repo.GetAssociationAsyncById(AssociationId);
+                var association = await _associationService.GetAssociationAsyncById(AssociationId);
+                if (association == null) return NoContent();
 
-                var results = _mapper.Map<AssociationDto>(association);
-
-                return Ok(results);
+                return Ok(association);
             }
-            catch (System.Exception)
+            catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, "Banco Dados Falhou");
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar recuperar eventos. Erro: {ex.Message}");
             }
         }
 
@@ -65,22 +73,16 @@ namespace DotEco.API.Controllers
         {
             try
             {
-                var association = _mapper.Map<Association>(model);
+                var association = await _associationService.AddAssociation(model);
+                if (association == null) return NoContent();
 
-                _repo.Add(association);
-
-                if (await _repo.SaveChangesAsync())
-                {
-                    return Created($"/api/associations/{model.Id}", _mapper.Map<AssociationDto>(association));
-                }
+                return Ok(association);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Banco Dados Falhou {ex.Message}");
+                    $"Erro ao tentar adicionar eventos. Erro: {ex.Message}");
             }
-
-            return BadRequest();
         }
 
         [HttpPut("{AssociationId}")]
@@ -89,25 +91,16 @@ namespace DotEco.API.Controllers
         {
             try
             {
-                var association = await _repo.GetAssociationAsyncById(AssociationId);
-                if (association == null) return NotFound();
+                var evento = await _associationService.UpdateAssociation(AssociationId, model);
+                if (evento == null) return NoContent();
 
-
-                _mapper.Map(model, association);
-
-                _repo.Update(association);
-
-                if (await _repo.SaveChangesAsync())
-                {
-                    return Created($"/api/associations/{model.Id}", _mapper.Map<AssociationDto>(association));
-                }
+                return Ok(evento);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, "Banco Dados Falhou " + ex.Message);
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar atualizar eventos. Erro: {ex.Message}");
             }
-
-            return BadRequest();
         }
 
         [HttpDelete("{AssociationId}")]
@@ -116,22 +109,23 @@ namespace DotEco.API.Controllers
         {
             try
             {
-                var association = await _repo.GetAssociationAsyncById(AssociationId);
-                if (association == null) return NotFound();
+                var association = await _associationService.GetAssociationAsyncById(AssociationId);
+                if (association == null) return NoContent();
 
-                _repo.Delete(association);
-
-                if (await _repo.SaveChangesAsync())
+                if (await _associationService.DeleteAssociation(AssociationId))
                 {
-                    return Ok(new { message = "Associação desvinculada" });
+                    return Ok(new { message = "Deletado" });
+                }
+                else
+                {
+                    throw new Exception("Ocorreu um problem não específico ao tentar deletar Evento.");
                 }
             }
-            catch (System.Exception)
+            catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, "Banco Dados Falhou");
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar deletar eventos. Erro: {ex.Message}");
             }
-
-            return BadRequest();
         }
 
     }

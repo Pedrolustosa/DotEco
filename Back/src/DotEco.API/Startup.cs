@@ -1,11 +1,16 @@
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 using AutoMapper;
+using DotEco.Application;
+using DotEco.Application.Contracts;
 using DotEco.Application.Dtos;
 using DotEco.Domain;
 using DotEco.Domain.Identity;
 using DotEco.Persistence;
 using DotEco.Persistence.Context;
+using DotEco.Persistence.Contracts;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -36,27 +41,6 @@ namespace DotEco.API
                 context => context.UseSqlite(Configuration.GetConnectionString("Sqlite"))
             );
 
-            #region AutoMapper
-            var autoMapperConfig = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<User, UserDto>().ReverseMap();
-                cfg.CreateMap<User, UserLoginDto>().ReverseMap();
-                cfg.CreateMap<Coupons, CouponsDto>().ReverseMap();
-                cfg.CreateMap<Association, AssociationDto>().ReverseMap();
-                cfg.CreateMap<CollectionData, CollectionDataDto>().ReverseMap();
-            });
-
-
-            services.AddSingleton(autoMapperConfig.CreateMapper());
-            #endregion
-
-            services.AddControllers()
-                    .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling =
-                        Newtonsoft.Json.ReferenceLoopHandling.Ignore
-                    );
-
-            services.AddScoped<IDotEcoRepository, DotEcoRepository>();
-
             IdentityBuilder builder = services.AddIdentityCore<User>(options =>
             {
                 options.Password.RequireDigit = false;
@@ -73,20 +57,16 @@ namespace DotEco.API
             builder.AddSignInManager<SignInManager<User>>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
-                                .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                };
-                options.RequireHttpsMetadata = false;
-            });
-
-
+                    .AddJwtBearer(options =>
+                    {
+                        options.TokenValidationParameters = new TokenValidationParameters
+                        {
+                            ValidateIssuerSigningKey = true,
+                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["AppSettings:Token"])),
+                            ValidateIssuer = false,
+                            ValidateAudience = false
+                        };
+                    });
             services.AddMvc(options =>
             {
                 var policy = new AuthorizationPolicyBuilder()
@@ -98,6 +78,21 @@ namespace DotEco.API
                     );
             services.AddControllers();
             services.AddCors();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddScoped<IAssociationService, AssociationService>();
+            services.AddScoped<ICollectionDataService, CollectionDataService>();
+            services.AddScoped<ICouponsService, CouponsService>();
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IAccountService, AccountService>();
+
+            services.AddScoped<IAssociationPersist, AssociationPersist>();
+            services.AddScoped<ICollectionDataPersist, CollectionDataPersist>();
+            services.AddScoped<ICouponsPersist, CouponsPersist>();
+            services.AddScoped<IGeralPersist, GeralPersist>();
+            services.AddScoped<IUserPersist, UserPersist>();
+
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "DotEco.API", Version = "v1" });

@@ -1,8 +1,12 @@
+using System;
 using System.Threading.Tasks;
 using AutoMapper;
+using DotEco.Application.Contracts;
+using DotEco.Application.Dtos;
 using DotEco.Domain;
 using DotEco.Persistence;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,119 +18,114 @@ namespace DotEco.API.Controllers
     [Authorize(Roles = "Empresa, Administrador")]
     public class CouponsController : ControllerBase
     {
-        private readonly IMapper _mapper;
-        private readonly IDotEcoRepository _repo;
+        private readonly ICouponsService _couponsService;
+        private readonly IWebHostEnvironment _hostEnvironment;
+        private readonly IAccountService _accountService;
 
-        public CouponsController(IDotEcoRepository repo, IMapper mapper)
+        public CouponsController(ICouponsService couponsService,
+                                 IWebHostEnvironment hostEnvironment,
+                                 IAccountService accountService)
         {
-            _mapper = mapper;
-            _repo = repo;
+            _hostEnvironment = hostEnvironment;
+            _accountService = accountService;
+            _couponsService = couponsService;
         }
+
         [HttpGet]
+        [Authorize(Roles = "Cliente2, Associacao, Administrador")]
         public async Task<IActionResult> Get()
         {
             try
             {
-                var coupons = await _repo.GetAllCouponsAsync();
+                var coupons = await _couponsService.GetAllCouponsAsync();
+                if (coupons == null) return NoContent();
 
-                var results = _mapper.Map<Coupons[]>(coupons);
-
-                return Ok(results);
+                return Ok(coupons);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Banco Dados Falhou {ex.Message}");
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar recuperar eventos. Erro: {ex.Message}");
             }
         }
 
-        [HttpGet("{CouponsId}")]
-
-        public async Task<IActionResult> Get(int CouponsId)
+        [HttpGet("{AssociationId}")]
+        [Authorize(Roles = "Cliente2, Associacao, Administrador")]
+        public async Task<IActionResult> Get(int couponsId)
         {
             try
             {
-                var coupons = await _repo.GetCouponsAsyncById(CouponsId);
+                var coupon = await _couponsService.GetCouponsAsyncById(couponsId);
+                if (coupon == null) return NoContent();
 
-                var results = _mapper.Map<CouponsDto>(coupons);
-
-                return Ok(results);
+                return Ok(coupon);
             }
-            catch (System.Exception)
+            catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, "Banco Dados Falhou");
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar recuperar eventos. Erro: {ex.Message}");
             }
         }
 
         [HttpPost]
+        [Authorize(Roles = "Associacao, Administrador")]
         public async Task<IActionResult> Post(CouponsDto model)
         {
             try
             {
-                var coupons = _mapper.Map<Coupons>(model);
+                var collectionData = await _couponsService.AddCoupons(model);
+                if (collectionData == null) return NoContent();
 
-                _repo.Add(coupons);
-
-                if (await _repo.SaveChangesAsync())
-                {
-                    return Created($"/api/coupons/{model.Id}", _mapper.Map<CouponsDto>(coupons));
-                }
+                return Ok(collectionData);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Banco Dados Falhou {ex.Message}");
+                    $"Erro ao tentar adicionar eventos. Erro: {ex.Message}");
             }
-
-            return BadRequest();
         }
 
-        [HttpPut("{CouponsId}")]
-        public async Task<IActionResult> Put(int CouponsId, CouponsDto model)
+        [HttpPut("{AssociationId}")]
+        [Authorize(Roles = "Associacao, Administrador")]
+        public async Task<IActionResult> Put(int couponsId, CouponsDto model)
         {
             try
             {
-                var coupons = await _repo.GetCouponsAsyncById(CouponsId);
-                if (coupons == null) return NotFound();
+                var coupon = await _couponsService.UpdateCoupons(couponsId, model);
+                if (coupon == null) return NoContent();
 
-
-                _mapper.Map(model, coupons);
-
-                _repo.Update(coupons);
-
-                if (await _repo.SaveChangesAsync())
-                {
-                    return Created($"/api/coupons/{model.Id}", _mapper.Map<CouponsDto>(coupons));
-                }
+                return Ok(coupon);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, "Banco Dados Falhou " + ex.Message);
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar atualizar eventos. Erro: {ex.Message}");
             }
-
-            return BadRequest();
         }
 
-        [HttpDelete("{CouponsId}")]
-        public async Task<IActionResult> Delete(int CouponsId)
+        [HttpDelete("{AssociationId}")]
+        [Authorize(Roles = "Associacao, Administrador")]
+        public async Task<IActionResult> Delete(int couponsId)
         {
             try
             {
-                var coupons = await _repo.GetCouponsAsyncById(CouponsId);
-                if (coupons == null) return NotFound();
+                var coupons = await _couponsService.GetCouponsAsyncById(couponsId);
+                if (coupons == null) return NoContent();
 
-                _repo.Delete(coupons);
-
-                if (await _repo.SaveChangesAsync())
+                if (await _couponsService.DeleteCoupons(couponsId))
                 {
-                    return Ok(new { message = "Cupom cancelado" });
+                    return Ok(new { message = "Deletado" });
+                }
+                else
+                {
+                    throw new Exception("Ocorreu um problem não específico ao tentar deletar Evento.");
                 }
             }
-            catch (System.Exception)
+            catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, "Banco Dados Falhou");
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar deletar eventos. Erro: {ex.Message}");
             }
-
-            return BadRequest();
         }
     }
 }
