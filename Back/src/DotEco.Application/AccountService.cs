@@ -63,11 +63,11 @@ namespace DotEco.Application
             }
         }
 
-        public async Task<UserUpdateDto> GetUserByUserNameAsync(string email)
+        public async Task<UserUpdateDto> GetUserByUserNameAsync(string username)
         {
             try
             {
-                var user = await _userPersist.GetUserByUserNameAsync(email);
+                var user = await _userPersist.GetUserByUserNameAsync(username);
                 if (user == null) return null;
 
                 var userUpdateDto = _mapper.Map<UserUpdateDto>(user);
@@ -83,7 +83,7 @@ namespace DotEco.Application
         {
             try
             {
-                var user = await _userPersist.GetUserByUserNameAsync(userUpdateDto.Email);
+                var user = await _userPersist.GetUserByUserNameAsync(userUpdateDto.UserName);
                 if (user == null) return null;
 
                 _mapper.Map(userUpdateDto, user);
@@ -95,7 +95,7 @@ namespace DotEco.Application
 
                 if (await _userPersist.SaveChangesAsync())
                 {
-                    var userRetorno = await _userPersist.GetUserByUserNameAsync(user.Email);
+                    var userRetorno = await _userPersist.GetUserByUserNameAsync(user.UserName);
 
                     return _mapper.Map<UserUpdateDto>(userRetorno);
                 }
