@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 using DotEco.Domain;
+using DotEco.Application.Contracts;
+using Microsoft.AspNetCore.Hosting;
+using System;
 
 namespace DotEco.API.Controllers
 {
@@ -15,124 +18,114 @@ namespace DotEco.API.Controllers
     [ApiController]
     public class CollectionDatasController : ControllerBase
     {
-        private readonly IMapper _mapper;
-        private readonly IDotEcoRepository _repo;
+        private readonly ICollectionDataService _collectionDataService;
+        private readonly IWebHostEnvironment _hostEnvironment;
+        private readonly IAccountService _accountService;
 
-        public CollectionDatasController(IDotEcoRepository repo, IMapper mapper)
+        public CollectionDatasController(ICollectionDataService collectionDataService,
+                                 IWebHostEnvironment hostEnvironment,
+                                 IAccountService accountService)
         {
-            _mapper = mapper;
-            _repo = repo;
+            _hostEnvironment = hostEnvironment;
+            _accountService = accountService;
+            _collectionDataService = collectionDataService;
         }
 
         [HttpGet]
-        [Authorize(Roles = "Cliente2, Administrador")]
+        [Authorize(Roles = "Cliente2, Associacao, Administrador")]
         public async Task<IActionResult> Get()
         {
             try
             {
-                var associations = await _repo.GetAllCollectionDataAsync();
+                var collectionDatas = await _collectionDataService.GetAllCollectionDataAsync();
+                if (collectionDatas == null) return NoContent();
 
-                var results = _mapper.Map<CollectionDataDto[]>(associations);
-
-                return Ok(results);
+                return Ok(collectionDatas);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Banco Dados Falhou {ex.Message}");
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar recuperar eventos. Erro: {ex.Message}");
             }
         }
 
-        [HttpGet("{CollectionDataId}")]
-        [Authorize(Roles = "Cliente2, Administrador")]
-        public async Task<IActionResult> Get(int CollectionDataId)
+        [HttpGet("{AssociationId}")]
+        [Authorize(Roles = "Cliente2, Associacao, Administrador")]
+        public async Task<IActionResult> Get(int collectionDatasId)
         {
             try
             {
-                var collectionData = await _repo.GetCollectionDataAsyncById(CollectionDataId);
+                var collectionData = await _collectionDataService.GetCollectionDataAsyncById(collectionDatasId);
+                if (collectionData == null) return NoContent();
 
-                var results = _mapper.Map<CollectionDataDto>(collectionData);
-
-                return Ok(results);
+                return Ok(collectionData);
             }
-            catch (System.Exception)
+            catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, "Banco Dados Falhou");
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar recuperar eventos. Erro: {ex.Message}");
             }
         }
 
         [HttpPost]
-        [Authorize(Roles = "Cliente2, Administrador")]
+        [Authorize(Roles = "Cliente2, Associacao, Administrador")]
         public async Task<IActionResult> Post(CollectionDataDto model)
         {
             try
             {
-                var collectionData = _mapper.Map<CollectionData>(model);
+                var collectionData = await _collectionDataService.AddCollectionData(model);
+                if (collectionData == null) return NoContent();
 
-                _repo.Add(collectionData);
-
-                if (await _repo.SaveChangesAsync())
-                {
-                    return Created($"/api/collectiondata/{model.Id}", _mapper.Map<CollectionDataDto>(collectionData));
-                }
+                return Ok(collectionData);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Banco Dados Falhou {ex.Message}");
+                    $"Erro ao tentar adicionar eventos. Erro: {ex.Message}");
             }
-
-            return BadRequest();
         }
 
-        [HttpPut("{CollectionDataId}")]
+        [HttpPut("{AssociationId}")]
         [Authorize(Roles = "Associacao, Administrador")]
-        public async Task<IActionResult> Put(int CollectionDataId, CollectionDataDto model)
+        public async Task<IActionResult> Put(int collectionDatasId, CollectionDataDto model)
         {
             try
             {
-                var collectionData = await _repo.GetCollectionDataAsyncById(CollectionDataId);
-                if (collectionData == null) return NotFound();
+                var collectionData = await _collectionDataService.UpdateCollectionData(collectionDatasId, model);
+                if (collectionData == null) return NoContent();
 
-
-                _mapper.Map(model, collectionData);
-
-                _repo.Update(collectionData);
-
-                if (await _repo.SaveChangesAsync())
-                {
-                    return Created($"/api/collectiondata/{model.Id}", _mapper.Map<CollectionDataDto>(collectionData));
-                }
+                return Ok(collectionData);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, "Banco Dados Falhou " + ex.Message);
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar atualizar eventos. Erro: {ex.Message}");
             }
-
-            return BadRequest();
         }
 
-        [HttpDelete("{CollectionDataId}")]
+        [HttpDelete("{AssociationId}")]
         [Authorize(Roles = "Associacao, Administrador")]
-        public async Task<IActionResult> Delete(int CollectionDataId)
+        public async Task<IActionResult> Delete(int collectionDatasId)
         {
             try
             {
-                var collectionData = await _repo.GetCollectionDataAsyncById(CollectionDataId);
-                if (collectionData == null) return NotFound();
+                var collectionDatas = await _collectionDataService.GetCollectionDataAsyncById(collectionDatasId);
+                if (collectionDatas == null) return NoContent();
 
-                _repo.Delete(collectionData);
-
-                if (await _repo.SaveChangesAsync())
+                if (await _collectionDataService.DeleteCollectionData(collectionDatasId))
                 {
-                    return Ok(new { message = "Coleta cancelada" });
+                    return Ok(new { message = "Deletado" });
+                }
+                else
+                {
+                    throw new Exception("Ocorreu um problem não específico ao tentar deletar Evento.");
                 }
             }
-            catch (System.Exception)
+            catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, "Banco Dados Falhou");
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar deletar eventos. Erro: {ex.Message}");
             }
-
-            return BadRequest();
         }
     }
 }

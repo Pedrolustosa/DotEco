@@ -1,21 +1,11 @@
 using System;
 using System.Threading.Tasks;
-using DotEco.Domain.Identity;
-using Microsoft.AspNetCore.Identity;
+using DotEco.API.Extensions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using System.Collections.Generic;
-using System.Security.Claims;
-using System.IdentityModel.Tokens.Jwt;
-using AutoMapper;
 using DotEco.Application.Dtos;
-using System.Linq;
-using DotEco.Persistence;
+using DotEco.Application.Contracts;
 
 namespace DotEco.API.Controllers
 {
@@ -23,57 +13,29 @@ namespace DotEco.API.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
-        private readonly IDotEcoRepository _repo;
-        private readonly IMapper _mapper;
+        private readonly IAccountService _accountService;
+        private readonly ITokenService _tokenService;
 
-        public UserController(IConfiguration configuration,
-                              IDotEcoRepository repo,
-                              UserManager<User> userManager,
-                              SignInManager<User> signInManager,
-                              IMapper mapper)
+        public UserController(IAccountService accountService,
+                                 ITokenService tokenService)
         {
-            _repo = repo;
-            _mapper = mapper;
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _configuration = configuration;
+            _accountService = accountService;
+            _tokenService = tokenService;
         }
 
-        [Authorize]
-        [HttpGet("TestClaim")]
-        public IActionResult GetClaims()
-        {
-            var identity = User.Identity as ClaimsIdentity;
-
-            var claims = from c in identity.Claims
-                         select new
-                         {
-                             subject = c.Subject.Name,
-                             type = c.Type,
-                             value = c.Value
-                         };
-
-            return Ok(claims);
-        }
-
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task<IActionResult> Get()
+        [HttpGet("GetUser")]
+        public async Task<IActionResult> GetUser()
         {
             try
             {
-                var users = await _repo.GetAllUserAsync();
-
-                var results = _mapper.Map<User[]>(users);
-
-                return Ok(results);
+                var email = User.GetUserName();
+                var user = await _accountService.GetUserByUserNameAsync(email);
+                return Ok(user);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Banco Dados Falhou {ex.Message}");
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar recuperar Usuário. Erro: {ex.Message}");
             }
         }
 
@@ -83,22 +45,19 @@ namespace DotEco.API.Controllers
         {
             try
             {
-                var user = _mapper.Map<User>(userDto);
+                if (await _accountService.UserExists(userDto.Email, userDto.UserName))
+                    return BadRequest("Usuário já existe");
 
-                var result = await _userManager.CreateAsync(user, userDto.Password);
+                var user = await _accountService.CreateAccountAsync(userDto);
+                if (user != null)
+                    return Ok(user);
 
-                var userToReturn = _mapper.Map<UserDto>(user);
-
-                if (result.Succeeded)
-                {
-                    return Created("GetUser", userToReturn);
-                }
-
-                return BadRequest(result.Errors);
+                return BadRequest("Usuário não criado, tente novamente mais tarde!");
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Banco Dados Falhou {ex.Message}");
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar Registrar Usuário. Erro: {ex.Message}");
             }
         }
 
@@ -108,108 +67,44 @@ namespace DotEco.API.Controllers
         {
             try
             {
-                var user = await _userManager.FindByEmailAsync(userLogin.Email);
+                var user = await _accountService.GetUserByUserNameAsync(userLogin.Email);
+                if (user == null) return Unauthorized("Usuário ou Senha está errado");
 
-                var result = await _signInManager.CheckPasswordSignInAsync(user, userLogin.Password, false);
+                var result = await _accountService.CheckUserPasswordAsync(user, userLogin.Password);
+                if (!result.Succeeded) return Unauthorized();
 
-                if (result.Succeeded)
+                return Ok(new
                 {
-                    var appUser = await _userManager.Users
-                    .FirstOrDefaultAsync(u => u.NormalizedEmail == userLogin.Email.ToUpper());
-
-                    var userToReturn = _mapper.Map<UserLoginDto>(appUser);
-
-                    return Ok(new
-                    {
-                        token = GenerateJwToken(appUser).Result,
-                        user = userToReturn
-                    });
-                }
-
-                return Unauthorized();
+                    Email = user.Email,
+                    FullName = user.FullName,
+                    Role = user.Type,
+                    token = _tokenService.CreateToken(user).Result
+                });
             }
-            catch (System.Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar realizar Login. Erro: {ex.Message}");
             }
         }
 
-        [HttpPut("{UserId}")]
-        [AllowAnonymous]
-        public async Task<IActionResult> Put(int UserId, UserDto model)
+        [HttpPut("UpdateUser")]
+        public async Task<IActionResult> UpdateUser(UserUpdateDto userUpdateDto)
         {
             try
             {
-                var users = await _repo.GetUsersAsyncById(UserId);
-                if (users == null) return NotFound();
+                var user = await _accountService.GetUserByUserNameAsync(User.GetUserName());
+                if (user == null) return Unauthorized("Usuário Inválido");
 
-                _mapper.Map(model, users);
+                var userReturn = await _accountService.UpdateAccount(userUpdateDto);
+                if (userReturn == null) return NoContent();
 
-                _repo.Update(users);
-
-                if (await _repo.SaveChangesAsync())
-                {
-                    return Created($"/api/user/{model.Id}", _mapper.Map<UserDto>(users));
-                }
+                return Ok(userReturn);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, "Banco Dados Falhou " + ex.Message);
-            }
-
-            return BadRequest();
-        }
-
-        private async Task<string> GenerateJwToken(User user)
-        {
-
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, user.FullName.ToString()),
-                new Claim(ClaimTypes.Role, RoleFactory(user.Type))
-            };
-
-            var roles = await _userManager.GetRolesAsync(user);
-
-            foreach (var role in roles)
-            {
-                claims.Add(new Claim(ClaimTypes.Role, role));
-            }
-
-            var key = new SymmetricSecurityKey(Encoding.ASCII
-                                .GetBytes(_configuration.GetSection("AppSettings:Token").Value));
-
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddMinutes(59),
-                SigningCredentials = creds
-            };
-
-            var tokenHandler = new JwtSecurityTokenHandler();
-
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-
-            return tokenHandler.WriteToken(token);
-        }
-
-        private static string RoleFactory(int roleNumber)
-        {
-            switch (roleNumber)
-            {
-                case 1:
-                    return "Cliente2";
-                case 2:
-                    return "Associacao";
-                case 3:
-                    return "Empresa";
-                case 4:
-                    return "Administrador";
-                default:
-                    throw new Exception();
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar Atualizar Usuário. Erro: {ex.Message}");
             }
         }
     }

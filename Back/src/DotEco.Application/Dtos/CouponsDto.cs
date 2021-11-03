@@ -1,4 +1,4 @@
-namespace DotEco.Domain
+namespace DotEco.Application.Dtos
 {
     public class CouponsDto
     {
