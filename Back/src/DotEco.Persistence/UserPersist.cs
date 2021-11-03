@@ -21,10 +21,10 @@ namespace DotEco.Persistence
             return await _context.Users.FindAsync(id);
         }
 
-        public async Task<User> GetUserByUserNameAsync(string email)
+        public async Task<User> GetUserByUserNameAsync(string username)
         {
             return await _context.Users
-                                 .SingleOrDefaultAsync(user => user.Email == email.ToLower());
+                                 .SingleOrDefaultAsync(user => user.UserName == username.ToLower());
         }
 
         public async Task<IEnumerable<User>> GetUsersAsync()

@@ -28,8 +28,8 @@ namespace DotEco.API.Controllers
         {
             try
             {
-                var email = User.GetUserName();
-                var user = await _accountService.GetUserByUserNameAsync(email);
+                var username = User.GetUserName();
+                var user = await _accountService.GetUserByUserNameAsync(username);
                 return Ok(user);
             }
             catch (Exception ex)
@@ -67,7 +67,7 @@ namespace DotEco.API.Controllers
         {
             try
             {
-                var user = await _accountService.GetUserByUserNameAsync(userLogin.Email);
+                var user = await _accountService.GetUserByUserNameAsync(userLogin.UserName);
                 if (user == null) return Unauthorized("Usuário ou Senha está errado");
 
                 var result = await _accountService.CheckUserPasswordAsync(user, userLogin.Password);
