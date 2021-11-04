@@ -208,7 +208,8 @@ namespace DotEco.Persistence.Migrations
                     Telephone = table.Column<string>(type: "TEXT", nullable: true),
                     TypeCollection = table.Column<string>(type: "TEXT", nullable: true),
                     Date = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Status = table.Column<int>(type: "INTEGER", nullable: false),
+                    StatusClient = table.Column<int>(type: "INTEGER", nullable: false),
+                    StatusAssociation = table.Column<int>(type: "INTEGER", nullable: false),
                     AssociationId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
