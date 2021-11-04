@@ -68,7 +68,10 @@ namespace DotEco.Persistence.Migrations
                     b.Property<string>("Reference")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Status")
+                    b.Property<int>("StatusAssociation")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("StatusClient")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Telephone")

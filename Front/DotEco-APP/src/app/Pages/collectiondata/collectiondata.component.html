@@ -31,7 +31,8 @@
                             <th>tipo de Coleta</th>
                             <th>date</th>
                             <th>associação</th>
-                            <th>status</th>
+                            <th>statusClient</th>
+                            <th>statusAssociation</th>
                             <th>opções</th>
                         </tr>
                     </thead>
@@ -45,7 +46,8 @@
                             <td>{{collectiondatas.typeCollection}}</td>
                             <td>{{collectiondatas.date}}</td>
                             <td>{{collectiondatas.associationId}}</td>
-                            <td>{{collectiondatas.status}}</td>
+                            <td>{{collectiondatas.statusClient}}</td>
+                            <td>{{collectiondatas.statusAssociation}}</td>
                             <td>
                                 <div>
                                     <button type="button" title="Excluir" class="btn btn-outline-danger me-2"
@@ -164,17 +166,33 @@
                         </div>
 
                         <div class="form-floating mb-3">
-                            <select class="form-select" id="status" formControlName="status" [ngClass]="{ 'is-invalid': collectiondataForm.get('status')?.errors 
-                        && collectiondataForm.get('status')?.touched}">
+                            <select class="form-select" id="statusClient" formControlName="statusClient" [ngClass]="{ 'is-invalid': collectiondataForm.get('statusClient')?.errors 
+                        && collectiondataForm.get('statusClient')?.touched}">
                                 <option value="" selected disabled hidden>Selecione uma Opção</option>
                                 <option value="0">Agendado</option>
                                 <option value="1">Comfirmado</option>
                                 <option value="2">Recusado</option>
                             </select>
-                            <label for="status">Status</label>
-                            <div *ngIf="collectiondataForm.get('status')?.hasError('required') 
-                                    && collectiondataForm.get('status')?.touched" class="invalid-feedback">
-                                Coloque o status comforme a situação da Coleta.
+                            <label for="statusClient">statusClient</label>
+                            <div *ngIf="collectiondataForm.get('statusClient')?.hasError('required') 
+                                    && collectiondataForm.get('statusClient')?.touched" class="invalid-feedback">
+                                Coloque o statusClient comforme a situação da Coleta.
+                            </div>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <select class="form-select" id="statusAssociation" formControlName="statusAssociation"
+                                [ngClass]="{ 'is-invalid': collectiondataForm.get('statusAssociation')?.errors 
+                        && collectiondataForm.get('statusAssociation')?.touched}">
+                                <option value="" selected disabled hidden>Selecione uma Opção</option>
+                                <option value="0">Agendado</option>
+                                <option value="1">Comfirmado</option>
+                                <option value="2">Recusado</option>
+                            </select>
+                            <label for="statusAssociation">statusAssociation</label>
+                            <div *ngIf="collectiondataForm.get('statusAssociation')?.hasError('required') 
+                                    && collectiondataForm.get('statusAssociation')?.touched" class="invalid-feedback">
+                                Coloque o statusAssociation comforme a situação da Coleta.
                             </div>
                         </div>
 

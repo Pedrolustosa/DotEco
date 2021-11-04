@@ -16,12 +16,20 @@ namespace DotEco.Domain
         public string Telephone { get; set; }
         public string TypeCollection { get; set; }
         public DateTime Date { get; set; }
-        public Status Status { get; set; }
+        public StatusClient StatusClient { get; set; }
+        public StatusAssociation StatusAssociation { get; set; }
         public int AssociationId { get; set; }
         public Association Association { get; set; }
     }
 
-    public enum Status
+    public enum StatusClient
+    {
+        Agendado = 0,
+        Confirmado = 1,
+        Recusado = 2,
+    }
+
+    public enum StatusAssociation
     {
         Agendado = 0,
         Confirmado = 1,

@@ -2,7 +2,6 @@ import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { User } from '../_models/User';
 
 @Injectable({
     providedIn: 'root'
@@ -33,8 +32,8 @@ export class AuthService {
         return this.http.post(`${this.baseURL}register`, model);
     }
 
-    profile(user: User) {
-        return this.http.put(`${this.baseURL}/${user.id}`, user);
+    profile(model: any) {
+        return this.http.put(`${this.baseURL}updateuser`, model);
     }
 
     loggedIn() {
