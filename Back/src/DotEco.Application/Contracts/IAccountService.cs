@@ -11,5 +11,6 @@ namespace DotEco.Application.Contracts
         Task<SignInResult> CheckUserPasswordAsync(UserUpdateDto userUpdateDto, string password);
         Task<UserDto> CreateAccountAsync(UserDto userDto);
         Task<UserUpdateDto> UpdateAccount(UserUpdateDto userUpdateDto);
+        Task<UserDto[]> GetAllUsersAsync();
     }
 }

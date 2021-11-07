@@ -16,6 +16,17 @@ namespace DotEco.Persistence
         {
             _context = context;
         }
+
+        public async Task<User[]> GetAllUsersAsync()
+        {
+            IQueryable<User> query = _context.Users;
+
+            query = query.AsNoTracking()
+                        .OrderBy(c => c.Id);
+
+            return await query.ToArrayAsync();
+        }
+
         public async Task<User> GetUserByIdAsync(int id)
         {
             return await _context.Users.FindAsync(id);

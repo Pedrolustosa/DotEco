@@ -5,6 +5,8 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Coupons } from 'src/app/_models/Coupons';
+import { User } from 'src/app/_models/User';
+import { AuthService } from 'src/app/_services/auth.service';
 import { CouponsService } from 'src/app/_services/coupons.service';
 
 @Component({
@@ -13,7 +15,7 @@ import { CouponsService } from 'src/app/_services/coupons.service';
   styleUrls: ['./coupons.component.css']
 })
 export class CouponsComponent implements OnInit {
-
+  user: User;
   titulo = 'Associações';
   couponsFilters: Coupons[];
   coupons: Coupons[];
@@ -29,6 +31,7 @@ export class CouponsComponent implements OnInit {
     private modalService: BsModalService,
     private localeService: BsLocaleService,
     private couponService: CouponsService,
+    private authService: AuthService,
     private spinner: NgxSpinnerService,
   ) {
     this.localeService.use('pt-br');
@@ -38,6 +41,7 @@ export class CouponsComponent implements OnInit {
     this.spinner.show();
     this.validation();
     this.getCoupon();
+    console.log("User", this.authService.login);
   }
 
   get filterList(): string {

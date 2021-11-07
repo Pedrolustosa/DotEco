@@ -120,5 +120,22 @@ namespace DotEco.Application
                 throw new Exception($"Erro ao verificar se usuário existe. Erro: {ex.Message}");
             }
         }
+
+        public async Task<UserDto[]> GetAllUsersAsync()
+        {
+            try
+            {
+                var users = await _userPersist.GetAllUsersAsync();
+                if (users == null) return null;
+
+                var result = _mapper.Map<UserDto[]>(users);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
