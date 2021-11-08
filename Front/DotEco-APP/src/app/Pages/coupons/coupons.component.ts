@@ -42,7 +42,6 @@ export class CouponsComponent implements OnInit {
     this.validation();
     this.getCoupon();
     this.userId = this.authService.getAllUser();
-    console.log("serId: ", this.userId);
   }
 
   get filterList(): string {
@@ -63,7 +62,7 @@ export class CouponsComponent implements OnInit {
       name: ['', Validators.required],
       percent: ['', Validators.required],
       userId: ['', Validators.required],
-      status: ['', Validators.required],
+      status: [''],
     });
   }
 
