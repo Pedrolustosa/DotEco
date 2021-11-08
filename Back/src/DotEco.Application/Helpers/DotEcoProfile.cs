@@ -12,7 +12,7 @@ namespace DotEco.Application.Helpers
             CreateMap<User, UserDto>().ReverseMap();
             CreateMap<User, UserLoginDto>().ReverseMap();
             CreateMap<User, UserUpdateDto>().ReverseMap();
-            CreateMap<Coupons, CouponsDto>().ReverseMap();
+            CreateMap<Coupon, CouponsDto>().ReverseMap();
             CreateMap<Association, AssociationDto>().ReverseMap();
             CreateMap<CollectionData, CollectionDataDto>().ReverseMap();
         }

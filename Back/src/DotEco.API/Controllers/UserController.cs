@@ -25,7 +25,6 @@ namespace DotEco.API.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        [Authorize(Roles = "Cliente2, Associacao, Administrador")]
         public async Task<IActionResult> Get()
         {
             try

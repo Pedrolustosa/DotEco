@@ -87,7 +87,7 @@ namespace DotEco.Persistence.Migrations
                     b.ToTable("CollectionData");
                 });
 
-            modelBuilder.Entity("DotEco.Domain.Coupons", b =>
+            modelBuilder.Entity("DotEco.Domain.Coupon", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -99,7 +99,15 @@ namespace DotEco.Persistence.Migrations
                     b.Property<string>("Percent")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Coupons");
                 });
@@ -318,6 +326,17 @@ namespace DotEco.Persistence.Migrations
                     b.Navigation("Association");
                 });
 
+            modelBuilder.Entity("DotEco.Domain.Coupon", b =>
+                {
+                    b.HasOne("DotEco.Domain.Identity.User", "User")
+                        .WithMany("Coupons")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("DotEco.Domain.Identity.UserRole", b =>
                 {
                     b.HasOne("DotEco.Domain.Identity.Role", "Role")
@@ -389,6 +408,8 @@ namespace DotEco.Persistence.Migrations
 
             modelBuilder.Entity("DotEco.Domain.Identity.User", b =>
                 {
+                    b.Navigation("Coupons");
+
                     b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618

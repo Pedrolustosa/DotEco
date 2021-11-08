@@ -15,9 +15,9 @@ namespace DotEco.Persistence
             _context = context;
             _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
-        public async Task<Coupons[]> GetAllCouponsAsync()
+        public async Task<Coupon[]> GetAllCouponsAsync()
         {
-            IQueryable<Coupons> query = _context.Coupons;
+            IQueryable<Coupon> query = _context.Coupons;
 
             query = query.AsNoTracking()
                         .OrderBy(c => c.Id);
@@ -25,9 +25,9 @@ namespace DotEco.Persistence
             return await query.ToArrayAsync();
         }
 
-        public async Task<Coupons> GetCouponsAsyncById(int CouponsId)
+        public async Task<Coupon> GetCouponsAsyncById(int CouponsId)
         {
-            IQueryable<Coupons> query = _context.Coupons;
+            IQueryable<Coupon> query = _context.Coupons;
 
             query = query
                         .AsNoTracking()

@@ -11,13 +11,13 @@ export interface CollectionData {
 }
 
 export enum StatusClient {
-    Agendado = 0,
-    Confirmado = 1,
-    Recusado = 2,
+    Scheduled = 0,
+    Confirmed = 1,
+    Refused = 2,
 }
 
 export enum StatusAssociation {
-    Agendado = 0,
-    Confirmado = 1,
-    Recusado = 2,
+    Scheduled = 0,
+    Confirmed = 1,
+    Refused = 2,
 }

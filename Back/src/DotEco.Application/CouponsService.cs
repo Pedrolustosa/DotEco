@@ -25,9 +25,9 @@ namespace DotEco.Application
         {
             try
             {
-                var coupons = _mapper.Map<Coupons>(model);
+                var coupons = _mapper.Map<Coupon>(model);
 
-                _geralPersist.Add<Coupons>(coupons);
+                _geralPersist.Add<Coupon>(coupons);
 
                 if (await _geralPersist.SaveChangesAsync())
                 {
@@ -50,7 +50,7 @@ namespace DotEco.Application
                 var coupons = await _couponsPersist.GetCouponsAsyncById(couponsId);
                 if (coupons == null) throw new Exception("association para delete não encontrado.");
 
-                _geralPersist.Delete<Coupons>(coupons);
+                _geralPersist.Delete<Coupon>(coupons);
                 return await _geralPersist.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -104,7 +104,7 @@ namespace DotEco.Application
 
                 _mapper.Map(model, coupon);
 
-                _geralPersist.Update<Coupons>(coupon);
+                _geralPersist.Update<Coupon>(coupon);
 
                 if (await _geralPersist.SaveChangesAsync())
                 {

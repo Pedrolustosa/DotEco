@@ -78,6 +78,35 @@
                             Desconto % é obrigatório.
                         </div>
                     </div>
+
+                    <div class="form-floating mb-3">
+                        <select class="form-select" id="userId" formControlName="userId" [ngClass]="{ 'is-invalid': couponsForm.get('userId')?.errors 
+                        && couponsForm.get('userId')?.touched}">
+                            <option value="" selected disabled hidden>Selecione uma Opção</option>
+                            <option *ngFor="let user of userId | async as list" [value]="user.id">
+                                {{user.name}}</option>
+                        </select>
+                        <label for="userId">Cliente</label>
+                        <div *ngIf="couponsForm.get('userId')?.hasError('required') 
+                                && couponsForm.get('userId')?.touched" class="invalid-feedback">
+                            Escolha o Tipo de Usuário.
+                        </div>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <select class="form-select" id="status" formControlName="status" [ngClass]="{ 'is-invalid': couponsForm.get('status')?.errors 
+                    && couponsForm.get('status')?.touched}">
+                            <option value="" selected disabled hidden>Selecione uma Opção</option>
+                            <option value="0">Agendado</option>
+                            <option value="1">Comfirmado</option>
+                        </select>
+                        <label for="status">status</label>
+                        <div *ngIf="couponsForm.get('status')?.hasError('required') 
+                                && couponsForm.get('status')?.touched" class="invalid-feedback">
+                            Coloque o status comforme a situação da Coleta.
+                        </div>
+                    </div>
+
                 </form>
             </div>
             <div class="modal-footer d-flex">
