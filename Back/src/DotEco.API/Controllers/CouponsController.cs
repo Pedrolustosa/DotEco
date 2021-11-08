@@ -15,7 +15,6 @@ namespace DotEco.API.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Empresa, Administrador")]
     public class CouponsController : ControllerBase
     {
         private readonly ICouponsService _couponsService;

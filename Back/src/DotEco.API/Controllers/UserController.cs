@@ -23,13 +23,31 @@ namespace DotEco.API.Controllers
             _tokenService = tokenService;
         }
 
-        [HttpGet("GetUser")]
-        public async Task<IActionResult> GetUser()
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Get()
         {
             try
             {
-                var username = User.GetUserName();
-                var user = await _accountService.GetUserByUserNameAsync(username);
+                var users = await _accountService.GetAllUsersAsync();
+                if (users == null) return NoContent();
+
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar recuperar eventos. Erro: {ex.Message}");
+            }
+        }
+
+        [HttpGet("GetUser/{userName}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetUser(string userName)
+        {
+            try
+            {
+                var user = await _accountService.GetUserByUserNameAsync(userName);
                 return Ok(user);
             }
             catch (Exception ex)

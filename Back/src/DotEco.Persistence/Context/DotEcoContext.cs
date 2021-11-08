@@ -15,7 +15,7 @@ namespace DotEco.Persistence.Context
         public DotEcoContext(DbContextOptions<DotEcoContext> options) : base(options) { }
         public DbSet<Association> Associations { get; set; }
         public DbSet<CollectionData> CollectionDatas { get; set; }
-        public DbSet<Coupons> Coupons { get; set; }
+        public DbSet<Coupon> Coupons { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -39,6 +39,10 @@ namespace DotEco.Persistence.Context
             modelBuilder.Entity<CollectionData>()
             .HasOne(e => e.Association)
             .WithMany(b => b.CollectionDatas);
+
+            modelBuilder.Entity<Coupon>()
+            .HasOne(e => e.User)
+            .WithMany(b => b.Coupons);
 
         }
     }

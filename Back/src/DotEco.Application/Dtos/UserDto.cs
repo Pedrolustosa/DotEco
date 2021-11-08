@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace DotEco.Application.Dtos
 {
     public class UserDto
@@ -9,5 +11,6 @@ namespace DotEco.Application.Dtos
         public string Email { get; set; }
         public string CPF { get; set; }
         public string Password { get; set; }
+        public List<CouponsDto> Coupons { get; set; }
     }
 }

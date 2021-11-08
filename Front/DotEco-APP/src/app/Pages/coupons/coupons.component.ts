@@ -4,7 +4,10 @@ import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 import { Coupons } from 'src/app/_models/Coupons';
+import { User } from 'src/app/_models/User';
+import { AuthService } from 'src/app/_services/auth.service';
 import { CouponsService } from 'src/app/_services/coupons.service';
 
 @Component({
@@ -13,11 +16,10 @@ import { CouponsService } from 'src/app/_services/coupons.service';
   styleUrls: ['./coupons.component.css']
 })
 export class CouponsComponent implements OnInit {
-
-  titulo = 'Associações';
   couponsFilters: Coupons[];
   coupons: Coupons[];
   coupon: Coupons;
+  userId: Observable<User[]>;
   couponsForm: FormGroup;
   mode = 'post';
   _filterList = '';
@@ -29,6 +31,7 @@ export class CouponsComponent implements OnInit {
     private modalService: BsModalService,
     private localeService: BsLocaleService,
     private couponService: CouponsService,
+    private authService: AuthService,
     private spinner: NgxSpinnerService,
   ) {
     this.localeService.use('pt-br');
@@ -38,6 +41,8 @@ export class CouponsComponent implements OnInit {
     this.spinner.show();
     this.validation();
     this.getCoupon();
+    this.userId = this.authService.getAllUser();
+    console.log("serId: ", this.userId);
   }
 
   get filterList(): string {
@@ -57,6 +62,8 @@ export class CouponsComponent implements OnInit {
     this.couponsForm = this.fb.group({
       name: ['', Validators.required],
       percent: ['', Validators.required],
+      userId: ['', Validators.required],
+      status: ['', Validators.required],
     });
   }
 
