@@ -45,11 +45,11 @@ namespace DotEco.API.Controllers
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar recuperar eventos. Erro: {ex.Message}");
+                    $"Erro ao tentar recuperar Coletas. Erro: {ex.Message}");
             }
         }
 
-        [HttpGet("{AssociationId}")]
+        [HttpGet("{CollectionDatasId}")]
         [Authorize(Roles = "Cliente2, Associacao, Administrador")]
         public async Task<IActionResult> Get(int collectionDatasId)
         {
@@ -63,7 +63,7 @@ namespace DotEco.API.Controllers
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar recuperar eventos. Erro: {ex.Message}");
+                    $"Erro ao tentar recuperar Coletas. Erro: {ex.Message}");
             }
         }
 
@@ -81,11 +81,11 @@ namespace DotEco.API.Controllers
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar adicionar eventos. Erro: {ex.Message}");
+                    $"Erro ao tentar adicionar Coletas. Erro: {ex.Message}");
             }
         }
 
-        [HttpPut("{AssociationId}")]
+        [HttpPut("{CollectionDatasId}")]
         [Authorize(Roles = "Associacao, Administrador")]
         public async Task<IActionResult> Put(int collectionDatasId, CollectionDataDto model)
         {
@@ -99,11 +99,11 @@ namespace DotEco.API.Controllers
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar atualizar eventos. Erro: {ex.Message}");
+                    $"Erro ao tentar atualizar Coletas. Erro: {ex.Message}");
             }
         }
 
-        [HttpDelete("{AssociationId}")]
+        [HttpDelete("{CollectionDatasId}")]
         [Authorize(Roles = "Associacao, Administrador")]
         public async Task<IActionResult> Delete(int collectionDatasId)
         {
@@ -118,13 +118,13 @@ namespace DotEco.API.Controllers
                 }
                 else
                 {
-                    throw new Exception("Ocorreu um problem não específico ao tentar deletar Evento.");
+                    throw new Exception("Ocorreu um problem não específico ao tentar deletar Coleta.");
                 }
             }
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar deletar eventos. Erro: {ex.Message}");
+                    $"Erro ao tentar deletar Coleta. Erro: {ex.Message}");
             }
         }
     }

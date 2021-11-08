@@ -1,9 +1,8 @@
 export interface Coupons {
-    id: number,
-    name: string,
-    quantity: number,
-    percent: string,
-    status: Status,
+    id: number;
+    name: string;
+    percent: string;
+    status: Status;
     userId: number;
 }
 

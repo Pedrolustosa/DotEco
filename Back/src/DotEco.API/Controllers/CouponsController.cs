@@ -44,11 +44,11 @@ namespace DotEco.API.Controllers
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar recuperar eventos. Erro: {ex.Message}");
+                    $"Erro ao tentar recuperar Cupons. Erro: {ex.Message}");
             }
         }
 
-        [HttpGet("{AssociationId}")]
+        [HttpGet("{CouponsId}")]
         [Authorize(Roles = "Cliente2, Associacao, Administrador")]
         public async Task<IActionResult> Get(int couponsId)
         {
@@ -62,7 +62,7 @@ namespace DotEco.API.Controllers
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar recuperar eventos. Erro: {ex.Message}");
+                    $"Erro ao tentar recuperar Cupons. Erro: {ex.Message}");
             }
         }
 
@@ -80,11 +80,11 @@ namespace DotEco.API.Controllers
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar adicionar eventos. Erro: {ex.Message}");
+                    $"Erro ao tentar adicionar Cupons. Erro: {ex.Message}");
             }
         }
 
-        [HttpPut("{AssociationId}")]
+        [HttpPut("{CouponsId}")]
         [Authorize(Roles = "Associacao, Administrador")]
         public async Task<IActionResult> Put(int couponsId, CouponsDto model)
         {
@@ -98,11 +98,11 @@ namespace DotEco.API.Controllers
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar atualizar eventos. Erro: {ex.Message}");
+                    $"Erro ao tentar atualizar Cupons. Erro: {ex.Message}");
             }
         }
 
-        [HttpDelete("{AssociationId}")]
+        [HttpDelete("{CouponsId}")]
         [Authorize(Roles = "Associacao, Administrador")]
         public async Task<IActionResult> Delete(int couponsId)
         {
@@ -117,13 +117,13 @@ namespace DotEco.API.Controllers
                 }
                 else
                 {
-                    throw new Exception("Ocorreu um problem não específico ao tentar deletar Evento.");
+                    throw new Exception("Ocorreu um problem não específico ao tentar deletar Cupom.");
                 }
             }
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar deletar eventos. Erro: {ex.Message}");
+                    $"Erro ao tentar deletar Cupom. Erro: {ex.Message}");
             }
         }
     }
