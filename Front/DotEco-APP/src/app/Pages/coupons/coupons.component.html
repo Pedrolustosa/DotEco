@@ -84,7 +84,7 @@
                         && couponsForm.get('userId')?.touched}">
                             <option value="" selected disabled hidden>Selecione uma Opção</option>
                             <option *ngFor="let user of userId | async as list" [value]="user.id">
-                                {{user.name}}</option>
+                                {{user.fullName}}</option>
                         </select>
                         <label for="userId">Cliente</label>
                         <div *ngIf="couponsForm.get('userId')?.hasError('required') 
@@ -97,8 +97,8 @@
                         <select class="form-select" id="status" formControlName="status" [ngClass]="{ 'is-invalid': couponsForm.get('status')?.errors 
                     && couponsForm.get('status')?.touched}">
                             <option value="" selected disabled hidden>Selecione uma Opção</option>
-                            <option value="0">Agendado</option>
-                            <option value="1">Comfirmado</option>
+                            <option value="0">Ativo</option>
+                            <option value="1">Inativo</option>
                         </select>
                         <label for="status">status</label>
                         <div *ngIf="couponsForm.get('status')?.hasError('required') 
