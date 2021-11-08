@@ -45,7 +45,7 @@ namespace DotEco.API.Controllers
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar recuperar eventos. Erro: {ex.Message}");
+                    $"Erro ao tentar recuperar Associações. Erro: {ex.Message}");
             }
         }
 
@@ -63,7 +63,7 @@ namespace DotEco.API.Controllers
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar recuperar eventos. Erro: {ex.Message}");
+                    $"Erro ao tentar recuperar Associações. Erro: {ex.Message}");
             }
         }
 
@@ -81,7 +81,7 @@ namespace DotEco.API.Controllers
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar adicionar eventos. Erro: {ex.Message}");
+                    $"Erro ao tentar adicionar Associações. Erro: {ex.Message}");
             }
         }
 
@@ -99,7 +99,7 @@ namespace DotEco.API.Controllers
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar atualizar eventos. Erro: {ex.Message}");
+                    $"Erro ao tentar atualizar Associações. Erro: {ex.Message}");
             }
         }
 
@@ -118,13 +118,13 @@ namespace DotEco.API.Controllers
                 }
                 else
                 {
-                    throw new Exception("Ocorreu um problem não específico ao tentar deletar Evento.");
+                    throw new Exception("Ocorreu um problem não específico ao tentar deletar Associação.");
                 }
             }
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar deletar eventos. Erro: {ex.Message}");
+                    $"Erro ao tentar deletar Associação: {ex.Message}");
             }
         }
 
