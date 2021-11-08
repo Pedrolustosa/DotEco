@@ -48,7 +48,7 @@ namespace DotEco.API.Controllers
             }
         }
 
-        [HttpGet("{AssociationId}")]
+        [HttpGet("{CouponsId}")]
         [Authorize(Roles = "Cliente2, Associacao, Administrador")]
         public async Task<IActionResult> Get(int couponsId)
         {
@@ -84,7 +84,7 @@ namespace DotEco.API.Controllers
             }
         }
 
-        [HttpPut("{AssociationId}")]
+        [HttpPut("{CouponsId}")]
         [Authorize(Roles = "Associacao, Administrador")]
         public async Task<IActionResult> Put(int couponsId, CouponsDto model)
         {
@@ -102,7 +102,7 @@ namespace DotEco.API.Controllers
             }
         }
 
-        [HttpDelete("{AssociationId}")]
+        [HttpDelete("{CouponsId}")]
         [Authorize(Roles = "Associacao, Administrador")]
         public async Task<IActionResult> Delete(int couponsId)
         {
