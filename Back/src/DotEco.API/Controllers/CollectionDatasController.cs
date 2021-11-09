@@ -32,7 +32,7 @@ namespace DotEco.API.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Cliente2, Associacao, Administrador")]
+        [Authorize(Roles = "Associacao, Administrador")]
         public async Task<IActionResult> Get()
         {
             try
@@ -50,7 +50,7 @@ namespace DotEco.API.Controllers
         }
 
         [HttpGet("{CollectionDatasId}")]
-        [Authorize(Roles = "Cliente2, Associacao, Administrador")]
+        [Authorize(Roles = "Associacao, Administrador")]
         public async Task<IActionResult> Get(int collectionDatasId)
         {
             try

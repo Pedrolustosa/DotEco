@@ -15,6 +15,6 @@ namespace DotEco.Domain
 
 public enum Status
 {
-    Active = 1,
+    Active = 0,
     Inactive = 1,
 }
