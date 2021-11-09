@@ -24,7 +24,6 @@ namespace DotEco.API.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> Get()
         {
             try
@@ -41,12 +40,12 @@ namespace DotEco.API.Controllers
             }
         }
 
-        [HttpGet("GetUser/{userName}")]
-        [AllowAnonymous]
-        public async Task<IActionResult> GetUser(string userName)
+        [HttpGet("GetUser")]
+        public async Task<IActionResult> GetUser()
         {
             try
             {
+                var userName = User.GetUserName();
                 var user = await _accountService.GetUserByUserNameAsync(userName);
                 return Ok(user);
             }
@@ -63,7 +62,7 @@ namespace DotEco.API.Controllers
         {
             try
             {
-                if (await _accountService.UserExists(userDto.Email, userDto.UserName))
+                if (await _accountService.UserExists(userDto.UserName))
                     return BadRequest("Usuário já existe");
 
                 var user = await _accountService.CreateAccountAsync(userDto);
