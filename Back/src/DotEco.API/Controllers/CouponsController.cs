@@ -85,7 +85,7 @@ namespace DotEco.API.Controllers
         }
 
         [HttpPut("{CouponsId}")]
-        [Authorize(Roles = "Associacao, Administrador")]
+        [Authorize(Roles = "Cliente2, Associacao, Administrador")]
         public async Task<IActionResult> Put(int couponsId, CouponsDto model)
         {
             try
