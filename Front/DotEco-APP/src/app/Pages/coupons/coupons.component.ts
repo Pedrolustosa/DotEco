@@ -21,6 +21,7 @@ export class CouponsComponent implements OnInit {
   coupon: Coupons;
   userId: Observable<User[]>;
   couponsForm: FormGroup;
+  user: User;
   mode = 'post';
   _filterList = '';
   bodyDeleteCoupons = '';
