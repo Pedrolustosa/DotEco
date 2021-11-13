@@ -7,7 +7,7 @@ import { Coupons } from '../_models/Coupons';
     providedIn: 'root'
 })
 export class CouponsService {
-    baseURL = 'http://localhost:5000/api/coupons';
+    baseURL = 'https://dotecoapi.azurewebsites.net/api/coupons';
 
     constructor(private http: HttpClient) { }
 

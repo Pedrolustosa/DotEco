@@ -9,7 +9,7 @@
 
 # About the project
 
-<img src="../../../Administrador/Nova%20pasta/DotEco/Front/DotEco-APP/src/assets/img/imgReadme/Logo_Uninassau.png"> DotEco is a website built during the 8th period of the Information Systems Course at College Uninassau Olinda.
+<img src="Front/DotEco-APP/src/assets/img/imgReadme/Logo_Uninassau.png"> DotEco is a website built during the 8th period of the Information Systems Course at College Uninassau Olinda.
 
 The application was developed to facilitate selective collection, through scheduling, for the collection of recyclable waste
 

@@ -9,6 +9,7 @@ using DotEco.Application.Contracts;
 
 namespace DotEco.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -92,9 +93,9 @@ namespace DotEco.API.Controllers
 
                 return Ok(new
                 {
-                    Email = user.Email,
-                    FullName = user.FullName,
-                    Role = user.Type,
+                    email = user.Email,
+                    fullName = user.FullName,
+                    type = user.Type,
                     token = _tokenService.CreateToken(user).Result
                 });
             }

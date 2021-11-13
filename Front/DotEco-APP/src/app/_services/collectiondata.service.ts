@@ -7,7 +7,7 @@ import { CollectionData } from '../_models/CollectionData';
     providedIn: 'root'
 })
 export class CollectionDataService {
-    baseURL = 'http://localhost:5000/api/collectiondatas';
+    baseURL = 'https://dotecoapi.azurewebsites.net/api/collectiondatas';
 
     constructor(private http: HttpClient) { }
 
