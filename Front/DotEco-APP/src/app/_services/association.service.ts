@@ -7,7 +7,7 @@ import { Association } from '../_models/Association';
     providedIn: 'root'
 })
 export class AssociationService {
-    baseURL = 'http://localhost:5000/api/associations';
+    baseURL = 'https://dotecoapi.azurewebsites.net/api/associations';
 
     constructor(private http: HttpClient) { }
 
