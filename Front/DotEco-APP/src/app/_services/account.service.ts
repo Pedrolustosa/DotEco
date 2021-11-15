@@ -41,8 +41,7 @@ export class AccountService {
             take(1),
             map((user: UserUpdate) => {
                 this.setCurrentUser(user);
-            }
-            )
+            })
         )
     }
 

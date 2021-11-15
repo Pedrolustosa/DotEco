@@ -1,11 +1,11 @@
 
 import { Component, OnInit } from '@angular/core';
 import { AbstractControlOptions, FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { AccountService } from 'src/app/_services/account.service';
 import { UserUpdate } from 'src/app/_models/Identity/UserUpdate';
+import { AccountService } from 'src/app/_services/account.service';
 import { ValidatorField } from 'src/app/_helpers/ValidatorField';
 
 @Component({
@@ -33,10 +33,10 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.validation();
-    this.loadingUser();
+    this.carregarUsuario();
   }
 
-  private loadingUser(): void {
+  private carregarUsuario(): void {
     this.spinner.show();
     this.accountService
       .getUser()
@@ -58,18 +58,19 @@ export class ProfileComponent implements OnInit {
 
   private validation(): void {
     const formOptions: AbstractControlOptions = {
-      validators: ValidatorField.MustMatch('password', 'confirmPassword'),
+      validators: ValidatorField.MustMatch('password', 'confirmePassword'),
     };
 
-    this.form = this.fb.group({
-      userName: [''],
-      fullName: ['', Validators.required],
-      cpf: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      type: ['', Validators.required],
-      password: ['', [Validators.minLength(6), Validators.nullValidator]],
-      confirmPassword: ['', Validators.nullValidator],
-    },
+    this.form = this.fb.group(
+      {
+        userName: [''],
+        fullName: ['', Validators.required],
+        cpf: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        type: ['', Validators.required],
+        password: ['', [Validators.minLength(6), Validators.nullValidator]],
+        confirmePassword: ['', Validators.nullValidator],
+      },
       formOptions
     );
   }
@@ -80,10 +81,10 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.updateUsers();
+    this.atualizarUsuario();
   }
 
-  public updateUsers() {
+  public atualizarUsuario() {
     this.userUpdate = { ...this.form.value };
     this.spinner.show();
 
@@ -97,6 +98,7 @@ export class ProfileComponent implements OnInit {
         }
       )
       .add(() => this.spinner.hide());
+    this.router.navigate(['/dashboard']);
   }
 
   public resetForm(event: any): void {

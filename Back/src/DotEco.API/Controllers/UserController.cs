@@ -100,7 +100,6 @@ namespace DotEco.API.Controllers
                 {
                     userName = user.UserName,
                     fullName = user.FullName,
-                    type = user.Type,
                     token = _tokenService.CreateToken(user).Result
                 });
             }
@@ -129,7 +128,6 @@ namespace DotEco.API.Controllers
                 {
                     userName = userReturn.UserName,
                     fullName = userReturn.FullName,
-                    type = userReturn.Type,
                     token = _tokenService.CreateToken(userReturn).Result
                 });
             }
