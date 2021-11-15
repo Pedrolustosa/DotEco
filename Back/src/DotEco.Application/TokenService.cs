@@ -44,13 +44,13 @@ namespace DotEco.Application
 
             var roles = await _userManager.GetRolesAsync(user);
 
-            claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
+            claims.AddRange(roles.Select(type => new Claim(ClaimTypes.Role, type)));
 
             var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddDays(1),
+                Expires = DateTime.UtcNow.AddMinutes(15),
                 SigningCredentials = creds
             };
 
