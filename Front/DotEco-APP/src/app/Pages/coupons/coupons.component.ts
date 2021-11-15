@@ -6,8 +6,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { Coupons } from 'src/app/_models/Coupons';
-import { User } from 'src/app/_models/User';
-import { AuthService } from 'src/app/_services/auth.service';
+import { User } from 'src/app/_models/Identity/User';
+import { AccountService } from 'src/app/_services/account.service';
 import { CouponsService } from 'src/app/_services/coupons.service';
 
 @Component({
@@ -32,7 +32,7 @@ export class CouponsComponent implements OnInit {
     private modalService: BsModalService,
     private localeService: BsLocaleService,
     private couponService: CouponsService,
-    private authService: AuthService,
+    private accountService: AccountService,
     private spinner: NgxSpinnerService,
   ) {
     this.localeService.use('pt-br');
@@ -42,7 +42,7 @@ export class CouponsComponent implements OnInit {
     this.spinner.show();
     this.validation();
     this.getCoupon();
-    this.userId = this.authService.getAllUser();
+    this.userId = this.accountService.getAllUser();
   }
 
   get filterList(): string {

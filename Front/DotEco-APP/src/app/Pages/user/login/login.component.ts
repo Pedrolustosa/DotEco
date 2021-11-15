@@ -1,7 +1,8 @@
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/_services/auth.service';
+import { AccountService } from 'src/app/_services/account.service';
+import { UserLogin } from 'src/app/_models/Identity/UserLogin';
 
 @Component({
   selector: 'app-login',
@@ -10,31 +11,26 @@ import { AuthService } from 'src/app/_services/auth.service';
 })
 export class LoginComponent implements OnInit {
   isCollapsed = true;
-  model: any = {};
+  model = {} as UserLogin;
 
   constructor(
-    private authService: AuthService,
+    private accountService: AccountService,
     public router: Router,
-    private toastr: ToastrService
+    private toaster: ToastrService
   ) { }
 
-  ngOnInit(): void {
-    if (localStorage.getItem('token') != null) {
-      this.router.navigate(['/dashboard']);
-    }
-  }
+  ngOnInit(): void { }
 
-  login() {
-    this.authService.login(this.model)
-      .subscribe(
-        () => {
-          this.router.navigate(['/dashboard']);
-          this.toastr.success('Logado com Sucesso');
-        },
-        error => {
-          this.toastr.error('Falha ao tentar Logar');
-        }
-      );
+  public login(): void {
+    this.accountService.login(this.model).subscribe(
+      () => {
+        this.router.navigateByUrl('/dashboard');
+      },
+      (error: any) => {
+        if (error.status == 401)
+          this.toaster.error('usuário ou senha inválido');
+        else console.error(error);
+      }
+    );
   }
-
 }

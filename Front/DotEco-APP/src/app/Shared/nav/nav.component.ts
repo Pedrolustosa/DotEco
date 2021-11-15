@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { AuthService } from 'src/app/_services/auth.service';
+import { AccountService } from 'src/app/_services/account.service';
 
 @Component({
   selector: 'app-nav',
@@ -12,33 +11,18 @@ export class NavComponent implements OnInit {
   isCollapsed = true;
 
   constructor(
-    public authService: AuthService,
-    public router: Router,
-    private toastr: ToastrService) { }
+    public accountService: AccountService,
+    private router: Router
+  ) { }
 
-  ngOnInit() {
+  ngOnInit(): void { }
+
+  logout(): void {
+    this.accountService.logout();
+    this.router.navigateByUrl('/home');
   }
 
-  showMenu() {
+  showMenu(): boolean {
     return this.router.url !== '/user/login';
   }
-
-  loggedIn() {
-    return this.authService.loggedIn();
-  }
-
-  entrar() {
-    this.router.navigate(['/user/login']);
-  }
-
-  logout() {
-    localStorage.removeItem('token');
-    this.toastr.show('Log Out');
-    this.router.navigate(['/home']);
-  }
-
-  userName() {
-    return sessionStorage.getItem('username');
-  }
-
 }

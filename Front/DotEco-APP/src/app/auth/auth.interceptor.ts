@@ -1,31 +1,33 @@
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpEvent, HttpRequest, HttpHandler } from '@angular/common/http';
-import { Router } from '@angular/router';
+import {
+    HttpRequest,
+    HttpHandler,
+    HttpEvent,
+    HttpInterceptor
+} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/internal/operators';
+import { take } from 'rxjs/operators';
+import { User } from '../_models/Identity/User';
+import { AccountService } from '../_services/account.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthInterceptor implements HttpInterceptor {
+    constructor(private accountService: AccountService) { }
 
-    constructor(private router: Router) { }
+    intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+        let currentUser: User;
+        this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
+            currentUser = user
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (localStorage.getItem('token') !== null) {
-            const cloneReq = req.clone({
-                headers: req.headers.set('Authorization', `Bearer ${localStorage.getItem('token')}`)
-            });
-            return next.handle(cloneReq).pipe(
-                tap(
-                    succ => { },
-                    err => {
-                        if (err.status === 401) {
-                            this.router.navigateByUrl('user/login');
-                        }
+            if (currentUser) {
+                request = request.clone({
+                    setHeaders: {
+                        Authorization: `Bearer ${currentUser.token}`
                     }
-                )
-            );
-        } else {
-            return next.handle(req.clone());
-        }
+                }
+                );
+            }
+        });
+        return next.handle(request);
     }
 }
