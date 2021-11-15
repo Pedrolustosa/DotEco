@@ -98,7 +98,6 @@ export class ProfileComponent implements OnInit {
         }
       )
       .add(() => this.spinner.hide());
-    this.router.navigate(['/dashboard']);
   }
 
   public resetForm(event: any): void {
