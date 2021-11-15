@@ -50,7 +50,7 @@ namespace DotEco.Application
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddMinutes(59),
+                Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = creds
             };
 

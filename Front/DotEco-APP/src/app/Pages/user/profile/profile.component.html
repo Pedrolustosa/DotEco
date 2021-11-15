@@ -1,0 +1,89 @@
+<section class="container mt-4">
+    <div class="card rounded shadow-sm">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="row p-3">
+                <div class="col-lg-9">
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <h3 class="border-bottom">Detalhe Perfil</h3>
+                        </div>
+                        <div class="form-group col-sm-5">
+                            <label>Nome Completo</label>
+                            <input type="text" formControlName="fullName" class="form-control"
+                                [ngClass]="{ 'is-invalid': f.fullName.errors && f.fullName.touched }" />
+                            <div *ngIf="f.fullName.errors && f.fullName.touched" class="invalid-feedback">
+                                <div *ngIf="f.fullName.errors.required">Nom Completo é obrigatório</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-sm-4">
+                            <label>CPF</label>
+                            <input type="text" formControlName="cpf" class="form-control"
+                                [ngClass]="{ 'is-invalid': f.cpf.errors && f.cpf.touched }" />
+                            <div *ngIf="f.cpf.errors && f.cpf.touched" class="invalid-feedback">
+                                <div *ngIf="f.cpf.errors.required">CPF é obrigatório</div>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-5">
+                            <label>E-mail</label>
+                            <input type="text" formControlName="email" class="form-control"
+                                [ngClass]="{ 'is-invalid': f.email.errors && f.email.touched }" />
+                            <div *ngIf="f.email.errors && f.email.touched" class="invalid-feedback">
+                                <div *ngIf="f.email.errors.required">e-mail é obrigatório</div>
+                                <div *ngIf="f.email.errors.email">e-mail precisa ser um endereço válido.</div>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-5">
+                            <label>Tipo</label>
+                            <select class="form-control" id="type" formControlName="type"
+                                [ngClass]="{ 'is-invalid': f.type.errors && f.type.touched }">
+                                <option value="" selected disabled hidden>Selecione uma Opção</option>
+                                <option *ngFor="let type of userTypes" [ngValue]="type.id">
+                                    {{type.name}}</option>
+                            </select>
+                            <div *ngIf="f.type.errors && f.type.touched" class="invalid-feedback">
+                                <div *ngIf="f.type.errors.required">Função é obrigatório</div>
+                                <div *ngIf="f.type.errors.type">Função precisa ser um endereço válido.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="pt-3 border-bottom">Mudar Senha</h3>
+                        <p>Caso mude de senha, preencha os campos abaixo:</p>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-sm">
+                            <label>Senha</label>
+                            <input type="password" formControlName="password" class="form-control"
+                                [ngClass]="{ 'is-invalid': f.password.errors && f.password.touched }" />
+                            <div *ngIf="f.password.errors && f.password.touched" class="invalid-feedback">
+                                <div *ngIf="f.password.errors.required">Senha é obrigatório</div>
+                                <div *ngIf="f.password.errors.minlength">Senha precisa ter pelo menos 6 caracteres</div>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm">
+                            <label>Confirmar Senha</label>
+                            <input type="password" formControlName="confirmPassword" class="form-control"
+                                [ngClass]="{ 'is-invalid': f.confirmPassword.errors && f.confirmPassword.touched }" />
+                            <div *ngIf="f.confirmPassword.errors && f.confirmPassword.touched" class="invalid-feedback">
+                                <div *ngIf="f.confirmPassword.errors.required">Confirmação de senha é Obrigatório</div>
+                                <div *ngIf="f.confirmPassword.errors.mustMatch">Repetir a senha é obrigatório.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="d-flex">
+                    <button (click)="resetForm($event)" class="btnUpdate">
+                        Limpar
+                    </button>
+                    <button class="btnUpdate" type="submit">
+                        Salvar Alteração
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

@@ -11,21 +11,37 @@ import { AssociationComponent } from './Pages/association/association.component'
 import { CouponsComponent } from './Pages/coupons/coupons.component';
 import { RegistrationComponent } from './Pages/user/registration/registration.component';
 import { CollectionDataComponent } from './Pages/collectiondata/collectiondata.component';
+import { ProfileComponent } from './Pages/user/profile/profile.component';
 
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'association', component: AssociationComponent, canActivate: [AuthGuard] },
-  { path: 'coupons', component: CouponsComponent, canActivate: [AuthGuard] },
-  { path: 'collectiondata', component: CollectionDataComponent, canActivate: [AuthGuard] },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
-    path: 'user', component: UserComponent,
+    path: 'user',
+    component: UserComponent,
     children: [
       { path: 'login', component: LoginComponent },
-      { path: 'registration', component: RegistrationComponent }
-    ]
-  }
+      { path: 'registration', component: RegistrationComponent },
+    ],
+  },
+  {
+    path: '',
+    runGuardsAndResolvers: 'always',
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'user', redirectTo: 'user/profile' },
+      {
+        path: 'user/profile',
+        component: ProfileComponent,
+      },
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'association', component: AssociationComponent },
+      { path: 'coupons', component: CouponsComponent },
+      { path: 'collectiondata', component: CollectionDataComponent },
+    ],
+  },
+  { path: 'home', component: HomeComponent },
+  { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
 
 @NgModule({

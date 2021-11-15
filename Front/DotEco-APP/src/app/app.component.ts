@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { User } from './_models/Identity/User';
+import { AccountService } from './_services/account.service';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +9,21 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  constructor(public accountService: AccountService) { }
 
-  constructor(private spinner: NgxSpinnerService) { }
+  ngOnInit(): void {
+    this.setCurrentUser();
+  }
+
+  setCurrentUser(): void {
+    let user: User;
+
+    if (localStorage.getItem('user'))
+      user = JSON.parse(localStorage.getItem('user') ?? '{}');
+    else
+      user = null
+
+    if (user)
+      this.accountService.setCurrentUser(user);
+  }
 }
