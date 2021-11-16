@@ -2,13 +2,23 @@
     <div class="card rounded shadow-sm">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="row p-3">
-                <div class="col-lg-12">
+                <div class="col-lg-6">
                     <div class="form-group">
                         <label>Nome Completo</label>
                         <input type="text" class="form-control" id="fullName" formControlName="fullName" name="fullName"
                             [ngClass]="{ 'is-invalid': f.fullName.errors && f.fullName.touched }" />
                         <div *ngIf="f.fullName.errors && f.fullName.touched" class="invalid-feedback">
                             <div *ngIf="f.fullName.errors.required">Nome é obrigatório</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Usuario</label>
+                        <input type="text" class="form-control" id="userName" formControlName="userName" name="userName"
+                            [ngClass]="{ 'is-invalid': f.userName.errors && f.userName.touched }" />
+                        <div *ngIf="f.userName.errors && f.userName.touched" class="invalid-feedback">
+                            <div *ngIf="f.userName.errors.required">Nome é obrigatório</div>
                         </div>
                     </div>
                 </div>
