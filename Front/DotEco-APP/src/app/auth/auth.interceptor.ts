@@ -14,7 +14,7 @@ import { AccountService } from '../_services/account.service';
 export class AuthInterceptor implements HttpInterceptor {
     constructor(private accountService: AccountService) { }
 
-    intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let currentUser: User;
         this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
             currentUser = user
