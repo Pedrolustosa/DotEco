@@ -61,52 +61,56 @@
             </div>
             <div class="modal-body">
                 <form class="form-group" [formGroup]="couponsForm">
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="name" name="name" formControlName="name" [ngClass]="{'is-invalid': couponsForm.get('name').errors 
+                    <div class="row">
+                        <div class="form-floating mb-3 col-md-4">
+                            <input type="text" class="form-control" id="name" name="name" formControlName="name"
+                                [ngClass]="{'is-invalid': couponsForm.get('name').errors 
                                     && couponsForm.get('name').touched}" />
-                        <label for="name">Nome</label>
-                        <div *ngIf="couponsForm.get('name').hasError('required') 
+                            <label for="name">Nome</label>
+                            <div *ngIf="couponsForm.get('name').hasError('required') 
                                     && couponsForm.get('name').touched" class="invalid-feedback">
-                            Nome é obrigatório.
+                                Nome é obrigatório.
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="percent" formControlName="percent" name="percent"
-                            [ngClass]="{ 'is-invalid': couponsForm.get('percent').errors 
+                        <div class="form-floating mb-3 col-md-2">
+                            <input type="text" class="form-control" id="percent" formControlName="percent"
+                                name="percent" [ngClass]="{ 'is-invalid': couponsForm.get('percent').errors 
                                     && couponsForm.get('percent').touched}">
-                        <label for="percent">Desconto %</label>
-                        <div *ngIf="couponsForm.get('percent').hasError('required') 
+                            <label for="percent">Desconto %</label>
+                            <div *ngIf="couponsForm.get('percent').hasError('required') 
                                         && couponsForm.get('percent').touched" class="invalid-feedback">
-                            Desconto % é obrigatório.
+                                Desconto % é obrigatório.
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-floating mb-3">
-                        <select class="form-select" id="userId" formControlName="userId" [ngClass]="{ 'is-invalid': couponsForm.get('userId')?.errors 
+                        <div class="form-floating mb-3 col-md-4">
+                            <select class="form-select" id="userId" formControlName="userId" [ngClass]="{ 'is-invalid': couponsForm.get('userId')?.errors 
                         && couponsForm.get('userId')?.touched}">
-                            <option value="" selected disabled hidden>Selecione uma Opção</option>
-                            <option *ngFor="let user of userId | async as list" [value]="user.id">
-                                {{user.fullName}}</option>
-                        </select>
-                        <label for="userId">Cliente</label>
-                        <div *ngIf="couponsForm.get('userId')?.hasError('required') 
+                                <option value="" selected disabled hidden>Selecione uma Opção</option>
+                                <option *ngFor="let user of userId | async as list" [value]="user.id">
+                                    {{user.fullName}}</option>
+                            </select>
+                            <label for="userId">Cliente</label>
+                            <div *ngIf="couponsForm.get('userId')?.hasError('required') 
                                 && couponsForm.get('userId')?.touched" class="invalid-feedback">
-                            Escolha o Tipo de Usuário.
+                                Escolha o Tipo de Usuário.
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-floating mb-3">
-                        <select class="form-select" id="status" formControlName="status" [ngClass]="{ 'is-invalid': couponsForm.get('status')?.errors 
+
+                        <div class="form-floating mb-3 col-md-2">
+                            <select class="form-select" id="status" formControlName="status" [ngClass]="{ 'is-invalid': couponsForm.get('status')?.errors 
                     && couponsForm.get('status')?.touched}">
-                            <option value="" selected disabled hidden>Selecione uma Opção</option>
-                            <option value="0">Ativo</option>
-                            <option value="1">Inativo</option>
-                        </select>
-                        <label for="status">status</label>
-                        <div *ngIf="couponsForm.get('status')?.hasError('required') 
+                                <option value="" selected disabled hidden>Selecione uma Opção</option>
+                                <option value="0">Ativo</option>
+                                <option value="1">Inativo</option>
+                            </select>
+                            <label for="status">status</label>
+                            <div *ngIf="couponsForm.get('status')?.hasError('required') 
                                 && couponsForm.get('status')?.touched" class="invalid-feedback">
-                            Coloque o status comforme a situação da Coleta.
+                                Coloque o status comforme a situação da Coleta.
+                            </div>
                         </div>
                     </div>
 

@@ -14,9 +14,6 @@
                 <li class="nav-item" routerLinkActive="active">
                     <a class="nav-link" routerLink="home">Home</a>
                 </li>
-                <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" routerLink="">Ajuda</a>
-                </li>
                 <ng-container *ngIf="(accountService.currentUser$ | async) !== null">
                     <li class="nav-item" routerLinkActive="active">
                         <a class="nav-link" routerLink="association">Associações</a>
