@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { User } from './_models/Identity/User';
 import { AccountService } from './_services/account.service';
 

@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   apiURL: 'https://dotecoapi.azurewebsites.net/',
+  //apiURL: 'http://localhost:5000/',
 };
 
 /*
