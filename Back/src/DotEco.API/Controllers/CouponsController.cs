@@ -31,7 +31,7 @@ namespace DotEco.API.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Cliente2, Associacao, Administrador")]
+        [Authorize(Roles = "Cliente2, Empresa, Administrador")]
         public async Task<IActionResult> Get()
         {
             try
@@ -49,7 +49,7 @@ namespace DotEco.API.Controllers
         }
 
         [HttpGet("{CouponsId}")]
-        [Authorize(Roles = "Cliente2, Associacao, Administrador")]
+        [Authorize(Roles = "Cliente2, Empresa, Administrador")]
         public async Task<IActionResult> Get(int couponsId)
         {
             try
@@ -67,7 +67,7 @@ namespace DotEco.API.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Associacao, Administrador")]
+        [Authorize(Roles = "Empresa, Administrador")]
         public async Task<IActionResult> Post(CouponsDto model)
         {
             try
@@ -85,7 +85,7 @@ namespace DotEco.API.Controllers
         }
 
         [HttpPut("{CouponsId}")]
-        [Authorize(Roles = "Cliente2, Associacao, Administrador")]
+        [Authorize(Roles = "Cliente2, Empresa, Administrador")]
         public async Task<IActionResult> Put(int couponsId, CouponsDto model)
         {
             try
@@ -103,7 +103,7 @@ namespace DotEco.API.Controllers
         }
 
         [HttpDelete("{CouponsId}")]
-        [Authorize(Roles = "Associacao, Administrador")]
+        [Authorize(Roles = "Empresa, Administrador")]
         public async Task<IActionResult> Delete(int couponsId)
         {
             try

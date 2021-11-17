@@ -72,7 +72,6 @@ namespace DotEco.API.Controllers
                     {
                         userName = user.UserName,
                         FullName = user.FullName,
-                        type = user.Type,
                         token = _tokenService.CreateToken(user).Result
                     });
 
@@ -117,6 +116,8 @@ namespace DotEco.API.Controllers
         {
             try
             {
+                if (userUpdateDto.UserName != User.GetUserName())
+                    return Unauthorized("Usuário Inválido");
 
                 var user = await _accountService.GetUserByUserNameAsync(User.GetUserName());
                 if (user == null) return Unauthorized("Usuário Inválido");
