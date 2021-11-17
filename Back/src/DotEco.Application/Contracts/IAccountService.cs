@@ -6,7 +6,7 @@ namespace DotEco.Application.Contracts
 {
     public interface IAccountService
     {
-        Task<bool> UserExists(string username);
+        Task<bool> UserExists(string username, string email);
         Task<UserUpdateDto> GetUserByUserNameAsync(string username);
         Task<SignInResult> CheckUserPasswordAsync(UserUpdateDto userUpdateDto, string password);
         Task<UserUpdateDto> CreateAccountAsync(UserDto userDto);
