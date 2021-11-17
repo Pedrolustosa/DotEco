@@ -1,56 +1,79 @@
+.carousel-item .active {
+    height: 32rem;
+    background-color: #5cad86;
+}
 
 .carousel-item .active img {
-    width: 105vw;
-    height: 85vh;
+    height: 50vh;
+    position: absolute;
+    top: 45%;
+    transform: translateY(-45%);
 }
 
 .carousel-inner img {
     height: 100vh;
-    filter: brightness(75%);
+    filter: brightness(81%);
+    
+}
+
+.carousel-caption {
+    position: absolute;
+    top: 55%;
+    transform: translateY(-49%);
 }
 
 .carousel-caption h1 {
+    text-shadow: .1rem .1rem .3rem rgba(0, 0, 0, 1);
     font-size: 3.5rem;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .carousel-caption p {
-    margin-bottom: 16.5%;
+    text-shadow: .1rem .1rem .3rem rgba(0, 0, 0, 1);
     font-size: x-large;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-/* entre carruosel e about */
+/* entre carruosel BETWEEN */
 
-.between-about, h3 {
-    padding-top: 3rem;
+#between .card-body {
+    margin-top: 4rem;
+}
+
+#between .between-text {
+    text-shadow: .1rem .1rem .3rem rgb(37, 35, 35);
+    font-size: 3rem;
     color: #42a877;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-/* about vertical */
-
-#conteiner .card-text {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+/* gradient about 
+.grandient {
+    background: linear-gradient(to bottom, #42a877, #65e6a7, #d8d7d7, #FFFFFF)
 }
+about vertical
+#conteiner .card-text {
+    text-shadow: 1.1rem 1.1rem 1.1rem 1.1rem rgb(218, 195, 173);
+    font-size: medium;
+}
+*/
 
+/*  conteiner do card  */
 #conteiner .card {
+    background: none;
+    top:15%;
+    border:none;
     text-align: center;
     margin: 1.5rem;
 }
 
-#conteiner .card-text {
-    font-size: x-large;
+/* Partner gradient */
+
+#partner .grandient {
+    background: linear-gradient(to top, #42a877, #65e6a7, #d8d7d7, #FFFFFF);
 }
 
-/* entre partner e about */
-
-.between-partner {
-    padding-bottom: 4rem;
-    color: #42a877;
-}
-
-/* Partner parceiros site*/
+/* Partner Parceiros Site */
 
 #partner .card {
     border-radius: 1.2rem;
