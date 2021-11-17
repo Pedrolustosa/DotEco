@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -7,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { Coupons } from 'src/app/_models/Coupons';
 import { User } from 'src/app/_models/Identity/User';
+import { UserUpdate } from 'src/app/_models/Identity/UserUpdate';
 import { AccountService } from 'src/app/_services/account.service';
 import { CouponsService } from 'src/app/_services/coupons.service';
 
@@ -21,7 +23,9 @@ export class CouponsComponent implements OnInit {
   coupon: Coupons;
   userId: Observable<User[]>;
   couponsForm: FormGroup;
+  form!: FormGroup;
   user: User;
+  userUpdate = {} as UserUpdate;
   mode = 'post';
   _filterList = '';
   bodyDeleteCoupons = '';
@@ -32,8 +36,10 @@ export class CouponsComponent implements OnInit {
     private modalService: BsModalService,
     private localeService: BsLocaleService,
     private couponService: CouponsService,
-    private accountService: AccountService,
+    public accountService: AccountService,
+    private toaster: ToastrService,
     private spinner: NgxSpinnerService,
+    private router: Router,
   ) {
     this.localeService.use('pt-br');
   }
@@ -42,6 +48,7 @@ export class CouponsComponent implements OnInit {
     this.spinner.show();
     this.validation();
     this.getCoupon();
+    this.carregarUsuario();
     this.userId = this.accountService.getAllUser();
   }
 
@@ -58,12 +65,31 @@ export class CouponsComponent implements OnInit {
     template.show();
   }
 
+  private carregarUsuario(): void {
+    this.spinner.show();
+    this.accountService
+      .getUser()
+      .subscribe(
+        (userRetorno: UserUpdate) => {
+          console.log(userRetorno);
+          this.userUpdate = userRetorno;
+          this.toaster.success('Usuário Carregado', 'Sucesso');
+        },
+        (error) => {
+          console.error(error);
+          this.toaster.error('Usuário não Carregado', 'Erro');
+          this.router.navigate(['/dashboard']);
+        }
+      )
+      .add(() => this.spinner.hide());
+  }
+
   validation() {
     this.couponsForm = this.fb.group({
       name: ['', Validators.required],
       percent: ['', Validators.required],
-      userId: ['', Validators.required],
-      status: [''],
+      userId: ['', Validators.nullValidator],
+      status: ['', Validators.nullValidator],
     });
   }
 

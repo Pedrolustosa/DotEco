@@ -1,5 +1,5 @@
 Create DB
-back/src/DotEco.Persistence -> dotnet ef --startup-project ../DotEco.API migrations add init
+back/src/DotEco.Persistence -> dotnet ef --startup-project ../DotEco.API migrations add initial_V1
 
 Update DB
 back/src/DotEco.Persistence -> dotnet ef --startup-project ../DotEco.API database update

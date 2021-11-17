@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DotEco.Persistence.Migrations
 {
-    public partial class init : Migration
+    public partial class initial_V1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -190,7 +190,7 @@ namespace DotEco.Persistence.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Percent = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -200,7 +200,7 @@ namespace DotEco.Persistence.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -218,7 +218,7 @@ namespace DotEco.Persistence.Migrations
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     StatusClient = table.Column<int>(type: "int", nullable: false),
                     StatusAssociation = table.Column<int>(type: "int", nullable: false),
-                    AssociationId = table.Column<int>(type: "int", nullable: false)
+                    AssociationId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -228,7 +228,7 @@ namespace DotEco.Persistence.Migrations
                         column: x => x.AssociationId,
                         principalTable: "Association",
                         principalColumn: "AssociationId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
