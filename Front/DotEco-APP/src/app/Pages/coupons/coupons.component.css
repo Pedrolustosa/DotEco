@@ -23,3 +23,32 @@
     color: #42a877;
     cursor: pointer;
 }
+
+.cardCupon {
+    width: 16rem;
+    border: none;
+    height: 32rem;
+    border-radius: 2rem;
+    text-align: center;
+    padding: 20px;
+    background-color: #42a877
+}
+
+.percent {
+    font-size: 4rem;
+    color: #fff
+}
+
+.discount {
+    font-size: 2.5rem;
+    color: #fff
+}
+
+.company {
+    font-size: 1.3rem;
+    color: #fff
+}
+
+.line {
+    color: #fff
+}
