@@ -63,8 +63,8 @@ namespace DotEco.API.Controllers
         {
             try
             {
-                if (await _accountService.UserExists(userDto.UserName))
-                    return BadRequest("Usuário já existe");
+                if (await _accountService.UserExists(userDto.UserName, userDto.Email))
+                    return BadRequest("Usuário/Email já existe");
 
                 var user = await _accountService.CreateAccountAsync(userDto);
                 if (user != null)
@@ -100,7 +100,6 @@ namespace DotEco.API.Controllers
                 {
                     userName = user.UserName,
                     fullName = user.FullName,
-                    type = user.Type,
                     token = _tokenService.CreateToken(user).Result
                 });
             }
@@ -129,7 +128,6 @@ namespace DotEco.API.Controllers
                 {
                     userName = userReturn.UserName,
                     fullName = userReturn.FullName,
-                    type = userReturn.Type,
                     token = _tokenService.CreateToken(userReturn).Result
                 });
             }

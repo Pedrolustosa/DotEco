@@ -41,21 +41,20 @@ namespace DotEco.API
                 context => context.UseSqlServer(Configuration.GetConnectionString("SQLServer"))
             );
 
-            IdentityBuilder builder = services.AddIdentityCore<User>(options =>
+            services.AddIdentityCore<User>(options =>
             {
                 options.Password.RequireDigit = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequiredLength = 4;
-            });
-
-            builder = new IdentityBuilder(builder.UserType, typeof(Role), builder.Services);
-            builder.AddEntityFrameworkStores<DotEcoContext>();
-            builder.AddRoleValidator<RoleValidator<Role>>();
-            builder.AddRoleManager<RoleManager<Role>>();
-            builder.AddSignInManager<SignInManager<User>>();
-            builder.AddDefaultTokenProviders();
+            })
+            .AddRoles<Role>()
+            .AddRoleManager<RoleManager<Role>>()
+            .AddSignInManager<SignInManager<User>>()
+            .AddRoleValidator<RoleValidator<Role>>()
+            .AddEntityFrameworkStores<DotEcoContext>()
+            .AddDefaultTokenProviders();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddJwtBearer(options =>
@@ -68,16 +67,14 @@ namespace DotEco.API
                             ValidateAudience = false
                         };
                     });
-            services.AddMvc(options =>
-            {
-                var policy = new AuthorizationPolicyBuilder()
-                    .RequireAuthenticatedUser()
-                    .Build();
-                options.Filters.Add(new AuthorizeFilter(policy));
-            }).AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling =
+
+            services.AddControllers()
+                    .AddJsonOptions(options =>
+                        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter())
+                    )
+                    .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling =
                         Newtonsoft.Json.ReferenceLoopHandling.Ignore
                     );
-            services.AddControllers();
             services.AddCors();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

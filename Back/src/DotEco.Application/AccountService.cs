@@ -113,12 +113,12 @@ namespace DotEco.Application
             }
         }
 
-        public async Task<bool> UserExists(string username)
+        public async Task<bool> UserExists(string username, string email)
         {
             try
             {
                 return await _userManager.Users
-                                         .AnyAsync(user => user.UserName == username.ToLower());
+                                         .AnyAsync(user => user.UserName == username.ToLower() || user.Email == email.ToLower());
             }
             catch (System.Exception ex)
             {

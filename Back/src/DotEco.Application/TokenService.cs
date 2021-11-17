@@ -38,8 +38,9 @@ namespace DotEco.Application
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.FullName.ToString()),
-                new Claim(ClaimTypes.Role, RoleFactory(userUpdateDto.Type))
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.Role, RoleFactory(userUpdateDto.Type)),
             };
 
             var roles = await _userManager.GetRolesAsync(user);
