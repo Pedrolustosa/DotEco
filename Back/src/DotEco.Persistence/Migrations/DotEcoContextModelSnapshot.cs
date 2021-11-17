@@ -58,7 +58,7 @@ namespace DotEco.Persistence.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("AssociationId")
+                    b.Property<int?>("AssociationId")
                         .HasColumnType("int");
 
                     b.Property<string>("CEP")
@@ -108,7 +108,7 @@ namespace DotEco.Persistence.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -331,9 +331,7 @@ namespace DotEco.Persistence.Migrations
                 {
                     b.HasOne("DotEco.Domain.Association", "Association")
                         .WithMany("CollectionDatas")
-                        .HasForeignKey("AssociationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AssociationId");
 
                     b.Navigation("Association");
                 });
@@ -342,9 +340,7 @@ namespace DotEco.Persistence.Migrations
                 {
                     b.HasOne("DotEco.Domain.Identity.User", "User")
                         .WithMany("Coupons")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });

@@ -9,6 +9,9 @@ import { CollectionDataService } from 'src/app/_services/collectiondata.service'
 import { Association } from 'src/app/_models/Association';
 import { AssociationService } from 'src/app/_services/association.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { UserUpdate } from 'src/app/_models/Identity/UserUpdate';
+import { AccountService } from 'src/app/_services/account.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-collectiondata',
@@ -16,13 +19,12 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./collectiondata.component.css']
 })
 export class CollectionDataComponent implements OnInit {
-  titulo = 'Requisições';
-
   collectiondataForm: FormGroup;
   collectiondatasFilters: CollectionData[];
   collectiondatas: CollectionData[];
   collectiondata: CollectionData;
   associationId: Observable<Association[]>;
+  userUpdate = {} as UserUpdate;
 
   mode = 'post';
   _filterList = '';
@@ -36,7 +38,10 @@ export class CollectionDataComponent implements OnInit {
     private localeService: BsLocaleService,
     private collectiondataService: CollectionDataService,
     private associationService: AssociationService,
+    public accountService: AccountService,
+    private toaster: ToastrService,
     private spinner: NgxSpinnerService,
+    private router: Router,
   ) {
     this.localeService.use('pt-br');
   }
@@ -44,6 +49,7 @@ export class CollectionDataComponent implements OnInit {
   ngOnInit(): void {
     this.spinner.show();
     this.validation();
+    this.carregarUsuario();
     this.getCollectionData();
     this.associationId = this.associationService.getAllAssociation();
   }
@@ -61,6 +67,8 @@ export class CollectionDataComponent implements OnInit {
     template.show();
   }
 
+
+
   validation() {
     this.collectiondataForm = this.fb.group({
       address: ['', Validators.required],
@@ -69,11 +77,30 @@ export class CollectionDataComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       telephone: ['', Validators.required],
       typeCollection: ['', Validators.required],
-      date: [''],
+      date: ['', Validators.nullValidator],
       associationId: ['', Validators.required],
-      statusClient: ['', Validators.required],
-      statusAssociation: ['', Validators.required],
+      statusClient: ['', Validators.nullValidator],
+      statusAssociation: ['', Validators.nullValidator],
     });
+  }
+
+  private carregarUsuario(): void {
+    this.spinner.show();
+    this.accountService
+      .getUser()
+      .subscribe(
+        (userRetorno: UserUpdate) => {
+          console.log(userRetorno);
+          this.userUpdate = userRetorno;
+          this.toaster.success('Usuário Carregado', 'Sucesso');
+        },
+        (error) => {
+          console.error(error);
+          this.toaster.error('Usuário não Carregado', 'Erro');
+          this.router.navigate(['/dashboard']);
+        }
+      )
+      .add(() => this.spinner.hide());
   }
 
   filterCollectionDatas(filterFor: string): CollectionData[] {

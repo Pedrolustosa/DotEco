@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotEco.Persistence.Migrations
 {
     [DbContext(typeof(DotEcoContext))]
-    [Migration("20211113184310_init")]
-    partial class init
+    [Migration("20211117161720_initial_V1")]
+    partial class initial_V1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -60,7 +60,7 @@ namespace DotEco.Persistence.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("AssociationId")
+                    b.Property<int?>("AssociationId")
                         .HasColumnType("int");
 
                     b.Property<string>("CEP")
@@ -110,7 +110,7 @@ namespace DotEco.Persistence.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -333,9 +333,7 @@ namespace DotEco.Persistence.Migrations
                 {
                     b.HasOne("DotEco.Domain.Association", "Association")
                         .WithMany("CollectionDatas")
-                        .HasForeignKey("AssociationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AssociationId");
 
                     b.Navigation("Association");
                 });
@@ -344,9 +342,7 @@ namespace DotEco.Persistence.Migrations
                 {
                     b.HasOne("DotEco.Domain.Identity.User", "User")
                         .WithMany("Coupons")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });

@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DotEco.Domain
@@ -17,21 +18,27 @@ namespace DotEco.Domain
         public DateTime Date { get; set; }
         public StatusClient StatusClient { get; set; }
         public StatusAssociation StatusAssociation { get; set; }
-        public int AssociationId { get; set; }
+        public int? AssociationId { get; set; }
         public Association Association { get; set; }
     }
+}
 
-    public enum StatusClient
-    {
-        Agendado = 0,
-        Confirmado = 1,
-        Recusado = 2,
-    }
+public enum StatusClient
+{
+    [Display(Name = "Agendado")]
+    Scheduled = 0,
+    [Display(Name = "Confirmado")]
+    Confirmed = 1,
+    [Display(Name = "Recusado")]
+    Refused = 2,
+}
 
-    public enum StatusAssociation
-    {
-        Agendado = 0,
-        Confirmado = 1,
-        Recusado = 2,
-    }
+public enum StatusAssociation
+{
+    [Display(Name = "Agendado")]
+    Scheduled = 0,
+    [Display(Name = "Confirmado")]
+    Confirmed = 1,
+    [Display(Name = "Recusado")]
+    Refused = 2,
 }

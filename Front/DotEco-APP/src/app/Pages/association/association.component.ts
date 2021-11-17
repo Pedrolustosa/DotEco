@@ -8,6 +8,9 @@ import { AssociationService } from 'src/app/_services/association.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { UserUpdate } from 'src/app/_models/Identity/UserUpdate';
+import { Router } from '@angular/router';
+import { AccountService } from 'src/app/_services/account.service';
 
 @Component({
   selector: 'app-association',
@@ -23,6 +26,7 @@ export class AssociationComponent implements OnInit {
   _association: Association[] = [];
   associations: Association[];
   association: Association;
+  userUpdate = {} as UserUpdate;
 
   mode = 'post';
   _filterList = '';
@@ -34,7 +38,10 @@ export class AssociationComponent implements OnInit {
     private modalService: BsModalService,
     private localeService: BsLocaleService,
     private associationService: AssociationService,
+    public accountService: AccountService,
+    private toaster: ToastrService,
     private spinner: NgxSpinnerService,
+    private router: Router,
   ) {
     this.localeService.use('pt-br');
   }
@@ -51,6 +58,7 @@ export class AssociationComponent implements OnInit {
     this.spinner.show();
     this.validation();
     this.getAssociation();
+    this.carregarUsuario();
   }
 
   openModal(template: any) {
@@ -67,6 +75,27 @@ export class AssociationComponent implements OnInit {
       address: ['', Validators.required],
     });
   }
+
+
+  private carregarUsuario(): void {
+    this.spinner.show();
+    this.accountService
+      .getUser()
+      .subscribe(
+        (userRetorno: UserUpdate) => {
+          console.log(userRetorno);
+          this.userUpdate = userRetorno;
+          this.toaster.success('Usuário Carregado', 'Sucesso');
+        },
+        (error) => {
+          console.error(error);
+          this.toaster.error('Usuário não Carregado', 'Erro');
+          this.router.navigate(['/dashboard']);
+        }
+      )
+      .add(() => this.spinner.hide());
+  }
+
 
   filterAssociations(filterFor: string): Association[] {
     filterFor = filterFor.toLocaleLowerCase();

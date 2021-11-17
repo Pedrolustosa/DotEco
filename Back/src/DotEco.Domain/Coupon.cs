@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using DotEco.Domain.Identity;
 
 namespace DotEco.Domain
@@ -8,13 +9,15 @@ namespace DotEco.Domain
         public string Name { get; set; }
         public string Percent { get; set; }
         public Status Status { get; set; }
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
         public User User { get; set; }
     }
 }
 
 public enum Status
 {
+    [Display(Name = "Ativo")]
     Active = 0,
+    [Display(Name = "Inativo")]
     Inactive = 1,
 }
