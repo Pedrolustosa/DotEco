@@ -38,19 +38,19 @@ namespace DotEco.Application
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, RoleFactory(userUpdateDto.Type))
+                new Claim(ClaimTypes.Name, user.FullName.ToString()),
+                new Claim(ClaimTypes.Role, RoleFactory(userUpdateDto.Type))
             };
 
             var roles = await _userManager.GetRolesAsync(user);
 
-            claims.AddRange(roles.Select(type => new Claim(ClaimTypes.Role, type)));
+            claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 
             var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddMinutes(15),
+                Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = creds
             };
 
