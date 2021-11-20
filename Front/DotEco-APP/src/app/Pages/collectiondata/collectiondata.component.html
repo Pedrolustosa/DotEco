@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center" *ngIf="userUpdate.type == 1">
         <button title="Criar" class="btnCollectionData text-center mb-2" (click)="newCollectionData(template)">
             <i class="fa fa-plus-circle"></i>&nbsp;
             Nova Coleta
@@ -48,8 +48,8 @@
                             <td>{{collectiondatas.associationId}}</td>
                             <td>{{collectiondatas.statusClient}}</td>
                             <td>{{collectiondatas.statusAssociation}}</td>
-                            <td *ngIf="collectiondatas.statusClient !== collectiondatas.statusAssociation">
-                                <div>
+                            <td>
+                                <div *ngIf="collectiondatas.statusClient !== collectiondatas.statusAssociation">
                                     <button type="button" title="Excluir" class="btn btn-outline-danger me-2"
                                         (click)="deleteCollectionData(collectiondatas, confirm)"><i
                                             class="fa fa-eraser"></i></button>

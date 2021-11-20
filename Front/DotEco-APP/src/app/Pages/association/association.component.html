@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center" *ngIf="userUpdate.type == 2">
         <button title="Criar" class="btnAssociation text-center mb-2" (click)="newAssociation(template)">
             <i class="fa fa-plus-circle"></i>&nbsp;
             Nova Associação
