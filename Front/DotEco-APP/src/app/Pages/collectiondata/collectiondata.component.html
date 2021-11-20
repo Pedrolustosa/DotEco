@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center" *ngIf="userUpdate.type == 1">
         <button title="Criar" class="btnCollectionData text-center mb-2" (click)="newCollectionData(template)">
             <i class="fa fa-plus-circle"></i>&nbsp;
             Nova Coleta
@@ -36,7 +36,7 @@
                             <th>opções</th>
                         </tr>
                     </thead>
-                    <tbody *ngIf="collectiondatas && collectiondatas">
+                    <tbody>
                         <tr *ngFor="let collectiondatas of collectiondatasFilters">
                             <td>{{collectiondatas.cep | mask: '00000-000'}}</td>
                             <td>{{collectiondatas.address}}</td>
@@ -48,14 +48,20 @@
                             <td>{{collectiondatas.associationId}}</td>
                             <td>{{collectiondatas.statusClient}}</td>
                             <td>{{collectiondatas.statusAssociation}}</td>
-                            <td *ngIf="collectiondatas.statusClient !== collectiondatas.statusAssociation">
-                                <div>
-                                    <button type="button" title="Excluir" class="btn btn-outline-danger me-2"
-                                        (click)="deleteCollectionData(collectiondatas, confirm)"><i
-                                            class="fa fa-eraser"></i></button>
-                                    <button type="button" title="Editar" class="btn btn-outline-warning me-2"
-                                        (click)="editCollectionData(collectiondatas, template)"><i
-                                            class="fa fa-edit"></i></button>
+                            <td>
+                                <div *ngIf="collectiondatas.statusClient !== collectiondatas.statusAssociation"
+                                    class="container">
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <button type="button" class="btn btn-danger"
+                                            (click)="deleteCollectionData(collectiondatas, confirm)"><i
+                                                class="fa fa-eraser"></i></button>
+                                        <button type="button" class="btn btn-warning"
+                                            (click)="editCollectionData(collectiondatas, template)"><i
+                                                class="fa fa-edit"></i></button>
+                                    </div>
+                                </div>
+                                <div *ngIf="collectiondatas.statusClient === collectiondatas.statusAssociation">
+                                    Parabéns +1!
                                 </div>
                             </td>
                         </tr>

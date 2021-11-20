@@ -1,5 +1,5 @@
 <section class="container">
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center" *ngIf="userUpdate.type == 3">
         <button title="Criar" class="btnCoupons text-center mb-2" (click)="newCoupons(template)">
             <i class="fa fa-plus-circle"></i>&nbsp;
             Gerar Cupom
