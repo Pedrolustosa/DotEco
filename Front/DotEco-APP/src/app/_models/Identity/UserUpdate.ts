@@ -5,5 +5,6 @@ export class UserUpdate {
     type: number;
     cpf: string;
     password: string;
+    points: number;
     token: string;
 }
