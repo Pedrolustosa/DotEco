@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotEco.Persistence.Migrations
 {
     [DbContext(typeof(DotEcoContext))]
-    [Migration("20211117161720_initial_V1")]
+    [Migration("20211121204620_initial_V1")]
     partial class initial_V1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -198,6 +198,9 @@ namespace DotEco.Persistence.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<int>("Points")
+                        .HasColumnType("int");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
