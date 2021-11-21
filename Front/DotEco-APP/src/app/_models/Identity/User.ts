@@ -5,5 +5,6 @@ export class User {
     cpf: string;
     password: string;
     type: number;
+    points: number;
     token: string;
 }

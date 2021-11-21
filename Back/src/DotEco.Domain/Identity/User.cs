@@ -8,6 +8,7 @@ namespace DotEco.Domain.Identity
         public string FullName { get; set; }
         public string CPF { get; set; }
         public int Type { get; set; }
+        public int Points { get; set; }
         public List<UserRole> UserRoles { get; set; }
         public List<Coupon> Coupons { get; set; }
     }
