@@ -19,8 +19,9 @@
                 </div>
             </div>
             <h3 class="card-header text-center">Coletas Agendadas</h3>
-            <div class="table-responsive-md">
-                <table class="table table-sm text-center table-bordered border-success table-striped table-hover">
+            <div class="table-responsive-md" *ngFor="let collectiondatas of collectiondatasFilters">
+                <table class="table table-sm text-center table-bordered border-success table-striped table-hover"
+                    *ngIf="userUpdate.id == collectiondatas.associationId">
                     <thead class="table-success">
                         <tr>
                             <th>cep</th>
@@ -37,7 +38,64 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let collectiondatas of collectiondatasFilters">
+                        <tr>
+                            <td>{{collectiondatas.cep | mask: '00000-000'}}</td>
+                            <td>{{collectiondatas.address}}</td>
+                            <td>{{collectiondatas.reference}}
+                            <td>{{collectiondatas.email}}</td>
+                            <td>{{collectiondatas.telephone | mask: '(00)00000-0000'}}</td>
+                            <td>{{collectiondatas.typeCollection}}</td>
+                            <td>{{collectiondatas.date}}</td>
+                            <td>{{collectiondatas.associationId}}</td>
+                            <td>{{collectiondatas.statusClient}}</td>
+                            <td>{{collectiondatas.statusAssociation}}</td>
+                            <td>
+                                <div *ngIf="collectiondatas.statusClient !== collectiondatas.statusAssociation"
+                                    class="container">
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <button type="button" class="btn btn-danger"
+                                            (click)="deleteCollectionData(collectiondatas, confirm)"><i
+                                                class="fa fa-eraser"></i></button>
+                                        <button type="button" class="btn btn-warning"
+                                            (click)="editCollectionData(collectiondatas, template)"><i
+                                                class="fa fa-edit"></i></button>
+                                    </div>
+                                </div>
+                                <div *ngIf="collectiondatas.statusClient === collectiondatas.statusAssociation">
+                                    Parabéns +1!
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot *ngIf="!collectiondatas">
+                        <tr>
+                            <td class="text-center">
+                                <h4>
+                                    Nenhuma Coleta encontrada!
+                                </h4>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <table class="table table-sm text-center table-bordered border-success table-striped table-hover"
+                    *ngIf="userUpdate.id == collectiondatas.userId">
+                    <thead class="table-success">
+                        <tr>
+                            <th>cep</th>
+                            <th>address</th>
+                            <th>reference</th>
+                            <th>email</th>
+                            <th>telephone</th>
+                            <th>tipo de Coleta</th>
+                            <th>date</th>
+                            <th>associação</th>
+                            <th>statusClient</th>
+                            <th>statusAssociation</th>
+                            <th>opções</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
                             <td>{{collectiondatas.cep | mask: '00000-000'}}</td>
                             <td>{{collectiondatas.address}}</td>
                             <td>{{collectiondatas.reference}}
@@ -96,13 +154,27 @@
                     <form class="form-group" [formGroup]="collectiondataForm">
                         <div *ngIf="userUpdate.type == 1">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="address" name="address"
-                                    formControlName="address" [ngClass]="{'is-invalid': collectiondataForm.get('name')?.errors 
-                                && collectiondataForm.get('address')?.touched}" />
-                                <label for="address">Endereço</label>
+                                <select class="form-select" id="userId" formControlName="userId" [ngClass]="{ 'is-invalid': collectiondataForm.get('userId')?.errors 
+                                        && collectiondataForm.get('userId')?.touched}">
+                                    <option value="" selected disabled hidden>Selecione uma Opção</option>
+                                    <option *ngFor="let user of userId | async as list" [value]="user.id">
+                                        {{user.fullName}}</option>
+                                </select>
+                                <label for="userId">Cliente</label>
+                                <div *ngIf="collectiondataForm.get('userId')?.hasError('required') 
+                                && collectiondataForm.get('userId')?.touched" class="invalid-feedback">
+                                    Escolha o Tipo de Usuário.
+                                </div>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="address" formControlName="address"
+                                    [ngClass]="{'is-invalid': collectiondataForm.get('address')?.errors 
+                                && collectiondataForm.get('address')?.touched }" mask="00000-000" />
+                                <label for="address">address</label>
                                 <div *ngIf="collectiondataForm.get('address')?.hasError('required') 
                                 && collectiondataForm.get('address')?.touched" class="invalid-feedback">
-                                    Endereço é obrigatório.
+                                    address é obrigatório.
                                 </div>
                             </div>
 
@@ -182,7 +254,7 @@
                                     <option value="" selected disabled hidden>Selecione uma Opção</option>
                                     <option *ngFor="let association of associationId | async as list"
                                         [value]="association.id">
-                                        {{association.name}}</option>
+                                        {{association.id}}</option>
                                 </select>
                                 <label for="associationId">Associação</label>
                                 <div *ngIf="collectiondataForm.get('associationId')?.hasError('required') 

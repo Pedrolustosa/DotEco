@@ -53,23 +53,6 @@ namespace DotEco.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Association",
-                columns: table => new
-                {
-                    AssociationId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CEP = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CNPJ = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    State = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Association", x => x.AssociationId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -183,6 +166,30 @@ namespace DotEco.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Association",
+                columns: table => new
+                {
+                    AssociationId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CEP = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CNPJ = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    State = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Association", x => x.AssociationId);
+                    table.ForeignKey(
+                        name: "FK_Association_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Coupons",
                 columns: table => new
                 {
@@ -219,11 +226,18 @@ namespace DotEco.Persistence.Migrations
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     StatusClient = table.Column<int>(type: "int", nullable: false),
                     StatusAssociation = table.Column<int>(type: "int", nullable: false),
-                    AssociationId = table.Column<int>(type: "int", nullable: true)
+                    AssociationId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CollectionData", x => x.CollectionDataId);
+                    table.ForeignKey(
+                        name: "FK_CollectionData_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_CollectionData_Association_AssociationId",
                         column: x => x.AssociationId,
@@ -272,9 +286,19 @@ namespace DotEco.Persistence.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Association_UserId",
+                table: "Association",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CollectionData_AssociationId",
                 table: "CollectionData",
                 column: "AssociationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CollectionData_UserId",
+                table: "CollectionData",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Coupons_UserId",

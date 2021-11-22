@@ -36,14 +36,21 @@ namespace DotEco.Persistence.Context
                         .IsRequired();
             });
 
-            modelBuilder.Entity<CollectionData>()
-            .HasOne(e => e.Association)
-            .WithMany(b => b.CollectionDatas);
+            modelBuilder.Entity<Association>()
+            .HasOne(e => e.User)
+            .WithMany(b => b.Associations);
 
             modelBuilder.Entity<Coupon>()
             .HasOne(e => e.User)
             .WithMany(b => b.Coupons);
 
+            modelBuilder.Entity<CollectionData>()
+            .HasOne(e => e.Association)
+            .WithMany(b => b.CollectionDatas);
+
+            modelBuilder.Entity<CollectionData>()
+            .HasOne(e => e.User)
+            .WithMany(b => b.CollectionDatas);
         }
     }
 }

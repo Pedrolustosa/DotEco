@@ -11,6 +11,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { UserUpdate } from 'src/app/_models/Identity/UserUpdate';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/_services/account.service';
+import { User } from 'src/app/_models/Identity/User';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-association',
@@ -27,6 +29,7 @@ export class AssociationComponent implements OnInit {
   associations: Association[];
   association: Association;
   userUpdate = {} as UserUpdate;
+  userId: Observable<User[]>;
 
   mode = 'post';
   _filterList = '';
@@ -59,6 +62,7 @@ export class AssociationComponent implements OnInit {
     this.validation();
     this.getAssociation();
     this.carregarUsuario();
+    this.userId = this.accountService.getAllUser();
   }
 
   openModal(template: any) {
@@ -68,7 +72,7 @@ export class AssociationComponent implements OnInit {
 
   validation() {
     this.associationForm = this.fb.group({
-      name: ['', Validators.required],
+      userId: ['', Validators.required],
       cep: ['', Validators.required],
       cnpj: ['', Validators.required],
       state: ['', Validators.required],
@@ -100,7 +104,7 @@ export class AssociationComponent implements OnInit {
   filterAssociations(filterFor: string): Association[] {
     filterFor = filterFor.toLocaleLowerCase();
     return this.associations.filter(
-      association => association.name.toLocaleLowerCase().indexOf(filterFor) !== -1
+      association => association.address.toLocaleLowerCase().indexOf(filterFor) !== -1
     );
   }
 
@@ -119,7 +123,7 @@ export class AssociationComponent implements OnInit {
   deleteAssociation(association: Association, template: any) {
     this.openModal(template);
     this.association = association;
-    this.bodyDeleteAssociation = `Tem certeza que deseja excluir o Evento: ${association.name}, Código: ${association.id}`;
+    this.bodyDeleteAssociation = `Tem certeza que deseja excluir o Evento: ${association.userId}, Código: ${association.id}`;
   }
 
   confirmDelete(template: any) {

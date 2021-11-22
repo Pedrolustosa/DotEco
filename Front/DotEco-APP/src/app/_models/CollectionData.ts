@@ -6,6 +6,7 @@ export interface CollectionData {
     email: string;
     telephone: string;
     associationId: number;
+    userId: number;
     statusClient: StatusClient;
     statusAssociation: StatusAssociation;
 }

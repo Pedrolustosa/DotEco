@@ -11,5 +11,7 @@ namespace DotEco.Domain.Identity
         public int Points { get; set; }
         public List<UserRole> UserRoles { get; set; }
         public List<Coupon> Coupons { get; set; }
+        public List<CollectionData> CollectionDatas { get; set; }
+        public List<Association> Associations { get; set; }
     }
 }
