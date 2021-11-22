@@ -73,13 +73,13 @@ export class AssociationComponent implements OnInit {
   validation() {
     this.associationForm = this.fb.group({
       userId: ['', Validators.required],
+      name: ['', Validators.required],
       cep: ['', Validators.required],
       cnpj: ['', Validators.required],
       state: ['', Validators.required],
       address: ['', Validators.required],
     });
   }
-
 
   private carregarUsuario(): void {
     this.spinner.show();
@@ -142,6 +142,7 @@ export class AssociationComponent implements OnInit {
       next: (associations: Association[]) => {
         this.associations = associations;
         this.associationsFilters = this.associations;
+        console.log("Asso: ", associations);
       },
       error: (error: any) => {
         this.spinner.hide();

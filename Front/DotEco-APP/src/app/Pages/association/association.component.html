@@ -23,6 +23,7 @@
                 <table class="table table-sm text-center table-bordered border-success table-striped table-hover">
                     <thead class="table-success">
                         <tr>
+                            <th>#</th>
                             <th>Nome</th>
                             <th>CEP</th>
                             <th>CNPJ</th>
@@ -33,6 +34,7 @@
                     </thead>
                     <tbody *ngIf="associations && associations">
                         <tr *ngFor="let associations of associationsFilters">
+                            <td>{{associations.id}}</td>
                             <td>{{associations.name}}</td>
                             <td>{{associations.cep | mask: '00000-000'}}</td>
                             <td>{{associations.cnpj | mask: '00.000.000/0000-00'}}</td>
@@ -80,17 +82,32 @@
                     <div class="modal-body">
                         <form class="form-group" [formGroup]="associationForm">
                             <div class="row">
-                                <div class="form-floating mb-3">
-                                    <select class="form-select" id="userId" formControlName="userId" [ngClass]="{ 'is-invalid': associationForm.get('userId')?.errors 
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <select class="form-select" id="userId" formControlName="userId" [ngClass]="{ 'is-invalid': associationForm.get('userId')?.errors 
                                             && associationForm.get('userId')?.touched}">
-                                        <option value="" selected disabled hidden>Selecione uma Opção</option>
-                                        <option *ngFor="let user of userId | async as list" [value]="user.id">
-                                            {{user.fullName}}</option>
-                                    </select>
-                                    <label for="userId">Cliente</label>
-                                    <div *ngIf="associationForm.get('userId')?.hasError('required') 
-                                    && associationForm.get('userId')?.touched" class="invalid-feedback">
-                                        Escolha o Tipo de Usuário.
+                                            <option value="" selected disabled hidden>Selecione uma Opção</option>
+                                            <option *ngFor="let user of userId | async as list" [value]="user.id">
+                                                {{user.fullName}}</option>
+                                        </select>
+                                        <label for="userId">Associação</label>
+                                        <div *ngIf="associationForm.get('userId')?.hasError('required') 
+                                        && associationForm.get('userId')?.touched" class="invalid-feedback">
+                                            Escolha a sua Associação
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="name" formControlName="name"
+                                            [ngClass]="{'is-invalid': associationForm.get('name').errors 
+                                        && associationForm.get('name').touched }" />
+                                        <label for="name">Comfirmar Associação</label>
+                                        <div *ngIf="associationForm.get('name').hasError('required') 
+                                        && associationForm.get('name').touched" class="invalid-feedback">
+                                            Comfirmação é obrigatório.
+                                        </div>
                                     </div>
                                 </div>
                             </div>

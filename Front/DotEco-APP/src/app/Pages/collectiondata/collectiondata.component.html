@@ -123,7 +123,11 @@
                                     </div>
                                 </div>
                                 <div *ngIf="collectiondatas.statusClient === collectiondatas.statusAssociation">
-                                    Parabéns +1!
+                                    <div *ngIf="userUpdate.type == 1">
+                                        <button type="submit" class="btnCollectionDataTable">
+                                            +1 Ponto!
+                                        </button>
+                                    </div>
                                 </div>
                             </td>
                         </tr>
