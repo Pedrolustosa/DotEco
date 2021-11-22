@@ -14,5 +14,6 @@ namespace DotEco.Application.Dtos
         public string Password { get; set; }
         public List<CouponsDto> Coupons { get; set; }
         public List<UserDto> Users { get; set; }
+        public List<AssociationDto> Associations { get; set; }
     }
 }
