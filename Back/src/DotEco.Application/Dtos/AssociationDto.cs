@@ -10,6 +10,8 @@ namespace DotEco.Application.Dtos
         public string CNPJ { get; set; }
         public string State { get; set; }
         public string Address { get; set; }
+        public int? UserId { get; set; }
+        public UserDto User { get; set; }
         public List<CollectionDataDto> CollectionDatas { get; set; }
     }
 }
