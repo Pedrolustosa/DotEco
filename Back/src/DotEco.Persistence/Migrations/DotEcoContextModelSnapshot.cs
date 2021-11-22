@@ -42,7 +42,12 @@ namespace DotEco.Persistence.Migrations
                     b.Property<string>("State")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Association");
                 });
@@ -85,9 +90,14 @@ namespace DotEco.Persistence.Migrations
                     b.Property<string>("TypeCollection")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AssociationId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("CollectionData");
                 });
@@ -330,13 +340,28 @@ namespace DotEco.Persistence.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("DotEco.Domain.Association", b =>
+                {
+                    b.HasOne("DotEco.Domain.Identity.User", "User")
+                        .WithMany("Associations")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("DotEco.Domain.CollectionData", b =>
                 {
                     b.HasOne("DotEco.Domain.Association", "Association")
                         .WithMany("CollectionDatas")
                         .HasForeignKey("AssociationId");
 
+                    b.HasOne("DotEco.Domain.Identity.User", "User")
+                        .WithMany("CollectionDatas")
+                        .HasForeignKey("UserId");
+
                     b.Navigation("Association");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("DotEco.Domain.Coupon", b =>
@@ -419,6 +444,10 @@ namespace DotEco.Persistence.Migrations
 
             modelBuilder.Entity("DotEco.Domain.Identity.User", b =>
                 {
+                    b.Navigation("Associations");
+
+                    b.Navigation("CollectionDatas");
+
                     b.Navigation("Coupons");
 
                     b.Navigation("UserRoles");

@@ -14,5 +14,7 @@ namespace DotEco.Application.Dtos
         public string StatusAssociation { get; set; }
         public int? AssociationId { get; set; }
         public AssociationDto Association { get; set; }
+        public int? UserId { get; set; }
+        public UserDto User { get; set; }
     }
 }

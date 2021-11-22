@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using DotEco.Domain.Identity;
 
 namespace DotEco.Domain
 {
@@ -20,6 +21,8 @@ namespace DotEco.Domain
         public StatusAssociation StatusAssociation { get; set; }
         public int? AssociationId { get; set; }
         public Association Association { get; set; }
+        public int? UserId { get; set; }
+        public User User { get; set; }
     }
 }
 

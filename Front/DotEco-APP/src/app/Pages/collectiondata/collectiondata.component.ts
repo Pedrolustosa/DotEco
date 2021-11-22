@@ -12,6 +12,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { UserUpdate } from 'src/app/_models/Identity/UserUpdate';
 import { AccountService } from 'src/app/_services/account.service';
 import { Router } from '@angular/router';
+import { User } from 'src/app/_models/Identity/User';
 
 @Component({
   selector: 'app-collectiondata',
@@ -25,6 +26,7 @@ export class CollectionDataComponent implements OnInit {
   collectiondata: CollectionData;
   associationId: Observable<Association[]>;
   userUpdate = {} as UserUpdate;
+  userId: Observable<User[]>;
 
   mode = 'post';
   _filterList = '';
@@ -52,6 +54,7 @@ export class CollectionDataComponent implements OnInit {
     this.carregarUsuario();
     this.getCollectionData();
     this.associationId = this.associationService.getAllAssociation();
+    this.userId = this.accountService.getAllUser();
   }
 
   get filterList(): string {
@@ -79,6 +82,7 @@ export class CollectionDataComponent implements OnInit {
       typeCollection: ['', Validators.required],
       date: ['', Validators.nullValidator],
       associationId: ['', Validators.required],
+      userId: ['', Validators.required],
       statusClient: ['', Validators.nullValidator],
       statusAssociation: ['', Validators.nullValidator],
     });

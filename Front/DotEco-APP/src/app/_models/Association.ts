@@ -1,6 +1,6 @@
 export interface Association {
     id: number;
-    name: string;
+    userId: number;
     cep: string;
     cnpj: string;
     state: string;

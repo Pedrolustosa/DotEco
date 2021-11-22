@@ -80,14 +80,17 @@
                     <div class="modal-body">
                         <form class="form-group" [formGroup]="associationForm">
                             <div class="row">
-                                <div class="form-floating mb-3 col-md-12">
-                                    <input type="text" class="form-control" id="name" name="name" formControlName="name"
-                                        [ngClass]="{'is-invalid': associationForm.get('name').errors 
-                                && associationForm.get('name').touched}" />
-                                    <label for="name">Nome</label>
-                                    <div *ngIf="associationForm.get('name').hasError('required') 
-                                && associationForm.get('name').touched" class="invalid-feedback">
-                                        Nome é obrigatório.
+                                <div class="form-floating mb-3">
+                                    <select class="form-select" id="userId" formControlName="userId" [ngClass]="{ 'is-invalid': associationForm.get('userId')?.errors 
+                                            && associationForm.get('userId')?.touched}">
+                                        <option value="" selected disabled hidden>Selecione uma Opção</option>
+                                        <option *ngFor="let user of userId | async as list" [value]="user.id">
+                                            {{user.fullName}}</option>
+                                    </select>
+                                    <label for="userId">Cliente</label>
+                                    <div *ngIf="associationForm.get('userId')?.hasError('required') 
+                                    && associationForm.get('userId')?.touched" class="invalid-feedback">
+                                        Escolha o Tipo de Usuário.
                                     </div>
                                 </div>
                             </div>
