@@ -4,7 +4,7 @@ import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
-import { CollectionData } from 'src/app/_models/CollectionData';
+import { CollectionData, StatusClient } from 'src/app/_models/CollectionData';
 import { CollectionDataService } from 'src/app/_services/collectiondata.service';
 import { Association } from 'src/app/_models/Association';
 import { AssociationService } from 'src/app/_services/association.service';
@@ -27,6 +27,7 @@ export class CollectionDataComponent implements OnInit {
   associationId: Observable<Association[]>;
   userUpdate = {} as UserUpdate;
   userId: Observable<User[]>;
+  statusEnum = StatusClient;
 
   mode = 'post';
   _filterList = '';
