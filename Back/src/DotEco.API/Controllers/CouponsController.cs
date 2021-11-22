@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using AutoMapper;
+using DotEco.API.Extensions;
 using DotEco.Application.Contracts;
 using DotEco.Application.Dtos;
 using DotEco.Domain;
@@ -90,10 +91,22 @@ namespace DotEco.API.Controllers
         {
             try
             {
-                var coupon = await _couponsService.UpdateCoupons(couponsId, model);
-                if (coupon == null) return NoContent();
+                var userName = User.GetUserName();
+                var user = await _accountService.GetUserByUserNameAsync(userName);
+                if (user.Points > 0)
+                {
+                    var points = user.Points - 1;
+                    var coupon = await _couponsService.UpdateCoupons(couponsId, model);
+                    if (coupon == null) return NoContent();
 
-                return Ok(coupon);
+                    return Ok(coupon);
+                }
+                else if (user.Points == 0)
+                {
+                    return BadRequest("Sem pontos!");
+                }
+
+                return Ok("Parabéns Pelo Cupom!");
             }
             catch (Exception ex)
             {
