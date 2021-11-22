@@ -71,9 +71,7 @@ export class CouponsComponent implements OnInit {
       .getUser()
       .subscribe(
         (userRetorno: UserUpdate) => {
-          console.log(userRetorno);
           this.userUpdate = userRetorno;
-          this.toaster.success('Usuário Carregado', 'Sucesso');
         },
         (error) => {
           console.error(error);
