@@ -71,8 +71,6 @@ export class CollectionDataComponent implements OnInit {
     template.show();
   }
 
-
-
   validation() {
     this.collectiondataForm = this.fb.group({
       address: ['', Validators.required],
