@@ -28,20 +28,14 @@ namespace DotEco.Domain
 
 public enum StatusClient
 {
-    [Display(Name = "Agendado")]
     Scheduled = 0,
-    [Display(Name = "Confirmado")]
     Confirmed = 1,
-    [Display(Name = "Recusado")]
     Refused = 2,
 }
 
 public enum StatusAssociation
 {
-    [Display(Name = "Agendado")]
     Scheduled = 0,
-    [Display(Name = "Confirmado")]
     Confirmed = 1,
-    [Display(Name = "Recusado")]
     Refused = 2,
 }
