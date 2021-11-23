@@ -51,24 +51,26 @@
                                     <td>{{collectiondatas.statusClient}}</td>
                                     <td>{{collectiondatas.statusAssociation}}</td>
                                     <td>
-                                        <div class="container"
-                                            *ngIf="collectiondatas.statusClient !== collectiondatas.statusAssociation || 
-                                        (collectiondatas.statusClient === collectiondatas.statusAssociation && collectiondatas.statusClient !== statusEnum.Confirmed)">
-                                            <div class="btn-group" role="group" aria-label="Basic example">
-                                                <button type="button" class="btn btn-danger"
-                                                    (click)="deleteCollectionData(collectiondatas, confirm)"><i
-                                                        class="fa fa-eraser"></i></button>
-                                                <button type="button" class="btn btn-warning"
-                                                    (click)="editCollectionData(collectiondatas, template)"><i
-                                                        class="fa fa-edit"></i></button>
-                                            </div>
+                                        <div class="container">
+                                            <ng-container
+                                                *ngIf="collectiondatas.statusClient !== collectiondatas.statusAssociation || 
+                                                (collectiondatas.statusClient === collectiondatas.statusAssociation && collectiondatas.statusClient !== statusEnum.Confirmed)">
+                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                    <button type="button" class="btn btn-danger"
+                                                        (click)="deleteCollectionData(collectiondatas, confirm)"><i
+                                                            class="fa fa-eraser"></i></button>
+                                                    <button type="button" class="btn btn-warning"
+                                                        (click)="editCollectionData(collectiondatas, template)"><i
+                                                            class="fa fa-edit"></i></button>
+                                                </div>
+                                            </ng-container>
                                         </div>
-                                        <div *ngIf="collectiondatas.statusClient === collectiondatas.statusAssociation 
+                                        <ng-container *ngIf="collectiondatas.statusClient === collectiondatas.statusAssociation 
                                         && collectiondatas.statusClient === statusEnum.Confirmed">
-                                            <button type="submit" class="btnCollectionDataTable">
+                                            <button type="submit" class="btnCollectionDataTable" [disabled]="userUpdate.Points > 0">
                                                 +1 Ponto!
                                             </button>
-                                        </div>
+                                        </ng-container>
                                     </td>
                                 </ng-container>
                             </tr>
@@ -120,22 +122,24 @@
                                     <div class="container">
                                         <ng-container
                                             *ngIf="collectiondatas.statusClient !== collectiondatas.statusAssociation || 
-                                            (collectiondatas.statusClient === collectiondatas.statusAssociation && collectiondatas.statusClient !== statusEnum)">
+                                                (collectiondatas.statusClient === collectiondatas.statusAssociation && collectiondatas.statusClient !== statusEnum.Confirmed)">
                                             <div class="btn-group" role="group" aria-label="Basic example">
                                                 <button type="button" class="btn btn-danger"
-                                                    (click)="deleteCollectionData(collectiondatas, confirm)"><i
-                                                        class="fa fa-eraser"></i></button>
+                                                    (click)="deleteCollectionData(collectiondatas, confirm)">
+                                                    <i class="fa fa-eraser"></i>
+                                                </button>
                                                 <button type="button" class="btn btn-warning"
-                                                    (click)="editCollectionData(collectiondatas, template)"><i
-                                                        class="fa fa-edit"></i></button>
+                                                    (click)="editCollectionData(collectiondatas, template)">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
                                             </div>
                                         </ng-container>
-                                    </div>
-                                    <div *ngIf="collectiondatas.statusClient === collectiondatas.statusAssociation 
-                                        && collectiondatas.statusClient === statusEnum">
-                                        <button type="submit" class="btnCollectionDataTable">
-                                            Coleta Concluída
-                                        </button>
+                                        <ng-container *ngIf="collectiondatas.statusClient === collectiondatas.statusAssociation 
+                                                && collectiondatas.statusClient === statusEnum.Confirmed">
+                                            <button type="submit" class="btnCollectionDataTable" (click)="Point()">
+                                                <i class="fas fa-check-double"> Coleta</i>
+                                            </button>
+                                        </ng-container>
                                     </div>
                                 </td>
                             </tr>

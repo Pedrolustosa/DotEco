@@ -2,24 +2,12 @@
     <div class="card rounded shadow-sm">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="row p-3">
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label>Nome Completo</label>
-                        <input type="text" class="form-control" id="fullName" formControlName="fullName" name="fullName"
-                            [ngClass]="{ 'is-invalid': f.fullName.errors && f.fullName.touched }" />
-                        <div *ngIf="f.fullName.errors && f.fullName.touched" class="invalid-feedback">
-                            <div *ngIf="f.fullName.errors.required">Nome é obrigatório</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label>Usuario</label>
-                        <input type="text" class="form-control" id="userName" formControlName="userName" name="userName"
-                            [ngClass]="{ 'is-invalid': f.userName.errors && f.userName.touched }" />
-                        <div *ngIf="f.userName.errors && f.userName.touched" class="invalid-feedback">
-                            <div *ngIf="f.userName.errors.required">Nome é obrigatório</div>
-                        </div>
+                <div class="form-group">
+                    <label>Nome Completo</label>
+                    <input type="text" class="form-control" id="fullName" formControlName="fullName" name="fullName"
+                        [ngClass]="{ 'is-invalid': f.fullName.errors && f.fullName.touched }" />
+                    <div *ngIf="f.fullName.errors && f.fullName.touched" class="invalid-feedback">
+                        <div *ngIf="f.fullName.errors.required">Nome é obrigatório</div>
                     </div>
                 </div>
             </div>
@@ -40,19 +28,6 @@
                         mask="000.000.000-00||00.000.000/0000-00" />
                     <div *ngIf="f.cpf.errors && f.cpf.touched" class="invalid-feedback">
                         <div *ngIf="f.cpf.errors.required">CPF/CNPJ é obrigatório</div>
-                    </div>
-                </div>
-                <div class="form-group col-md-4">
-                    <label>Tipo</label>
-                    <select class="form-control" id="type" formControlName="type"
-                        [ngClass]="{ 'is-invalid': f.type.errors && f.type.touched }">
-                        <option value="" selected disabled hidden>Selecione uma Opção</option>
-                        <option *ngFor="let type of userTypes" [ngValue]="type.id">
-                            {{type.name}}</option>
-                    </select>
-                    <div *ngIf="f.type.errors && f.type.touched" class="invalid-feedback">
-                        <div *ngIf="f.type.errors.required">Função é obrigatório</div>
-                        <div *ngIf="f.type.errors.type">Função precisa ser um endereço válido.</div>
                     </div>
                 </div>
             </div>

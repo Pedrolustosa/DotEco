@@ -16,12 +16,6 @@ import { ValidatorField } from 'src/app/_helpers/ValidatorField';
 export class ProfileComponent implements OnInit {
   userUpdate = {} as UserUpdate;
   form!: FormGroup;
-  userTypes = [
-    { id: 1, name: "Cliente" },
-    { id: 2, name: "Associação" },
-    { id: 3, name: "Empresa" },
-    { id: 4, name: "Administrador" }
-  ];
 
   constructor(
     private fb: FormBuilder,
@@ -64,10 +58,10 @@ export class ProfileComponent implements OnInit {
     this.form = this.fb.group(
       {
         userName: [''],
+        type: [''],
         fullName: ['', Validators.required],
         cpf: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
-        type: ['', Validators.required],
         password: ['', [Validators.minLength(6), Validators.nullValidator]],
         confirmePassword: ['', Validators.nullValidator],
       },
