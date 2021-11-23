@@ -52,7 +52,8 @@
                                     <td>{{collectiondatas.statusAssociation}}</td>
                                     <td>
                                         <div class="container"
-                                            *ngIf="collectiondatas.statusClient.Confirmed !== collectiondatas.statusAssociation.Refused">
+                                            *ngIf="collectiondatas.statusClient !== collectiondatas.statusAssociation || 
+                                        (collectiondatas.statusClient === collectiondatas.statusAssociation && collectiondatas.statusClient !== statusEnum.Confirmed)">
                                             <div class="btn-group" role="group" aria-label="Basic example">
                                                 <button type="button" class="btn btn-danger"
                                                     (click)="deleteCollectionData(collectiondatas, confirm)"><i
@@ -62,7 +63,8 @@
                                                         class="fa fa-edit"></i></button>
                                             </div>
                                         </div>
-                                        <div *ngIf="collectiondatas.statusClient === collectiondatas.statusAssociation">
+                                        <div *ngIf="collectiondatas.statusClient === collectiondatas.statusAssociation 
+                                        && collectiondatas.statusClient === statusEnum.Confirmed">
                                             <button type="submit" class="btnCollectionDataTable">
                                                 +1 Ponto!
                                             </button>
@@ -118,7 +120,7 @@
                                     <div class="container">
                                         <ng-container
                                             *ngIf="collectiondatas.statusClient !== collectiondatas.statusAssociation || 
-                                            (collectiondatas.statusClient === collectiondatas.statusAssociation && collectiondatas.statusClient !== statusEnum  == 1)">
+                                            (collectiondatas.statusClient === collectiondatas.statusAssociation && collectiondatas.statusClient !== statusEnum)">
                                             <div class="btn-group" role="group" aria-label="Basic example">
                                                 <button type="button" class="btn btn-danger"
                                                     (click)="deleteCollectionData(collectiondatas, confirm)"><i
@@ -130,7 +132,7 @@
                                         </ng-container>
                                     </div>
                                     <div *ngIf="collectiondatas.statusClient === collectiondatas.statusAssociation 
-                                        && collectiondatas.statusClient === statusEnum == 1">
+                                        && collectiondatas.statusClient === statusEnum">
                                         <button type="submit" class="btnCollectionDataTable">
                                             Coleta Concluída
                                         </button>

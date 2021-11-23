@@ -95,7 +95,10 @@ namespace DotEco.API.Controllers
                 var user = await _accountService.GetUserByUserNameAsync(userName);
                 if (user.Points > 0)
                 {
-                    var points = user.Points - 1;
+                    int test = 1;
+                    user.Points = user.Points - test;
+                    await _accountService.UpdateAccount(user);
+
                     var coupon = await _couponsService.UpdateCoupons(couponsId, model);
                     if (coupon == null) return NoContent();
 

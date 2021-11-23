@@ -12,13 +12,13 @@ export interface CollectionData {
 }
 
 export enum StatusClient {
-    Scheduled = 0,
-    Confirmed = 1,
-    Refused = 2,
+    Scheduled = "Scheduled",
+    Confirmed = "Confirmed",
+    Refused = "Refused",
 }
 
 export enum StatusAssociation {
-    Scheduled = 0,
-    Confirmed = 1,
-    Refused = 2,
+    Scheduled = "Scheduled",
+    Confirmed = "Confirmed",
+    Refused = "Refused",
 }
