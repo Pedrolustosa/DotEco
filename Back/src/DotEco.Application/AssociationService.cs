@@ -5,6 +5,7 @@ using DotEco.Application.Contracts;
 using DotEco.Application.Dtos;
 using DotEco.Domain;
 using DotEco.Persistence.Contracts;
+using DotEco.Persistence.Models;
 
 namespace DotEco.Application
 {
@@ -86,14 +87,19 @@ namespace DotEco.Application
             }
         }
 
-        public async Task<AssociationDto[]> GetAllAssociationAsync()
+        public async Task<PageList<AssociationDto>> GetAllAssociationAsync(PageParams pageParams)
         {
             try
             {
-                var associations = await _associationPersist.GetAllAssociationAsync();
+                var associations = await _associationPersist.GetAllAssociationAsync(pageParams);
                 if (associations == null) return null;
 
-                var result = _mapper.Map<AssociationDto[]>(associations);
+                var result = _mapper.Map<PageList<AssociationDto>>(associations);
+
+                result.CurrentPage = associations.CurrentPage;
+                result.TotalPages = associations.TotalPages;
+                result.PageSize = associations.PageSize;
+                result.TotalCount = associations.TotalCount;
 
                 return result;
             }

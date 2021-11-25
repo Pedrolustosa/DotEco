@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using DotEco.Domain;
 using DotEco.Persistence.Context;
 using DotEco.Persistence.Contracts;
+using DotEco.Persistence.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DotEco.Persistence
@@ -13,16 +14,17 @@ namespace DotEco.Persistence
         public AssociationPersist(DotEcoContext context)
         {
             _context = context;
-            //_context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
-        public async Task<Association[]> GetAllAssociationAsync()
+        public async Task<PageList<Association>> GetAllAssociationAsync(PageParams pageParams)
         {
             IQueryable<Association> query = _context.Associations;
 
             query = query.AsNoTracking()
+                        .Where(e => (e.Name.ToLower().Contains(pageParams.Term.ToLower()) ||
+                               e.State.ToLower().Contains(pageParams.Term.ToLower())))
                         .OrderBy(c => c.Id);
 
-            return await query.ToArrayAsync();
+            return await PageList<Association>.CreateAsync(query, pageParams.PageNumber, pageParams.pageSize);
         }
 
         public async Task<Association> GetAssociationAsyncById(int AssociationId)

@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using DotEco.Application.Dtos;
+using DotEco.Persistence.Models;
 
 namespace DotEco.Application.Contracts
 {
@@ -8,7 +9,7 @@ namespace DotEco.Application.Contracts
         Task<AssociationDto> AddAssociation(AssociationDto model);
         Task<AssociationDto> UpdateAssociation(int associationId, AssociationDto model);
         Task<bool> DeleteAssociation(int associationId);
-        Task<AssociationDto[]> GetAllAssociationAsync();
+        Task<PageList<AssociationDto>> GetAllAssociationAsync(PageParams pageParams);
         Task<AssociationDto> GetAssociationAsyncById(int associationId);
     }
 }

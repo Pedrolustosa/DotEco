@@ -58,8 +58,8 @@ export class CollectionDataComponent implements OnInit {
     this.validation();
     this.carregarUsuario();
     this.getCollectionData();
-    this.associationId = this.associationService.getAllAssociation();
     this.userId = this.accountService.getAllUser();
+    this.associationId = this.associationService.getAllAssociations();
   }
 
   get filterList(): string {
