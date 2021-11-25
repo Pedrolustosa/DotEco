@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
@@ -13,6 +13,7 @@ import { UserUpdate } from 'src/app/_models/Identity/UserUpdate';
 import { AccountService } from 'src/app/_services/account.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/_models/Identity/User';
+import { ValidatorField } from 'src/app/_helpers/ValidatorField';
 
 @Component({
   selector: 'app-collectiondata',
@@ -21,6 +22,7 @@ import { User } from 'src/app/_models/Identity/User';
 })
 export class CollectionDataComponent implements OnInit {
   collectiondataForm: FormGroup;
+  form!: FormGroup;
   collectiondatasFilters: CollectionData[];
   collectiondatas: CollectionData[];
   collectiondata: CollectionData;
@@ -28,6 +30,8 @@ export class CollectionDataComponent implements OnInit {
   userUpdate = {} as UserUpdate;
   userId: Observable<User[]>;
   statusEnum = StatusClient;
+  association = {} as Association;
+  buttonHidden: boolean = true;
 
   mode = 'post';
   _filterList = '';
@@ -71,7 +75,7 @@ export class CollectionDataComponent implements OnInit {
     template.show();
   }
 
-  validation() {
+  private validation(): void {
     this.collectiondataForm = this.fb.group({
       address: ['', Validators.required],
       cep: ['', Validators.required],
@@ -98,7 +102,7 @@ export class CollectionDataComponent implements OnInit {
         (error) => {
           console.error(error);
           this.toaster.error('Usuário não Carregado', 'Erro');
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/Home']);
         }
       )
       .add(() => this.spinner.hide());
@@ -154,6 +158,29 @@ export class CollectionDataComponent implements OnInit {
       },
       complete: () => this.spinner.hide()
     });
+  }
+
+  onSubmit(): void {
+    this.countPoints();
+  }
+
+  public countPoints(): void {
+    this.spinner.show();
+    this.buttonHidden = !this.buttonHidden
+    this.userUpdate.points += 1
+    this.userUpdate.userName = this.userUpdate.userName
+    this.userUpdate.type = this.userUpdate.type
+    this.userUpdate.fullName = this.userUpdate.fullName
+    this.userUpdate.cpf = this.userUpdate.cpf
+    this.userUpdate.email = this.userUpdate.email
+    this.userUpdate.password = this.userUpdate.password
+    this.accountService.updateUser(this.userUpdate).subscribe(
+      () => this.toaster.success('Pontos atualizado!', 'Sucesso'),
+      (error) => {
+        this.toaster.error(error.error);
+        console.error(error);
+      }
+    ).add(() => this.spinner.hide());
   }
 
   saveAlteration(template: any) {

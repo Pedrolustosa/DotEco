@@ -6,7 +6,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
-import { Coupons } from 'src/app/_models/Coupons';
+import { Coupons, Status } from 'src/app/_models/Coupons';
 import { User } from 'src/app/_models/Identity/User';
 import { UserUpdate } from 'src/app/_models/Identity/UserUpdate';
 import { AccountService } from 'src/app/_services/account.service';
@@ -22,6 +22,7 @@ export class CouponsComponent implements OnInit {
   coupons: Coupons[];
   coupon: Coupons;
   userId: Observable<User[]>;
+  status = Status;
   couponsForm: FormGroup;
   form!: FormGroup;
   user: User;

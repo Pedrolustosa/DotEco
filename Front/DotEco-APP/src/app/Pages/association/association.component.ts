@@ -142,7 +142,6 @@ export class AssociationComponent implements OnInit {
       next: (associations: Association[]) => {
         this.associations = associations;
         this.associationsFilters = this.associations;
-        console.log("Asso: ", associations);
       },
       error: (error: any) => {
         this.spinner.hide();

@@ -81,15 +81,13 @@ export class ProfileComponent implements OnInit {
   public atualizarUsuario() {
     this.userUpdate = { ...this.form.value };
     this.spinner.show();
-
     this.accountService.updateUser(this.userUpdate).subscribe(
       () => this.toaster.success('Usuário atualizado!', 'Sucesso'),
       (error) => {
         this.toaster.error(error.error);
         console.error(error);
       }
-    )
-      .add(() => this.spinner.hide());
+    ).add(() => this.spinner.hide());
   }
 
   public resetForm(event: any): void {

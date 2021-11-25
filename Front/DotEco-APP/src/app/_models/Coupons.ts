@@ -7,6 +7,6 @@ export interface Coupons {
 }
 
 export enum Status {
-    Active = 0,
-    Inactive = 1,
+    Active = "Active",
+    Inactive = "Inactive",
 }

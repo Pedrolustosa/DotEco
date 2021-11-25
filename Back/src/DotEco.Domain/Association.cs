@@ -1,6 +1,5 @@
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using DotEco.Domain.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DotEco.Domain
 {
@@ -16,6 +15,5 @@ namespace DotEco.Domain
         public string Address { get; set; }
         public int? UserId { get; set; }
         public User User { get; set; }
-        public List<CollectionData> CollectionDatas { get; set; }
     }
 }

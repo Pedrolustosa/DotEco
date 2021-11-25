@@ -45,10 +45,6 @@ namespace DotEco.Persistence.Context
             .WithMany(b => b.Coupons);
 
             modelBuilder.Entity<CollectionData>()
-            .HasOne(e => e.Association)
-            .WithMany(b => b.CollectionDatas);
-
-            modelBuilder.Entity<CollectionData>()
             .HasOne(e => e.User)
             .WithMany(b => b.CollectionDatas);
         }

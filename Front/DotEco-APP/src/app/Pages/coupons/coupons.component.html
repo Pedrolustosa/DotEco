@@ -8,7 +8,7 @@
     <div class="card mt-5">
         <div class="card-body">
             <tabset class="m-2">
-                <tab heading="Ativos" id="tab1">
+                <tab heading="Disponíveis" id="tab1">
 
                     <div class="container">
                         <div class="mt-2 m-1">
@@ -32,7 +32,7 @@
                                                 all
                                                 products at bbbootstrap.com</span>
                                             <div class="d-flex justify-content-center">
-                                                <ng-container *ngIf="userUpdate.Point > 0">
+                                                <ng-container>
                                                     <button class="btnCoupons"
                                                         (click)="editCoupons(coupons, template)">Resgatar</button>
                                                 </ng-container>
@@ -44,7 +44,7 @@
                         </div>
                         <div *ngIf="!coupons">
                             <tr>
-                                <td colspan="7" class="text-center">
+                                <td colspan="12" class="text-center">
                                     <h4>
                                         Nenhum Cupom Disnponível!
                                     </h4>
@@ -59,26 +59,61 @@
                         <div class="row">
                             <div *ngFor="let coupons of couponsFilters" class="col-md-2 me-3 mt-1 mb-1">
                                 <div *ngIf="userUpdate.id == coupons.userId">
-                                    <div class="cardCupon">
-                                        <div class="text-center">
-                                            <div class="d-flex flex-row text-center">
-                                                <div class="d-flex flex-column ml-1">
-                                                    <h1 class="percent mb-0">{{coupons.percent}}%</h1>
-                                                    <span class="discount">Discount</span>
-                                                    <hr class="line">
-                                                    <span class="company text-center fs-4">{{coupons.name}}</span>
-                                                    <hr class="line">
-                                                    <span class="company text-center fs-5">{{coupons.userId}}</span>
+                                    <ng-container *ngIf="coupons.status === status.Active">
+                                        <div class="cardCupon">
+                                            <div class="text-center">
+                                                <div class="d-flex flex-row text-center">
+                                                    <div class="d-flex flex-column ml-1">
+                                                        <h1 class="percent mb-0">{{coupons.percent}}%</h1>
+                                                        <span class="discount">Discount</span>
+                                                        <hr class="line">
+                                                        <span class="company text-center fs-4">{{coupons.name}}</span>
+                                                        <hr class="line">
+                                                        <span class="company text-center fs-5">{{coupons.userId}}</span>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <hr class="line">
+                                            <span class="text-white">Ultimate discount for all customers
+                                                across all country on all products at bbbootstrap.com
+                                            </span>
+                                            <hr class="line">
+                                            <span class="mt-1 text-white">{{coupons.status}}</span>
                                         </div>
-                                        <hr class="line">
-                                        <span class="text-white">Ultimate discount for all customers
-                                            across all country on all products at bbbootstrap.com
-                                        </span>
-                                        <hr class="line">
-                                        <span class="mt-1 text-white">{{coupons.status}}</span>
-                                    </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tab>
+
+                <tab heading="Usado">
+                    <div class="mt-2 m-1">
+                        <div class="row">
+                            <div *ngFor="let coupons of couponsFilters" class="col-md-2 me-3 mt-1 mb-1">
+                                <div *ngIf="userUpdate.id == coupons.userId">
+                                    <ng-container *ngIf="coupons.status === status.Inactive">
+                                        <div class="cardCupon">
+                                            <div class="text-center">
+                                                <div class="d-flex flex-row text-center">
+                                                    <div class="d-flex flex-column ml-1">
+                                                        <h1 class="percent mb-0">{{coupons.percent}}%</h1>
+                                                        <span class="discount">Discount</span>
+                                                        <hr class="line">
+                                                        <span class="company text-center fs-4">{{coupons.name}}</span>
+                                                        <hr class="line">
+                                                        <span class="company text-center fs-5">{{coupons.userId}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr class="line">
+                                            <span class="text-white">Ultimate discount for all customers
+                                                across all country on all products at bbbootstrap.com
+                                            </span>
+                                            <hr class="line">
+                                            <span class="mt-1 text-white">{{coupons.status}}</span>
+                                        </div>
+                                    </ng-container>
                                 </div>
                             </div>
                         </div>
@@ -94,9 +129,6 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">
-                    Atualziando Dados
-                </h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="template.hide()"
                     aria-label="Close">
                 </button>

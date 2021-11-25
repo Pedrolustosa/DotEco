@@ -41,14 +41,14 @@
                             <td>{{associations.state}}</td>
                             <td>{{associations.address}}</td>
                             <td>
-                                <div>
+                                <ng-container *ngIf="userUpdate.id == associations.userId">
                                     <button type="button" title="Excluir" class="btn btn-outline-danger me-2"
                                         (click)="deleteAssociation(associations, confirm)"><i
                                             class="fa fa-eraser"></i></button>
                                     <button type="button" title="Editar" class="btn btn-outline-warning me-2"
                                         (click)="editAssociation(associations, template)"><i
                                             class="fa fa-edit"></i></button>
-                                </div>
+                                </ng-container>
                             </td>
                         </tr>
                     </tbody>
@@ -71,9 +71,6 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">
-                        Atualziando Dados
-                    </h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="template.hide()"
                         aria-label="Close">
                     </button>

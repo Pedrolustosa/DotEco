@@ -12,7 +12,7 @@ namespace DotEco.Application.Dtos
         public string Date { get; set; }
         public string StatusClient { get; set; }
         public string StatusAssociation { get; set; }
-        public int? AssociationId { get; set; }
+        public int AssociationId { get; set; }
         public AssociationDto Association { get; set; }
         public int? UserId { get; set; }
         public UserDto User { get; set; }
