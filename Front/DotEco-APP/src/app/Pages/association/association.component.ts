@@ -12,7 +12,10 @@ import { UserUpdate } from 'src/app/_models/Identity/UserUpdate';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/_services/account.service';
 import { User } from 'src/app/_models/Identity/User';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { PaginatedResult, Pagination } from 'src/app/_models/Pagination';
+import { etLocale } from 'ngx-bootstrap/chronos';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-association',
@@ -21,10 +24,9 @@ import { Observable } from 'rxjs';
 })
 
 export class AssociationComponent implements OnInit {
-  titulo = 'Associações';
+  pagination = {} as Pagination;
 
   associationForm: FormGroup;
-  associationsFilters: Association[];
   _association: Association[] = [];
   associations: Association[];
   association: Association;
@@ -32,7 +34,6 @@ export class AssociationComponent implements OnInit {
   userId: Observable<User[]>;
 
   mode = 'post';
-  _filterList = '';
   bodyDeleteAssociation = '';
 
   constructor(
@@ -49,19 +50,16 @@ export class AssociationComponent implements OnInit {
     this.localeService.use('pt-br');
   }
 
-  get filterList(): string {
-    return this._filterList;
-  }
-  set filterList(value: string) {
-    this._filterList = value;
-    this.associationsFilters = this.filterList ? this.filterAssociations(this.filterList) : this.associations;
-  }
-
   ngOnInit(): void {
     this.spinner.show();
     this.validation();
     this.getAssociation();
     this.carregarUsuario();
+    this.pagination = {
+      currentPage: 1,
+      itemsPerPage: 3,
+      totalItems: 1,
+    } as Pagination;
     this.userId = this.accountService.getAllUser();
   }
 
@@ -94,16 +92,34 @@ export class AssociationComponent implements OnInit {
           this.toaster.error('Usuário não Carregado', 'Erro');
           this.router.navigate(['/dashboard']);
         }
-      )
-      .add(() => this.spinner.hide());
+      ).add(() => this.spinner.hide());
   }
 
+  termSearchChanged: Subject<string> = new Subject<string>();
 
-  filterAssociations(filterFor: string): Association[] {
-    filterFor = filterFor.toLocaleLowerCase();
-    return this.associations.filter(
-      association => association.address.toLocaleLowerCase().indexOf(filterFor) !== -1
-    );
+  public filterAssociations(evt: any): void {
+    if (this.termSearchChanged.observers.length === 0) {
+      this.termSearchChanged.pipe(debounceTime(2500)).subscribe(
+        filterFor => {
+          this.spinner.show();
+          this.associationService.getAllAssociation(
+            this.pagination.currentPage,
+            this.pagination.itemsPerPage,
+            filterFor
+          ).subscribe(
+            (paginatedResult: PaginatedResult<Association[]>) => {
+              this.associations = paginatedResult.result;
+              this.pagination = paginatedResult.pagination;
+            },
+            (error: any) => {
+              this.spinner.hide();
+              this.toastr.error('Erro ao carregar as Associações', 'Erro!');
+            }
+          ).add(() => this.spinner.hide());
+        }
+      )
+    }
+    this.termSearchChanged.next(evt.value);
   }
 
   newAssociation(template: any) {
@@ -138,17 +154,18 @@ export class AssociationComponent implements OnInit {
   }
 
   public getAssociation(): void {
-    this.associationService.getAllAssociation().subscribe({
-      next: (associations: Association[]) => {
-        this.associations = associations;
-        this.associationsFilters = this.associations;
-      },
-      error: (error: any) => {
-        this.spinner.hide();
-        this.toastr.error('Erro ao Carregar as Associações', 'Erro!');
-      },
-      complete: () => this.spinner.hide()
-    });
+    this.spinner.show();
+    this.associationService.getAllAssociation(this.pagination.currentPage,
+      this.pagination.itemsPerPage).subscribe(
+        (paginatedResult: PaginatedResult<Association[]>) => {
+          this.associations = paginatedResult.result;
+          this.pagination = paginatedResult.pagination;
+        },
+        (error: any) => {
+          this.spinner.hide();
+          this.toastr.error('Erro ao Carregar as Associações', 'Erro!');
+        },
+      ).add(() => this.spinner.hide());
   }
 
   saveAlteration(template: any) {
@@ -178,6 +195,11 @@ export class AssociationComponent implements OnInit {
         );
       }
     }
+  }
+
+  public pageChanged(event): void {
+    this.pagination.currentPage = event.page;
+    this.getAssociation();
   }
 
 }

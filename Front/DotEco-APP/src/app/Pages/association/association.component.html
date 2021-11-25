@@ -12,7 +12,8 @@
                 <div class="col-sm-4 mb-2">
                     <div class="form-inline">
                         <div class="form-floating mb-3">
-                            <input id="search" type="text" class="form-control mr-2" [(ngModel)]="filterList" />
+                            <input id="search" type="text" class="form-control mr-2"
+                                (input)="filterAssociations($event.target)" />
                             <label for="search">Pesquisar</label>
                         </div>
                     </div>
@@ -32,8 +33,8 @@
                             <th>Opções</th>
                         </tr>
                     </thead>
-                    <tbody *ngIf="associations && associations">
-                        <tr *ngFor="let associations of associationsFilters">
+                    <tbody *ngIf="associations && associations.length">
+                        <tr *ngFor="let associations of associations">
                             <td>{{associations.id}}</td>
                             <td>{{associations.name}}</td>
                             <td>{{associations.cep | mask: '00000-000'}}</td>
@@ -62,6 +63,13 @@
                         </tr>
                     </tfoot>
                 </table>
+                <div class="d-flex justify-content-center align-items-center">
+                    <pagination [boundaryLinks]="true" (pageChanged)="pageChanged($event)"
+                        [(ngModel)]="pagination.currentPage" [totalItems]="pagination.totalItems"
+                        [itemsPerPage]="pagination.itemsPerPage" pageBtnClass="btn" previousText="&lsaquo;"
+                        nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+                    </pagination>
+                </div>
             </div>
         </div>
     </div>

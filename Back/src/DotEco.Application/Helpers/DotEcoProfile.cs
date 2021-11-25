@@ -2,6 +2,7 @@ using AutoMapper;
 using DotEco.Application.Dtos;
 using DotEco.Domain;
 using DotEco.Domain.Identity;
+using DotEco.Persistence.Models;
 
 namespace DotEco.Application.Helpers
 {
