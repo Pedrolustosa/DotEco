@@ -63,8 +63,11 @@ namespace DotEco.Persistence.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("AssociationId")
+                    b.Property<int>("AssociationId")
                         .HasColumnType("int");
+
+                    b.Property<string>("AssociationName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CEP")
                         .HasColumnType("nvarchar(max)");
@@ -95,8 +98,6 @@ namespace DotEco.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AssociationId");
-
                     b.HasIndex("UserId");
 
                     b.ToTable("CollectionData");
@@ -107,6 +108,7 @@ namespace DotEco.Persistence.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
+                        .HasColumnName("CouponId")
                         .UseIdentityColumn();
 
                     b.Property<string>("Name")
@@ -125,7 +127,7 @@ namespace DotEco.Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Coupons");
+                    b.ToTable("Coupon");
                 });
 
             modelBuilder.Entity("DotEco.Domain.Identity.Role", b =>
@@ -351,15 +353,9 @@ namespace DotEco.Persistence.Migrations
 
             modelBuilder.Entity("DotEco.Domain.CollectionData", b =>
                 {
-                    b.HasOne("DotEco.Domain.Association", "Association")
-                        .WithMany("CollectionDatas")
-                        .HasForeignKey("AssociationId");
-
                     b.HasOne("DotEco.Domain.Identity.User", "User")
                         .WithMany("CollectionDatas")
                         .HasForeignKey("UserId");
-
-                    b.Navigation("Association");
 
                     b.Navigation("User");
                 });
@@ -430,11 +426,6 @@ namespace DotEco.Persistence.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("DotEco.Domain.Association", b =>
-                {
-                    b.Navigation("CollectionDatas");
                 });
 
             modelBuilder.Entity("DotEco.Domain.Identity.Role", b =>

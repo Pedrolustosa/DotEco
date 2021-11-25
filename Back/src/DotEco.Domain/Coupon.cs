@@ -1,10 +1,12 @@
-using System.ComponentModel.DataAnnotations;
 using DotEco.Domain.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DotEco.Domain
 {
+    [Table("Coupon")]
     public class Coupon
     {
+        [Column("CouponId")]
         public int Id { get; set; }
         public string Name { get; set; }
         public string Percent { get; set; }
@@ -16,8 +18,6 @@ namespace DotEco.Domain
 
 public enum Status
 {
-    [Display(Name = "Ativo")]
     Active = 0,
-    [Display(Name = "Inativo")]
     Inactive = 1,
 }

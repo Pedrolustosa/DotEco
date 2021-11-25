@@ -190,28 +190,6 @@ namespace DotEco.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Coupons",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Percent = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Coupons", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Coupons_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "CollectionData",
                 columns: table => new
                 {
@@ -224,10 +202,11 @@ namespace DotEco.Persistence.Migrations
                     Telephone = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TypeCollection = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AssociationId = table.Column<int>(type: "int", nullable: false),
+                    AssociationName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: true),
                     StatusClient = table.Column<int>(type: "int", nullable: false),
-                    StatusAssociation = table.Column<int>(type: "int", nullable: false),
-                    AssociationId = table.Column<int>(type: "int", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: true)
+                    StatusAssociation = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -238,11 +217,27 @@ namespace DotEco.Persistence.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Coupon",
+                columns: table => new
+                {
+                    CouponId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Percent = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Coupon", x => x.CouponId);
                     table.ForeignKey(
-                        name: "FK_CollectionData_Association_AssociationId",
-                        column: x => x.AssociationId,
-                        principalTable: "Association",
-                        principalColumn: "AssociationId",
+                        name: "FK_Coupon_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -291,18 +286,13 @@ namespace DotEco.Persistence.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CollectionData_AssociationId",
-                table: "CollectionData",
-                column: "AssociationId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_CollectionData_UserId",
                 table: "CollectionData",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Coupons_UserId",
-                table: "Coupons",
+                name: "IX_Coupon_UserId",
+                table: "Coupon",
                 column: "UserId");
         }
 
@@ -324,16 +314,16 @@ namespace DotEco.Persistence.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Association");
+
+            migrationBuilder.DropTable(
                 name: "CollectionData");
 
             migrationBuilder.DropTable(
-                name: "Coupons");
+                name: "Coupon");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "Association");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

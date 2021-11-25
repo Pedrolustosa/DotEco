@@ -1,7 +1,6 @@
 using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using DotEco.Domain.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DotEco.Domain
 {
@@ -17,25 +16,26 @@ namespace DotEco.Domain
         public string Telephone { get; set; }
         public string TypeCollection { get; set; }
         public DateTime Date { get; set; }
-        public StatusClient StatusClient { get; set; }
-        public StatusAssociation StatusAssociation { get; set; }
-        public int? AssociationId { get; set; }
-        public Association Association { get; set; }
+        public int AssociationId { get; set; }
         public int? UserId { get; set; }
         public User User { get; set; }
+        public StatusClient StatusClient { get; set; }
+        public StatusAssociation StatusAssociation { get; set; }
     }
 }
 
 public enum StatusClient
 {
-    Scheduled = 0,
-    Confirmed = 1,
-    Refused = 2,
+    Waiting = 0,
+    Scheduled = 1,
+    Confirmed = 2,
+    Refused = 3,
 }
 
 public enum StatusAssociation
 {
-    Scheduled = 0,
-    Confirmed = 1,
-    Refused = 2,
+    Waiting = 0,
+    Scheduled = 1,
+    Confirmed = 2,
+    Refused = 3,
 }
