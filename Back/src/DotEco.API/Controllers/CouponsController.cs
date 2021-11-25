@@ -93,20 +93,30 @@ namespace DotEco.API.Controllers
             {
                 var userName = User.GetUserName();
                 var user = await _accountService.GetUserByUserNameAsync(userName);
-                if (user.Points > 0)
+                if (user.Type == 3)
                 {
-                    int test = 1;
-                    user.Points = user.Points - test;
-                    await _accountService.UpdateAccount(user);
-
                     var coupon = await _couponsService.UpdateCoupons(couponsId, model);
                     if (coupon == null) return NoContent();
 
                     return Ok(coupon);
                 }
-                else if (user.Points == 0)
+                else
                 {
-                    return BadRequest("Sem pontos!");
+                    if (user.Points > 0)
+                    {
+                        int test = 1;
+                        user.Points = user.Points - test;
+                        await _accountService.UpdateAccount(user);
+
+                        var coupon = await _couponsService.UpdateCoupons(couponsId, model);
+                        if (coupon == null) return NoContent();
+
+                        return Ok(coupon);
+                    }
+                    else if (user.Points == 0)
+                    {
+                        return BadRequest("Sem pontos!");
+                    }
                 }
 
                 return Ok("Parabéns Pelo Cupom!");
