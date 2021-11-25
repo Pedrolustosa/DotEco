@@ -3,6 +3,7 @@ export interface Coupons {
     name: string;
     percent: string;
     status: Status;
+    companyId: number;
     userId: number;
 }
 
