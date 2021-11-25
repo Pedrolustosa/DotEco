@@ -88,6 +88,7 @@ export class CouponsComponent implements OnInit {
       name: ['', Validators.required],
       percent: ['', Validators.required],
       userId: ['', Validators.nullValidator],
+      companyId: ['', Validators.nullValidator],
       status: ['', Validators.nullValidator],
     });
   }

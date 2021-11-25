@@ -6,6 +6,7 @@ namespace DotEco.Application.Dtos
         public string Name { get; set; }
         public string Percent { get; set; }
         public string Status { get; set; }
+        public int CompanyId { get; set; }
         public int? UserId { get; set; }
         public UserDto Users { get; set; }
     }

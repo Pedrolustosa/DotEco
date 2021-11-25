@@ -21,13 +21,12 @@
                                                     <div class="d-flex flex-column ml-1">
                                                         <h1 class="mb-0 percent">{{coupons.percent}}%</h1>
                                                         <span class="discount">Discount</span>
-
                                                     </div>
                                                 </div>
                                             </div>
                                             <hr class="line">
                                             <span class="company text-center fs-3">{{coupons.name}}</span>
-                                            <br>
+                                            <hr class="line">
                                             <span class="text-white">discount for all customers across all country on
                                                 all
                                                 products at bbbootstrap.com</span>
@@ -119,6 +118,39 @@
                         </div>
                     </div>
                 </tab>
+
+                <tab heading="Empresa">
+                    <div class="mt-2 m-1">
+                        <div class="row">
+                            <div *ngFor="let coupons of couponsFilters" class="col-md-2 me-3 mt-1 mb-1">
+                                <div *ngIf="userUpdate.id == coupons.companyId">
+                                    <div class="cardCupon">
+                                        <div class="text-center">
+                                            <div class="d-flex flex-row text-center">
+                                                <div class="d-flex flex-column ml-1">
+                                                    <h1 class="mb-0 percent">{{coupons.percent}}%</h1>
+                                                    <span class="discount">Discount</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr class="line">
+                                        <span class="company text-center fs-3">{{coupons.name}}</span>
+                                        <hr class="line">
+                                        <span class="text-white">discount for all customers across all country on
+                                            all
+                                            products at bbbootstrap.com</span>
+                                        <div class="d-flex justify-content-center">
+                                            <ng-container>
+                                                <button class="btnCoupons"
+                                                    (click)="editCoupons(coupons, template)">Resgatar</button>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tab>
             </tabset>
         </div>
     </div>
@@ -136,6 +168,20 @@
             <div class="modal-body">
                 <form class="form-group" [formGroup]="couponsForm">
                     <div class="row">
+                        <div *ngIf="userUpdate.type == 3" class="form-floating mb-3 col-md-4">
+                            <select class="form-select" id="companyId" formControlName="companyId" [ngClass]="{ 'is-invalid': couponsForm.get('companyId')?.errors 
+                        && couponsForm.get('companyId')?.touched}">
+                                <option value="" selected disabled hidden>Selecione uma Opção</option>
+                                <option *ngFor="let company of userId | async as list" [value]="company.id">
+                                    {{company.fullName}}</option>
+                            </select>
+                            <label for="companyId">Empresa</label>
+                            <div *ngIf="couponsForm.get('companyId')?.hasError('required') 
+                                && couponsForm.get('companyId')?.touched" class="invalid-feedback">
+                                Escolha a Empresa que representa o Cupom.
+                            </div>
+                        </div>
+
                         <div *ngIf="userUpdate.type == 3" class="form-floating mb-3 col-md-4">
                             <input type="text" class="form-control" id="name" name="name" formControlName="name"
                                 [ngClass]="{'is-invalid': couponsForm.get('name').errors 
