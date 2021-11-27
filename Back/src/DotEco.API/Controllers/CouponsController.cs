@@ -6,6 +6,7 @@ using DotEco.Application.Contracts;
 using DotEco.Application.Dtos;
 using DotEco.Domain;
 using DotEco.Persistence;
+using DotEco.Persistence.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -33,12 +34,14 @@ namespace DotEco.API.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Cliente2, Empresa, Administrador")]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery] PageParams pageParams)
         {
             try
             {
-                var coupons = await _couponsService.GetAllCouponsAsync();
+                var coupons = await _couponsService.GetAllCouponsAsync(pageParams);
                 if (coupons == null) return NoContent();
+
+                Response.AddPagination(coupons.CurrentPage, coupons.PageSize, coupons.TotalCount, coupons.TotalPages);
 
                 return Ok(coupons);
             }

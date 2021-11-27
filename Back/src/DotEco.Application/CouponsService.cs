@@ -5,6 +5,7 @@ using DotEco.Application.Contracts;
 using DotEco.Application.Dtos;
 using DotEco.Domain;
 using DotEco.Persistence.Contracts;
+using DotEco.Persistence.Models;
 
 namespace DotEco.Application
 {
@@ -59,14 +60,19 @@ namespace DotEco.Application
             }
         }
 
-        public async Task<CouponsDto[]> GetAllCouponsAsync()
+        public async Task<PageList<CouponsDto>> GetAllCouponsAsync(PageParams pageParams)
         {
             try
             {
-                var coupons = await _couponsPersist.GetAllCouponsAsync();
+                var coupons = await _couponsPersist.GetAllCouponsAsync(pageParams);
                 if (coupons == null) return null;
 
-                var result = _mapper.Map<CouponsDto[]>(coupons);
+                var result = _mapper.Map<PageList<CouponsDto>>(coupons);
+
+                result.CurrentPage = coupons.CurrentPage;
+                result.TotalPages = coupons.TotalPages;
+                result.PageSize = coupons.PageSize;
+                result.TotalCount = coupons.TotalCount;
 
                 return result;
             }

@@ -1,15 +1,17 @@
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { CollectionData } from '../_models/CollectionData';
 import { environment } from 'src/environments/environment';
 import { UserUpdate } from '../_models/Identity/UserUpdate';
-import { take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
+import { PaginatedResult } from '../_models/Pagination';
 
 @Injectable({
     providedIn: 'root'
 })
 export class CollectionDataService {
+    userUpdate = {} as UserUpdate;
     baseUrl = environment.apiURL + 'api/collectiondatas'
     baseUrlUser = environment.apiURL + 'api/user/'
 
@@ -17,6 +19,29 @@ export class CollectionDataService {
 
     getAllCollectionData(): Observable<CollectionData[]> {
         return this.http.get<CollectionData[]>(this.baseUrl);
+    }
+
+    getAllCollectionDatas(page?: number, itemsPerPage?: number, term?: string): Observable<PaginatedResult<CollectionData[]>> {
+        const paginatedResult: PaginatedResult<CollectionData[]> = new PaginatedResult<CollectionData[]>();
+        let params = new HttpParams;
+        if (page != null && itemsPerPage != null) {
+            params = params.append('pageNumber', page.toString());
+            params = params.append('pageSize', itemsPerPage.toString());
+        }
+        if (term != null && term != '')
+            params = params.append('term', term)
+
+        return this.http
+            .get<CollectionData[]>(this.baseUrl, { observe: 'response', params })
+            .pipe(
+                take(1),
+                map((response) => {
+                    paginatedResult.result = response.body;
+                    if (response.headers.has('Pagination')) {
+                        paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+                    }
+                    return paginatedResult;
+                }));
     }
 
     getCollectionDataById(id: number): Observable<CollectionData> {

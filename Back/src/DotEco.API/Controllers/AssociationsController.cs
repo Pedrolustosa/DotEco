@@ -1,12 +1,8 @@
-using AutoMapper;
-using DotEco.Domain;
-using DotEco.Persistence;
 using System.Threading.Tasks;
 using DotEco.Application.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
-using DotEco.Persistence.Contracts;
 using DotEco.Application.Contracts;
 using Microsoft.AspNetCore.Hosting;
 using System;

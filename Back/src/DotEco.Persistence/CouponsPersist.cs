@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using DotEco.Domain;
 using DotEco.Persistence.Context;
 using DotEco.Persistence.Contracts;
+using DotEco.Persistence.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DotEco.Persistence
@@ -15,14 +16,14 @@ namespace DotEco.Persistence
             _context = context;
             _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
-        public async Task<Coupon[]> GetAllCouponsAsync()
+        public async Task<PageList<Coupon>> GetAllCouponsAsync(PageParams pageParams)
         {
             IQueryable<Coupon> query = _context.Coupons;
 
             query = query.AsNoTracking()
                         .OrderBy(c => c.Id);
 
-            return await query.ToArrayAsync();
+            return await PageList<Coupon>.CreateAsync(query, pageParams.PageNumber, pageParams.pageSize);
         }
 
         public async Task<Coupon> GetCouponsAsyncById(int CouponsId)

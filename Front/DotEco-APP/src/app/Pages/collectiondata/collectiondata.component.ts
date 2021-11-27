@@ -3,7 +3,7 @@ import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@ang
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { CollectionData, StatusClient } from 'src/app/_models/CollectionData';
 import { CollectionDataService } from 'src/app/_services/collectiondata.service';
 import { Association } from 'src/app/_models/Association';
@@ -13,7 +13,8 @@ import { UserUpdate } from 'src/app/_models/Identity/UserUpdate';
 import { AccountService } from 'src/app/_services/account.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/_models/Identity/User';
-import { ValidatorField } from 'src/app/_helpers/ValidatorField';
+import { PaginatedResult, Pagination } from 'src/app/_models/Pagination';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-collectiondata',
@@ -21,6 +22,7 @@ import { ValidatorField } from 'src/app/_helpers/ValidatorField';
   styleUrls: ['./collectiondata.component.css']
 })
 export class CollectionDataComponent implements OnInit {
+  pagination = {} as Pagination;
   collectiondataForm: FormGroup;
   form!: FormGroup;
   collectiondatasFilters: CollectionData[];
@@ -58,16 +60,13 @@ export class CollectionDataComponent implements OnInit {
     this.validation();
     this.carregarUsuario();
     this.getCollectionData();
+    this.pagination = {
+      currentPage: 1,
+      itemsPerPage: 3,
+      totalItems: 1,
+    } as Pagination;
     this.userId = this.accountService.getAllUser();
     this.associationId = this.associationService.getAllAssociations();
-  }
-
-  get filterList(): string {
-    return this._filterList;
-  }
-  set filterList(value: string) {
-    this._filterList = value;
-    this.collectiondatasFilters = this.filterList ? this.filterCollectionDatas(this.filterList) : this.collectiondatas;
   }
 
   openModal(template: any) {
@@ -77,6 +76,7 @@ export class CollectionDataComponent implements OnInit {
 
   private validation(): void {
     this.collectiondataForm = this.fb.group({
+      name: ['', Validators.required],
       address: ['', Validators.required],
       cep: ['', Validators.required],
       reference: ['', Validators.required],
@@ -108,11 +108,31 @@ export class CollectionDataComponent implements OnInit {
       .add(() => this.spinner.hide());
   }
 
-  filterCollectionDatas(filterFor: string): CollectionData[] {
-    filterFor = filterFor.toLocaleLowerCase();
-    return this.collectiondatas.filter(
-      collectiondata => collectiondata.cep.toLocaleLowerCase().indexOf(filterFor) !== -1
-    );
+  termSearchChanged: Subject<string> = new Subject<string>();
+
+  public filterCollectionData(evt: any): void {
+    if (this.termSearchChanged.observers.length === 0) {
+      this.termSearchChanged.pipe(debounceTime(2500)).subscribe(
+        filterFor => {
+          this.spinner.show();
+          this.collectiondataService.getAllCollectionDatas(
+            this.pagination.currentPage,
+            this.pagination.itemsPerPage,
+            filterFor
+          ).subscribe(
+            (paginatedResult: PaginatedResult<CollectionData[]>) => {
+              this.collectiondatas = paginatedResult.result;
+              this.pagination = paginatedResult.pagination;
+            },
+            (error: any) => {
+              this.spinner.hide();
+              this.toastr.error('Erro ao carregar as Associações', 'Erro!');
+            }
+          ).add(() => this.spinner.hide());
+        }
+      )
+    }
+    this.termSearchChanged.next(evt.value);
   }
 
   newCollectionData(template: any) {
@@ -147,17 +167,18 @@ export class CollectionDataComponent implements OnInit {
   }
 
   public getCollectionData(): void {
-    this.collectiondataService.getAllCollectionData().subscribe({
-      next: (collectiondata: CollectionData[]) => {
-        this.collectiondatas = collectiondata;
-        this.collectiondatasFilters = this.collectiondatas;
-      },
-      error: (error: any) => {
-        this.spinner.hide();
-        this.toastr.error('Erro ao Carregar as Coletas', 'Erro!');
-      },
-      complete: () => this.spinner.hide()
-    });
+    this.spinner.show();
+    this.collectiondataService.getAllCollectionDatas(this.pagination.currentPage,
+      this.pagination.itemsPerPage).subscribe(
+        (paginatedResult: PaginatedResult<CollectionData[]>) => {
+          this.collectiondatas = paginatedResult.result;
+          this.pagination = paginatedResult.pagination;
+        },
+        (error: any) => {
+          this.spinner.hide();
+          this.toastr.error('Erro ao Carregar as Coletas', 'Erro!');
+        },
+      ).add(() => this.spinner.hide());
   }
 
   onSubmit(): void {
@@ -210,6 +231,11 @@ export class CollectionDataComponent implements OnInit {
         );
       }
     }
+  }
+
+  public pageChanged(event): void {
+    this.pagination.currentPage = event.page;
+    this.getCollectionData();
   }
 
 }

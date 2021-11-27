@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { Coupons, Status } from 'src/app/_models/Coupons';
 import { User } from 'src/app/_models/Identity/User';
 import { UserUpdate } from 'src/app/_models/Identity/UserUpdate';
+import { PaginatedResult, Pagination } from 'src/app/_models/Pagination';
 import { AccountService } from 'src/app/_services/account.service';
 import { CouponsService } from 'src/app/_services/coupons.service';
 
@@ -18,6 +19,7 @@ import { CouponsService } from 'src/app/_services/coupons.service';
   styleUrls: ['./coupons.component.css']
 })
 export class CouponsComponent implements OnInit {
+  pagination = {} as Pagination;
   couponsFilters: Coupons[];
   coupons: Coupons[];
   coupon: Coupons;
@@ -50,15 +52,12 @@ export class CouponsComponent implements OnInit {
     this.validation();
     this.getCoupon();
     this.carregarUsuario();
+    this.pagination = {
+      currentPage: 1,
+      itemsPerPage: 3,
+      totalItems: 1,
+    } as Pagination;
     this.userId = this.accountService.getAllUser();
-  }
-
-  get filterList(): string {
-    return this._filterList;
-  }
-  set filterList(value: string) {
-    this._filterList = value;
-    this.couponsFilters = this.filterList ? this.filterCoupons(this.filterList) : this.coupons;
   }
 
   openModal(template: any) {
@@ -93,13 +92,6 @@ export class CouponsComponent implements OnInit {
     });
   }
 
-  filterCoupons(filterFor: string): Coupons[] {
-    filterFor = filterFor.toLocaleLowerCase();
-    return this.coupons.filter(
-      coupon => coupon.name.toLocaleLowerCase().indexOf(filterFor) !== -1
-    );
-  }
-
   newCoupons(template: any) {
     this.mode = 'post';
     this.openModal(template);
@@ -132,17 +124,18 @@ export class CouponsComponent implements OnInit {
   }
 
   public getCoupon(): void {
-    this.couponService.getAllCoupons().subscribe({
-      next: (coupons: Coupons[]) => {
-        this.coupons = coupons;
-        this.couponsFilters = this.coupons;
-      },
-      error: (error: any) => {
-        this.spinner.hide();
-        this.toastr.error('Erro ao Carregar os Cupons', 'Erro!');
-      },
-      complete: () => this.spinner.hide()
-    });
+    this.spinner.show();
+    this.couponService.getAllCoupons(this.pagination.currentPage,
+      this.pagination.itemsPerPage).subscribe(
+        (paginatedResult: PaginatedResult<Coupons[]>) => {
+          this.coupons = paginatedResult.result;
+          this.pagination = paginatedResult.pagination;
+        },
+        (error: any) => {
+          this.spinner.hide();
+          this.toastr.error('Erro ao Carregar as Coletas', 'Erro!');
+        },
+      ).add(() => this.spinner.hide());
   }
 
   saveAlteration(template: any) {
@@ -172,6 +165,11 @@ export class CouponsComponent implements OnInit {
         );
       }
     }
+  }
+
+  public pageChanged(event): void {
+    this.pagination.currentPage = event.page;
+    this.getCoupon();
   }
 
 }

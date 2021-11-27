@@ -11,10 +11,9 @@
             <div class="row mb-4">
                 <div class="col-sm-4 mb-2">
                     <div class="form-inline">
-                        <div class="form-floating mb-3">
-                            <input id="search" type="text" class="form-control mr-2" [(ngModel)]="filterList" />
-                            <label for="search">Pesquisar</label>
-                        </div>
+                        <input id="search" type="text" class="form-control mr-2"
+                            (input)="filterCollectionData($event.target)" />
+                        <label for="search">Pesquisar</label>
                     </div>
                 </div>
             </div>
@@ -37,8 +36,8 @@
                                 <th>opções</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr *ngFor="let collectiondatas of collectiondatasFilters">
+                        <tbody *ngIf="collectiondatas && collectiondatas.length">
+                            <tr *ngFor="let collectiondatas of collectiondatas">
                                 <ng-container *ngIf="userUpdate.id == collectiondatas.userId">
                                     <td>{{collectiondatas.cep | mask: '00000-000'}}</td>
                                     <td>{{collectiondatas.address}}</td>
@@ -91,6 +90,13 @@
                             </tr>
                         </tfoot>
                     </table>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <pagination [boundaryLinks]="true" (pageChanged)="pageChanged($event)"
+                            [(ngModel)]="pagination.currentPage" [totalItems]="pagination.totalItems"
+                            [itemsPerPage]="pagination.itemsPerPage" pageBtnClass="btn" previousText="&lsaquo;"
+                            nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+                        </pagination>
+                    </div>
                 </div>
             </ng-container>
             <ng-container *ngIf="userUpdate.type == 2">
@@ -110,9 +116,8 @@
                                 <th>opções</th>
                             </tr>
                         </thead>
-
-                        <tbody>
-                            <tr *ngFor="let collectiondatas of collectiondatasFilters">
+                        <tbody *ngIf="collectiondatas && collectiondatas.length">
+                            <tr *ngFor="let collectiondatas of collectiondatas">
                                 <ng-container *ngIf="userUpdate.id == collectiondatas.associationId">
                                     <td>{{collectiondatas.cep | mask: '00000-000'}}</td>
                                     <td>{{collectiondatas.address}}</td>
@@ -160,6 +165,13 @@
                             </tr>
                         </tfoot>
                     </table>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <pagination [boundaryLinks]="true" (pageChanged)="pageChanged($event)"
+                            [(ngModel)]="pagination.currentPage" [totalItems]="pagination.totalItems"
+                            [itemsPerPage]="pagination.itemsPerPage" pageBtnClass="btn" previousText="&lsaquo;"
+                            nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+                        </pagination>
+                    </div>
                 </div>
             </ng-container>
         </div>
@@ -202,6 +214,21 @@
                             <label for="associationId">Associação</label>
                             <div *ngIf="collectiondataForm.get('associationId')?.hasError('required') 
                                     && collectiondataForm.get('associationId')?.touched" class="invalid-feedback">
+                                Escolha o Tipo de Usuário.
+                            </div>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <select class="form-select" id="name" formControlName="name" [ngClass]="{ 'is-invalid': collectiondataForm.get('name')?.errors 
+                            && collectiondataForm.get('name')?.touched}">
+                                <option selected disabled hidden>Selecione uma Opção</option>
+                                <option *ngFor="let association of associationId | async as list"
+                                    [value]="association.name">
+                                    {{association.name}}</option>
+                            </select>
+                            <label for="name">Associação</label>
+                            <div *ngIf="collectiondataForm.get('name')?.hasError('required') 
+                                    && collectiondataForm.get('name')?.touched" class="invalid-feedback">
                                 Escolha o Tipo de Usuário.
                             </div>
                         </div>
