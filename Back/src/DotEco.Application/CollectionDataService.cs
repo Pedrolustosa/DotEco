@@ -5,6 +5,7 @@ using DotEco.Application.Contracts;
 using DotEco.Application.Dtos;
 using DotEco.Domain;
 using DotEco.Persistence.Contracts;
+using DotEco.Persistence.Models;
 
 namespace DotEco.Application
 {
@@ -59,14 +60,19 @@ namespace DotEco.Application
             }
         }
 
-        public async Task<CollectionDataDto[]> GetAllCollectionDataAsync()
+        public async Task<PageList<CollectionDataDto>> GetAllCollectionDataAsync(PageParams pageParams)
         {
             try
             {
-                var collectionDatas = await _collectionDataPersist.GetAllCollectionDataAsync();
+                var collectionDatas = await _collectionDataPersist.GetAllCollectionDataAsync(pageParams);
                 if (collectionDatas == null) return null;
 
-                var result = _mapper.Map<CollectionDataDto[]>(collectionDatas);
+                var result = _mapper.Map<PageList<CollectionDataDto>>(collectionDatas);
+
+                result.CurrentPage = collectionDatas.CurrentPage;
+                result.TotalPages = collectionDatas.TotalPages;
+                result.PageSize = collectionDatas.PageSize;
+                result.TotalCount = collectionDatas.TotalCount;
 
                 return result;
             }

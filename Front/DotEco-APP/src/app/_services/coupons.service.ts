@@ -1,10 +1,11 @@
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Coupons } from '../_models/Coupons';
 import { environment } from 'src/environments/environment';
 import { UserUpdate } from '../_models/Identity/UserUpdate';
-import { take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
+import { PaginatedResult } from '../_models/Pagination';
 
 @Injectable({
     providedIn: 'root'
@@ -15,8 +16,27 @@ export class CouponsService {
 
     constructor(private http: HttpClient) { }
 
-    getAllCoupons(): Observable<Coupons[]> {
-        return this.http.get<Coupons[]>(this.baseUrl);
+    getAllCoupons(page?: number, itemsPerPage?: number, term?: string): Observable<PaginatedResult<Coupons[]>> {
+        const paginatedResult: PaginatedResult<Coupons[]> = new PaginatedResult<Coupons[]>();
+        let params = new HttpParams;
+        if (page != null && itemsPerPage != null) {
+            params = params.append('pageNumber', page.toString());
+            params = params.append('pageSize', itemsPerPage.toString());
+        }
+        if (term != null && term != '')
+            params = params.append('term', term)
+
+        return this.http
+            .get<Coupons[]>(this.baseUrl, { observe: 'response', params })
+            .pipe(
+                take(1),
+                map((response) => {
+                    paginatedResult.result = response.body;
+                    if (response.headers.has('Pagination')) {
+                        paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+                    }
+                    return paginatedResult;
+                }));
     }
 
     getCouponsById(id: number): Observable<Coupons> {

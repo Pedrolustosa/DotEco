@@ -10,6 +10,8 @@ using DotEco.Domain;
 using DotEco.Application.Contracts;
 using Microsoft.AspNetCore.Hosting;
 using System;
+using DotEco.Persistence.Models;
+using DotEco.API.Extensions;
 
 namespace DotEco.API.Controllers
 {
@@ -33,12 +35,14 @@ namespace DotEco.API.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Cliente2, Associacao, Administrador")]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery] PageParams pageParams)
         {
             try
             {
-                var collectionDatas = await _collectionDataService.GetAllCollectionDataAsync();
+                var collectionDatas = await _collectionDataService.GetAllCollectionDataAsync(pageParams);
                 if (collectionDatas == null) return NoContent();
+
+                Response.AddPagination(collectionDatas.CurrentPage, collectionDatas.PageSize, collectionDatas.TotalCount, collectionDatas.TotalPages);
 
                 return Ok(collectionDatas);
             }
