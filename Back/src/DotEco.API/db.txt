@@ -3,3 +3,7 @@ back/src/DotEco.Persistence -> dotnet ef --startup-project ../DotEco.API migrati
 
 Update DB
 back/src/DotEco.Persistence -> dotnet ef --startup-project ../DotEco.API database update
+
+Deploy Azure
+back/src/DotEco.api -> dotnet publish -c Release -o ./publish
+/swagger/index.html
