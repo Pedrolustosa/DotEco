@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/_models/Identity/User';
 import { AccountService } from 'src/app/_services/account.service';
@@ -26,8 +27,10 @@ export class RegistrationComponent implements OnInit {
     private accountService: AccountService,
     public router: Router,
     public fb: FormBuilder,
-    private toastr: ToastrService) {
-  }
+    private toaster: ToastrService,
+    private spinner: NgxSpinnerService,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit() {
     this.validation();
@@ -59,6 +62,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   registerUser() {
+    this.spinner.show();
     if (this.registerForm.valid) {
       this.user = Object.assign(
         { password: this.registerForm.get('passwords.password').value },
@@ -80,8 +84,7 @@ export class RegistrationComponent implements OnInit {
             }
           });
         }
-      );
+      ).add(() => this.spinner.hide());
     }
   }
-
 }

@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
           this.toaster.error('usuário ou senha inválido');
         else console.error(error);
       }
-    )
-      .add(() => this.spinner.hide());
+    ).add(() => this.spinner.hide());
   }
 }
