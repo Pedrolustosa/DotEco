@@ -93,12 +93,12 @@
                                             && associationForm.get('userId')?.touched}">
                                             <option value="" selected disabled hidden>Selecione uma Opção</option>
                                             <option *ngFor="let user of userId | async as list" [value]="user.id">
-                                                {{user.fullName}}</option>
+                                                {{user.userName}}</option>
                                         </select>
-                                        <label for="userId">Associação</label>
+                                        <label for="userId">Usuário Associação</label>
                                         <div *ngIf="associationForm.get('userId')?.hasError('required') 
                                         && associationForm.get('userId')?.touched" class="invalid-feedback">
-                                            Escolha a sua Associação
+                                            Usuário da Associação
                                         </div>
                                     </div>
                                 </div>
@@ -108,10 +108,10 @@
                                         <input type="text" class="form-control" id="name" formControlName="name"
                                             [ngClass]="{'is-invalid': associationForm.get('name').errors 
                                         && associationForm.get('name').touched }" />
-                                        <label for="name">Comfirmar Associação</label>
+                                        <label for="name">Nome Associação</label>
                                         <div *ngIf="associationForm.get('name').hasError('required') 
                                         && associationForm.get('name').touched" class="invalid-feedback">
-                                            Comfirmação é obrigatório.
+                                            Nome da Associação é obrigatório.
                                         </div>
                                     </div>
                                 </div>

@@ -11,6 +11,7 @@ namespace DotEco.Application.Dtos
         public string Telephone { get; set; }
         public string TypeCollection { get; set; }
         public string Date { get; set; }
+        public string StatusPoint { get; set; }
         public string StatusClient { get; set; }
         public string StatusAssociation { get; set; }
         public int AssociationId { get; set; }

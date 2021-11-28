@@ -10,6 +10,7 @@ export interface CollectionData {
     telephone: string;
     userId: number;
     associationId: Association[];
+    statusPoint: StatusPoint;
     statusClient: StatusClient;
     statusAssociation: StatusAssociation;
 }
@@ -26,4 +27,9 @@ export enum StatusAssociation {
     Scheduled = "Scheduled",
     Confirmed = "Confirmed",
     Refused = "Refused",
+}
+
+export enum StatusPoint {
+    Rescued = "Rescued",
+    NotRescued = "NotRescued",
 }
