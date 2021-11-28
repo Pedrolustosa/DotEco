@@ -43,10 +43,6 @@ export class CouponsService {
         return this.http.get<Coupons>(`${this.baseUrl}/${id}`);
     }
 
-    getUser(): Observable<UserUpdate> {
-        return this.http.get<UserUpdate>(this.baseUrlUser + 'getUser').pipe(take(1));
-    }
-
     postCoupons(coupon: Coupons) {
         return this.http.post(this.baseUrl, coupon);
     }
