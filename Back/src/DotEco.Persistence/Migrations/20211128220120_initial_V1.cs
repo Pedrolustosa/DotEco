@@ -205,6 +205,7 @@ namespace DotEco.Persistence.Migrations
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     AssociationId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: true),
+                    StatusPoint = table.Column<int>(type: "int", nullable: false),
                     StatusClient = table.Column<int>(type: "int", nullable: false),
                     StatusAssociation = table.Column<int>(type: "int", nullable: false)
                 },

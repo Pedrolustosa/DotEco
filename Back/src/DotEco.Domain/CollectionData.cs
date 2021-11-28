@@ -20,6 +20,7 @@ namespace DotEco.Domain
         public int AssociationId { get; set; }
         public int? UserId { get; set; }
         public User User { get; set; }
+        public StatusPoint StatusPoint { get; set; }
         public StatusClient StatusClient { get; set; }
         public StatusAssociation StatusAssociation { get; set; }
     }
@@ -39,4 +40,10 @@ public enum StatusAssociation
     Scheduled = 1,
     Confirmed = 2,
     Refused = 3,
+}
+
+public enum StatusPoint
+{
+    Rescued = 0,
+    NotRescued = 1,
 }

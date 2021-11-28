@@ -87,6 +87,9 @@ namespace DotEco.Persistence.Migrations
                     b.Property<int>("StatusClient")
                         .HasColumnType("int");
 
+                    b.Property<int>("StatusPoint")
+                        .HasColumnType("int");
+
                     b.Property<string>("Telephone")
                         .HasColumnType("nvarchar(max)");
 

@@ -4,7 +4,7 @@ import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { Observable, Subject } from 'rxjs';
-import { CollectionData, StatusClient } from 'src/app/_models/CollectionData';
+import { CollectionData, StatusClient, StatusPoint } from 'src/app/_models/CollectionData';
 import { CollectionDataService } from 'src/app/_services/collectiondata.service';
 import { Association } from 'src/app/_models/Association';
 import { AssociationService } from 'src/app/_services/association.service';
@@ -32,6 +32,7 @@ export class CollectionDataComponent implements OnInit {
   userUpdate = {} as UserUpdate;
   userId: Observable<User[]>;
   statusEnum = StatusClient;
+  statusPoint = StatusPoint;
   association = {} as Association;
   buttonHidden: boolean = true;
 
@@ -86,6 +87,7 @@ export class CollectionDataComponent implements OnInit {
       date: ['', Validators.nullValidator],
       associationId: ['', Validators.required],
       userId: ['', Validators.required],
+      statusPoint: ['', Validators.nullValidator],
       statusClient: ['', Validators.nullValidator],
       statusAssociation: ['', Validators.nullValidator],
     });
@@ -187,7 +189,6 @@ export class CollectionDataComponent implements OnInit {
 
   public countPoints(): void {
     this.spinner.show();
-    this.buttonHidden = !this.buttonHidden
     this.userUpdate.points += 1
     this.userUpdate.userName = this.userUpdate.userName
     this.userUpdate.type = this.userUpdate.type
