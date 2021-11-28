@@ -12,7 +12,7 @@ import { PaginatedResult } from '../_models/Pagination';
 })
 export class CouponsService {
     baseUrl = environment.apiURL + 'api/coupons';
-    baseUrlUser = environment.apiURL + 'api/user/'
+    baseUrlUser = environment.apiURL + 'api/user/';
 
     constructor(private http: HttpClient) { }
 
