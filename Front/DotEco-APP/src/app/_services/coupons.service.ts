@@ -12,7 +12,7 @@ import { PaginatedResult } from '../_models/Pagination';
 })
 export class CouponsService {
     baseUrl = environment.apiURL + 'api/coupons';
-    baseUrlUser = environment.apiURL + 'api/user/'
+    baseUrlUser = environment.apiURL + 'api/user/';
 
     constructor(private http: HttpClient) { }
 
@@ -41,10 +41,6 @@ export class CouponsService {
 
     getCouponsById(id: number): Observable<Coupons> {
         return this.http.get<Coupons>(`${this.baseUrl}/${id}`);
-    }
-
-    getUser(): Observable<UserUpdate> {
-        return this.http.get<UserUpdate>(this.baseUrlUser + 'getUser').pipe(take(1));
     }
 
     postCoupons(coupon: Coupons) {

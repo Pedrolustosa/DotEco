@@ -48,10 +48,6 @@ export class CollectionDataService {
         return this.http.get<CollectionData>(`${this.baseUrl}/${id}`);
     }
 
-    getUser(): Observable<UserUpdate> {
-        return this.http.get<UserUpdate>(this.baseUrlUser + 'getUser').pipe(take(1));
-    }
-
     postCollectionData(collectiondata: CollectionData) {
         return this.http.post(this.baseUrl, collectiondata);
     }
