@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiURL: 'https://dotecoapiv1.azurewebsites.net/',
+  apiURL: 'https://dotecoapi-v1.azurewebsites.net/',
   //apiURL: 'https://localhost:5001/',
   //apiURL: 'https://localhost:44367/',
 };
