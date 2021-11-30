@@ -34,6 +34,7 @@ export class CollectionDataComponent implements OnInit {
   statusEnum = StatusClient;
   statusPoint = StatusPoint;
   association = {} as Association;
+  collection = {} as CollectionData;
   buttonHidden: boolean = true;
 
   mode = 'post';
