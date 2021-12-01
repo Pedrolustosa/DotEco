@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { CollectionData, StatusClient, StatusPoint } from 'src/app/_models/CollectionData';
 import { CollectionDataService } from 'src/app/_services/collectiondata.service';
 import { Association } from 'src/app/_models/Association';
@@ -13,8 +13,6 @@ import { UserUpdate } from 'src/app/_models/Identity/UserUpdate';
 import { AccountService } from 'src/app/_services/account.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/_models/Identity/User';
-import { PaginatedResult, Pagination } from 'src/app/_models/Pagination';
-import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-collectiondata',
@@ -22,6 +20,7 @@ import { debounceTime } from 'rxjs/operators';
   styleUrls: ['./collectiondata.component.css']
 })
 export class CollectionDataComponent implements OnInit {
+  p: number = 1;
   collectiondataForm: FormGroup;
   form!: FormGroup;
   collectiondatasFilters: CollectionData[];
