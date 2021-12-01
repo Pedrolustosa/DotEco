@@ -30,6 +30,6 @@ export enum StatusAssociation {
 }
 
 export enum StatusPoint {
-    Rescued = "Rescued",
+    Rescued = "c",
     NotRescued = "NotRescued",
 }
