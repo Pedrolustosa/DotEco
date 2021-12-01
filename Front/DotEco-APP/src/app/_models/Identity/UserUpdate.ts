@@ -1,4 +1,5 @@
 export class UserUpdate {
+  id: number;
   userName: string;
   fullName: string;
   email: string;

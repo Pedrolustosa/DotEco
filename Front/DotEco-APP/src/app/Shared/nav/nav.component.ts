@@ -8,6 +8,7 @@ import { AccountService } from 'src/app/_services/account.service';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
+  public user = this.accountService.currentUser$;
   isCollapsed = true;
 
   constructor(

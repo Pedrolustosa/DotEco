@@ -20,7 +20,29 @@ namespace DotEco.Persistence
             IQueryable<CollectionData> query = _context.CollectionDatas;
 
             query = query.AsNoTracking()
-                        .OrderBy(c => c.Id);
+                        .OrderByDescending(c => c.Id);
+
+            return await query.ToArrayAsync();
+        }
+
+        public async Task<CollectionData[]> GetCollectionDataByUserIdAsync(int userId)
+        {
+            IQueryable<CollectionData> query = _context.CollectionDatas;
+
+            query = query.AsNoTracking()
+                         .Where(c => c.UserId == userId)
+                         .OrderByDescending(c => c.Id);
+
+            return await query.ToArrayAsync();
+        }
+
+        public async Task<CollectionData[]> GetCollectionDataByAssociationIdAsync(int associationId)
+        {
+            IQueryable<CollectionData> query = _context.CollectionDatas;
+
+            query = query.AsNoTracking()
+                         .Where(c => c.AssociationId == associationId)
+                         .OrderByDescending(c => c.Id);
 
             return await query.ToArrayAsync();
         }
@@ -29,10 +51,9 @@ namespace DotEco.Persistence
         {
             IQueryable<CollectionData> query = _context.CollectionDatas;
 
-            query = query
-                        .AsNoTracking()
-                        .OrderBy(c => c.Id)
-                        .Where(c => c.Id == CollectionDataId);
+            query = query.AsNoTracking()
+                         .OrderBy(c => c.Id)
+                         .Where(c => c.Id == CollectionDataId);
 
             return await query.FirstOrDefaultAsync();
         }
