@@ -15,16 +15,14 @@ namespace DotEco.Persistence
         {
             _context = context;
         }
-        public async Task<PageList<Association>> GetAllAssociationAsync(PageParams pageParams)
+        public async Task<Association[]> GetAllAssociationAsync()
         {
             IQueryable<Association> query = _context.Associations;
 
             query = query.AsNoTracking()
-                        .Where(e => (e.Name.ToLower().Contains(pageParams.Term.ToLower()) ||
-                               e.State.ToLower().Contains(pageParams.Term.ToLower())))
                         .OrderBy(c => c.Id);
 
-            return await PageList<Association>.CreateAsync(query, pageParams.PageNumber, pageParams.pageSize);
+            return await query.ToArrayAsync();
         }
 
         public async Task<Association> GetAssociationAsyncById(int AssociationId)

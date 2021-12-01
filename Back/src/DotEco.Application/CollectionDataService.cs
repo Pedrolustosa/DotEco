@@ -60,19 +60,14 @@ namespace DotEco.Application
             }
         }
 
-        public async Task<PageList<CollectionDataDto>> GetAllCollectionDataAsync(PageParams pageParams)
+        public async Task<CollectionDataDto[]> GetAllCollectionDataAsync()
         {
             try
             {
-                var collectionDatas = await _collectionDataPersist.GetAllCollectionDataAsync(pageParams);
+                var collectionDatas = await _collectionDataPersist.GetAllCollectionDataAsync();
                 if (collectionDatas == null) return null;
 
-                var result = _mapper.Map<PageList<CollectionDataDto>>(collectionDatas);
-
-                result.CurrentPage = collectionDatas.CurrentPage;
-                result.TotalPages = collectionDatas.TotalPages;
-                result.PageSize = collectionDatas.PageSize;
-                result.TotalCount = collectionDatas.TotalCount;
+                var result = _mapper.Map<CollectionDataDto[]>(collectionDatas);
 
                 return result;
             }

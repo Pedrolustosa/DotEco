@@ -16,27 +16,8 @@ export class CouponsService {
 
     constructor(private http: HttpClient) { }
 
-    getAllCoupons(page?: number, itemsPerPage?: number, term?: string): Observable<PaginatedResult<Coupons[]>> {
-        const paginatedResult: PaginatedResult<Coupons[]> = new PaginatedResult<Coupons[]>();
-        let params = new HttpParams;
-        if (page != null && itemsPerPage != null) {
-            params = params.append('pageNumber', page.toString());
-            params = params.append('pageSize', itemsPerPage.toString());
-        }
-        if (term != null && term != '')
-            params = params.append('term', term)
-
-        return this.http
-            .get<Coupons[]>(this.baseUrl, { observe: 'response', params })
-            .pipe(
-                take(1),
-                map((response) => {
-                    paginatedResult.result = response.body;
-                    if (response.headers.has('Pagination')) {
-                        paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
-                    }
-                    return paginatedResult;
-                }));
+    getAllCoupons(): Observable<Coupons[]> {
+        return this.http.get<Coupons[]>(this.baseUrl);
     }
 
     getCouponsById(id: number): Observable<Coupons> {

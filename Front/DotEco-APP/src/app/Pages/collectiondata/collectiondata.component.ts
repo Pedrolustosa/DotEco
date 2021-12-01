@@ -22,7 +22,6 @@ import { debounceTime } from 'rxjs/operators';
   styleUrls: ['./collectiondata.component.css']
 })
 export class CollectionDataComponent implements OnInit {
-  pagination = {} as Pagination;
   collectiondataForm: FormGroup;
   form!: FormGroup;
   collectiondatasFilters: CollectionData[];
@@ -61,13 +60,8 @@ export class CollectionDataComponent implements OnInit {
     this.validation();
     this.carregarUsuario();
     this.getCollectionData();
-    this.pagination = {
-      currentPage: 1,
-      itemsPerPage: 3,
-      totalItems: 1,
-    } as Pagination;
     this.userId = this.accountService.getAllUser();
-    this.associationId = this.associationService.getAllAssociations();
+    this.associationId = this.associationService.getAllAssociation();
   }
 
   openModal(template: any) {
@@ -110,33 +104,6 @@ export class CollectionDataComponent implements OnInit {
       .add(() => this.spinner.hide());
   }
 
-  termSearchChanged: Subject<string> = new Subject<string>();
-
-  public filterCollectionData(evt: any): void {
-    if (this.termSearchChanged.observers.length === 0) {
-      this.termSearchChanged.pipe(debounceTime(2500)).subscribe(
-        filterFor => {
-          this.spinner.show();
-          this.collectiondataService.getAllCollectionDatas(
-            this.pagination.currentPage,
-            this.pagination.itemsPerPage,
-            filterFor
-          ).subscribe(
-            (paginatedResult: PaginatedResult<CollectionData[]>) => {
-              this.collectiondatas = paginatedResult.result;
-              this.pagination = paginatedResult.pagination;
-            },
-            (error: any) => {
-              this.spinner.hide();
-              this.toastr.error('Erro ao carregar as Associações', 'Erro!');
-            }
-          ).add(() => this.spinner.hide());
-        }
-      )
-    }
-    this.termSearchChanged.next(evt.value);
-  }
-
   newCollectionData(template: any) {
     this.mode = 'post';
     this.openModal(template);
@@ -169,18 +136,17 @@ export class CollectionDataComponent implements OnInit {
   }
 
   public getCollectionData(): void {
-    this.spinner.show();
-    this.collectiondataService.getAllCollectionDatas(this.pagination.currentPage,
-      this.pagination.itemsPerPage).subscribe(
-        (paginatedResult: PaginatedResult<CollectionData[]>) => {
-          this.collectiondatas = paginatedResult.result;
-          this.pagination = paginatedResult.pagination;
-        },
-        (error: any) => {
-          this.spinner.hide();
-          this.toastr.error('Erro ao Carregar as Coletas', 'Erro!');
-        },
-      ).add(() => this.spinner.hide());
+    this.collectiondataService.getAllCollectionDatas().subscribe({
+      next: (collectiondata: CollectionData[]) => {
+        this.collectiondatas = collectiondata;
+        this.collectiondatasFilters = this.collectiondatas;
+      },
+      error: (error: any) => {
+        this.spinner.hide();
+        this.toastr.error('Erro ao Carregar as Coletas', 'Erro!');
+      },
+      complete: () => this.spinner.hide()
+    });
   }
 
   onSubmit(): void {
@@ -232,11 +198,6 @@ export class CollectionDataComponent implements OnInit {
         );
       }
     }
-  }
-
-  public pageChanged(event): void {
-    this.pagination.currentPage = event.page;
-    this.getCollectionData();
   }
 
 }

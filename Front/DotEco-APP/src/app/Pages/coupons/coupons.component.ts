@@ -19,7 +19,6 @@ import { CouponsService } from 'src/app/_services/coupons.service';
   styleUrls: ['./coupons.component.css']
 })
 export class CouponsComponent implements OnInit {
-  pagination = {} as Pagination;
   couponsFilters: Coupons[];
   coupons: Coupons[];
   coupon: Coupons;
@@ -52,11 +51,6 @@ export class CouponsComponent implements OnInit {
     this.validation();
     this.getCoupon();
     this.carregarUsuario();
-    this.pagination = {
-      currentPage: 1,
-      itemsPerPage: 3,
-      totalItems: 1,
-    } as Pagination;
     this.userId = this.accountService.getAllUser();
   }
 
@@ -124,18 +118,17 @@ export class CouponsComponent implements OnInit {
   }
 
   public getCoupon(): void {
-    this.spinner.show();
-    this.couponService.getAllCoupons(this.pagination.currentPage,
-      this.pagination.itemsPerPage).subscribe(
-        (paginatedResult: PaginatedResult<Coupons[]>) => {
-          this.coupons = paginatedResult.result;
-          this.pagination = paginatedResult.pagination;
-        },
-        (error: any) => {
-          this.spinner.hide();
-          this.toastr.error('Erro ao Carregar as Coletas', 'Erro!');
-        },
-      ).add(() => this.spinner.hide());
+    this.couponService.getAllCoupons().subscribe({
+      next: (coupons: Coupons[]) => {
+        this.coupons = coupons;
+        this.couponsFilters = this.coupons;
+      },
+      error: (error: any) => {
+        this.spinner.hide();
+        this.toastr.error('Erro ao Carregar os Cupons', 'Erro!');
+      },
+      complete: () => this.spinner.hide()
+    });
   }
 
   saveAlteration(template: any) {
@@ -165,11 +158,6 @@ export class CouponsComponent implements OnInit {
         );
       }
     }
-  }
-
-  public pageChanged(event): void {
-    this.pagination.currentPage = event.page;
-    this.getCoupon();
   }
 
 }

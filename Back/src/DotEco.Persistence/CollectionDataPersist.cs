@@ -15,15 +15,14 @@ namespace DotEco.Persistence
         {
             _context = context;
         }
-        public async Task<PageList<CollectionData>> GetAllCollectionDataAsync(PageParams pageParams)
+        public async Task<CollectionData[]> GetAllCollectionDataAsync()
         {
             IQueryable<CollectionData> query = _context.CollectionDatas;
 
             query = query.AsNoTracking()
-                         .Where(e => (e.Email.ToLower().Contains(pageParams.Term.ToLower())))
-                         .OrderBy(c => c.Id);
+                        .OrderBy(c => c.Id);
 
-            return await PageList<CollectionData>.CreateAsync(query, pageParams.PageNumber, pageParams.pageSize);
+            return await query.ToArrayAsync();
         }
 
         public async Task<CollectionData> GetCollectionDataAsyncById(int CollectionDataId)

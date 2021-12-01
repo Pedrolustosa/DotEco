@@ -14,16 +14,15 @@ namespace DotEco.Persistence
         public CouponsPersist(DotEcoContext context)
         {
             _context = context;
-            _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
-        public async Task<PageList<Coupon>> GetAllCouponsAsync(PageParams pageParams)
+        public async Task<Coupon[]> GetAllCouponsAsync()
         {
             IQueryable<Coupon> query = _context.Coupons;
 
             query = query.AsNoTracking()
                         .OrderBy(c => c.Id);
 
-            return await PageList<Coupon>.CreateAsync(query, pageParams.PageNumber, pageParams.pageSize);
+            return await query.ToArrayAsync();
         }
 
         public async Task<Coupon> GetCouponsAsyncById(int CouponsId)

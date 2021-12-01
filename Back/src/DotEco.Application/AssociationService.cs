@@ -87,19 +87,14 @@ namespace DotEco.Application
             }
         }
 
-        public async Task<PageList<AssociationDto>> GetAllAssociationAsync(PageParams pageParams)
+        public async Task<AssociationDto[]> GetAllAssociationAsync()
         {
             try
             {
-                var associations = await _associationPersist.GetAllAssociationAsync(pageParams);
+                var associations = await _associationPersist.GetAllAssociationAsync();
                 if (associations == null) return null;
 
-                var result = _mapper.Map<PageList<AssociationDto>>(associations);
-
-                result.CurrentPage = associations.CurrentPage;
-                result.TotalPages = associations.TotalPages;
-                result.PageSize = associations.PageSize;
-                result.TotalCount = associations.TotalCount;
+                var result = _mapper.Map<AssociationDto[]>(associations);
 
                 return result;
             }
