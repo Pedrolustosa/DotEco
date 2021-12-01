@@ -55,29 +55,24 @@
                                                 *ngIf="collectiondatas.statusClient !== collectiondatas.statusAssociation || 
                                                 (collectiondatas.statusClient === collectiondatas.statusAssociation && collectiondatas.statusClient !== statusEnum.Confirmed)">
                                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                                    <button type="button" class="btn btn-danger"
-                                                        (click)="deleteCollectionData(collectiondatas, confirm)"><i
-                                                            class="fa fa-eraser"></i></button>
                                                     <button type="button" class="btn btn-warning"
-                                                        (click)="editCollectionData(collectiondatas, template)"><i
-                                                            class="fa fa-edit"></i></button>
+                                                        (click)="editCollectionData(collectiondatas, template)">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button>
                                                 </div>
                                             </ng-container>
                                         </div>
                                         <ng-container *ngIf="collectiondatas.statusClient === collectiondatas.statusAssociation 
                                         && collectiondatas.statusClient === statusEnum.Confirmed">
-                                            <ng-container
-                                                *ngIf="collectiondatas.statusPoint === statusPoint.NotRescued">
-                                                <button type="submit" class="btnCollectionDataTable"
-                                                    (click)="countPoints()">
-                                                    +1 Ponto!
-                                                </button>
-                                            </ng-container>
-                                            <ng-container *ngIf="collectiondatas.statusPoint === statusPoint.Rescued">
-                                                <button class="btnCollectionDataTable">
-                                                    Parabéns!
-                                                </button>
-                                            </ng-container>
+                                            <button
+                                                *ngIf="collectiondatas.statusPoint !== statusPoint.Rescued && collectiondatas.statusPoint === statusPoint.NotRescued"
+                                                type="submit" class="btnCollectionDataTable" (click)="countPoints()">
+                                                +1 Ponto!
+                                            </button>
+                                            <button *ngIf="collectiondatas.statusPoint !== statusPoint.NotRescued"
+                                                type="button" class="btnCollectionDataTable">
+                                                Parabéns!
+                                            </button>
                                         </ng-container>
                                     </td>
                                 </ng-container>
@@ -137,10 +132,6 @@
                                                 *ngIf="collectiondatas.statusClient !== collectiondatas.statusAssociation || 
                                                 (collectiondatas.statusClient === collectiondatas.statusAssociation && collectiondatas.statusClient !== statusEnum.Confirmed)">
                                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                                    <button type="button" class="btn btn-danger"
-                                                        (click)="deleteCollectionData(collectiondatas, confirm)">
-                                                        <i class="fa fa-eraser"></i>
-                                                    </button>
                                                     <button type="button" class="btn btn-warning"
                                                         (click)="editCollectionData(collectiondatas, template)">
                                                         <i class="fa fa-edit"></i>
@@ -149,19 +140,16 @@
                                             </ng-container>
                                             <ng-container *ngIf="collectiondatas.statusClient === collectiondatas.statusAssociation 
                                                 && collectiondatas.statusClient === statusEnum.Confirmed">
-                                                <ng-container
-                                                    *ngIf="collectiondatas.statusPoint === statusPoint.NotRescued">
-                                                    <button type="button" class="btn btn-warning"
-                                                        (click)="editCollectionData(collectiondatas, template)">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                </ng-container>
-                                                <ng-container
-                                                    *ngIf="collectiondatas.statusPoint === statusPoint.Rescued">
-                                                    <button class="btnCollectionDataTable">
-                                                        Concluído!
-                                                    </button>
-                                                </ng-container>
+                                                <button
+                                                    *ngIf="collectiondatas.statusPoint !== statusPoint.Rescued && collectiondatas.statusPoint === statusPoint.NotRescued"
+                                                    type="button" class="btn btn-warning"
+                                                    (click)="editCollectionData(collectiondatas, template)">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+                                                <button *ngIf="collectiondatas.statusPoint !== statusPoint.NotRescued"
+                                                    type="button" class="btnCollectionDataTable">
+                                                    <i class="fa fa-edit"> Concluído</i>
+                                                </button>
                                             </ng-container>
                                         </div>
                                     </td>
@@ -348,10 +336,10 @@
                             <select class="form-select" id="statusClient" formControlName="statusClient" [ngClass]="{ 'is-invalid': collectiondataForm.get('statusClient')?.errors 
                                     && collectiondataForm.get('statusClient')?.touched}">
                                 <option value="" selected disabled hidden>Selecione uma Opção</option>
-                                <option value="0">Aguardando</option>
-                                <option value="1">Agendado</option>
-                                <option value="2">Confirmado</option>
-                                <option value="3">Recusado</option>
+                                <option value="Waiting">Aguardando</option>
+                                <option value="Scheduled">Agendado</option>
+                                <option value="Confirmed">Confirmado</option>
+                                <option value="Refused">Recusado</option>
                             </select>
                             <label for="statusClient">statusClient</label>
                             <div *ngIf="collectiondataForm.get('statusClient')?.hasError('required') 
@@ -380,12 +368,12 @@
                                     [ngClass]="{ 'is-invalid': collectiondataForm.get('statusAssociation')?.errors 
                                     && collectiondataForm.get('statusAssociation')?.touched}">
                                     <option value="" selected disabled hidden>Selecione uma Opção</option>
-                                    <option value="0">Aguardando</option>
-                                    <option value="1">Agendado</option>
-                                    <option value="2">Confirmado</option>
-                                    <option value="3">Recusado</option>
+                                    <option value="Waiting">Aguardando</option>
+                                    <option value="Scheduled">Agendado</option>
+                                    <option value="Confirmed">Confirmado</option>
+                                    <option value="Refused">Recusado</option>
                                 </select>
-                                <label for="statusAssociation">statusAssociation</label>
+                                <label for="statusAssociation">Status Association</label>
                                 <div *ngIf="collectiondataForm.get('statusAssociation')?.hasError('required') 
                                     && collectiondataForm.get('statusAssociation')?.touched" class="invalid-feedback">
                                     Coloque o statusAssociation comforme a situação da Coleta.
@@ -396,8 +384,8 @@
                                 <select class="form-select" id="statusPoint" formControlName="statusPoint" [ngClass]="{ 'is-invalid': collectiondataForm.get('statusPoint')?.errors 
                                  && collectiondataForm.get('statusPoint')?.touched}">
                                     <option value="" selected disabled hidden>Selecione uma Opção</option>
-                                    <option value="0">Sim</option>
-                                    <option value="1">Não</option>
+                                    <option value="NotRescued">Não</option>
+                                    <option value="Rescued">Sim</option>
                                 </select>
                                 <label for="statusPoint">Coleta concluída</label>
                                 <div *ngIf="collectiondataForm.get('statusPoint')?.hasError('required') 
