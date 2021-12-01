@@ -33,6 +33,7 @@ import { AssociationComponent } from './Pages/association/association.component'
 import { RegistrationComponent } from './Pages/user/registration/registration.component';
 import { CollectionDataComponent } from './Pages/collectiondata/collectiondata.component';
 import { ProfileComponent } from './Pages/user/profile/profile.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 defineLocale('pt-br', ptBrLocale);
@@ -59,12 +60,13 @@ defineLocale('pt-br', ptBrLocale);
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    NgxSpinnerModule,
+    NgxPaginationModule,
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot(),
     CarouselModule.forRoot(),
     BsDatepickerModule.forRoot(),
     ModalModule.forRoot(),
-    PaginationModule.forRoot(),
     TabsModule.forRoot(),
     NgxMaskModule.forRoot(),
     ToastrModule.forRoot({
@@ -73,7 +75,6 @@ defineLocale('pt-br', ptBrLocale);
       preventDuplicates: true,
       progressBar: true
     }),
-    NgxSpinnerModule,
   ],
   providers: [
     AssociationService,
