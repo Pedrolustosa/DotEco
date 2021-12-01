@@ -8,17 +8,6 @@
 
     <div class="card mt-5">
         <div class="card-body">
-            <div class="row mb-4">
-                <div class="col-sm-4 mb-2">
-                    <div class="form-inline">
-                        <div class="form-floating mb-3">
-                            <input id="search" type="text" class="form-control mr-2"
-                                (input)="filterAssociations($event.target)" />
-                            <label for="search">Pesquisar</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <h3 class="card-header text-center">Associaçoes</h3>
             <div class="table-responsive-md">
                 <table class="table table-sm text-center table-bordered border-success table-striped table-hover">
@@ -63,13 +52,6 @@
                         </tr>
                     </tfoot>
                 </table>
-                <div class="d-flex justify-content-center align-items-center">
-                    <pagination [boundaryLinks]="true" (pageChanged)="pageChanged($event)"
-                        [(ngModel)]="pagination.currentPage" [totalItems]="pagination.totalItems"
-                        [itemsPerPage]="pagination.itemsPerPage" pageBtnClass="btn" previousText="&lsaquo;"
-                        nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
-                    </pagination>
-                </div>
             </div>
         </div>
     </div>

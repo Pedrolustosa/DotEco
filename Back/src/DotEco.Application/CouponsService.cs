@@ -60,19 +60,14 @@ namespace DotEco.Application
             }
         }
 
-        public async Task<PageList<CouponsDto>> GetAllCouponsAsync(PageParams pageParams)
+        public async Task<CouponsDto[]> GetAllCouponsAsync()
         {
             try
             {
-                var coupons = await _couponsPersist.GetAllCouponsAsync(pageParams);
+                var coupons = await _couponsPersist.GetAllCouponsAsync();
                 if (coupons == null) return null;
 
-                var result = _mapper.Map<PageList<CouponsDto>>(coupons);
-
-                result.CurrentPage = coupons.CurrentPage;
-                result.TotalPages = coupons.TotalPages;
-                result.PageSize = coupons.PageSize;
-                result.TotalCount = coupons.TotalCount;
+                var result = _mapper.Map<CouponsDto[]>(coupons);
 
                 return result;
             }

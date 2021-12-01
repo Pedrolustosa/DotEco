@@ -9,7 +9,7 @@ namespace DotEco.Application.Contracts
         Task<AssociationDto> AddAssociation(AssociationDto model);
         Task<AssociationDto> UpdateAssociation(int associationId, AssociationDto model);
         Task<bool> DeleteAssociation(int associationId);
-        Task<PageList<AssociationDto>> GetAllAssociationAsync(PageParams pageParams);
+        Task<AssociationDto[]> GetAllAssociationAsync();
         Task<AssociationDto> GetAssociationAsyncById(int associationId);
     }
 }

@@ -7,7 +7,7 @@ namespace DotEco.Persistence.Contracts
     public interface ICollectionDataPersist
     {
         //COLLECTION DATAS
-        Task<PageList<CollectionData>> GetAllCollectionDataAsync(PageParams pageParams);
+        Task<CollectionData[]> GetAllCollectionDataAsync();
         Task<CollectionData> GetCollectionDataAsyncById(int CollectionDataId);
     }
 }

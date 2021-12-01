@@ -35,14 +35,12 @@ namespace DotEco.API.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Cliente2, Associacao, Administrador")]
-        public async Task<IActionResult> Get([FromQuery] PageParams pageParams)
+        public async Task<IActionResult> Get()
         {
             try
             {
-                var collectionDatas = await _collectionDataService.GetAllCollectionDataAsync(pageParams);
+                var collectionDatas = await _collectionDataService.GetAllCollectionDataAsync();
                 if (collectionDatas == null) return NoContent();
-
-                Response.AddPagination(collectionDatas.CurrentPage, collectionDatas.PageSize, collectionDatas.TotalCount, collectionDatas.TotalPages);
 
                 return Ok(collectionDatas);
             }

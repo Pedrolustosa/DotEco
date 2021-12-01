@@ -9,7 +9,7 @@ namespace DotEco.Application.Contracts
         Task<CollectionDataDto> AddCollectionData(CollectionDataDto model);
         Task<CollectionDataDto> UpdateCollectionData(int collectionDataId, CollectionDataDto model);
         Task<bool> DeleteCollectionData(int collectionDataId);
-        Task<PageList<CollectionDataDto>> GetAllCollectionDataAsync(PageParams pageParams);
+        Task<CollectionDataDto[]> GetAllCollectionDataAsync();
         Task<CollectionDataDto> GetCollectionDataAsyncById(int collectionDataId);
     }
 }

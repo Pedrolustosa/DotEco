@@ -17,31 +17,8 @@ export class CollectionDataService {
 
     constructor(private http: HttpClient) { }
 
-    getAllCollectionData(): Observable<CollectionData[]> {
+    getAllCollectionDatas(): Observable<CollectionData[]> {
         return this.http.get<CollectionData[]>(this.baseUrl);
-    }
-
-    getAllCollectionDatas(page?: number, itemsPerPage?: number, term?: string): Observable<PaginatedResult<CollectionData[]>> {
-        const paginatedResult: PaginatedResult<CollectionData[]> = new PaginatedResult<CollectionData[]>();
-        let params = new HttpParams;
-        if (page != null && itemsPerPage != null) {
-            params = params.append('pageNumber', page.toString());
-            params = params.append('pageSize', itemsPerPage.toString());
-        }
-        if (term != null && term != '')
-            params = params.append('term', term)
-
-        return this.http
-            .get<CollectionData[]>(this.baseUrl, { observe: 'response', params })
-            .pipe(
-                take(1),
-                map((response) => {
-                    paginatedResult.result = response.body;
-                    if (response.headers.has('Pagination')) {
-                        paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
-                    }
-                    return paginatedResult;
-                }));
     }
 
     getCollectionDataById(id: number): Observable<CollectionData> {
