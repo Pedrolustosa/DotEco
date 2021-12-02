@@ -17,15 +17,19 @@ export class CouponsService {
     constructor(private http: HttpClient) { }
 
     getAllCoupons(): Observable<Coupons[]> {
-        return this.http.get<Coupons[]>(this.baseUrl);
+        return this.http.get<Coupons[]>(`${this.baseUrl}/available`);
     }
 
     getCouponByUserId(userId: number): Observable<Coupons[]> {
         return this.http.get<Coupons[]>(`${this.baseUrl}/user/${userId}`);
     }
 
-    getCouponByAssociationId(associationId: number): Observable<Coupons[]> {
-        return this.http.get<Coupons[]>(`${this.baseUrl}/company/${associationId}`);
+    GetCouponsUsedAsync(userId: number): Observable<Coupons[]> {
+        return this.http.get<Coupons[]>(`${this.baseUrl}/used/${userId}`);
+    }
+
+    getCouponByCompanyId(companyId: number): Observable<Coupons[]> {
+        return this.http.get<Coupons[]>(`${this.baseUrl}/company/${companyId}`);
     }
 
     getCouponsById(id: number): Observable<Coupons> {

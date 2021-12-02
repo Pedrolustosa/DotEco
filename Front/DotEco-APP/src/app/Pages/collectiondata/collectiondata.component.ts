@@ -168,13 +168,7 @@ export class CollectionDataComponent implements OnInit {
 
   public countPoints(): void {
     this.spinner.show();
-    this.userUpdate.points += 1
-    this.userUpdate.userName = this.userUpdate.userName
-    this.userUpdate.type = this.userUpdate.type
-    this.userUpdate.fullName = this.userUpdate.fullName
-    this.userUpdate.cpf = this.userUpdate.cpf
-    this.userUpdate.email = this.userUpdate.email
-    this.userUpdate.password = this.userUpdate.password
+    this.userUpdate = { points: this.userUpdate.points += 1, ...this.userUpdate }
     this.accountService.updateUser(this.userUpdate).subscribe(
       () => this.toaster.success('Pontos atualizado!', 'Sucesso'),
       (error) => {

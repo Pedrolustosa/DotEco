@@ -28,7 +28,7 @@
                     </thead>
                     <tbody *ngIf="collectiondatas && collectiondatas.length">
                         <tr
-                            *ngFor="let collectiondatas of collectiondatas | paginate: { itemsPerPage: 3, currentPage: p }">
+                            *ngFor="let collectiondatas of collectiondatas | paginate: { itemsPerPage: 10, currentPage: p }">
                             <td>{{collectiondatas.cep | mask: '00000-000'}}</td>
                             <td>{{collectiondatas.address}}</td>
                             <td>{{collectiondatas.reference}}

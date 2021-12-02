@@ -7,6 +7,7 @@ namespace DotEco.Persistence.Contracts
     {
         //COUPONS
         Task<Coupon[]> GetAllCouponsAsync();
+        Task<Coupon[]> GetCouponsUsedAsync(int userId);
         Task<Coupon[]> GetCouponByUserIdAsync(int userId);
         Task<Coupon[]> GetCouponByCompanyIdAsync(int companyId);
         Task<Coupon> GetCouponsAsyncById(int CouponsId);

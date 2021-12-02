@@ -76,6 +76,23 @@ namespace DotEco.Application
             }
         }
 
+        public async Task<CouponsDto[]> GetCouponsUsedAsync(int userId)
+        {
+            try
+            {
+                var coupons = await _couponsPersist.GetCouponsUsedAsync(userId);
+                if (coupons == null) return null;
+
+                var result = _mapper.Map<CouponsDto[]>(coupons);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public async Task<CouponsDto[]> GetCouponByUserIdAsync(int userId)
         {
             try

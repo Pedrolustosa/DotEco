@@ -19,16 +19,22 @@ import { CouponsService } from 'src/app/_services/coupons.service';
 })
 export class CouponsComponent implements OnInit {
   p: number = 1;
-  couponsFilters: Coupons[];
-  coupons: Coupons[];
-  coupon: Coupons;
-  userId: Observable<User[]>;
-  status = Status;
+
   couponsForm: FormGroup;
   form!: FormGroup;
+
+  availableCoupons: Coupons[];
+  rescueCoupons: Coupons[];
+  usedCoupons: Coupons[];
+  companyCoupons: Coupons[];
+  coupon: Coupons;
+
+  status = Status;
+
   user: User;
+  userId: Observable<User[]>;
   userUpdate = {} as UserUpdate;
-  coup = {} as Coupons;
+
   mode = 'post';
   _filterList = '';
   bodyDeleteCoupons = '';
@@ -36,7 +42,6 @@ export class CouponsComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private toastr: ToastrService,
-    private modalService: BsModalService,
     private localeService: BsLocaleService,
     private couponService: CouponsService,
     public accountService: AccountService,
@@ -66,6 +71,7 @@ export class CouponsComponent implements OnInit {
       .subscribe(
         (userRetorno: UserUpdate) => {
           this.userUpdate = userRetorno;
+          this.getCouponsById();
           this.getCoupons();
         },
         (error) => {
@@ -102,14 +108,14 @@ export class CouponsComponent implements OnInit {
   deleteCoupons(coupon: Coupons, template: any) {
     this.openModal(template);
     this.coupon = coupon;
-    this.bodyDeleteCoupons = `Tem certeza que deseja excluir o Cupom: ${this.coupon.name}, Código: ${this.coupon.id}`;
+    this.bodyDeleteCoupons = `Tem certeza que deseja excluir o Cupom: ${this.coupon.name}`;
   }
 
   confirmDelete(template: any) {
     this.couponService.deleteCoupons(this.coupon.id).subscribe(
       () => {
         template.hide();
-        this.getCoupons();
+        this.getCouponsById();
         this.toastr.success('Deletado com Sucesso');
       }, error => {
         this.toastr.error('Erro ao tentar Deletar');
@@ -121,54 +127,62 @@ export class CouponsComponent implements OnInit {
   public getCoupons(): void {
     this.couponService.getAllCoupons().subscribe({
       next: (coupons: Coupons[]) => {
-        this.coupons = coupons;
-        this.couponsFilters = this.coupons;
+        this.availableCoupons = coupons;
       },
       error: (error: any) => {
         this.spinner.hide();
-        this.toastr.error('Erro ao Carregar os Cupons', 'Erro!');
+        this.toastr.error('Erro ao Carregar os Cupons do Cliente', 'Erro!');
       },
       complete: () => this.spinner.hide()
     });
   }
 
-  // public getCoupon(): void {
-  //   if (this.userUpdate.type === 1) {
-  //     this.couponService.getCouponByUserId(this.userUpdate.id).subscribe({
-  //       next: (coupons: Coupons[]) => {
-  //         this.coupons = coupons;
-  //         this.couponsFilters = this.coupons;
-  //       },
-  //       error: (error: any) => {
-  //         this.spinner.hide();
-  //         this.toastr.error('Erro ao Carregar os Cupons', 'Erro!');
-  //       },
-  //       complete: () => this.spinner.hide()
-  //     });
-  //   }
-  //   if (this.userUpdate.type === 3) {
-  //     this.couponService.getCouponByAssociationId(this.userUpdate.id).subscribe({
-  //       next: (coupons: Coupons[]) => {
-  //         this.coupons = coupons;
-  //         this.couponsFilters = this.coupons;
-  //       },
-  //       error: (error: any) => {
-  //         this.spinner.hide();
-  //         this.toastr.error('Erro ao Carregar os Cupons', 'Erro!');
-  //       },
-  //       complete: () => this.spinner.hide()
-  //     });
-  //   }
-  // }
+  public getCouponsById(): void {
+    if (this.userUpdate.type === 1) {
+      this.couponService.GetCouponsUsedAsync(this.userUpdate.id).subscribe({
+        next: (coupons: Coupons[]) => {
+          this.usedCoupons = coupons;
+        },
+        error: (error: any) => {
+          this.spinner.hide();
+          this.toastr.error('Erro ao Carregar os Cupons do Cliente', 'Erro!');
+        },
+        complete: () => this.spinner.hide()
+      });
+      this.couponService.getCouponByUserId(this.userUpdate.id).subscribe({
+        next: (coupons: Coupons[]) => {
+          this.rescueCoupons = coupons;
+        },
+        error: (error: any) => {
+          this.spinner.hide();
+          this.toastr.error('Erro ao Carregar os Cupons do Cliente', 'Erro!');
+        },
+        complete: () => this.spinner.hide()
+      });
+    }
+    if (this.userUpdate.type === 3) {
+      this.couponService.getCouponByCompanyId(this.userUpdate.id).subscribe({
+        next: (coupons: Coupons[]) => {
+          this.companyCoupons = coupons;
+        },
+        error: (error: any) => {
+          this.spinner.hide();
+          this.toastr.error('Erro ao Carregar os Cupons da Empresa', 'Erro!');
+        },
+        complete: () => this.spinner.hide()
+      });
+    }
+  }
 
   saveAlteration(template: any) {
     if (this.couponsForm.valid) {
       if (this.mode === 'post') {
         this.coupon = Object.assign({}, this.couponsForm.value);
+        this.coupon.companyId = this.userUpdate.id
         this.couponService.postCoupons(this.coupon).subscribe(
           (newCoupons: Coupons) => {
             template.hide();
-            this.getCoupons();
+            this.getCouponsById();
             this.toastr.success('Inserido com Sucesso!');
           }, error => {
             this.toastr.error(`Erro ao Inserir: ${error}`);

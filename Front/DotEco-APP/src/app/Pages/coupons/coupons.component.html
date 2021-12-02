@@ -8,142 +8,30 @@
     <div class="card mt-5">
         <div class="card-body">
             <tabset class="m-2">
-                <tab heading="Disponíveis" id="tab1">
+                <tab heading="Disponíveis" id="tab1" *ngIf="userUpdate.type === 1">
                     <div class="mt-2 m-1">
                         <div class="row">
-                            <div *ngFor="let coupons of coupons | paginate: { itemsPerPage: 3, currentPage: p }"
-                                class="col-md-2 me-5 mt-2 mb-2">
-                                <ng-container *ngIf="coupons.userId == null">
-                                    <div class="cardCupon">
-                                        <div class="text-center">
-                                            <div class="d-flex flex-row text-center">
-                                                <div class="d-flex flex-column ml-1">
-                                                    <h1 class="mb-0 percent">{{coupons.percent}}%</h1>
-                                                    <span class="discount">Discount</span>
-                                                </div>
+                            <div *ngFor="let coupon of availableCoupons | paginate: { itemsPerPage: 5, currentPage: p }"
+                                class="col-md-3 me-5 mt-2 mb-2">
+                                <div class="cardCupon">
+                                    <div class="text-center">
+                                        <div class="d-flex flex-row text-center">
+                                            <div class="d-flex flex-column ml-1">
+                                                <h1 class="mb-0 percent">{{coupon.percent}}%</h1>
+                                                <span class="discount">Discount</span>
                                             </div>
-                                        </div>
-                                        <hr class="line">
-                                        <span class="company text-center fs-3">{{coupons.name}}</span>
-                                        <hr class="line">
-                                        <span class="text-white">{{coupons.description}}</span>
-                                        <hr class="line">
-                                        <div class="d-flex justify-content-center">
-                                            <ng-container>
-                                                <button class="btnCoupons"
-                                                    (click)="editCoupons(coupons, template)">Resgatar</button>
-                                            </ng-container>
                                         </div>
                                     </div>
-                                </ng-container>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <pagination-controls previousLabel="Anterior" nextLabel="Próximo" (pageChange)="p = $event">
-                            </pagination-controls>
-                        </div>
-                    </div>
-                </tab>
-
-                <tab heading="Resgatado">
-                    <div class="mt-2 m-1">
-                        <div class="row">
-                            <div *ngFor="let coupons of coupons  | paginate: { itemsPerPage: 3, currentPage: p }"
-                                class="col-md-2 me-5 mt-2 mb-2">
-                                <div *ngIf="userUpdate.id == coupons.userId">
-                                    <ng-container *ngIf="coupons.status === status.Active">
-                                        <div class="cardCupon">
-                                            <div class="text-center">
-                                                <div class="d-flex flex-row text-center">
-                                                    <div class="d-flex flex-column ml-1">
-                                                        <h1 class="percent mb-0">{{coupons.percent}}%</h1>
-                                                        <span class="discount">Discount</span>
-                                                        <hr class="line">
-                                                        <span class="company text-center fs-4">{{coupons.name}}</span>
-                                                        <hr class="line">
-                                                        <span class="company text-center fs-5">{{coupons.userId}}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <hr class="line">
-                                            <span class="text-white">{{coupons.description}}</span>
-                                            <hr class="line">
-                                            <span class="mt-1 text-white">{{coupons.status}}</span>
-                                        </div>
-                                    </ng-container>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <pagination-controls previousLabel="Anterior" nextLabel="Próximo" (pageChange)="p = $event">
-                            </pagination-controls>
-                        </div>
-                    </div>
-                </tab>
-
-                <tab heading="Usado">
-                    <div class="mt-2 m-1">
-                        <div class="row">
-                            <div *ngFor="let coupons of coupons | paginate: { itemsPerPage: 3, currentPage: p }"
-                                class="col-md-2 me-5 mt-2 mb-2">
-                                <div *ngIf="userUpdate.id == coupons.userId">
-                                    <ng-container *ngIf="coupons.status === status.Inactive">
-                                        <div class="cardCupon">
-                                            <div class="text-center">
-                                                <div class="d-flex flex-row text-center">
-                                                    <div class="d-flex flex-column ml-1">
-                                                        <h1 class="percent mb-0">{{coupons.percent}}%</h1>
-                                                        <span class="discount">Discount</span>
-                                                        <hr class="line">
-                                                        <span class="company text-center fs-4">{{coupons.name}}</span>
-                                                        <hr class="line">
-                                                        <span class="company text-center fs-5">{{coupons.userId}}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <hr class="line">
-                                            <span class="text-white">{{coupons.description}}</span>
-                                            <hr class="line">
-                                            <span class="mt-1 text-white">{{coupons.status}}</span>
-                                        </div>
-                                    </ng-container>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <pagination-controls previousLabel="Anterior" nextLabel="Próximo" (pageChange)="p = $event">
-                            </pagination-controls>
-                        </div>
-                    </div>
-                </tab>
-
-                <tab heading="Empresa">
-                    <div class="mt-2 m-1">
-                        <div class="row">
-                            <div *ngFor="let coupons of coupons | paginate: { itemsPerPage: 3, currentPage: p }"
-                                class="col-md-2 me-5 mt-2 mb-2">
-                                <div *ngIf="userUpdate.id == coupons.companyId">
-                                    <div class="cardCupon">
-                                        <div class="text-center">
-                                            <div class="d-flex flex-row text-center">
-                                                <div class="d-flex flex-column ml-1">
-                                                    <h1 class="mb-0 percent">{{coupons.percent}}%</h1>
-                                                    <span class="discount">Discount</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr class="line">
-                                        <span class="company text-center fs-3">{{coupons.name}}</span>
-                                        <hr class="line">
-                                        <span class="company text-center fs-3">{{coupons.description}}</span>
-                                        <hr class="line">
-                                        <span class="mt-1 text-white">{{coupons.status}}</span>
-                                        <div class="d-flex justify-content-center">
-                                            <ng-container>
-                                                <button class="btnCoupons"
-                                                    (click)="editCoupons(coupons, template)">Resgatar</button>
-                                            </ng-container>
-                                        </div>
+                                    <hr class="line">
+                                    <span class="company text-center fs-3">{{coupon.name}}</span>
+                                    <hr class="line">
+                                    <span class="text-white">{{coupon.description}}</span>
+                                    <hr class="line">
+                                    <div class="d-flex justify-content-center">
+                                        <ng-container>
+                                            <button class="btnCoupons"
+                                                (click)="editCoupons(coupon, template)">Resgatar</button>
+                                        </ng-container>
                                     </div>
                                 </div>
                             </div>
@@ -154,11 +42,111 @@
                         </div>
                     </div>
                 </tab>
+
+                <tab heading="Resgatado" *ngIf="userUpdate.type === 1">
+                    <div class="mt-2 m-1">
+                        <div class="row">
+                            <div *ngFor="let coupon of rescueCoupons  | paginate: { itemsPerPage: 5, currentPage: p }"
+                                class="col-md-3 me-5 mt-2 mb-2">
+                                <div class="cardCupon">
+                                    <div class="text-center">
+                                        <div class="d-flex flex-row text-center">
+                                            <div class="d-flex flex-column ml-1">
+                                                <h1 class="percent mb-0">{{coupon.percent}}%</h1>
+                                                <span class="discount">Discount</span>
+                                                <hr class="line">
+                                                <span class="company text-center fs-4">{{coupon.name}}</span>
+                                                <hr class="line">
+                                                <span class="company text-center fs-5">{{coupon.userId}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="line">
+                                    <span class="text-white">{{coupon.description}}</span>
+                                    <hr class="line">
+                                    <span class="mt-1 text-white">{{coupon.status}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <pagination-controls previousLabel="Anterior" nextLabel="Próximo" (pageChange)="p = $event">
+                        </pagination-controls>
+                    </div>
+                </tab>
+
+                <tab heading="Usado" *ngIf="userUpdate.type === 1">
+                    <div class="mt-2 m-1">
+                        <div class="row">
+                            <div *ngFor="let coupon of usedCoupons | paginate: { itemsPerPage: 5, currentPage: p }"
+                                class="col-md-3 me-5 mt-2 mb-2">
+                                <div class="cardCupon">
+                                    <div class="text-center">
+                                        <div class="d-flex flex-row text-center">
+                                            <div class="d-flex flex-column ml-1">
+                                                <h1 class="percent mb-0">{{coupon.percent}}%</h1>
+                                                <span class="discount">Discount</span>
+                                                <hr class="line">
+                                                <span class="company text-center fs-4">{{coupon.name}}</span>
+                                                <hr class="line">
+                                                <span class="company text-center fs-5">{{coupon.userId}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="line">
+                                    <span class="text-white">{{coupon.description}}</span>
+                                    <hr class="line">
+                                    <span class="mt-1 text-white">{{coupon.status}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <pagination-controls previousLabel="Anterior" nextLabel="Próximo" (pageChange)="p = $event">
+                            </pagination-controls>
+                        </div>
+                    </div>
+                </tab>
+
+                <tab heading="Empresa" *ngIf="userUpdate.type === 3">
+                    <div class="mt-2 m-1">
+                        <div class="row">
+                            <div *ngFor="let coupon of companyCoupons | paginate: { itemsPerPage: 5, currentPage: p }"
+                                class="col-md-3 mt-2 mb-2">
+                                <div class="cardCupon">
+                                    <div class="text-center">
+                                        <div class="d-flex flex-row text-center">
+                                            <div class="d-flex flex-column ml-1">
+                                                <h1 class="mb-0 percent">{{coupon.percent}}%</h1>
+                                                <span class="discount">Discount</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="line">
+                                    <span class="company text-center fs-3">{{coupon.name}}</span>
+                                    <hr class="line">
+                                    <span class="company text-center fs-3">{{coupon.description}}</span>
+                                    <hr class="line">
+                                    <span class="mt-1 text-white">{{coupon.status}}</span>
+                                    <div class="d-flex justify-content-center">
+                                        <ng-container>
+                                            <button class="btnCoupons"
+                                                (click)="editCoupons(coupon, template)">Resgatar</button>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <pagination-controls previousLabel="Anterior" nextLabel="Próximo" (pageChange)="p = $event">
+                        </pagination-controls>
+                    </div>
+                </tab>
+
             </tabset>
         </div>
     </div>
 </section>
-
 
 <div bsModal #template="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
     <div class="modal-dialog modal-lg">
@@ -171,20 +159,6 @@
             <div class="modal-body">
                 <form class="form-group" [formGroup]="couponsForm">
                     <div class="row">
-                        <div *ngIf="userUpdate.type == 3" class="form-floating mb-3 col-md-4">
-                            <select class="form-select" id="companyId" formControlName="companyId" [ngClass]="{ 'is-invalid': couponsForm.get('companyId')?.errors 
-                        && couponsForm.get('companyId')?.touched}">
-                                <option value="" selected disabled hidden>Selecione uma Opção</option>
-                                <option *ngFor="let company of userId | async as list" [value]="company.id">
-                                    {{company.fullName}}</option>
-                            </select>
-                            <label for="companyId">Empresa</label>
-                            <div *ngIf="couponsForm.get('companyId')?.hasError('required') 
-                                && couponsForm.get('companyId')?.touched" class="invalid-feedback">
-                                Escolha a Empresa que representa o Cupom.
-                            </div>
-                        </div>
-
                         <div *ngIf="userUpdate.type == 3" class="form-floating mb-3 col-md-4">
                             <input type="text" class="form-control" id="name" name="name" formControlName="name"
                                 [ngClass]="{'is-invalid': couponsForm.get('name').errors 
@@ -206,9 +180,8 @@
                                 Desconto % é obrigatório.
                             </div>
                         </div>
-                    </div>
 
-                    <div class="row">
+
                         <div *ngIf="userUpdate.type == 3" class="form-floating mb-3 col-md-8">
                             <input type="text" class="form-control" id="description" formControlName="description"
                                 name="description" [ngClass]="{ 'is-invalid': couponsForm.get('description').errors 
@@ -219,21 +192,6 @@
                                 Desconto % é obrigatório.
                             </div>
                         </div>
-
-                        <div *ngIf="userUpdate.type == 1" class="form-floating mb-3 col-md-4">
-                            <select class="form-select" id="userId" formControlName="userId" [ngClass]="{ 'is-invalid': couponsForm.get('userId')?.errors 
-                        && couponsForm.get('userId')?.touched}">
-                                <option value="" selected disabled hidden>Selecione uma Opção</option>
-                                <option *ngFor="let user of userId | async as list" [value]="user.id">
-                                    {{user.fullName}}</option>
-                            </select>
-                            <label for="userId">Cliente</label>
-                            <div *ngIf="couponsForm.get('userId')?.hasError('required') 
-                                && couponsForm.get('userId')?.touched" class="invalid-feedback">
-                                Escolha o Tipo de Usuário.
-                            </div>
-                        </div>
-
 
                         <div *ngIf="userUpdate.type == 3" class="form-floating mb-3 col-md-4">
                             <select class="form-select" id="status" formControlName="status" [ngClass]="{ 'is-invalid': couponsForm.get('status')?.errors 
@@ -246,6 +204,22 @@
                             <div *ngIf="couponsForm.get('status')?.hasError('required') 
                                 && couponsForm.get('status')?.touched" class="invalid-feedback">
                                 Coloque o status comforme a situação da Coleta.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div *ngIf="userUpdate.type == 1" class="form-floating mb-3 col-md-4">
+                            <select class="form-select" id="userId" formControlName="userId" [ngClass]="{ 'is-invalid': couponsForm.get('userId')?.errors 
+                        && couponsForm.get('userId')?.touched}">
+                                <option value="" selected disabled hidden>Selecione uma Opção</option>
+                                <option *ngFor="let user of userId | async as list" [value]="user.id">
+                                    {{user.fullName}}</option>
+                            </select>
+                            <label for="userId">Cliente</label>
+                            <div *ngIf="couponsForm.get('userId')?.hasError('required') 
+                                && couponsForm.get('userId')?.touched" class="invalid-feedback">
+                                Escolha o Tipo de Usuário.
                             </div>
                         </div>
                     </div>
