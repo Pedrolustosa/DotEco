@@ -9,7 +9,6 @@ import { Observable } from 'rxjs';
 import { Coupons, Status } from 'src/app/_models/Coupons';
 import { User } from 'src/app/_models/Identity/User';
 import { UserUpdate } from 'src/app/_models/Identity/UserUpdate';
-import { PaginatedResult, Pagination } from 'src/app/_models/Pagination';
 import { AccountService } from 'src/app/_services/account.service';
 import { CouponsService } from 'src/app/_services/coupons.service';
 
@@ -19,6 +18,7 @@ import { CouponsService } from 'src/app/_services/coupons.service';
   styleUrls: ['./coupons.component.css']
 })
 export class CouponsComponent implements OnInit {
+  p: number = 1;
   couponsFilters: Coupons[];
   coupons: Coupons[];
   coupon: Coupons;
@@ -80,6 +80,7 @@ export class CouponsComponent implements OnInit {
     this.couponsForm = this.fb.group({
       name: ['', Validators.required],
       percent: ['', Validators.required],
+      description: ['', Validators.required],
       userId: ['', Validators.nullValidator],
       companyId: ['', Validators.nullValidator],
       status: ['', Validators.nullValidator],

@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using DotEco.Application.Dtos;
-using DotEco.Persistence.Models;
 
 namespace DotEco.Application.Contracts
 {

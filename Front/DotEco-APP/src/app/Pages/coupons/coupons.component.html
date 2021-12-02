@@ -11,7 +11,8 @@
                 <tab heading="Disponíveis" id="tab1">
                     <div class="mt-2 m-1">
                         <div class="row">
-                            <div *ngFor="let coupons of coupons" class="col-md-2 me-3 mt-1 mb-1">
+                            <div *ngFor="let coupons of coupons | paginate: { itemsPerPage: 3, currentPage: p }"
+                                class="col-md-2 me-3 mt-1 mb-1">
                                 <div *ngIf="coupons.userId == null">
                                     <div class="cardCupon">
                                         <div class="text-center">
@@ -23,11 +24,9 @@
                                             </div>
                                         </div>
                                         <hr class="line">
-                                        <span class="company text-center fs-3">{{coupons.name}}</span>
+                                        <span class="company text-center fs-3">{{coupons.description}}</span>
                                         <hr class="line">
-                                        <span class="text-white">discount for all customers across all country on
-                                            all
-                                            products at bbbootstrap.com</span>
+                                        <span class="text-white">{{coupons.name}}</span>
                                         <div class="d-flex justify-content-center">
                                             <ng-container>
                                                 <button class="btnCoupons"
@@ -38,13 +37,18 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="d-flex justify-content-center">
+                            <pagination-controls previousLabel="Anterior" nextLabel="Próximo" (pageChange)="p = $event">
+                            </pagination-controls>
+                        </div>
                     </div>
                 </tab>
 
                 <tab heading="Resgatado">
                     <div class="mt-2 m-1">
                         <div class="row">
-                            <div *ngFor="let coupons of coupons" class="col-md-2 me-3 mt-1 mb-1">
+                            <div *ngFor="let coupons of coupons  | paginate: { itemsPerPage: 3, currentPage: p }"
+                                class="col-md-2 me-3 mt-1 mb-1">
                                 <div *ngIf="userUpdate.id == coupons.userId">
                                     <ng-container *ngIf="coupons.status === status.Active">
                                         <div class="cardCupon">
@@ -71,13 +75,18 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="d-flex justify-content-center">
+                            <pagination-controls previousLabel="Anterior" nextLabel="Próximo" (pageChange)="p = $event">
+                            </pagination-controls>
+                        </div>
                     </div>
                 </tab>
 
                 <tab heading="Usado">
                     <div class="mt-2 m-1">
                         <div class="row">
-                            <div *ngFor="let coupons of coupons" class="col-md-2 me-3 mt-1 mb-1">
+                            <div *ngFor="let coupons of coupons | paginate: { itemsPerPage: 3, currentPage: p }"
+                                class="col-md-2 me-3 mt-1 mb-1">
                                 <div *ngIf="userUpdate.id == coupons.userId">
                                     <ng-container *ngIf="coupons.status === status.Inactive">
                                         <div class="cardCupon">
@@ -94,9 +103,7 @@
                                                 </div>
                                             </div>
                                             <hr class="line">
-                                            <span class="text-white">Ultimate discount for all customers
-                                                across all country on all products at bbbootstrap.com
-                                            </span>
+                                            <span class="company text-center fs-3">{{coupons.description}}</span>
                                             <hr class="line">
                                             <span class="mt-1 text-white">{{coupons.status}}</span>
                                         </div>
@@ -104,13 +111,18 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="d-flex justify-content-center">
+                            <pagination-controls previousLabel="Anterior" nextLabel="Próximo" (pageChange)="p = $event">
+                            </pagination-controls>
+                        </div>
                     </div>
                 </tab>
 
                 <tab heading="Empresa">
                     <div class="mt-2 m-1">
                         <div class="row">
-                            <div *ngFor="let coupons of coupons" class="col-md-2 me-3 mt-1 mb-1">
+                            <div *ngFor="let coupons of coupons | paginate: { itemsPerPage: 3, currentPage: p }"
+                                class="col-md-2 me-3 mt-1 mb-1">
                                 <div *ngIf="userUpdate.id == coupons.companyId">
                                     <div class="cardCupon">
                                         <div class="text-center">
@@ -124,9 +136,7 @@
                                         <hr class="line">
                                         <span class="company text-center fs-3">{{coupons.name}}</span>
                                         <hr class="line">
-                                        <span class="text-white">discount for all customers across all country on
-                                            all
-                                            products at bbbootstrap.com</span>
+                                        <span class="company text-center fs-3">{{coupons.description}}</span>
                                         <hr class="line">
                                         <span class="mt-1 text-white">{{coupons.status}}</span>
                                         <div class="d-flex justify-content-center">
@@ -138,6 +148,10 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <pagination-controls previousLabel="Anterior" nextLabel="Próximo" (pageChange)="p = $event">
+                            </pagination-controls>
                         </div>
                     </div>
                 </tab>
@@ -190,6 +204,17 @@
                             <label for="percent">Desconto %</label>
                             <div *ngIf="couponsForm.get('percent').hasError('required') 
                                         && couponsForm.get('percent').touched" class="invalid-feedback">
+                                Desconto % é obrigatório.
+                            </div>
+                        </div>
+
+                        <div *ngIf="userUpdate.type == 3" class="form-floating mb-3 col-md-2">
+                            <input type="text" class="form-control" id="description" formControlName="description"
+                                name="description" [ngClass]="{ 'is-invalid': couponsForm.get('description').errors 
+                                    && couponsForm.get('description').touched}">
+                            <label for="description">Desconto %</label>
+                            <div *ngIf="couponsForm.get('description').hasError('required') 
+                                        && couponsForm.get('description').touched" class="invalid-feedback">
                                 Desconto % é obrigatório.
                             </div>
                         </div>

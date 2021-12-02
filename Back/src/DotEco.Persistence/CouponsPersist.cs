@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using DotEco.Domain;
 using DotEco.Persistence.Context;
 using DotEco.Persistence.Contracts;
-using DotEco.Persistence.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DotEco.Persistence

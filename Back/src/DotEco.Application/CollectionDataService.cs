@@ -5,7 +5,6 @@ using DotEco.Application.Contracts;
 using DotEco.Application.Dtos;
 using DotEco.Domain;
 using DotEco.Persistence.Contracts;
-using DotEco.Persistence.Models;
 
 namespace DotEco.Application
 {

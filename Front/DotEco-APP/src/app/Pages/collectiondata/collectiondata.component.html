@@ -105,7 +105,10 @@
                         </tr>
                     </tfoot>
                 </table>
-                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                <div class="d-flex justify-content-center">
+                    <pagination-controls previousLabel="Anterior" nextLabel="Próximo" (pageChange)="p = $event">
+                    </pagination-controls>
+                </div>
             </div>
         </div>
     </div>
