@@ -9,7 +9,7 @@
     <div class="card mt-5">
         <div class="card-body">
             <h3 class="card-header text-center">Associaçoes</h3>
-            <div class="table-responsive-md">
+            <div class="table-responsive-xxl">
                 <table class="table table-sm text-center table-bordered border-success table-striped table-hover">
                     <thead class="table-success">
                         <tr>
@@ -72,37 +72,6 @@
                 <div *ngIf="userUpdate.type == 2">
                     <div class="modal-body">
                         <form class="form-group" [formGroup]="associationForm">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-floating mb-3">
-                                        <select class="form-select" id="userId" formControlName="userId" [ngClass]="{ 'is-invalid': associationForm.get('userId')?.errors 
-                                            && associationForm.get('userId')?.touched}">
-                                            <option value="" selected disabled hidden>Selecione uma Opção</option>
-                                            <option *ngFor="let user of userId | async as list" [value]="user.id">
-                                                {{user.userName}}</option>
-                                        </select>
-                                        <label for="userId">Usuário Associação</label>
-                                        <div *ngIf="associationForm.get('userId')?.hasError('required') 
-                                        && associationForm.get('userId')?.touched" class="invalid-feedback">
-                                            Usuário da Associação
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="name" formControlName="name"
-                                            [ngClass]="{'is-invalid': associationForm.get('name').errors 
-                                        && associationForm.get('name').touched }" />
-                                        <label for="name">Nome Associação</label>
-                                        <div *ngIf="associationForm.get('name').hasError('required') 
-                                        && associationForm.get('name').touched" class="invalid-feedback">
-                                            Nome da Associação é obrigatório.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="row">
                                 <div class="form-floating mb-3 col-md-3">
                                     <input type="text" class="form-control" id="cep" formControlName="cep" [ngClass]="{'is-invalid': associationForm.get('cep').errors 

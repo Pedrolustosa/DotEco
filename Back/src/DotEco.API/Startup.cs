@@ -32,7 +32,7 @@ namespace DotEco.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DotEcoContext>(
-                context => context.UseSqlServer(Configuration.GetConnectionString("SQLServerAzure"))
+                context => context.UseSqlServer(Configuration.GetConnectionString("SQLServer"))
             );
 
             services.AddIdentityCore<User>(options =>

@@ -6,16 +6,12 @@ import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { Association } from 'src/app/_models/Association';
 import { AssociationService } from 'src/app/_services/association.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { UserUpdate } from 'src/app/_models/Identity/UserUpdate';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/_services/account.service';
 import { User } from 'src/app/_models/Identity/User';
 import { Observable, Subject } from 'rxjs';
-import { PaginatedResult, Pagination } from 'src/app/_models/Pagination';
-import { etLocale } from 'ngx-bootstrap/chronos';
-import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-association',
@@ -38,7 +34,6 @@ export class AssociationComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private toastr: ToastrService,
-    private modalService: BsModalService,
     private localeService: BsLocaleService,
     private associationService: AssociationService,
     public accountService: AccountService,
@@ -64,10 +59,10 @@ export class AssociationComponent implements OnInit {
 
   validation() {
     this.associationForm = this.fb.group({
-      userId: ['', Validators.required],
-      name: ['', Validators.required],
+      userId: [''],
+      name: [''],
+      cnpj: [''],
       cep: ['', Validators.required],
-      cnpj: ['', Validators.required],
       state: ['', Validators.required],
       address: ['', Validators.required],
     });
@@ -104,7 +99,7 @@ export class AssociationComponent implements OnInit {
   deleteAssociation(association: Association, template: any) {
     this.openModal(template);
     this.association = association;
-    this.bodyDeleteAssociation = `Tem certeza que deseja excluir o Evento: ${association.userId}, Código: ${association.id}`;
+    this.bodyDeleteAssociation = "Tem certeza que deseja tirar a sua associação ?";
   }
 
   confirmDelete(template: any) {
@@ -137,6 +132,9 @@ export class AssociationComponent implements OnInit {
     if (this.associationForm.valid) {
       if (this.mode === 'post') {
         this.association = Object.assign({}, this.associationForm.value);
+        this.association.userId = this.userUpdate.id;
+        this.association.name = this.userUpdate.fullName;
+        this.association.cnpj = this.userUpdate.cpf;
         this.associationService.postAssociation(this.association).subscribe(
           (newAssociation: Association) => {
             template.hide();

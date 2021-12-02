@@ -4,8 +4,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { CollectionData } from '../_models/CollectionData';
 import { environment } from 'src/environments/environment';
 import { UserUpdate } from '../_models/Identity/UserUpdate';
-import { map, take } from 'rxjs/operators';
-import { PaginatedResult } from '../_models/Pagination';
 
 @Injectable({
     providedIn: 'root'

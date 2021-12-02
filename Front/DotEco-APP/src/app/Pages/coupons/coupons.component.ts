@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
-import { BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
@@ -86,7 +85,13 @@ export class CouponsComponent implements OnInit {
     this.couponsForm = this.fb.group({
       name: ['', Validators.required],
       percent: ['', Validators.required],
-      description: ['', Validators.required],
+      description: ['',
+        [
+          Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(25),
+        ]
+      ],
       userId: ['', Validators.nullValidator],
       companyId: ['', Validators.nullValidator],
       status: ['', Validators.nullValidator],

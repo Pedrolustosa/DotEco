@@ -9,7 +9,7 @@
     <div class="card mt-5">
         <div class="card-body">
             <h3 class="card-header text-center">Coletas Agendadas</h3>
-            <div class="table-responsive-md">
+            <div class="table-responsive-xxl">
                 <table class="table table-sm text-center table-bordered border-success table-striped table-hover">
                     <thead class="table-success">
                         <tr>
@@ -36,7 +36,7 @@
                             <td>{{collectiondatas.telephone | mask: '(00)00000-0000'}}</td>
                             <td>{{collectiondatas.typeCollection}}</td>
                             <td>{{collectiondatas.date}}</td>
-                            <td>{{collectiondatas.associationId}}</td>
+                            <td>{{collectiondatas.name}}</td>
                             <td>{{collectiondatas.statusClient}}</td>
                             <td>{{collectiondatas.statusAssociation}}</td>
                             <td>
@@ -128,22 +128,6 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-floating mb-3">
-                                    <select class="form-select" id="userId" formControlName="userId" [ngClass]="{ 'is-invalid': collectiondataForm.get('userId')?.errors 
-                                        && collectiondataForm.get('userId')?.touched}">
-                                        <option value="" selected disabled hidden>Selecione uma Opção</option>
-                                        <option *ngFor="let user of userId | async as list" [value]="user.id">
-                                            {{user.fullName}}</option>
-                                    </select>
-                                    <label for="userId">Cliente</label>
-                                    <div *ngIf="collectiondataForm.get('userId')?.hasError('required') 
-                                && collectiondataForm.get('userId')?.touched" class="invalid-feedback">
-                                        Escolha o Tipo de Usuário.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="form-floating mb-3">
                                     <select class="form-select" id="associationId" formControlName="associationId"
                                         [ngClass]="{ 'is-invalid': collectiondataForm.get('associationId')?.errors 
                                 && collectiondataForm.get('associationId')?.touched}">
@@ -219,19 +203,6 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input type="email" class="form-control" id="email" formControlName="email"
-                                        [ngClass]="{ 'is-invalid': collectiondataForm.get('email')?.errors 
-                                    && collectiondataForm.get('email')?.touched}" />
-                                    <label for="email">Email</label>
-                                    <div *ngIf="collectiondataForm.get('email')?.hasError('required') 
-                                    && collectiondataForm.get('email')?.touched" class="invalid-feedback">
-                                        Email é obrigatório.
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="col-md-3">
                                 <div class="form-floating mb-3">
                                     <select class="form-select" id="typeCollection"
