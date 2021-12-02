@@ -14,7 +14,6 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxMaskModule } from 'ngx-mask';
-import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { defineLocale, ptBrLocale } from 'ngx-bootstrap/chronos';
 import { NgxSpinnerModule } from "ngx-spinner";
 
@@ -24,7 +23,6 @@ import { AssociationService } from './_services/association.service';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './Shared/nav/nav.component';
-import { TitleComponent } from './Shared/title/title.component';
 import { HomeComponent } from './Pages/home/home.component';
 import { UserComponent } from './Pages/user/user.component';
 import { LoginComponent } from './Pages/user/login/login.component';
@@ -42,7 +40,6 @@ defineLocale('pt-br', ptBrLocale);
   declarations: [
     AppComponent,
     NavComponent,
-    TitleComponent,
     HomeComponent,
     UserComponent,
     LoginComponent,
