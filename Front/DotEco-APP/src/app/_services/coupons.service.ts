@@ -20,6 +20,14 @@ export class CouponsService {
         return this.http.get<Coupons[]>(this.baseUrl);
     }
 
+    getCouponByUserId(userId: number): Observable<Coupons[]> {
+        return this.http.get<Coupons[]>(`${this.baseUrl}/user/${userId}`);
+    }
+
+    getCouponByAssociationId(associationId: number): Observable<Coupons[]> {
+        return this.http.get<Coupons[]>(`${this.baseUrl}/company/${associationId}`);
+    }
+
     getCouponsById(id: number): Observable<Coupons> {
         return this.http.get<Coupons>(`${this.baseUrl}/${id}`);
     }

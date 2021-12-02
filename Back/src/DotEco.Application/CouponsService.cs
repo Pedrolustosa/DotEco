@@ -76,6 +76,40 @@ namespace DotEco.Application
             }
         }
 
+        public async Task<CouponsDto[]> GetCouponByUserIdAsync(int userId)
+        {
+            try
+            {
+                var coupons = await _couponsPersist.GetCouponByUserIdAsync(userId);
+                if (coupons == null) return null;
+
+                var result = _mapper.Map<CouponsDto[]>(coupons);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<CouponsDto[]> GetCouponByCompanyIdAsync(int companyId)
+        {
+            try
+            {
+                var coupons = await _couponsPersist.GetCouponByCompanyIdAsync(companyId);
+                if (coupons == null) return null;
+
+                var result = _mapper.Map<CouponsDto[]>(coupons);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public async Task<CouponsDto> GetCouponsAsyncById(int couponsId)
         {
             try

@@ -9,6 +9,8 @@ namespace DotEco.Application.Contracts
         Task<CouponsDto> UpdateCoupons(int couponsId, CouponsDto model);
         Task<bool> DeleteCoupons(int couponsId);
         Task<CouponsDto[]> GetAllCouponsAsync();
+        Task<CouponsDto[]> GetCouponByUserIdAsync(int userId);
+        Task<CouponsDto[]> GetCouponByCompanyIdAsync(int companyId);
         Task<CouponsDto> GetCouponsAsyncById(int couponsId);
     }
 }

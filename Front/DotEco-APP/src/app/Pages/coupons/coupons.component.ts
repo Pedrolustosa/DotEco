@@ -28,6 +28,7 @@ export class CouponsComponent implements OnInit {
   form!: FormGroup;
   user: User;
   userUpdate = {} as UserUpdate;
+  coup = {} as Coupons;
   mode = 'post';
   _filterList = '';
   bodyDeleteCoupons = '';
@@ -49,7 +50,6 @@ export class CouponsComponent implements OnInit {
   ngOnInit(): void {
     this.spinner.show();
     this.validation();
-    this.getCoupon();
     this.carregarUsuario();
     this.userId = this.accountService.getAllUser();
   }
@@ -66,14 +66,14 @@ export class CouponsComponent implements OnInit {
       .subscribe(
         (userRetorno: UserUpdate) => {
           this.userUpdate = userRetorno;
+          this.getCoupons();
         },
         (error) => {
           console.error(error);
           this.toaster.error('Usuário não Carregado', 'Erro');
           this.router.navigate(['/dashboard']);
         }
-      )
-      .add(() => this.spinner.hide());
+      ).add(() => this.spinner.hide());
   }
 
   validation() {
@@ -109,7 +109,7 @@ export class CouponsComponent implements OnInit {
     this.couponService.deleteCoupons(this.coupon.id).subscribe(
       () => {
         template.hide();
-        this.getCoupon();
+        this.getCoupons();
         this.toastr.success('Deletado com Sucesso');
       }, error => {
         this.toastr.error('Erro ao tentar Deletar');
@@ -118,7 +118,7 @@ export class CouponsComponent implements OnInit {
     );
   }
 
-  public getCoupon(): void {
+  public getCoupons(): void {
     this.couponService.getAllCoupons().subscribe({
       next: (coupons: Coupons[]) => {
         this.coupons = coupons;
@@ -132,6 +132,35 @@ export class CouponsComponent implements OnInit {
     });
   }
 
+  // public getCoupon(): void {
+  //   if (this.userUpdate.type === 1) {
+  //     this.couponService.getCouponByUserId(this.userUpdate.id).subscribe({
+  //       next: (coupons: Coupons[]) => {
+  //         this.coupons = coupons;
+  //         this.couponsFilters = this.coupons;
+  //       },
+  //       error: (error: any) => {
+  //         this.spinner.hide();
+  //         this.toastr.error('Erro ao Carregar os Cupons', 'Erro!');
+  //       },
+  //       complete: () => this.spinner.hide()
+  //     });
+  //   }
+  //   if (this.userUpdate.type === 3) {
+  //     this.couponService.getCouponByAssociationId(this.userUpdate.id).subscribe({
+  //       next: (coupons: Coupons[]) => {
+  //         this.coupons = coupons;
+  //         this.couponsFilters = this.coupons;
+  //       },
+  //       error: (error: any) => {
+  //         this.spinner.hide();
+  //         this.toastr.error('Erro ao Carregar os Cupons', 'Erro!');
+  //       },
+  //       complete: () => this.spinner.hide()
+  //     });
+  //   }
+  // }
+
   saveAlteration(template: any) {
     if (this.couponsForm.valid) {
       if (this.mode === 'post') {
@@ -139,7 +168,7 @@ export class CouponsComponent implements OnInit {
         this.couponService.postCoupons(this.coupon).subscribe(
           (newCoupons: Coupons) => {
             template.hide();
-            this.getCoupon();
+            this.getCoupons();
             this.toastr.success('Inserido com Sucesso!');
           }, error => {
             this.toastr.error(`Erro ao Inserir: ${error}`);
@@ -147,11 +176,10 @@ export class CouponsComponent implements OnInit {
         );
       } else {
         this.coupon = Object.assign({ id: this.coupon.id }, this.couponsForm.value);
-
         this.couponService.putCoupons(this.coupon).subscribe(
           () => {
             template.hide();
-            this.getCoupon();
+            this.getCoupons();
             this.toastr.success('Editado com Sucesso!');
           }, error => {
             this.toastr.error(`Erro ao Editar: ${error}`);

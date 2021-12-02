@@ -46,6 +46,42 @@ namespace DotEco.API.Controllers
             }
         }
 
+        [HttpGet("user/{UserId}")]
+        [Authorize(Roles = "Cliente2, Empresa, Administrador")]
+        public async Task<IActionResult> GetByUserId(int userId)
+        {
+            try
+            {
+                var coupon = await _couponsService.GetCouponByUserIdAsync(userId);
+                if (coupon == null) return NoContent();
+
+                return Ok(coupon);
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar recuperar Cupons. Erro: {ex.Message}");
+            }
+        }
+
+        [HttpGet("company/{CompanyId}")]
+        [Authorize(Roles = "Cliente2, Empresa, Administrador")]
+        public async Task<IActionResult> GetByCompanyId(int companyId)
+        {
+            try
+            {
+                var coupon = await _couponsService.GetCouponByCompanyIdAsync(companyId);
+                if (coupon == null) return NoContent();
+
+                return Ok(coupon);
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar recuperar Cupons. Erro: {ex.Message}");
+            }
+        }
+
         [HttpGet("{CouponsId}")]
         [Authorize(Roles = "Cliente2, Empresa, Administrador")]
         public async Task<IActionResult> Get(int couponsId)

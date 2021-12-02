@@ -12,8 +12,8 @@
                     <div class="mt-2 m-1">
                         <div class="row">
                             <div *ngFor="let coupons of coupons | paginate: { itemsPerPage: 3, currentPage: p }"
-                                class="col-md-2 me-3 mt-1 mb-1">
-                                <div *ngIf="coupons.userId == null">
+                                class="col-md-2 me-5 mt-2 mb-2">
+                                <ng-container *ngIf="coupons.userId == null">
                                     <div class="cardCupon">
                                         <div class="text-center">
                                             <div class="d-flex flex-row text-center">
@@ -24,9 +24,10 @@
                                             </div>
                                         </div>
                                         <hr class="line">
-                                        <span class="company text-center fs-3">{{coupons.description}}</span>
+                                        <span class="company text-center fs-3">{{coupons.name}}</span>
                                         <hr class="line">
-                                        <span class="text-white">{{coupons.name}}</span>
+                                        <span class="text-white">{{coupons.description}}</span>
+                                        <hr class="line">
                                         <div class="d-flex justify-content-center">
                                             <ng-container>
                                                 <button class="btnCoupons"
@@ -34,7 +35,7 @@
                                             </ng-container>
                                         </div>
                                     </div>
-                                </div>
+                                </ng-container>
                             </div>
                         </div>
                         <div class="d-flex justify-content-center">
@@ -48,7 +49,7 @@
                     <div class="mt-2 m-1">
                         <div class="row">
                             <div *ngFor="let coupons of coupons  | paginate: { itemsPerPage: 3, currentPage: p }"
-                                class="col-md-2 me-3 mt-1 mb-1">
+                                class="col-md-2 me-5 mt-2 mb-2">
                                 <div *ngIf="userUpdate.id == coupons.userId">
                                     <ng-container *ngIf="coupons.status === status.Active">
                                         <div class="cardCupon">
@@ -65,9 +66,7 @@
                                                 </div>
                                             </div>
                                             <hr class="line">
-                                            <span class="text-white">Ultimate discount for all customers
-                                                across all country on all products at bbbootstrap.com
-                                            </span>
+                                            <span class="text-white">{{coupons.description}}</span>
                                             <hr class="line">
                                             <span class="mt-1 text-white">{{coupons.status}}</span>
                                         </div>
@@ -86,7 +85,7 @@
                     <div class="mt-2 m-1">
                         <div class="row">
                             <div *ngFor="let coupons of coupons | paginate: { itemsPerPage: 3, currentPage: p }"
-                                class="col-md-2 me-3 mt-1 mb-1">
+                                class="col-md-2 me-5 mt-2 mb-2">
                                 <div *ngIf="userUpdate.id == coupons.userId">
                                     <ng-container *ngIf="coupons.status === status.Inactive">
                                         <div class="cardCupon">
@@ -103,7 +102,7 @@
                                                 </div>
                                             </div>
                                             <hr class="line">
-                                            <span class="company text-center fs-3">{{coupons.description}}</span>
+                                            <span class="text-white">{{coupons.description}}</span>
                                             <hr class="line">
                                             <span class="mt-1 text-white">{{coupons.status}}</span>
                                         </div>
@@ -122,7 +121,7 @@
                     <div class="mt-2 m-1">
                         <div class="row">
                             <div *ngFor="let coupons of coupons | paginate: { itemsPerPage: 3, currentPage: p }"
-                                class="col-md-2 me-3 mt-1 mb-1">
+                                class="col-md-2 me-5 mt-2 mb-2">
                                 <div *ngIf="userUpdate.id == coupons.companyId">
                                     <div class="cardCupon">
                                         <div class="text-center">
@@ -207,12 +206,14 @@
                                 Desconto % é obrigatório.
                             </div>
                         </div>
+                    </div>
 
-                        <div *ngIf="userUpdate.type == 3" class="form-floating mb-3 col-md-2">
+                    <div class="row">
+                        <div *ngIf="userUpdate.type == 3" class="form-floating mb-3 col-md-8">
                             <input type="text" class="form-control" id="description" formControlName="description"
                                 name="description" [ngClass]="{ 'is-invalid': couponsForm.get('description').errors 
                                     && couponsForm.get('description').touched}">
-                            <label for="description">Desconto %</label>
+                            <label for="description">Descrição</label>
                             <div *ngIf="couponsForm.get('description').hasError('required') 
                                         && couponsForm.get('description').touched" class="invalid-feedback">
                                 Desconto % é obrigatório.
@@ -234,9 +235,9 @@
                         </div>
 
 
-                        <div *ngIf="userUpdate.type == 3" class="form-floating mb-3 col-md-2">
+                        <div *ngIf="userUpdate.type == 3" class="form-floating mb-3 col-md-4">
                             <select class="form-select" id="status" formControlName="status" [ngClass]="{ 'is-invalid': couponsForm.get('status')?.errors 
-                    && couponsForm.get('status')?.touched}">
+                        && couponsForm.get('status')?.touched}">
                                 <option value="" selected disabled hidden>Selecione uma Opção</option>
                                 <option value="0">Ativo</option>
                                 <option value="1">Inativo</option>

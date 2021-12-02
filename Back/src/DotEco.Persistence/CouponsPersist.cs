@@ -24,6 +24,28 @@ namespace DotEco.Persistence
             return await query.ToArrayAsync();
         }
 
+        public async Task<Coupon[]> GetCouponByUserIdAsync(int userId)
+        {
+            IQueryable<Coupon> query = _context.Coupons;
+
+            query = query.AsNoTracking()
+                        .Where(c => c.UserId == userId)
+                        .OrderBy(c => c.Id);
+
+            return await query.ToArrayAsync();
+        }
+
+        public async Task<Coupon[]> GetCouponByCompanyIdAsync(int companyId)
+        {
+            IQueryable<Coupon> query = _context.Coupons;
+
+            query = query.AsNoTracking()
+                        .Where(c => c.CompanyId == companyId)
+                        .OrderBy(c => c.Id);
+
+            return await query.ToArrayAsync();
+        }
+
         public async Task<Coupon> GetCouponsAsyncById(int CouponsId)
         {
             IQueryable<Coupon> query = _context.Coupons;
