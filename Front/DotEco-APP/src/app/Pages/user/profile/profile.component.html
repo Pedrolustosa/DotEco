@@ -2,7 +2,7 @@
     <div class="card rounded shadow-sm">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="row p-3">
-                <div class="form-group">
+                <div class="form-group col-md-5">
                     <label>Nome Completo</label>
                     <input type="text" class="form-control" id="fullName" formControlName="fullName" name="fullName"
                         [ngClass]="{ 'is-invalid': f.fullName.errors && f.fullName.touched }" />
@@ -10,9 +10,7 @@
                         <div *ngIf="f.fullName.errors.required">Nome é obrigatório</div>
                     </div>
                 </div>
-            </div>
-            <div class="row p-3">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
                     <label>E-mail</label>
                     <input type="text" formControlName="email" class="form-control"
                         [ngClass]="{ 'is-invalid': f.email.errors && f.email.touched }" />
@@ -21,7 +19,7 @@
                         <div *ngIf="f.email.errors.email">e-mail precisa ser um endereço válido.</div>
                     </div>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
                     <label>CPF/CNPJ</label>
                     <input type="text" formControlName="cpf" class="form-control"
                         [ngClass]="{ 'is-invalid': f.cpf.errors && f.cpf.touched }"
@@ -30,6 +28,7 @@
                         <div *ngIf="f.cpf.errors.required">CPF/CNPJ é obrigatório</div>
                     </div>
                 </div>
+                <div class="col-md-1">Pontos: {{userUpdate.points}}</div>
             </div>
             <div class="p-2">
                 <h3 class="pt-3 border-bottom">Mudar Senha</h3>
