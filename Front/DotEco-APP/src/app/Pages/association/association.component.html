@@ -23,7 +23,7 @@
                         </tr>
                     </thead>
                     <tbody *ngIf="associations && associations.length">
-                        <tr *ngFor="let associations of associations">
+                        <tr *ngFor="let associations of associations | paginate: { itemsPerPage: 3, currentPage: p }">
                             <td>{{associations.id}}</td>
                             <td>{{associations.name}}</td>
                             <td>{{associations.cep | mask: '00000-000'}}</td>
@@ -44,7 +44,7 @@
                     </tbody>
                     <tfoot *ngIf="!associations">
                         <tr>
-                            <td colspan="7" class="text-center">
+                            <td colspan="12" class="text-center">
                                 <h4>
                                     Nenhuma Associação encontrada!
                                 </h4>
@@ -52,6 +52,10 @@
                         </tr>
                     </tfoot>
                 </table>
+                <div class="d-flex justify-content-center">
+                    <pagination-controls previousLabel="Anterior" nextLabel="Próximo" (pageChange)="p = $event">
+                    </pagination-controls>
+                </div>
             </div>
         </div>
     </div>

@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using DotEco.Domain;
-using DotEco.Persistence.Models;
 
 namespace DotEco.Persistence.Contracts
 {
@@ -8,6 +7,8 @@ namespace DotEco.Persistence.Contracts
     {
         //COLLECTION DATAS
         Task<CollectionData[]> GetAllCollectionDataAsync();
+        Task<CollectionData[]> GetCollectionDataByUserIdAsync(int userId);
+        Task<CollectionData[]> GetCollectionDataByAssociationIdAsync(int associationId);
         Task<CollectionData> GetCollectionDataAsyncById(int CollectionDataId);
     }
 }

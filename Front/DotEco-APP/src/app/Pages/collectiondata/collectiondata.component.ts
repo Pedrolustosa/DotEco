@@ -32,7 +32,6 @@ export class CollectionDataComponent implements OnInit {
   statusEnum = StatusClient;
   statusPoint = StatusPoint;
   association = {} as Association;
-  buttonHidden: boolean = true;
 
   mode = 'post';
   _filterList = '';
@@ -58,7 +57,6 @@ export class CollectionDataComponent implements OnInit {
     this.spinner.show();
     this.validation();
     this.carregarUsuario();
-    this.getCollectionData();
     this.userId = this.accountService.getAllUser();
     this.associationId = this.associationService.getAllAssociation();
   }
@@ -93,6 +91,7 @@ export class CollectionDataComponent implements OnInit {
       .subscribe(
         (userRetorno: UserUpdate) => {
           this.userUpdate = userRetorno;
+          this.getCollectionData();
         },
         (error) => {
           console.error(error);
@@ -135,17 +134,32 @@ export class CollectionDataComponent implements OnInit {
   }
 
   public getCollectionData(): void {
-    this.collectiondataService.getAllCollectionDatas().subscribe({
-      next: (collectiondata: CollectionData[]) => {
-        this.collectiondatas = collectiondata;
-        this.collectiondatasFilters = this.collectiondatas;
-      },
-      error: (error: any) => {
-        this.spinner.hide();
-        this.toastr.error('Erro ao Carregar as Coletas', 'Erro!');
-      },
-      complete: () => this.spinner.hide()
-    });
+    if (this.userUpdate.type === 1) {
+      this.collectiondataService.getCollectionDataByUserId(this.userUpdate.id).subscribe({
+        next: (collectiondata: CollectionData[]) => {
+          this.collectiondatas = collectiondata;
+          this.collectiondatasFilters = this.collectiondatas;
+        },
+        error: (error: any) => {
+          this.spinner.hide();
+          this.toastr.error('Erro ao Carregar as Coletas', 'Erro!');
+        },
+        complete: () => this.spinner.hide()
+      });
+    }
+    if (this.userUpdate.type === 2) {
+      this.collectiondataService.getCollectionDataByAssociationId(this.userUpdate.id).subscribe({
+        next: (collectiondata: CollectionData[]) => {
+          this.collectiondatas = collectiondata;
+          this.collectiondatasFilters = this.collectiondatas;
+        },
+        error: (error: any) => {
+          this.spinner.hide();
+          this.toastr.error('Erro ao Carregar as Coletas', 'Erro!');
+        },
+        complete: () => this.spinner.hide()
+      });
+    }
   }
 
   onSubmit(): void {

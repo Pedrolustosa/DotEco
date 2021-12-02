@@ -5,7 +5,6 @@ using DotEco.Application.Contracts;
 using DotEco.Application.Dtos;
 using DotEco.Domain;
 using DotEco.Persistence.Contracts;
-using DotEco.Persistence.Models;
 
 namespace DotEco.Application
 {
@@ -65,6 +64,40 @@ namespace DotEco.Application
             try
             {
                 var coupons = await _couponsPersist.GetAllCouponsAsync();
+                if (coupons == null) return null;
+
+                var result = _mapper.Map<CouponsDto[]>(coupons);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<CouponsDto[]> GetCouponByUserIdAsync(int userId)
+        {
+            try
+            {
+                var coupons = await _couponsPersist.GetCouponByUserIdAsync(userId);
+                if (coupons == null) return null;
+
+                var result = _mapper.Map<CouponsDto[]>(coupons);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<CouponsDto[]> GetCouponByCompanyIdAsync(int companyId)
+        {
+            try
+            {
+                var coupons = await _couponsPersist.GetCouponByCompanyIdAsync(companyId);
                 if (coupons == null) return null;
 
                 var result = _mapper.Map<CouponsDto[]>(coupons);

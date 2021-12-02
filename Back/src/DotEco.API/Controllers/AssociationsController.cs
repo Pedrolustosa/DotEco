@@ -6,8 +6,6 @@ using Microsoft.AspNetCore.Authorization;
 using DotEco.Application.Contracts;
 using Microsoft.AspNetCore.Hosting;
 using System;
-using DotEco.Persistence.Models;
-using DotEco.API.Extensions;
 
 namespace DotEco.API.Controllers
 {

@@ -1,12 +1,8 @@
 using System;
 using System.Threading.Tasks;
-using AutoMapper;
 using DotEco.API.Extensions;
 using DotEco.Application.Contracts;
 using DotEco.Application.Dtos;
-using DotEco.Domain;
-using DotEco.Persistence;
-using DotEco.Persistence.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -42,6 +38,42 @@ namespace DotEco.API.Controllers
                 if (coupons == null) return NoContent();
 
                 return Ok(coupons);
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar recuperar Cupons. Erro: {ex.Message}");
+            }
+        }
+
+        [HttpGet("user/{UserId}")]
+        [Authorize(Roles = "Cliente2, Empresa, Administrador")]
+        public async Task<IActionResult> GetByUserId(int userId)
+        {
+            try
+            {
+                var coupon = await _couponsService.GetCouponByUserIdAsync(userId);
+                if (coupon == null) return NoContent();
+
+                return Ok(coupon);
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar recuperar Cupons. Erro: {ex.Message}");
+            }
+        }
+
+        [HttpGet("company/{CompanyId}")]
+        [Authorize(Roles = "Cliente2, Empresa, Administrador")]
+        public async Task<IActionResult> GetByCompanyId(int companyId)
+        {
+            try
+            {
+                var coupon = await _couponsService.GetCouponByCompanyIdAsync(companyId);
+                if (coupon == null) return NoContent();
+
+                return Ok(coupon);
             }
             catch (Exception ex)
             {

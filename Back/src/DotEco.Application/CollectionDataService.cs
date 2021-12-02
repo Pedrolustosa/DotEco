@@ -5,7 +5,6 @@ using DotEco.Application.Contracts;
 using DotEco.Application.Dtos;
 using DotEco.Domain;
 using DotEco.Persistence.Contracts;
-using DotEco.Persistence.Models;
 
 namespace DotEco.Application
 {
@@ -65,6 +64,40 @@ namespace DotEco.Application
             try
             {
                 var collectionDatas = await _collectionDataPersist.GetAllCollectionDataAsync();
+                if (collectionDatas == null) return null;
+
+                var result = _mapper.Map<CollectionDataDto[]>(collectionDatas);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<CollectionDataDto[]> GetCollectionDataByUserIdAsync(int userId)
+        {
+            try
+            {
+                var collectionDatas = await _collectionDataPersist.GetCollectionDataByUserIdAsync(userId);
+                if (collectionDatas == null) return null;
+
+                var result = _mapper.Map<CollectionDataDto[]>(collectionDatas);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<CollectionDataDto[]> GetCollectionDataByAssociationIdAsync(int associationId)
+        {
+            try
+            {
+                var collectionDatas = await _collectionDataPersist.GetCollectionDataByAssociationIdAsync(associationId);
                 if (collectionDatas == null) return null;
 
                 var result = _mapper.Map<CollectionDataDto[]>(collectionDatas);

@@ -21,6 +21,14 @@ export class CollectionDataService {
         return this.http.get<CollectionData[]>(this.baseUrl);
     }
 
+    getCollectionDataByUserId(userId: number): Observable<CollectionData[]> {
+        return this.http.get<CollectionData[]>(`${this.baseUrl}/user/${userId}`);
+    }
+    
+    getCollectionDataByAssociationId(associationId: number): Observable<CollectionData[]> {
+        return this.http.get<CollectionData[]>(`${this.baseUrl}/association/${associationId}`);
+    }
+
     getCollectionDataById(id: number): Observable<CollectionData> {
         return this.http.get<CollectionData>(`${this.baseUrl}/${id}`);
     }

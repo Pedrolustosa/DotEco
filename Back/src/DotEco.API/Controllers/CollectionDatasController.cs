@@ -1,17 +1,11 @@
-
-using AutoMapper;
-using DotEco.Persistence;
 using System.Threading.Tasks;
 using DotEco.Application.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
-using DotEco.Domain;
 using DotEco.Application.Contracts;
 using Microsoft.AspNetCore.Hosting;
 using System;
-using DotEco.Persistence.Models;
-using DotEco.API.Extensions;
 
 namespace DotEco.API.Controllers
 {
@@ -40,6 +34,42 @@ namespace DotEco.API.Controllers
             try
             {
                 var collectionDatas = await _collectionDataService.GetAllCollectionDataAsync();
+                if (collectionDatas == null) return NoContent();
+
+                return Ok(collectionDatas);
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar recuperar Coletas. Erro: {ex.Message}");
+            }
+        }
+
+        [HttpGet("user/{UserId}")]
+        [Authorize(Roles = "Cliente2, Associacao, Administrador")]
+        public async Task<IActionResult> GetCollectionUserId(int userId)
+        {
+            try
+            {
+                var collectionDatas = await _collectionDataService.GetCollectionDataByUserIdAsync(userId);
+                if (collectionDatas == null) return NoContent();
+
+                return Ok(collectionDatas);
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar recuperar Coletas. Erro: {ex.Message}");
+            }
+        }
+
+        [HttpGet("association/{AssociationId}")]
+        [Authorize(Roles = "Cliente2, Associacao, Administrador")]
+        public async Task<IActionResult> GetCollectionAssociationId(int associationId)
+        {
+            try
+            {
+                var collectionDatas = await _collectionDataService.GetCollectionDataByAssociationIdAsync(associationId);
                 if (collectionDatas == null) return NoContent();
 
                 return Ok(collectionDatas);

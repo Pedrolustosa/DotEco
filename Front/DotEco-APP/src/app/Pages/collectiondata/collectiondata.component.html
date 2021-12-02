@@ -9,51 +9,49 @@
     <div class="card mt-5">
         <div class="card-body">
             <h3 class="card-header text-center">Coletas Agendadas</h3>
-            <ng-container *ngIf="userUpdate.type == 1">
-                <div class="table-responsive-md">
-                    <table class="table table-sm text-center table-bordered border-success table-striped table-hover">
-                        <thead class="table-success">
-                            <tr>
-                                <th>cep</th>
-                                <th>address</th>
-                                <th>reference</th>
-                                <th>email</th>
-                                <th>telephone</th>
-                                <th>tipo de Coleta</th>
-                                <th>date</th>
-                                <th>associação</th>
-                                <th>statusClient</th>
-                                <th>statusAssociation</th>
-                                <th>opções</th>
-                            </tr>
-                        </thead>
-                        <tbody *ngIf="collectiondatas && collectiondatas.length">
-                            <tr
-                                *ngFor="let collectiondatas of collectiondatas | paginate: { itemsPerPage: 3, currentPage: p }">
-                                <ng-container *ngIf="userUpdate.id == collectiondatas.userId">
-                                    <td>{{collectiondatas.cep | mask: '00000-000'}}</td>
-                                    <td>{{collectiondatas.address}}</td>
-                                    <td>{{collectiondatas.reference}}
-                                    <td>{{collectiondatas.email}}</td>
-                                    <td>{{collectiondatas.telephone | mask: '(00)00000-0000'}}</td>
-                                    <td>{{collectiondatas.typeCollection}}</td>
-                                    <td>{{collectiondatas.date}}</td>
-                                    <td>{{collectiondatas.associationId}}</td>
-                                    <td>{{collectiondatas.statusClient}}</td>
-                                    <td>{{collectiondatas.statusAssociation}}</td>
-                                    <td>
-                                        <div class="container">
-                                            <ng-container
-                                                *ngIf="collectiondatas.statusClient !== collectiondatas.statusAssociation || 
-                                                (collectiondatas.statusClient === collectiondatas.statusAssociation && collectiondatas.statusClient !== statusEnum.Confirmed)">
-                                                <div class="btn-group" role="group" aria-label="Basic example">
-                                                    <button type="button" class="btn btn-warning"
-                                                        (click)="editCollectionData(collectiondatas, template)">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                </div>
-                                            </ng-container>
-                                        </div>
+            <div class="table-responsive-md">
+                <table class="table table-sm text-center table-bordered border-success table-striped table-hover">
+                    <thead class="table-success">
+                        <tr>
+                            <th>cep</th>
+                            <th>address</th>
+                            <th>reference</th>
+                            <th>email</th>
+                            <th>telephone</th>
+                            <th>tipo de Coleta</th>
+                            <th>date</th>
+                            <th>associação</th>
+                            <th>statusClient</th>
+                            <th>statusAssociation</th>
+                            <th>opções</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="collectiondatas && collectiondatas.length">
+                        <tr
+                            *ngFor="let collectiondatas of collectiondatas | paginate: { itemsPerPage: 3, currentPage: p }">
+                            <td>{{collectiondatas.cep | mask: '00000-000'}}</td>
+                            <td>{{collectiondatas.address}}</td>
+                            <td>{{collectiondatas.reference}}
+                            <td>{{collectiondatas.email}}</td>
+                            <td>{{collectiondatas.telephone | mask: '(00)00000-0000'}}</td>
+                            <td>{{collectiondatas.typeCollection}}</td>
+                            <td>{{collectiondatas.date}}</td>
+                            <td>{{collectiondatas.associationId}}</td>
+                            <td>{{collectiondatas.statusClient}}</td>
+                            <td>{{collectiondatas.statusAssociation}}</td>
+                            <td>
+                                <div class="container">
+                                    <ng-container *ngIf="userUpdate.type === 1">
+                                        <ng-container
+                                            *ngIf="collectiondatas.statusClient !== collectiondatas.statusAssociation || 
+                                                (collectiondatas.statusClient === collectiondatas.statusAssociation && collectiondatas.statusClient !== statusEnum.Confirmed) ">
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <button type="button" class="btn btn-warning"
+                                                    (click)="editCollectionData(collectiondatas, template)">
+                                                    <i class="fa fa-edit"></i>
+                                                </button>
+                                            </div>
+                                        </ng-container>
                                         <ng-container *ngIf="collectiondatas.statusClient === collectiondatas.statusAssociation 
                                         && collectiondatas.statusClient === statusEnum.Confirmed">
                                             <button
@@ -66,94 +64,52 @@
                                                 Parabéns!
                                             </button>
                                         </ng-container>
-                                    </td>
-                                </ng-container>
-                            </tr>
-                        </tbody>
-                        <tfoot *ngIf="!collectiondatas">
-                            <tr>
-                                <td class="text-center">
-                                    <h4>
-                                        Nenhuma Coleta encontrada!
-                                    </h4>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
-                </div>
-            </ng-container>
-            <ng-container *ngIf="userUpdate.type == 2">
-                <div class="table-responsive-md">
-                    <table class="table table-sm text-center table-bordered border-success table-striped table-hover">
-                        <thead class="table-success">
-                            <tr>
-                                <th>cep</th>
-                                <th>address</th>
-                                <th>reference</th>
-                                <th>email</th>
-                                <th>telephone</th>
-                                <th>tipo de Coleta</th>
-                                <th>date</th>
-                                <th>statusClient</th>
-                                <th>statusAssociation</th>
-                                <th>opções</th>
-                            </tr>
-                        </thead>
-                        <tbody *ngIf="collectiondatas && collectiondatas.length">
-                            <tr *ngFor="let collectiondatas of collectiondatas">
-                                <ng-container *ngIf="userUpdate.id == collectiondatas.associationId">
-                                    <td>{{collectiondatas.cep | mask: '00000-000'}}</td>
-                                    <td>{{collectiondatas.address}}</td>
-                                    <td>{{collectiondatas.reference}}
-                                    <td>{{collectiondatas.email}}</td>
-                                    <td>{{collectiondatas.telephone | mask: '(00)00000-0000'}}</td>
-                                    <td>{{collectiondatas.typeCollection}}</td>
-                                    <td>{{collectiondatas.date}}</td>
-                                    <td>{{collectiondatas.statusClient}}</td>
-                                    <td>{{collectiondatas.statusAssociation}}</td>
-                                    <td>
-                                        <div class="container">
-                                            <ng-container
-                                                *ngIf="collectiondatas.statusClient !== collectiondatas.statusAssociation || 
+                                    </ng-container>
+
+                                    <ng-container *ngIf="userUpdate.type === 2">
+                                        <ng-container
+                                            *ngIf="collectiondatas.statusClient !== collectiondatas.statusAssociation || 
                                                 (collectiondatas.statusClient === collectiondatas.statusAssociation && collectiondatas.statusClient !== statusEnum.Confirmed)">
-                                                <div class="btn-group" role="group" aria-label="Basic example">
-                                                    <button type="button" class="btn btn-warning"
-                                                        (click)="editCollectionData(collectiondatas, template)">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                </div>
-                                            </ng-container>
-                                            <ng-container *ngIf="collectiondatas.statusClient === collectiondatas.statusAssociation 
-                                                && collectiondatas.statusClient === statusEnum.Confirmed">
-                                                <button
-                                                    *ngIf="collectiondatas.statusPoint !== statusPoint.Rescued && collectiondatas.statusPoint === statusPoint.NotRescued"
-                                                    type="button" class="btn btn-warning"
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <button type="button" class="btn btn-warning"
                                                     (click)="editCollectionData(collectiondatas, template)">
                                                     <i class="fa fa-edit"></i>
                                                 </button>
-                                                <button *ngIf="collectiondatas.statusPoint !== statusPoint.NotRescued"
-                                                    type="button" class="btnCollectionDataTable">
-                                                    <i class="fa fa-edit"> Concluído</i>
-                                                </button>
-                                            </ng-container>
-                                        </div>
-                                    </td>
-                                </ng-container>
-                            </tr>
-                        </tbody>
-                        <tfoot *ngIf="!collectiondatas">
-                            <tr>
-                                <td class="text-center">
-                                    <h4>
-                                        Nenhuma Coleta encontrada!
-                                    </h4>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
+                                            </div>
+                                        </ng-container>
+                                        <ng-container *ngIf="collectiondatas.statusClient === collectiondatas.statusAssociation 
+                                                && collectiondatas.statusClient === statusEnum.Confirmed">
+                                            <button
+                                                *ngIf="collectiondatas.statusPoint !== statusPoint.Rescued && collectiondatas.statusPoint === statusPoint.NotRescued"
+                                                type="button" class="btn btn-warning"
+                                                (click)="editCollectionData(collectiondatas, template)">
+                                                <i class="fa fa-edit"></i>
+                                            </button>
+                                            <button *ngIf="collectiondatas.statusPoint !== statusPoint.NotRescued"
+                                                type="button" class="btnCollectionDataTable">
+                                                <i class="fa fa-edit"> Concluído</i>
+                                            </button>
+                                        </ng-container>
+                                    </ng-container>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot *ngIf="!collectiondatas">
+                        <tr>
+                            <td colspan="12" class="text-center">
+                                <h4>
+                                    Nenhuma Coleta encontrada!
+                                </h4>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <div class="d-flex justify-content-center">
+                    <pagination-controls previousLabel="Anterior" nextLabel="Próximo" (pageChange)="p = $event">
+                    </pagination-controls>
                 </div>
-            </ng-container>
+            </div>
         </div>
     </div>
 </div>

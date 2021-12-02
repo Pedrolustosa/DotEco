@@ -24,7 +24,7 @@ import { debounceTime } from 'rxjs/operators';
 })
 
 export class AssociationComponent implements OnInit {
-
+  p: number = 1;
   associationForm: FormGroup;
   _association: Association[] = [];
   associations: Association[];
