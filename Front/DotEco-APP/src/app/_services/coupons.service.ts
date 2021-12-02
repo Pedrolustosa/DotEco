@@ -3,10 +3,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Coupons } from '../_models/Coupons';
 import { environment } from 'src/environments/environment';
-import { UserUpdate } from '../_models/Identity/UserUpdate';
-import { map, take } from 'rxjs/operators';
-import { PaginatedResult } from '../_models/Pagination';
-
 @Injectable({
     providedIn: 'root'
 })

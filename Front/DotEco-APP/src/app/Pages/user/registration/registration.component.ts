@@ -27,7 +27,6 @@ export class RegistrationComponent implements OnInit {
     private accountService: AccountService,
     public router: Router,
     public fb: FormBuilder,
-    private toaster: ToastrService,
     private spinner: NgxSpinnerService,
     private toastr: ToastrService
   ) { }

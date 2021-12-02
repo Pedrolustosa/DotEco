@@ -41,7 +41,6 @@ export class CollectionDataComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private toastr: ToastrService,
-    private modalService: BsModalService,
     private localeService: BsLocaleService,
     private collectiondataService: CollectionDataService,
     private associationService: AssociationService,
@@ -68,16 +67,16 @@ export class CollectionDataComponent implements OnInit {
 
   private validation(): void {
     this.collectiondataForm = this.fb.group({
+      email: [''],
+      userId: [''],
       name: ['', Validators.required],
       address: ['', Validators.required],
       cep: ['', Validators.required],
       reference: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
       telephone: ['', Validators.required],
       typeCollection: ['', Validators.required],
       date: ['', Validators.nullValidator],
       associationId: ['', Validators.required],
-      userId: ['', Validators.required],
       statusPoint: ['', Validators.nullValidator],
       statusClient: ['', Validators.nullValidator],
       statusAssociation: ['', Validators.nullValidator],
@@ -181,7 +180,9 @@ export class CollectionDataComponent implements OnInit {
   saveAlteration(template: any) {
     if (this.collectiondataForm.valid) {
       if (this.mode === 'post') {
-        this.collectiondata = this.collectiondataForm.value;
+        this.collectiondata = Object.assign({}, this.collectiondataForm.value);
+        this.collectiondata.userId = this.userUpdate.id;
+        this.collectiondata.email = this.userUpdate.email;
         this.collectiondataService.postCollectionData(this.collectiondata).subscribe(
           (newCollectionData: CollectionData) => {
             template.hide();
