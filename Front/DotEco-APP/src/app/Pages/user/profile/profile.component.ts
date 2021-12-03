@@ -60,7 +60,7 @@ export class ProfileComponent implements OnInit {
         userName: [''],
         type: [''],
         fullName: ['', Validators.required],
-        cpf: ['', Validators.required],
+        cpfCnpj: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.minLength(6), Validators.nullValidator]],
         confirmePassword: ['', Validators.nullValidator],

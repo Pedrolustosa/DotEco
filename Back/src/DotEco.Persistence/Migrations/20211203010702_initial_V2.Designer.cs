@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotEco.Persistence.Migrations
 {
     [DbContext(typeof(DotEcoContext))]
-    [Migration("20211202193630_initial_V1")]
-    partial class initial_V1
+    [Migration("20211203010702_initial_V2")]
+    partial class initial_V2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,7 +35,7 @@ namespace DotEco.Persistence.Migrations
                     b.Property<string>("CEP")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CNPJ")
+                    b.Property<string>("CpfCnpj")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -180,11 +180,11 @@ namespace DotEco.Persistence.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("CPF")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CpfCnpj")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")

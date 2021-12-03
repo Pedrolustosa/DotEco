@@ -4,14 +4,16 @@ using DotEco.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DotEco.Persistence.Migrations
 {
     [DbContext(typeof(DotEcoContext))]
-    partial class DotEcoContextModelSnapshot : ModelSnapshot
+    [Migration("20211203003909_initial_V1")]
+    partial class initial_V1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,7 +68,7 @@ namespace DotEco.Persistence.Migrations
                     b.Property<int>("AssociationId")
                         .HasColumnType("int");
 
-                    b.Property<string>("CEP")
+                    b.Property<string>("CpfCnpj")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Date")

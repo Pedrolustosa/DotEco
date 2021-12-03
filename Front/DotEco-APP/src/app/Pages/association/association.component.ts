@@ -61,7 +61,7 @@ export class AssociationComponent implements OnInit {
     this.associationForm = this.fb.group({
       userId: [''],
       name: [''],
-      cnpj: [''],
+      cpfCnpj: [''],
       cep: ['', Validators.required],
       state: ['', Validators.required],
       address: ['', Validators.required],
@@ -134,7 +134,7 @@ export class AssociationComponent implements OnInit {
         this.association = Object.assign({}, this.associationForm.value);
         this.association.userId = this.userUpdate.id;
         this.association.name = this.userUpdate.fullName;
-        this.association.cnpj = this.userUpdate.cpf;
+        this.association.cpfCnpj = this.userUpdate.cpfCnpj;
         this.associationService.postAssociation(this.association).subscribe(
           (newAssociation: Association) => {
             template.hide();

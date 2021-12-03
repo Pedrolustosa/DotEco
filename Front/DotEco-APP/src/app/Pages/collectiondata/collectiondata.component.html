@@ -13,17 +13,17 @@
                 <table class="table table-sm text-center table-bordered border-success table-striped table-hover">
                     <thead class="table-success">
                         <tr>
-                            <th>cep</th>
-                            <th>address</th>
-                            <th>reference</th>
-                            <th>email</th>
-                            <th>telephone</th>
-                            <th>tipo de Coleta</th>
-                            <th>date</th>
-                            <th>associação</th>
-                            <th>statusClient</th>
-                            <th>statusAssociation</th>
-                            <th>opções</th>
+                            <th>CEP</th>
+                            <th>Endereço</th>
+                            <th>Referencia</th>
+                            <th>E-Mail</th>
+                            <th>Telefone</th>
+                            <th>Reciclável</th>
+                            <th>Data Coleta</th>
+                            <th>Associação</th>
+                            <th>Status Cliente</th>
+                            <th>Status Associação</th>
+                            <th>Opções</th>
                         </tr>
                     </thead>
                     <tbody *ngIf="collectiondatas && collectiondatas.length">
@@ -106,7 +106,7 @@
                     </tfoot>
                 </table>
                 <div class="d-flex justify-content-center">
-                    <pagination-controls previousLabel="Anterior" nextLabel="Próximo" (pageChange)="p = $event">
+                    <pagination-controls previousLabel="<" nextLabel=">" (pageChange)="p = $event">
                     </pagination-controls>
                 </div>
             </div>

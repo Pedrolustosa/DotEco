@@ -1,17 +1,55 @@
-.navbar {
-    background-color: #42a877;
-    border-radius: 0rem 0rem .5rem .5rem;
-    font-size: 1rem;
-    line-height: 1.1rem;
+.navbar-nav>li>a {
+    text-transform: uppercase;
+    font-size: .9rem;
+    margin-right: 20px;
+    color: #fff
+}
+
+.navbar-toggler {
+    padding: .20rem .50rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    background-color: transparent;
+    border: 1px solid white
 }
 
 .nav-link {
-    color: #FFFFFF;
+    color: #fff !important
 }
 
-.doteco p {
-    margin-bottom: auto;
-    font-family: Arial, Helvetica, sans-serif;
+.nav-link:hover {
+    color: #42a877 !important;
+    text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
+}
+
+.wrapper {
+        width: 100%;
+        position: absolute;
+        height: 100%;
+        background-color: #000;
+        clip-path: polygon(81% 0, 100% 0, 100% 50%, 100% 100%, 71% 100%);
+        transition: 1s all
+}
+
+.navbar-brand {
+    color: #fff;
+    font-family: 'Allerta Stencil', sans-serif;
+    margin-bottom: 4px;
+    font-size: 27px
+}
+
+.navbar-doteco:hover .wrapper {
+    clip-path: polygon(81% 0, 100% 0, 100% 50%, 100% 100%, 65% 100%)
+}
+
+.navbar-brand:hover {
+    color: #42a877;
+    text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
+}
+
+.navbar-doteco {
+    background-color: #42a877;
+    color: #fff
 }
 
 li{
@@ -38,3 +76,12 @@ li{
     box-shadow: -150px 0 0 #FFFFFF inset;
     color: #42a877;
 }
+
+/* ============ only desktop view ============ */
+@media all and (min-width: 600px) {
+	.navbar .nav-item .dropdown-menu{ display: none; cursor: pointer;}
+	.navbar .nav-item:hover .nav-link{}
+	.navbar .nav-item:hover .dropdown-menu{ display: block; }
+	.navbar .nav-item .dropdown-menu{ margin-top:0; }
+}
+/* ============ desktop view .end// ============ */
