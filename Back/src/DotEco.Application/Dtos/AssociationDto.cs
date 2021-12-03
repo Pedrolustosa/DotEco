@@ -7,7 +7,7 @@ namespace DotEco.Application.Dtos
         public int Id { get; set; }
         public string Name { get; set; }
         public string CEP { get; set; }
-        public string CNPJ { get; set; }
+        public string CpfCnpj { get; set; }
         public string State { get; set; }
         public string Address { get; set; }
         public int? UserId { get; set; }

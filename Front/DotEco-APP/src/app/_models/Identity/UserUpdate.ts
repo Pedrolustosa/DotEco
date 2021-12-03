@@ -4,7 +4,7 @@ export class UserUpdate {
   fullName: string;
   email: string;
   type: number;
-  cpf: string;
+  cpfCnpj: string;
   password: string;
   points: number;
   token: string;

@@ -2,7 +2,7 @@ export class User {
     userName: string;
     fullName: string;
     email: string;
-    cpf: string;
+    cpfCnpj: string;
     password: string;
     type: number;
     points: number;

@@ -42,15 +42,15 @@
 
                                     <div class="d-flex justify-content-center align-items-center">
                                         <div class="form-floating mb-3">
-                                            <input type="text" class="form-control" id="cpf" formControlName="cpf"
-                                                name="cpf" [ngClass]="{ 'is-invalid': registerForm.get('cpf')?.errors 
-                                                && registerForm.get('cpf')?.touched}"
+                                            <input type="text" class="form-control" id="cpfCnpj"
+                                                formControlName="cpfCnpj" name="cpfCnpj" [ngClass]="{ 'is-invalid': registerForm.get('cpfCnpj')?.errors 
+                                                && registerForm.get('cpfCnpj')?.touched}"
                                                 mask="000.000.000-00||00.000.000/0000-00"
                                                 placeholder="Insira o Nome Completo">
-                                            <label for="cpf">CPF ou CNPJ</label>
-                                            <div *ngIf="registerForm.get('cpf')?.hasError('required') 
-                                                    && registerForm.get('cpf')?.touched" class="invalid-feedback">
-                                                CPF é obrigatório.
+                                            <label for="cpfCnpj">CPF ou CNPJ</label>
+                                            <div *ngIf="registerForm.get('cpfCnpj')?.hasError('required') 
+                                                    && registerForm.get('cpfCnpj')?.touched" class="invalid-feedback">
+                                                CPF/CNPJ é obrigatório.
                                             </div>
                                         </div>
                                     </div>

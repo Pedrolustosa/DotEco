@@ -1,54 +1,55 @@
-<nav class="navbar navbar-expand-lg navbar-dark shadow-sm pt-3" *ngIf="showMenu()">
-    <div class="container pb-2">
-        <a class="navbar-brand text-white fs-1" routerLink="">
-            <div class="doteco fs-1">
-                <p>DOT<b>ECO</b></p>
-            </div>
-        </a>
-        <button class="navbar-toggler" (click)="isCollapsed = !isCollapsed" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse " [collapse]="isCollapsed" [isAnimated]="true" id="navbarNav">
-            <ul class="navbar-nav me-auto">
+<nav class="navbar navbar-expand-lg navbar-doteco navbar-dark" *ngIf="showMenu()">
+    <div class="wrapper"> </div>
+    <div class="container all-show"> <a class="navbar-brand" href="#">DOT<b>ECO</b> <i class="fa fa-codepen"></i></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span
+                class="navbar-toggler-icon"></span> </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
                 <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" routerLink="home">Home</a>
+                    <a class="nav-link active" aria-current="page" routerLink="home">
+                        <i class="fas fa-home me-1"></i>Home
+                    </a>
                 </li>
                 <ng-container *ngIf="(user | async) !== null">
                     <li class="nav-item" routerLinkActive="active">
-                        <a class="nav-link" routerLink="association">Associações</a>
+                        <a class="nav-link" routerLink="association"><i class="fas fa-people-carry me-1"></i>
+                            Associações</a>
                     </li>
                     <li class="nav-item" routerLinkActive="active">
-                        <a class="nav-link" routerLink="coupons">Cupons</a>
+                        <a class="nav-link" routerLink="coupons"><i class="fas fa-ticket-alt me-1"></i> Cupons</a>
                     </li>
                     <li class="nav-item" routerLinkActive="active">
-                        <a class="nav-link" routerLink="collectiondata">Solicitações</a>
+                        <a class="nav-link" routerLink="collectiondata"><i class="fas fa-recycle me-1"></i>
+                            Solicitações</a>
                     </li>
                 </ng-container>
             </ul>
-            <div *ngIf="(user | async) === null" class="navbar-nav mr-3 d-xs-none d-none d-md-block">
-                <a class="btn btnDotEco" routerLink="/user/login">Entrar</a>
+            <div class="d-flex flex-column sim">
+                <div *ngIf="(user | async) === null" class="navbar-nav mr-3 d-xs-none d-none d-md-block">
+                    <a class="btn btnDotEco" routerLink="/user/login">Entrar</a>
+                </div>
+                <ul *ngIf="(user | async) !== null" class="navbar-nav">
+                    <li class="nav-item dropdown" dropdown *ngIf="(user | async) as user">
+                        <a dropdownToggle class="nav-link  dropdown-toggle" id="navbarDropdownMenuLink"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="far fa-user-circle"></i> {{user.fullName | titlecase}}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" routerLink="user/profile">
+                                    <i class="far fa-id-badge me-1"></i> Perfil
+                                </a>
+                            </li>
+                            <li>
+                                <a (click)="logout()" class="dropdown-item">
+                                    <i class="fas fa-sign-out-alt me-1"></i> Sair
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
-            <ul *ngIf="(user | async) !== null" class="navbar-nav">
-                <li class="nav-item dropdown" dropdown *ngIf="(user | async) as user">
-                    <a dropdownToggle class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                        style="cursor: pointer; text-transform: capitalize;">
-                        {{user.fullName | titlecase}}
-                    </a>
-                    <div *dropdownMenu class="dropdown-menu dropdown-menu-right"
-                        aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" routerLink="user/profile">
-                            Perfil
-                        </a>
-                        <div role="separator" class="divider"></div>
-                        <a (click)="logout()" class="dropdown-item" style="cursor: pointer;">
-                            Sair
-                        </a>
-                    </div>
-                </li>
-            </ul>
         </div>
-
     </div>
 </nav>

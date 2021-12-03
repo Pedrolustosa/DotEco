@@ -23,21 +23,24 @@
                         </tr>
                     </thead>
                     <tbody *ngIf="associations && associations.length">
-                        <tr *ngFor="let associations of associations | paginate: { itemsPerPage: 10, currentPage: p }">
+                        <tr *ngFor="let associations of associations | paginate: { itemsPerPage: 15, currentPage: p }">
                             <td>{{associations.id}}</td>
                             <td>{{associations.name}}</td>
                             <td>{{associations.cep | mask: '00000-000'}}</td>
-                            <td>{{associations.cnpj | mask: '00.000.000/0000-00'}}</td>
+                            <td>{{associations.cpfCnpj | mask: '00.000.000/0000-00'}}</td>
                             <td>{{associations.state}}</td>
                             <td>{{associations.address}}</td>
                             <td>
-                                <ng-container *ngIf="userUpdate.id == associations.userId">
+                                <ng-container *ngIf="userUpdate.id === associations.userId">
                                     <button type="button" title="Excluir" class="btn btn-outline-danger me-2"
                                         (click)="deleteAssociation(associations, confirm)"><i
                                             class="fa fa-eraser"></i></button>
                                     <button type="button" title="Editar" class="btn btn-outline-warning me-2"
                                         (click)="editAssociation(associations, template)"><i
                                             class="fa fa-edit"></i></button>
+                                </ng-container>
+                                <ng-container *ngIf="userUpdate.id !== associations.userId">
+                                    <button class="btnAssociationDenied">Sem Permissão!</button>
                                 </ng-container>
                             </td>
                         </tr>
@@ -53,7 +56,7 @@
                     </tfoot>
                 </table>
                 <div class="d-flex justify-content-center">
-                    <pagination-controls previousLabel="Anterior" nextLabel="Próximo" (pageChange)="p = $event">
+                    <pagination-controls class="custom-pagination" responsive="true" previousLabel="<" nextLabel=">" (pageChange)="p = $event">
                     </pagination-controls>
                 </div>
             </div>
@@ -80,17 +83,6 @@
                                     <div *ngIf="associationForm.get('cep').hasError('required') 
                                 && associationForm.get('cep').touched" class="invalid-feedback">
                                         CEP é obrigatório.
-                                    </div>
-                                </div>
-
-                                <div class="form-floating mb-3 col-md-3">
-                                    <input type="text" class="form-control" id="cnpj" formControlName="cnpj" name="cnpj"
-                                        [ngClass]="{ 'is-invalid': associationForm.get('cnpj').errors 
-                                && associationForm.get('cnpj').touched}" mask="00.000.000/0000-00">
-                                    <label for="cnpj">CNPJ</label>
-                                    <div *ngIf="associationForm.get('cnpj').hasError('required') 
-                                    && associationForm.get('cnpj').touched" class="invalid-feedback">
-                                        CNPJ é obrigatório.
                                     </div>
                                 </div>
 

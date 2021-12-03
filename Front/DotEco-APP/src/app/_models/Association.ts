@@ -3,7 +3,7 @@ export interface Association {
     userId: number;
     name: string;
     cep: string;
-    cnpj: string;
+    cpfCnpj: string;
     state: string;
     address: string;
 }
