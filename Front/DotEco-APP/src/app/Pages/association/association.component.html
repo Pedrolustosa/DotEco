@@ -17,6 +17,7 @@
                             <th>Nome</th>
                             <th>CEP</th>
                             <th>CNPJ</th>
+                            <td>Telephone</td>
                             <th>Estado</th>
                             <th>Endereço</th>
                             <th>Opções</th>
@@ -28,6 +29,7 @@
                             <td>{{associations.name}}</td>
                             <td>{{associations.cep | mask: '00000-000'}}</td>
                             <td>{{associations.cpfCnpj | mask: '00.000.000/0000-00'}}</td>
+                            <td>{{associations.telephone | mask: '(00) 0000-0000'}}</td>
                             <td>{{associations.state}}</td>
                             <td>{{associations.address}}</td>
                             <td>
@@ -85,6 +87,17 @@
                                 && associationForm.get('cep').touched" class="invalid-feedback">
                                         CEP é obrigatório.
                                     </div>
+                                </div>
+
+                                <div class="form-floating mb-3 col-md-3">
+                                    <input type="text" class="form-control" id="telephone" formControlName="telephone"
+                                        [ngClass]="{ 'is-invalid': associationForm.get('telephone').errors 
+                                    && associationForm.get('telephone').touched}" />
+                                    <div *ngIf="associationForm.get('telephone').hasError('required') 
+                                    && associationForm.get('telephone').touched" class="invalid-feedback">
+                                        Endereço é obrigatório.
+                                    </div>
+                                    <label for="telephone" class="ms-2">Endereço</label>
                                 </div>
 
                                 <div class="form-floating mb-3 col-md-3">

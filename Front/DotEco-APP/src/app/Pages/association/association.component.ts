@@ -62,6 +62,7 @@ export class AssociationComponent implements OnInit {
       userId: [''],
       name: [''],
       cpfCnpj: [''],
+      telephone: ['', Validators.required],
       cep: ['', Validators.required],
       state: ['', Validators.required],
       address: ['', Validators.required],
