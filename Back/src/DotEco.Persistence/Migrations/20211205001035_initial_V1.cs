@@ -230,6 +230,7 @@ namespace DotEco.Persistence.Migrations
                     Percent = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserFullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CompanyFullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CompanyId = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: true)
