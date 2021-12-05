@@ -4,7 +4,7 @@
             <div class="col-md-9">
                 <div class="card mt-2 mb-4 m-3">
                     <div class="row g-0">
-                        <div class="col-md-8 d-flex align-items-center">
+                        <div class="col-md-7 d-flex align-items-center">
                             <div class="card-body p-4 p-lg-6 gap-3">
 
                                 <div class="mt-5">
@@ -18,7 +18,7 @@
                                                 formControlName="userName" [ngClass]="{'is-invalid': registerForm.get('userName')?.errors 
                                                 && registerForm.get('userName')?.touched}"
                                                 placeholder="Insira o nome de Usuário" />
-                                            <label for="userName">Nome Usuário</label>
+                                            <label for="userName" class="ms-2">Nome Usuário</label>
                                             <div *ngIf="registerForm.get('userName')?.hasError('required') 
                                                 && registerForm.get('userName')?.touched" class="invalid-feedback">
                                                 Usuário é obrigatório.
@@ -32,7 +32,7 @@
                                                 formControlName="fullName" [ngClass]="{'is-invalid': registerForm.get('fullName')?.errors 
                                                 && registerForm.get('fullName')?.touched }"
                                                 placeholder="Insira o Nome Completo" />
-                                            <label for="floatingNome">Nome</label>
+                                            <label for="floatingNome" class="ms-2">Nome</label>
                                             <div *ngIf="registerForm.get('fullName')?.hasError('required') 
                                                 && registerForm.get('fullName')?.touched" class="invalid-feedback">
                                                 Nome Completo é obrigatório.
@@ -47,7 +47,7 @@
                                                 && registerForm.get('cpfCnpj')?.touched}"
                                                 mask="000.000.000-00||00.000.000/0000-00"
                                                 placeholder="Insira o Nome Completo">
-                                            <label for="cpfCnpj">CPF ou CNPJ</label>
+                                            <label for="cpfCnpj" class="ms-2">CPF ou CNPJ</label>
                                             <div *ngIf="registerForm.get('cpfCnpj')?.hasError('required') 
                                                     && registerForm.get('cpfCnpj')?.touched" class="invalid-feedback">
                                                 CPF/CNPJ é obrigatório.
@@ -63,27 +63,29 @@
                                                 placeholder="Insira o Nome Completo" />
                                             <div *ngIf="registerForm.get('email')?.hasError('required') 
                                                     && registerForm.get('email')?.touched" class="invalid-feedback">
-                                                email é obrigatório.
+                                                Email é obrigatório.
                                             </div>
                                             <div *ngIf="registerForm.get('email')?.hasError('email')
                                                     && registerForm.get('email')?.touched" class="invalid-feedback">
                                                 Deve ser um e-mail válido.
                                             </div>
-                                            <label for="email">Email address</label>
+                                            <label for="email" class="ms-2">E-mail</label>
                                         </div>
                                     </div>
 
-                                    <div class="d-flex justify-content-center align-items-center mb-3">
-                                        <select class="form-control" id="type" formControlName="type" [ngClass]="{ 'is-invalid': registerForm.get('type')?.errors 
-                                            && registerForm.get('type')?.touched}">
+
+                                    <div class="form-floating mb-3">
+                                        <select class="form-select" id="type" formControlName="type" [ngClass]="{ 'is-invalid': registerForm.get('type').errors 
+                                        && registerForm.get('type').touched}">
                                             <option value="" selected disabled hidden>Selecione uma Opção</option>
                                             <option *ngFor="let type of userTypes" [ngValue]="type.id">
                                                 {{type.name}}</option>
                                         </select>
-                                        <div *ngIf="registerForm.get('type')?.hasError('required') 
-                                                    && registerForm.get('type')?.touched" class="invalid-feedback">
-                                            Escolha o Tipo de Usuário.
+                                        <div *ngIf="registerForm.get('type').hasError('required') 
+                                        && registerForm.get('type').touched" class="invalid-feedback">
+                                            Perfil é obrigatório.
                                         </div>
+                                        <label for="type" class="ms-2">Perfil</label>
                                     </div>
 
                                     <div formGroupName="passwords">
@@ -103,7 +105,7 @@
                                                     class="invalid-feedback">
                                                     Senha é obrigatório.
                                                 </div>
-                                                <label for="password">Password</label>
+                                                <label for="password" class="ms-2">Password</label>
                                             </div>
                                         </div>
 
@@ -115,7 +117,7 @@
                                                     ||registerForm.get('passwords.confirmPassword')?.hasError('mismatch') 
                                                     && registerForm.get('passwords.confirmPassword')?.touched }"
                                                     placeholder="Confirme a Senha" />
-                                                <label for="confirmPassword">Password</label>
+                                                <label for="confirmPassword" class="ms-2">Password</label>
                                                 <div *ngIf="registerForm.get('passwords.confirmPassword')?.hasError('required') 
                                                     && registerForm.get('passwords.confirmPassword')?.touched"
                                                     class="invalid-feedback">
@@ -139,7 +141,7 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="col-md-4 panelRegister">
+                        <div class="col-md-5 panelRegister">
                             <div class="block Title2">
 
                                 <div class="doteco fs-1">

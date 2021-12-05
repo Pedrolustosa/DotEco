@@ -89,6 +89,11 @@
     background: #E6E6E6;
 }
 
+.form-select {
+    height: 4.5rem;
+    background: #E6E6E6;
+}
+
 input {
     max-width: 35rem;
     font-weight: 900;
@@ -100,7 +105,7 @@ input {
 select {
     max-width: 35rem;
     font-weight: 900;
-    font-size: 1.5rem;
+    font-size: 2rem;
     line-height: 3rem;
     border-radius: 1rem;
 }

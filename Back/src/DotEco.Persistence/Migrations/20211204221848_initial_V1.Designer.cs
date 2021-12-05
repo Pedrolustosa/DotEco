@@ -4,14 +4,16 @@ using DotEco.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DotEco.Persistence.Migrations
 {
     [DbContext(typeof(DotEcoContext))]
-    partial class DotEcoContextModelSnapshot : ModelSnapshot
+    [Migration("20211204221848_initial_V1")]
+    partial class initial_V1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,9 +115,6 @@ namespace DotEco.Persistence.Migrations
                         .HasColumnType("int")
                         .HasColumnName("CouponId")
                         .UseIdentityColumn();
-
-                    b.Property<string>("CompanyFullName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CompanyId")
                         .HasColumnType("int");

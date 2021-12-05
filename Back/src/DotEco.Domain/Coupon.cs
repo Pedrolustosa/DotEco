@@ -11,6 +11,8 @@ namespace DotEco.Domain
         public string Name { get; set; }
         public string Percent { get; set; }
         public string Description { get; set; }
+        public string UserFullName { get; set; }
+        public string CompanyFullName { get; set; }
         public int CompanyId { get; set; }
         public Status Status { get; set; }
         public int? UserId { get; set; }
@@ -20,6 +22,6 @@ namespace DotEco.Domain
 
 public enum Status
 {
-    Active = 0,
-    Inactive = 1,
+    Ativo,
+    Inativo,
 }

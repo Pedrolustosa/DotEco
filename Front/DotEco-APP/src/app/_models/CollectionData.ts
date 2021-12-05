@@ -16,20 +16,20 @@ export interface CollectionData {
 }
 
 export enum StatusClient {
-    Waiting = "Waiting",
-    Scheduled = "Scheduled",
-    Confirmed = "Confirmed",
-    Refused = "Refused",
+    Waiting = "Aguardando",
+    Scheduled = "Agendado",
+    Confirmed = "Confirmado",
+    Refused = "Recusado",
 }
 
 export enum StatusAssociation {
-    Waiting = "Waiting",
-    Scheduled = "Scheduled",
-    Confirmed = "Confirmed",
-    Refused = "Refused",
+    Waiting = "Aguardando",
+    Scheduled = "Agendado",
+    Confirmed = "Confirmado",
+    Refused = "Recusado",
 }
 
 export enum StatusPoint {
-    Rescued = "c",
-    NotRescued = "NotRescued",
+    NotRescued = "NaoResgatado",
+    Rescued = "Resgatado",
 }

@@ -76,7 +76,7 @@ export class CouponsComponent implements OnInit {
         (error) => {
           console.error(error);
           this.toaster.error('Usuário não Carregado', 'Erro');
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/home']);
         }
       ).add(() => this.spinner.hide());
   }
@@ -84,16 +84,12 @@ export class CouponsComponent implements OnInit {
   validation() {
     this.couponsForm = this.fb.group({
       name: ['', Validators.required],
-      percent: ['', Validators.required],
-      description: ['',
-        [
-          Validators.required,
-          Validators.minLength(4),
-          Validators.maxLength(25),
-        ]
-      ],
+      percent: ['', Validators.required, Validators.max(100)],
+      description: ['', [Validators.minLength(4), Validators.maxLength(50),]],
       userId: ['', Validators.nullValidator],
+      userFullName: ['', Validators.nullValidator],
       companyId: ['', Validators.nullValidator],
+      companyFullName: ['', Validators.nullValidator],
       status: ['', Validators.nullValidator],
     });
   }
@@ -183,7 +179,8 @@ export class CouponsComponent implements OnInit {
     if (this.couponsForm.valid) {
       if (this.mode === 'post') {
         this.coupon = Object.assign({}, this.couponsForm.value);
-        this.coupon.companyId = this.userUpdate.id
+        this.coupon.companyId = this.userUpdate.id;
+        this.coupon.companyFullName = this.userUpdate.fullName;
         this.couponService.postCoupons(this.coupon).subscribe(
           (newCoupons: Coupons) => {
             template.hide();
@@ -194,18 +191,33 @@ export class CouponsComponent implements OnInit {
           }
         );
       } else {
-        this.coupon = Object.assign({ id: this.coupon.id }, this.couponsForm.value);
-        this.couponService.putCoupons(this.coupon).subscribe(
-          () => {
-            template.hide();
-            this.getCoupons();
-            this.toastr.success('Editado com Sucesso!');
-          }, error => {
-            this.toastr.error(`Erro ao Editar: ${error}`);
-          }
-        );
+        if (this.userUpdate.type === 1) {
+          this.coupon = Object.assign({ id: this.coupon.id }, this.couponsForm.value);
+          this.coupon.userId = this.userUpdate.id;
+          this.coupon.userFullName = this.userUpdate.fullName;
+          this.couponService.putCoupons(this.coupon).subscribe(
+            () => {
+              template.hide();
+              this.getCouponsById();
+              this.toastr.success('Editado com Sucesso!');
+            }, error => {
+              this.toastr.error(`Erro ao Editar: ${error}`);
+            }
+          );
+        }
+        if (this.userUpdate.type === 3) {
+          this.coupon = Object.assign({ id: this.coupon.id }, this.couponsForm.value);
+          this.couponService.putCoupons(this.coupon).subscribe(
+            () => {
+              template.hide();
+              this.getCouponsById();
+              this.toastr.success('Editado com Sucesso!');
+            }, error => {
+              this.toastr.error(`Erro ao Editar: ${error}`);
+            }
+          );
+        }
       }
     }
   }
-
 }

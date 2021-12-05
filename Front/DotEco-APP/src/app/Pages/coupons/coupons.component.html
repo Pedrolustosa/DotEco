@@ -11,8 +11,8 @@
                 <tab heading="Disponíveis" id="tab1" *ngIf="userUpdate.type === 1">
                     <div class="mt-2 m-1">
                         <div class="row">
-                            <div *ngFor="let coupon of availableCoupons | paginate: { itemsPerPage: 5, currentPage: p }"
-                                class="col-md-3 me-5 mt-2 mb-2">
+                            <div *ngFor="let coupon of availableCoupons | paginate: { itemsPerPage: 6, currentPage: p }"
+                                class="col-md-6 me-5 mt-2 mb-2">
                                 <div class="cardCupon">
                                     <div class="text-center">
                                         <div class="d-flex flex-row text-center">
@@ -23,7 +23,9 @@
                                         </div>
                                     </div>
                                     <hr class="line">
-                                    <span class="company text-center fs-3">{{coupon.name}}</span>
+                                    <span class="company text-center">{{coupon.name}}</span>
+                                    <hr class="line">
+                                    <span class="text-white">{{coupon.companyFullName}}</span>
                                     <hr class="line">
                                     <span class="text-white">{{coupon.description}}</span>
                                     <hr class="line">
@@ -46,7 +48,7 @@
                 <tab heading="Resgatado" *ngIf="userUpdate.type === 1">
                     <div class="mt-2 m-1">
                         <div class="row">
-                            <div *ngFor="let coupon of rescueCoupons  | paginate: { itemsPerPage: 5, currentPage: p }"
+                            <div *ngFor="let coupon of rescueCoupons  | paginate: { itemsPerPage: 6, currentPage: p }"
                                 class="col-md-3 me-5 mt-2 mb-2">
                                 <div class="cardCupon">
                                     <div class="text-center">
@@ -55,12 +57,12 @@
                                                 <h1 class="percent mb-0">{{coupon.percent}}%</h1>
                                                 <span class="discount">Discount</span>
                                                 <hr class="line">
-                                                <span class="company text-center fs-4">{{coupon.name}}</span>
-                                                <hr class="line">
-                                                <span class="company text-center fs-5">{{coupon.userId}}</span>
+                                                <span class="company text-center">{{coupon.name}}</span>
                                             </div>
                                         </div>
                                     </div>
+                                    <hr class="line">
+                                    <span class="text-white">{{coupon.companyFullName}}</span>
                                     <hr class="line">
                                     <span class="text-white">{{coupon.description}}</span>
                                     <hr class="line">
@@ -78,7 +80,7 @@
                 <tab heading="Usado" *ngIf="userUpdate.type === 1">
                     <div class="mt-2 m-1">
                         <div class="row">
-                            <div *ngFor="let coupon of usedCoupons | paginate: { itemsPerPage: 5, currentPage: p }"
+                            <div *ngFor="let coupon of usedCoupons | paginate: { itemsPerPage: 6, currentPage: p }"
                                 class="col-md-3 me-5 mt-2 mb-2">
                                 <div class="cardCupon">
                                     <div class="text-center">
@@ -87,12 +89,12 @@
                                                 <h1 class="percent mb-0">{{coupon.percent}}%</h1>
                                                 <span class="discount">Discount</span>
                                                 <hr class="line">
-                                                <span class="company text-center fs-4">{{coupon.name}}</span>
-                                                <hr class="line">
-                                                <span class="company text-center fs-5">{{coupon.userId}}</span>
+                                                <span class="company text-center">{{coupon.name}}</span>
                                             </div>
                                         </div>
                                     </div>
+                                    <hr class="line">
+                                    <span class="text-white">{{coupon.companyFullName}}</span>
                                     <hr class="line">
                                     <span class="text-white">{{coupon.description}}</span>
                                     <hr class="line">
@@ -122,16 +124,16 @@
                                         </div>
                                     </div>
                                     <hr class="line">
-                                    <span class="company text-center fs-3">{{coupon.name}}</span>
+                                    <span class="company text-center">{{coupon.name}}</span>
                                     <hr class="line">
-                                    <span class="company text-center fs-3">{{coupon.description}}</span>
+                                    <span class="company text-center">{{coupon.description}}</span>
                                     <hr class="line">
-                                    <span class="mt-1 text-white">{{coupon.status}}</span>
+                                    <span class="company text-center">{{coupon.userFullName}}</span>
+                                    <hr class="line">
+                                    <span class=" text-white">{{coupon.status}}</span>
                                     <div class="d-flex justify-content-center">
-                                        <ng-container>
-                                            <button class="btnCoupons"
-                                                (click)="editCoupons(coupon, template)">Resgatar</button>
-                                        </ng-container>
+                                        <button class="btnCoupons"
+                                            (click)="editCoupons(coupon, template)">Resgatar</button>
                                     </div>
                                 </div>
                             </div>
@@ -159,22 +161,22 @@
             <div class="modal-body">
                 <form class="form-group" [formGroup]="couponsForm">
                     <div class="row">
-                        <div *ngIf="userUpdate.type == 3" class="form-floating mb-3 col-md-4">
+                        <div *ngIf="userUpdate.type == 3" class="form-floating mb-3 col-md-9">
                             <input type="text" class="form-control" id="name" name="name" formControlName="name"
                                 [ngClass]="{'is-invalid': couponsForm.get('name').errors 
                                     && couponsForm.get('name').touched}" />
-                            <label for="name">Nome</label>
+                            <label for="name" class="ms-2">Nome</label>
                             <div *ngIf="couponsForm.get('name').hasError('required') 
                                     && couponsForm.get('name').touched" class="invalid-feedback">
                                 Nome é obrigatório.
                             </div>
                         </div>
 
-                        <div *ngIf="userUpdate.type == 3" class="form-floating mb-3 col-md-2">
-                            <input type="text" class="form-control" id="percent" formControlName="percent"
+                        <div *ngIf="userUpdate.type == 3" class="form-floating mb-3 col-md-3">
+                            <input type="number" class="form-control" id="percent" formControlName="percent"
                                 name="percent" [ngClass]="{ 'is-invalid': couponsForm.get('percent').errors 
-                                    && couponsForm.get('percent').touched}">
-                            <label for="percent">Desconto %</label>
+                                    && couponsForm.get('percent').touched}" max="100" min="0">
+                            <label for="percent" class="ms-2">Desconto %</label>
                             <div *ngIf="couponsForm.get('percent').hasError('required') 
                                         && couponsForm.get('percent').touched" class="invalid-feedback">
                                 Desconto % é obrigatório.
@@ -182,25 +184,35 @@
                         </div>
 
 
-                        <div *ngIf="userUpdate.type == 3" class="form-floating mb-3 col-md-8">
+                        <div *ngIf="userUpdate.type == 3" class="form-floating mb-3 col-md-9">
                             <input type="text" class="form-control" id="description" formControlName="description"
                                 name="description" [ngClass]="{ 'is-invalid': couponsForm.get('description').errors 
                                     && couponsForm.get('description').touched}">
-                            <label for="description">Descrição</label>
+                            <label for="description" class="ms-2">Descrição</label>
                             <div *ngIf="couponsForm.get('description').hasError('required') 
                                         && couponsForm.get('description').touched" class="invalid-feedback">
                                 Desconto % é obrigatório.
                             </div>
+                            <div *ngIf="couponsForm.get('description')?.hasError('minlength') 
+                                                    && couponsForm.get('description')?.touched"
+                                class="invalid-feedback">
+                                Deve conter no mínimo 4 caracters
+                            </div>
+                            <div *ngIf="couponsForm.get('description')?.hasError('maxlength') 
+                                                    && couponsForm.get('description')?.touched"
+                                class="invalid-feedback">
+                                Deve conter no máximo 50 caracters
+                            </div>
                         </div>
 
-                        <div *ngIf="userUpdate.type == 3" class="form-floating mb-3 col-md-4">
+                        <div *ngIf="userUpdate.type == 3" class="form-floating mb-3 col-md-3">
                             <select class="form-select" id="status" formControlName="status" [ngClass]="{ 'is-invalid': couponsForm.get('status')?.errors 
                         && couponsForm.get('status')?.touched}">
                                 <option value="" selected disabled hidden>Selecione uma Opção</option>
                                 <option value="0">Ativo</option>
                                 <option value="1">Inativo</option>
                             </select>
-                            <label for="status">status</label>
+                            <label for="status" class="ms-2">Status</label>
                             <div *ngIf="couponsForm.get('status')?.hasError('required') 
                                 && couponsForm.get('status')?.touched" class="invalid-feedback">
                                 Coloque o status comforme a situação da Coleta.
@@ -210,31 +222,29 @@
 
                     <div class="row">
                         <div *ngIf="userUpdate.type == 1" class="form-floating mb-3 col-md-4">
-                            <select class="form-select" id="userId" formControlName="userId" [ngClass]="{ 'is-invalid': couponsForm.get('userId')?.errors 
-                        && couponsForm.get('userId')?.touched}">
-                                <option value="" selected disabled hidden>Selecione uma Opção</option>
-                                <option *ngFor="let user of userId | async as list" [value]="user.id">
-                                    {{user.fullName}}</option>
-                            </select>
-                            <label for="userId">Cliente</label>
-                            <div *ngIf="couponsForm.get('userId')?.hasError('required') 
-                                && couponsForm.get('userId')?.touched" class="invalid-feedback">
-                                Escolha o Tipo de Usuário.
-                            </div>
+                            <p>Deseja Resgatar o Cupom ?</p>
                         </div>
                     </div>
 
                 </form>
             </div>
-            <div class="modal-footer d-flex">
+            <ng-contaier class="modal-footer d-flex">
                 <button class="btn btn-outline-secondary" (click)="template.hide()">
                     Fechar
                 </button>
-                <button class="btn btn-outline-primary ml-auto" [disabled]="!couponsForm.valid"
-                    (click)="saveAlteration(template)">
-                    Salvar Alterações
-                </button>
-            </div>
+                <ng-container *ngIf="userUpdate.type == 1">
+                    <button class="btn btn-success ml-auto" [disabled]="!couponsForm.valid"
+                        (click)="saveAlteration(template)">
+                        Resgatar
+                    </button>
+                </ng-container>
+                <ng-container *ngIf="userUpdate.type == 3">
+                    <button class="btn btn-outline-primary ml-auto" [disabled]="!couponsForm.valid"
+                        (click)="saveAlteration(template)">
+                        Salvar Alterações
+                    </button>
+                </ng-container>
+            </ng-contaier>
         </div>
     </div>
 </div>
