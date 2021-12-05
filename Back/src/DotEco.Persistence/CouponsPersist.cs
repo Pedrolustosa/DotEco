@@ -19,7 +19,7 @@ namespace DotEco.Persistence
             IQueryable<Coupon> query = _context.Coupons;
 
             query = query.AsNoTracking()
-                        .Where(c => c.UserId == null && c.Status == Status.Active)
+                        .Where(c => c.UserId == null && c.Status == Status.Ativo)
                         .OrderByDescending(c => c.Id);
 
             return await query.ToArrayAsync();
@@ -30,7 +30,7 @@ namespace DotEco.Persistence
             IQueryable<Coupon> query = _context.Coupons;
 
             query = query.AsNoTracking()
-                        .Where(c => c.UserId == userId && c.Status == Status.Inactive)
+                        .Where(c => c.UserId == userId && c.Status == Status.Inativo)
                         .OrderByDescending(c => c.Id);
 
             return await query.ToArrayAsync();
@@ -41,7 +41,7 @@ namespace DotEco.Persistence
             IQueryable<Coupon> query = _context.Coupons;
 
             query = query.AsNoTracking()
-                        .Where(c => c.UserId == userId && c.Status == Status.Active)
+                        .Where(c => c.UserId == userId && c.Status == Status.Ativo)
                         .OrderByDescending(c => c.Id);
 
             return await query.ToArrayAsync();

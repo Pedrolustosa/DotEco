@@ -22,15 +22,6 @@
     text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
 }
 
-.wrapper {
-        width: 100%;
-        position: absolute;
-        height: 100%;
-        background-color: #000;
-        clip-path: polygon(81% 0, 100% 0, 100% 50%, 100% 100%, 71% 100%);
-        transition: 1s all
-}
-
 .navbar-brand {
     color: #fff;
     font-family: 'Allerta Stencil', sans-serif;

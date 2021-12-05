@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotEco.Persistence.Migrations
 {
     [DbContext(typeof(DotEcoContext))]
-    [Migration("20211203003909_initial_V1")]
-    partial class initial_V1
+    [Migration("20211204223741_initial_V2")]
+    partial class initial_V2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -68,7 +68,7 @@ namespace DotEco.Persistence.Migrations
                     b.Property<int>("AssociationId")
                         .HasColumnType("int");
 
-                    b.Property<string>("CpfCnpj")
+                    b.Property<string>("CEP")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Date")
@@ -116,6 +116,9 @@ namespace DotEco.Persistence.Migrations
                         .HasColumnName("CouponId")
                         .UseIdentityColumn();
 
+                    b.Property<string>("CompanyFullName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("CompanyId")
                         .HasColumnType("int");
 
@@ -130,6 +133,9 @@ namespace DotEco.Persistence.Migrations
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
+
+                    b.Property<string>("UserFullName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("UserId")
                         .HasColumnType("int");

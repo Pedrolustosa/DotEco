@@ -28,22 +28,22 @@ namespace DotEco.Domain
 
 public enum StatusClient
 {
-    Waiting = 0,
-    Scheduled = 1,
-    Confirmed = 2,
-    Refused = 3,
+    Aguardando,
+    Agendado,
+    Confirmado,
+    Recusado,
 }
 
 public enum StatusAssociation
 {
-    Waiting = 0,
-    Scheduled = 1,
-    Confirmed = 2,
-    Refused = 3,
+    Aguardando,
+    Agendado,
+    Confirmado,
+    Recusado,
 }
 
 public enum StatusPoint
 {
-    Rescued = 0,
-    NotRescued = 1,
+    NaoResgatado = 0,
+    Resgatado = 1,
 }

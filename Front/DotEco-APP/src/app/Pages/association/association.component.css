@@ -47,39 +47,3 @@
     color: #e74c3c;
     cursor: pointer;
 }
-
-.custom-pagination /deep/ .ngx-pagination{
-    margin-bottom:0 !important;
-}
-.custom-pagination /deep/ .ngx-pagination li{
-    margin-right: -1px !important;
-}
-.custom-pagination /deep/ .ngx-pagination a:first-of-type a:last-of-type li.current{
-    background-color: #42a877 !important;
-    border: 2px solid #787b7e !important;
-    border-radius: .9rem;
-    cursor: pointer;
-    padding: 6px 12px !important;
-    z-index: 999999 !important;
-    position: relative;
-}
-.custom-pagination /deep/ .ngx-pagination li a:focus{
-    outline:none;
-}
-.custom-pagination /deep/ .ngx-pagination a, .ngx-pagination button{
-    color: #007bff !important;
-    background-color: #fff !important;
-    border: 1px solid #dee2e6 !important;
-    padding: 6px 12px !important;
-
-}
-.custom-pagination /deep/ .ngx-pagination .disabled{
-    pointer-events: none  !important;
-    cursor: auto  !important;
-    background-color: #fff  !important;
-    padding: 6px 12px !important;
-    border: 3px solid #2ecc71!important;
-    background-color: #2ecc71!important;
-    color: #fff!important;
-    font-weight: bold!important;
-}

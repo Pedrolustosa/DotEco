@@ -183,6 +183,7 @@ export class CollectionDataComponent implements OnInit {
         this.collectiondata = Object.assign({}, this.collectiondataForm.value);
         this.collectiondata.userId = this.userUpdate.id;
         this.collectiondata.email = this.userUpdate.email;
+        this.collectiondata.statusPoint = StatusPoint.NotRescued;
         this.collectiondataService.postCollectionData(this.collectiondata).subscribe(
           (newCollectionData: CollectionData) => {
             template.hide();

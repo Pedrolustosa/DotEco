@@ -6,18 +6,18 @@ namespace DotEco.Persistence.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "CpfCnpj",
-                table: "CollectionData",
-                newName: "CEP");
+            migrationBuilder.AddColumn<string>(
+                name: "CompanyFullName",
+                table: "Coupon",
+                type: "nvarchar(max)",
+                nullable: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "CEP",
-                table: "CollectionData",
-                newName: "CpfCnpj");
+            migrationBuilder.DropColumn(
+                name: "CompanyFullName",
+                table: "Coupon");
         }
     }
 }

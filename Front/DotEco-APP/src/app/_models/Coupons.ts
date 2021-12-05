@@ -3,12 +3,14 @@ export interface Coupons {
     name: string;
     percent: string;
     description: string;
-    status: Status;
-    companyId: number;
     userId: number;
+    userFullName: string;
+    companyId: number;
+    companyFullName: string;
+    status: Status;
 }
 
 export enum Status {
-    Active = "Active",
-    Inactive = "Inactive",
+    Active = "Ativo",
+    Inactive = "Inativo",
 }
