@@ -44,6 +44,6 @@ public enum StatusAssociation
 
 public enum StatusPoint
 {
-    NaoResgatado = 0,
-    Resgatado = 1,
+    NaoResgatado,
+    Resgatado,
 }
