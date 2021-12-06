@@ -4,6 +4,7 @@ export interface Association {
     name: string;
     cep: string;
     cpfCnpj: string;
+    telephone: string;
     state: string;
     address: string;
 }

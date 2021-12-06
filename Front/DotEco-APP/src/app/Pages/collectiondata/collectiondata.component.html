@@ -277,10 +277,10 @@
                                     [ngClass]="{ 'is-invalid': collectiondataForm.get('statusAssociation')?.errors 
                                     && collectiondataForm.get('statusAssociation')?.touched}">
                                     <option value="" selected disabled hidden>Selecione uma Opção</option>
-                                    <option value="Waiting">Aguardando</option>
-                                    <option value="Scheduled">Agendado</option>
-                                    <option value="Confirmed">Confirmado</option>
-                                    <option value="Refused">Recusado</option>
+                                    <option value="Aguardando">Aguardando</option>
+                                    <option value="Agendado">Agendado</option>
+                                    <option value="Confirmado">Confirmado</option>
+                                    <option value="Recusado">Recusado</option>
                                 </select>
                                 <label for="statusAssociation" class="ms-2">Status Association</label>
                                 <div *ngIf="collectiondataForm.get('statusAssociation')?.hasError('required') 
@@ -293,8 +293,8 @@
                                 <select class="form-select" id="statusPoint" formControlName="statusPoint" [ngClass]="{ 'is-invalid': collectiondataForm.get('statusPoint')?.errors 
                                     && collectiondataForm.get('statusPoint')?.touched}">
                                     <option value="" selected disabled hidden>Selecione uma Opção</option>
-                                    <option value="NotRescued">Não</option>
-                                    <option value="Rescued">Sim</option>
+                                    <option value="NaoResgatado">Não Resgatado</option>
+                                    <option value="Resgatado">Resgatado</option>
                                 </select>
                                 <label for="statusPoint" class="ms-2">Ponto Resgatado ?</label>
                                 <div *ngIf="collectiondataForm.get('statusPoint')?.hasError('required') 
