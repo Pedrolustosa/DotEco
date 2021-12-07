@@ -27,7 +27,7 @@
                         <span class="input-group-text" id="basic-addon1"><i class="far fa-address-card fs-2"></i></span>
                         <input type="text" formControlName="cpfCnpj" class="form-control"
                             [ngClass]="{ 'is-invalid': f.cpfCnpj.errors && f.cpfCnpj.touched }"
-                            placeholder="CPF ou CNPJ" mask="000.000.000-00||00.000.000/0000-00" />
+                            placeholder="CPF ou CNPJ" mask="000.000.000-00||00.000.000/0000-00" disabled />
                         <div *ngIf="f.cpfCnpj.errors && f.cpfCnpj.touched" class="invalid-feedback">
                             <div *ngIf="f.cpf.errors.required">CPF/CNPJ é obrigatório</div>
                         </div>
