@@ -81,6 +81,7 @@ export class ProfileComponent implements OnInit {
   public atualizarUsuario() {
     this.userUpdate = { ...this.form.value };
     this.spinner.show();
+    this.userUpdate.points = this.userUpdate.points;
     this.accountService.updateUser(this.userUpdate).subscribe(
       () => this.toaster.success('Usuário atualizado!', 'Sucesso'),
       (error) => {
