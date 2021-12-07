@@ -12,16 +12,18 @@
 
 <img src="Front/DotEco-APP/src/assets/img/imgReadme/Logo_Uninassau.png"> DotEco é um site construído durante o 8º período do Curso de Sistemas de Informação da Faculdade Uninassau Olinda.
 
-O aplicativo foi desemvolvido para a população poder solicitar a coleta do matérial seletico, através de agendamento, e com isso ganhar cupons de descontos em lojas parceiras.
+O aplicativo foi desemvolvido para a população poder solicitar a coleta do material seletivo, através de agendamento, e com isso ganhar cupons de descontos em lojas parceiras.
 
 # Status do Projeto ♻️
 
 <h4 align="center"> 
-	🚧 DotEco em construção... 🚧
+	🚧 V1.0 DotEco 🚧
 </h4>
 
 # Layout
-Telas com exemplos (inserir gifs)
+
+<img src="Front/DotEco-APP/src/assets/img/imgReadme/Home_Doteco.png" >
+
 
 
 # Tecnologias Usadas 👩‍💻 :
@@ -84,11 +86,11 @@ The application was developed for the population to be able to request the colle
 # Project Status ♻️
 
 <h4 align="center"> 
-	🚧 DotEco Under construction... 🚧
+	🚧V1.0 DotEco... 🚧
 </h4>
 
 # Layout
-Telas com exemplos (inserir gifs)
+<img src="Front/DotEco-APP/src/assets/img/imgReadme/Home_Doteco.png" >
 
 
 # Technologies Used 👩‍💻 :
